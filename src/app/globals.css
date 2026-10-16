@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens: the single source of truth for colour, type, shape and motion.
+ * Values come from docs/BRAND.md and docs/IMPLEMENTATION_PLAN.md §3-4.
+ * tests/unit/design-tokens.test.ts checks every allowed text pairing for WCAG AA.
+ */
+@theme {
+  /* Brand */
+  --color-tm-blue: #004165;
+  --color-tm-blue-hover: #005786;
+  --color-maroon: #772432;
+  --color-maroon-hover: #8a2a3b;
+  --color-gold: #d6b06a;
+  --color-signal-green: #3c8d5a;
+
+  /* Neutrals */
+  --color-ink: #0b1220;
+  --color-surface: #111827;
+  --color-muted: #9ca3af; /* text on dark */
+  --color-ink-muted: #4b5563; /* text on light */
+  --color-paper: #f6f3ee; /* editorial light bands */
+  --color-soft-gray: #f5f7f8; /* UI surfaces: inputs, accordions */
+  --color-card: #e8ecee;
+  --color-cool-gray: #a9b2b1;
+  --color-white: #ffffff;
+  --color-hairline: rgb(0 65 101 / 0.12);
+  --color-hairline-dark: rgb(255 255 255 / 0.08);
+
+  /* Type */
+  --font-serif: var(--font-source-serif), Cambria, Georgia, serif;
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* Breakpoints (docs/DESIGN.md §9: 640 / 900 / 1280) */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 56.25rem;
+  --breakpoint-lg: 80rem;
+  --breakpoint-xl: 90rem;
+
+  /* Shape */
+  --radius-card: 1.5rem;
+  --radius-panel: 2rem;
+  --shadow-soft: 0 10px 30px rgb(0 0 0 / 0.08);
+
+  /* Motion (mirrored in src/lib/motion/tokens.ts) */
+  --ease-deliver: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-breath: cubic-bezier(0.37, 0, 0.63, 1);
+  --duration-quick: 450ms;
+  --duration-base: 900ms;
+  --duration-slow: 1300ms;
+}
+
+/* Fluid type scale (docs/IMPLEMENTATION_PLAN.md §3.2) */
+@utility text-display {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 1.5rem + 9vw, 11.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+@utility text-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 1.6rem + 4.6vw, 7rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+@utility text-h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.125rem, 1.5rem + 2.6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+@utility text-h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+@utility text-lead {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.6;
+}
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @variant md {
+    padding-inline: 1.5rem;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-tm-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .theme-dark :focus-visible,
+  [data-theme="dark"] :focus-visible {
+    outline-color: var(--color-gold);
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100px;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-white);
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Film grain for dark cinematic bands (static, no runtime cost) */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Designed stand-in for photos not supplied yet: a lit stage, not a broken image */
+  .stage-placeholder {
+    background:
+      radial-gradient(60% 55% at 50% 0%, rgb(214 176 106 / 0.28), transparent 70%),
+      radial-gradient(80% 60% at 50% 110%, rgb(0 65 101 / 0.55), transparent 70%),
+      linear-gradient(160deg, var(--color-surface), var(--color-ink));
+  }
+  .stage-placeholder::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "member-story-one",
+    "name": "Member name",
+    "role": "Member since 2024",
+    "before": "Avoided speaking up in meetings.",
+    "today": "Leads the weekly team briefing.",
+    "quote": "Placeholder quote until a member approves their story.",
+    "imageSlot": "story-one",
+    "consent": true,
+    "status": "published",
+    "placeholder": true
+  }
+]

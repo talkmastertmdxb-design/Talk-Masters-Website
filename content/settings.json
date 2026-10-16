@@ -1,0 +1,23 @@
+{
+  "clubName": "Talk-Masters Club",
+  "parentOrganisation": "Toastmasters International",
+  "tagline": "A Club with Difference",
+  "description": "A public speaking and leadership club for everyone, of every age and background. Find your voice, lead with confidence, inspire the world.",
+  "meeting": {
+    "schedule": "Meeting day to be confirmed",
+    "startTime": "19:00",
+    "durationMinutes": 120,
+    "venue": "Venue to be confirmed",
+    "city": "Dubai",
+    "placeholder": true
+  },
+  "contactEmail": "hello@example.com",
+  "socials": [],
+  "stats": [
+    { "label": "Speeches delivered", "value": 500, "suffix": "+", "placeholder": true },
+    { "label": "Active members", "value": 50, "suffix": "+", "placeholder": true },
+    { "label": "Leadership roles", "value": 100, "suffix": "+", "placeholder": true },
+    { "label": "Nationalities", "value": 20, "suffix": "+", "placeholder": true }
+  ],
+  "placeholder": true
+}

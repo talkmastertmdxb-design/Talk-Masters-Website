@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "club-president",
+    "name": "Officer name",
+    "role": "Club President",
+    "term": "2026-2027",
+    "bio": "Short bio to be supplied.",
+    "imageSlot": "officer-president",
+    "consent": true,
+    "placeholder": true
+  }
+]

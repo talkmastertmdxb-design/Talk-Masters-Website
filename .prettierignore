@@ -1,0 +1,12 @@
+.next
+node_modules
+coverage
+playwright-report
+test-results
+docs/inspiration
+assets
+package-lock.json
+.agents
+.claude
+skills-lock.json
+AGENTS.md

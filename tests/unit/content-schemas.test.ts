@@ -1,0 +1,104 @@
+import { describe, expect, it } from "vitest";
+import {
+  eventSchema,
+  imageSlotSchema,
+  parseContent,
+  settingsSchema,
+  ContentError,
+} from "@/lib/content/schemas";
+
+const validSettings = {
+  clubName: "Talk-Masters Club",
+  parentOrganisation: "Toastmasters International",
+  tagline: "A Club with Difference",
+  description: "A public speaking and leadership club open to everyone.",
+  meeting: {
+    schedule: "Every second Tuesday",
+    startTime: "19:00",
+    durationMinutes: 120,
+    venue: "Venue to be confirmed",
+    city: "Dubai",
+  },
+  contactEmail: "hello@example.com",
+  socials: [],
+  stats: [{ label: "Speeches delivered", value: 500, suffix: "+" }],
+};
+
+describe("settingsSchema", () => {
+  it("accepts valid settings and defaults placeholder to false", () => {
+    const parsed = settingsSchema.parse(validSettings);
+    expect(parsed.meeting.placeholder).toBe(false);
+    expect(parsed.stats[0]?.placeholder).toBe(false);
+  });
+
+  it("rejects a malformed meeting time", () => {
+    const bad = { ...validSettings, meeting: { ...validSettings.meeting, startTime: "7pm" } };
+    expect(settingsSchema.safeParse(bad).success).toBe(false);
+  });
+
+  it("rejects an invalid contact email", () => {
+    expect(settingsSchema.safeParse({ ...validSettings, contactEmail: "nope" }).success).toBe(false);
+  });
+});
+
+describe("eventSchema", () => {
+  const event = {
+    slug: "open-house-evening",
+    title: "Open House Evening",
+    type: "meeting",
+    startsAt: "2026-11-10T19:00:00+04:00",
+    endsAt: "2026-11-10T21:00:00+04:00",
+    venue: "Venue to be confirmed",
+    summary: "Watch a real meeting. Guests never have to speak.",
+    status: "published",
+  };
+
+  it("accepts a valid event", () => {
+    expect(eventSchema.safeParse(event).success).toBe(true);
+  });
+
+  it("rejects a slug that is not kebab-case", () => {
+    expect(eventSchema.safeParse({ ...event, slug: "Open House" }).success).toBe(false);
+  });
+
+  it("rejects an event that ends before it starts", () => {
+    const bad = { ...event, endsAt: "2026-11-10T18:00:00+04:00" };
+    expect(eventSchema.safeParse(bad).success).toBe(false);
+  });
+});
+
+describe("imageSlotSchema", () => {
+  const slot = {
+    id: "hero-stage",
+    alt: "A speaker at the lectern under warm stage light",
+    aspectRatio: "4/5",
+    brief: "Speaker at the lectern, three-quarter angle, warm light",
+    src: null,
+  };
+
+  it("accepts an empty slot (placeholder) and a filled slot", () => {
+    expect(imageSlotSchema.safeParse(slot).success).toBe(true);
+    expect(imageSlotSchema.safeParse({ ...slot, src: "/images/hero-stage.jpg" }).success).toBe(true);
+  });
+
+  it("only allows images served from /images/", () => {
+    expect(imageSlotSchema.safeParse({ ...slot, src: "https://drive.google.com/x.jpg" }).success).toBe(false);
+  });
+
+  it("rejects a malformed aspect ratio", () => {
+    expect(imageSlotSchema.safeParse({ ...slot, aspectRatio: "portrait" }).success).toBe(false);
+  });
+});
+
+describe("parseContent", () => {
+  it("throws a readable ContentError naming the source file", () => {
+    expect(() => parseContent(settingsSchema, { clubName: "" }, "content/settings.json")).toThrow(
+      ContentError,
+    );
+    try {
+      parseContent(settingsSchema, { clubName: "" }, "content/settings.json");
+    } catch (error) {
+      expect((error as Error).message).toContain("content/settings.json");
+    }
+  });
+});

@@ -1,0 +1,107 @@
+[
+  {
+    "id": "hero-stage",
+    "alt": "A speaker at the lectern under warm stage light, the audience softly out of focus",
+    "aspectRatio": "4/5",
+    "brief": "Speaker at the lectern, three-quarter angle, warm dramatic light",
+    "src": null
+  },
+  {
+    "id": "manifesto-bento",
+    "alt": "Club members of different ages talking together after a meeting",
+    "aspectRatio": "1/1",
+    "brief": "Mixed-age group laughing together after a meeting",
+    "src": null
+  },
+  {
+    "id": "fear-split",
+    "alt": "A first-time speaker smiling as the audience applauds",
+    "aspectRatio": "4/5",
+    "brief": "Nervous-then-smiling moment, applause in the background",
+    "src": null
+  },
+  {
+    "id": "agenda-welcome",
+    "alt": "Guests being welcomed at the door of a meeting",
+    "aspectRatio": "3/4",
+    "brief": "Guests welcomed at the entrance, name badges",
+    "src": null
+  },
+  {
+    "id": "agenda-prepared-speeches",
+    "alt": "A member delivering a prepared speech",
+    "aspectRatio": "3/4",
+    "brief": "Prepared speech in progress, gesture mid-sentence",
+    "src": null
+  },
+  {
+    "id": "agenda-table-topics",
+    "alt": "A member answering an impromptu Table Topics question",
+    "aspectRatio": "3/4",
+    "brief": "Table Topics moment, speaker thinking on their feet",
+    "src": null
+  },
+  {
+    "id": "agenda-evaluations",
+    "alt": "An evaluator giving supportive feedback",
+    "aspectRatio": "3/4",
+    "brief": "Evaluator giving feedback, speaker listening",
+    "src": null
+  },
+  {
+    "id": "agenda-timer",
+    "alt": "The timer holding up green, amber and red cards",
+    "aspectRatio": "3/4",
+    "brief": "Timer with the coloured timing cards or lights",
+    "src": null
+  },
+  {
+    "id": "agenda-awards",
+    "alt": "Members receiving ribbons at the end of a meeting",
+    "aspectRatio": "3/4",
+    "brief": "Best Speaker ribbons and applause",
+    "src": null
+  },
+  {
+    "id": "statement-fullbleed",
+    "alt": "An audience of all ages listening intently",
+    "aspectRatio": "16/9",
+    "brief": "Wide audience shot showing a range of ages and backgrounds",
+    "src": null
+  },
+  {
+    "id": "journey-feature",
+    "alt": "An experienced member mentoring a newer member",
+    "aspectRatio": "4/5",
+    "brief": "Mentor and mentee, one-to-one",
+    "src": null
+  },
+  {
+    "id": "story-one",
+    "alt": "Portrait of a club member",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait for a Before / Today story",
+    "src": null
+  },
+  {
+    "id": "officer-president",
+    "alt": "Portrait of the club president",
+    "aspectRatio": "1/1",
+    "brief": "Officer portrait, plain background, natural light",
+    "src": null
+  },
+  {
+    "id": "event-featured",
+    "alt": "A Talk-Masters meeting in progress",
+    "aspectRatio": "16/9",
+    "brief": "Featured event banner: the room mid-meeting",
+    "src": null
+  },
+  {
+    "id": "venue-entrance",
+    "alt": "The entrance to the meeting venue",
+    "aspectRatio": "16/9",
+    "brief": "Venue entrance so first-time guests recognise it",
+    "src": null
+  }
+]

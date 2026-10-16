@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Do I have to speak if I visit as a guest?",
+    "answer": "No. Guests are welcome to simply watch. If you'd like to try, you can volunteer for a short impromptu topic, but it's entirely your choice.",
+    "placeholder": true
+  },
+  {
+    "question": "Who can join?",
+    "answer": "Everyone. Our members come from every age group, gender and background: students, professionals, parents, career changers and retirees.",
+    "placeholder": true
+  },
+  {
+    "question": "Does it cost anything to visit?",
+    "answer": "Visiting as a guest is free. Membership dues are confirmed by the club; ask us at any meeting.",
+    "placeholder": true
+  },
+  {
+    "question": "What happens at a meeting?",
+    "answer": "A structured evening of prepared speeches, impromptu Table Topics and supportive evaluations, all kept on time by a timer with green, amber and red lights.",
+    "placeholder": true
+  },
+  {
+    "question": "I'm a complete beginner. Is that okay?",
+    "answer": "That's exactly who Toastmasters is for. Everyone starts somewhere, and you'll progress at your own pace with a mentor.",
+    "placeholder": true
+  }
+]
