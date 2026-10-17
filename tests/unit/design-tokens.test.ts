@@ -13,12 +13,12 @@ const AA_TEXT = 4.5;
 
 // Every text/background pairing the design system allows.
 const textPairs: Array<[foreground: string, background: string]> = [
-  ["ink", "paper"],
+  ["tm-blue", "white"],
   ["ink", "soft-gray"],
   ["ink", "white"],
-  ["ink-muted", "paper"],
+  ["ink-muted", "soft-gray"],
   ["ink-muted", "white"],
-  ["tm-blue", "paper"],
+  ["tm-blue", "soft-gray"],
   ["white", "tm-blue"],
   ["white", "maroon"],
   ["white", "ink"],
@@ -43,6 +43,6 @@ describe("brand colour tokens", () => {
   });
 
   it("gold on light backgrounds fails, so it must never be used as text there", () => {
-    expect(contrastRatio(tokens.gold!, tokens.paper!)).toBeLessThan(AA_TEXT);
+    expect(contrastRatio(tokens.gold!, tokens["soft-gray"]!)).toBeLessThan(AA_TEXT);
   });
 });

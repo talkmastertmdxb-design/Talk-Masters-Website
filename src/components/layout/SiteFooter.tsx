@@ -1,0 +1,82 @@
+import Link from "next/link";
+import { ButtonLink } from "@/components/ui/Button";
+import { VoiceLine } from "@/components/signature/VoiceLine";
+import { content } from "@/lib/content";
+import { buildYear } from "@/lib/site";
+import type { NavItem } from "./SiteHeader";
+import { Wordmark } from "./Wordmark";
+
+interface SiteFooterProps {
+  items: readonly NavItem[];
+}
+
+/** The Close: the last call to action, then everything a guest needs to find us. */
+export function SiteFooter({ items }: SiteFooterProps) {
+  const { meeting, contactEmail, clubName, parentOrganisation, tagline } = content.settings;
+
+  return (
+    <footer className="theme-dark footer-glow grain bg-ink relative isolate overflow-hidden text-white">
+      <section aria-labelledby="guest-band" className="container-site pt-32 pb-24 text-center md:pt-40">
+        <h2 id="guest-band" className="text-h1 mx-auto max-w-[14ch]">
+          Ready to become a better speaker?
+        </h2>
+        <p className="text-lead mx-auto mt-6 max-w-[46ch] text-white/75">
+          Come to your first meeting as our guest. It&apos;s free, and you only speak if you want to.
+        </p>
+        <div className="mx-auto mt-10 flex max-w-xs flex-col items-center gap-3">
+          <ButtonLink href="/join">Book a guest visit</ButtonLink>
+          <VoiceLine variant="underline" className="text-gold h-6 w-56" />
+        </div>
+      </section>
+
+      <div className="container-site border-hairline-dark grid gap-12 border-t py-16 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <Wordmark />
+          <p className="mt-6 max-w-[34ch] text-white/70">
+            {tagline}. Open to everyone, of every age and background.
+          </p>
+        </div>
+
+        <div className="md:col-span-4">
+          <h3 className="font-semibold">Meetings</h3>
+          <p className="mt-3 text-white/70">
+            {meeting.schedule}, from {meeting.startTime}
+            <br />
+            {meeting.venue}, {meeting.city}
+          </p>
+          <a href={`mailto:${contactEmail}`} className="nav-link mt-3 inline-block text-white">
+            {contactEmail}
+          </a>
+        </div>
+
+        <nav aria-label="Footer" className="md:col-span-3">
+          <h3 className="font-semibold">Explore</h3>
+          <ul className="mt-3 flex flex-col gap-2 text-white/70">
+            {items.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="nav-link">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/join" className="nav-link">
+                Book a guest visit
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div className="container-site border-hairline-dark text-muted flex flex-col gap-3 border-t py-8 text-sm md:flex-row md:justify-between">
+        <p>
+          © {buildYear} {clubName}, a club of {parentOrganisation}.
+        </p>
+        {/* TODO(launch): replace with the trademark notice required by the Toastmasters brand portal. */}
+        <p className="max-w-[60ch]">
+          Toastmasters International and its logo are trademarks of {parentOrganisation}.
+        </p>
+      </div>
+    </footer>
+  );
+}

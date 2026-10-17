@@ -135,7 +135,7 @@ Rule: **a page ships only when it has real content.** No placeholder pages in pr
 
 ### 3.1 Colour: BRAND.md stays; two refinements **[Change]**
 
-- **Warm ivory for light bands:** `--paper: #F6F3EE` replaces cool `#F5F7F8` on editorial bands. Gold and navy look richer on warm paper, which is the Bailey Hart warmth in our palette. Cool soft gray stays for UI surfaces (inputs, accordions).
+- **Light bands (revised 2026-10-17):** brand soft gray `#F5F7F8` alternating with white. Warm ivory was dropped: cream + serif is the most common generated-site look.
 - **Gold never as text on light backgrounds** (contrast). On light bands, gold appears only as a line or shape: the Voice Line, rules, dots.
 - **Timing-light colours** (only in S2 and S4): green `#3C8D5A`, amber `#D6B06A` (our gold), red = maroon `#772432`. Each check is paired with a label or icon, never colour alone.
 - Ratio from BRAND §3 still applies: 60 / 25 / 10 / 5.
@@ -354,6 +354,8 @@ Each phase ends with a **gate**: tests green, a code review with no CRITICAL or 
 
 **Status (2026-10-16): Phase 0 done.** Next.js 16 + TS strict + Tailwind v4 scaffold; brand tokens with an automated WCAG contrast test; Source Serif 4 + Open Sans; typed, validated content in `content/` with placeholder flags; `<ImageSlot>` placeholder system (docs/IMAGES.md); motion tokens; security headers; Vitest (86% coverage) + Playwright/axe on desktop, mobile and reduced motion; GitHub Actions CI; skills installed. Still open from Phase 0: the 21st.dev Magic MCP (the user adds it with their own key).
 
+**Status (2026-10-17): Phases 1-3 in review.** Built: glass nav with the Timing Light (S2) and a full-screen mobile menu; the hero "The first word" (S1) with a SplitText mask reveal, the Voice Line motif, and a stage spotlight; About with count-up stats; Why join with practice rows and a reassurance card; the closing guest band and footer; a temporary /join page. Motion: Lenis + ScrollTrigger in one provider, gsap.matchMedia branches, a reduced-motion path, a CSS failsafe if JS is late. **D4 reverted:** light bands use the brand soft gray `#F5F7F8` and white instead of warm ivory, because cream + serif is the most common generated-site look. Awaiting club sign-off on the look before Phase 5.
+
 Estimated total to launch: **about 4-5 weeks for one developer**, assuming content arrives by Phase 5.
 
 ---
@@ -378,7 +380,7 @@ Anything that scores below 7 gets redesigned, not decorated.
 | D1  | City and venue, meeting day and time; how guests register today                                   | **Required** for the hero, SEO and the form |
 | D2  | Logo: TI-compliant wordmark + official emblem (section 0.1)                                       | Redo the logo; don't use the AI badge       |
 | D3  | Display serif at weight 400-500 instead of Cambria Bold (section 3.2)                             | Approve                                     |
-| D4  | Warm ivory `#F6F3EE` for light bands (section 3.1)                                                | Approve                                     |
+| D4  | ~~Warm ivory `#F6F3EE`~~ reverted to brand soft gray `#F5F7F8` + white (2026-10-17)               | Done                                        |
 | D5  | Drop particles, beams and Framer Motion; Voice Line motif + GSAP only (sections 1.2, 5.1)         | Approve                                     |
 | D6  | Cut home to 11 bands; gallery, stories pages and achievements wait for content (sections 2.3-2.4) | Approve                                     |
 | D7  | v1 content in typed local files; Drive CMS in v1.1 (section 5.1)                                  | Approve                                     |

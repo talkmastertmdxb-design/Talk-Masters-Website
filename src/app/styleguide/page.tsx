@@ -14,7 +14,6 @@ const swatches = [
   ["gold", "bg-gold"],
   ["ink", "bg-ink"],
   ["surface", "bg-surface"],
-  ["paper", "bg-paper"],
   ["soft-gray", "bg-soft-gray"],
   ["cool-gray", "bg-cool-gray"],
 ] as const;

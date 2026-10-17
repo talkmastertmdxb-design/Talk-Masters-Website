@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { content } from "@/lib/content";
 import { resolveImageSlot, shouldShowPlaceholderLabels } from "@/lib/images/slots";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { ImagePlaceholder, type ImageVariant } from "./ImagePlaceholder";
 
 interface ImageSlotProps {
   /** Id from content/images.json */
@@ -10,6 +10,7 @@ interface ImageSlotProps {
   sizes: string;
   /** Set only for the LCP image above the fold. */
   priority?: boolean;
+  variant?: ImageVariant;
   className?: string;
 }
 
@@ -18,24 +19,37 @@ interface ImageSlotProps {
  * designed placeholder; adding the file and its path in content/images.json
  * swaps in the real image with no component changes (see docs/IMAGES.md).
  */
-export function ImageSlot({ id, sizes, priority = false, className = "" }: ImageSlotProps) {
+export function ImageSlot({
+  id,
+  sizes,
+  priority = false,
+  variant = "frame",
+  className = "",
+}: ImageSlotProps) {
   const slot = resolveImageSlot(content.imageSlots, id);
 
   if (!slot.src) {
     return (
       <ImagePlaceholder
         slot={slot}
+        variant={variant}
         showLabel={shouldShowPlaceholderLabels(process.env)}
         className={className}
       />
     );
   }
 
+  const isBackdrop = variant === "backdrop";
+
   return (
     <div
       data-image-slot={slot.id}
-      style={{ aspectRatio: slot.aspectRatio }}
-      className={`rounded-card relative overflow-hidden ${className}`}
+      style={isBackdrop ? undefined : { aspectRatio: slot.aspectRatio }}
+      className={
+        isBackdrop
+          ? `backdrop-photo absolute inset-0 -z-20 ${className}`
+          : `rounded-card relative overflow-hidden ${className}`
+      }
     >
       <Image
         src={slot.src}
