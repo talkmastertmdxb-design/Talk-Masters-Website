@@ -2,52 +2,156 @@
   {
     "slug": "member-one",
     "name": "Member name",
-    "role": "Member",
-    "occupation": "Occupation",
-    "organisation": "Workplace (optional)",
-    "memberSince": 2023,
-    "quote": "Placeholder: one line about what changed.",
-    "before": "Placeholder: what speaking felt like before joining.",
-    "today": "Placeholder: what they can do now.",
-    "story": [
-      "Placeholder: why they came to their first meeting.",
-      "Placeholder: the moment things started to change.",
-      "Placeholder: how Toastmasters shows up in their work and life today."
+    "occupation": "Degree / job role",
+    "organisation": "Company / organisation",
+    "segment": "professional",
+    "challenge": "Placeholder: I used to avoid speaking in meetings.",
+    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Placeholder: why they came to their first meeting."
+      },
+      {
+        "milestone": "first-table-topic",
+        "text": "Placeholder: their first Table Topic."
+      },
+      {
+        "milestone": "first-speech",
+        "text": "Placeholder: their first prepared speech."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Placeholder: a leadership role they took on."
+      }
     ],
+    "impact": {
+      "career": "Placeholder: impact on their career.",
+      "leadership": "Placeholder: impact on their leadership.",
+      "confidence": "Placeholder: impact on their confidence.",
+      "networking": "Placeholder: impact on their network."
+    },
+    "advice": "Placeholder: one piece of advice for new guests.",
     "imageSlot": "member-one",
     "consent": true,
-    "featured": true,
+    "spotlight": true,
     "status": "published",
-    "placeholder": true
+    "placeholder": true,
+    "position": "Vice President Education"
   },
   {
     "slug": "member-two",
     "name": "Member name",
-    "role": "Member",
-    "occupation": "Occupation",
-    "memberSince": 2021,
-    "quote": "Placeholder: one line about what changed.",
-    "before": "Placeholder: what speaking felt like before joining.",
-    "today": "Placeholder: what they can do now.",
-    "story": ["Placeholder: their story in their own words."],
+    "occupation": "Degree / course",
+    "segment": "student",
+    "challenge": "Placeholder: I used to avoid speaking in meetings.",
+    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Placeholder: why they came to their first meeting."
+      },
+      {
+        "milestone": "first-table-topic",
+        "text": "Placeholder: their first Table Topic."
+      },
+      {
+        "milestone": "first-speech",
+        "text": "Placeholder: their first prepared speech."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Placeholder: a leadership role they took on."
+      }
+    ],
+    "impact": {
+      "career": "Placeholder: impact on their career.",
+      "leadership": "Placeholder: impact on their leadership.",
+      "confidence": "Placeholder: impact on their confidence.",
+      "networking": "Placeholder: impact on their network."
+    },
+    "advice": "Placeholder: one piece of advice for new guests.",
     "imageSlot": "member-two",
     "consent": true,
-    "featured": true,
+    "spotlight": true,
     "status": "published",
     "placeholder": true
   },
   {
     "slug": "member-three",
     "name": "Member name",
-    "role": "Member",
-    "memberSince": 2024,
-    "quote": "Placeholder: one line about what changed.",
-    "before": "Placeholder: what speaking felt like before joining.",
-    "today": "Placeholder: what they can do now.",
-    "story": ["Placeholder: their story in their own words."],
+    "occupation": "Degree / job role",
+    "organisation": "Company / organisation",
+    "segment": "executive",
+    "challenge": "Placeholder: I used to avoid speaking in meetings.",
+    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Placeholder: why they came to their first meeting."
+      },
+      {
+        "milestone": "first-table-topic",
+        "text": "Placeholder: their first Table Topic."
+      },
+      {
+        "milestone": "first-speech",
+        "text": "Placeholder: their first prepared speech."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Placeholder: a leadership role they took on."
+      }
+    ],
+    "impact": {
+      "career": "Placeholder: impact on their career.",
+      "leadership": "Placeholder: impact on their leadership.",
+      "confidence": "Placeholder: impact on their confidence.",
+      "networking": "Placeholder: impact on their network."
+    },
+    "advice": "Placeholder: one piece of advice for new guests.",
     "imageSlot": "member-three",
     "consent": true,
-    "featured": true,
+    "spotlight": true,
+    "status": "published",
+    "placeholder": true
+  },
+  {
+    "slug": "member-four",
+    "name": "Member name",
+    "occupation": "Degree / job role",
+    "organisation": "Company / organisation",
+    "segment": "alumni",
+    "challenge": "Placeholder: I used to avoid speaking in meetings.",
+    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Placeholder: why they came to their first meeting."
+      },
+      {
+        "milestone": "first-table-topic",
+        "text": "Placeholder: their first Table Topic."
+      },
+      {
+        "milestone": "first-speech",
+        "text": "Placeholder: their first prepared speech."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Placeholder: a leadership role they took on."
+      }
+    ],
+    "impact": {
+      "career": "Placeholder: impact on their career.",
+      "leadership": "Placeholder: impact on their leadership.",
+      "confidence": "Placeholder: impact on their confidence.",
+      "networking": "Placeholder: impact on their network."
+    },
+    "advice": "Placeholder: one piece of advice for new guests.",
+    "imageSlot": "member-four",
+    "consent": true,
+    "spotlight": true,
     "status": "published",
     "placeholder": true
   }

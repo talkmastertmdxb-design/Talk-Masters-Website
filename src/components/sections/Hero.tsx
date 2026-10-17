@@ -5,7 +5,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 import { HeroIntro } from "./HeroIntro";
 
-/** The Opening: one promise, and the next meeting, in the first screen on any device. */
+/** The Opening (Section 1): one promise, and the next meeting, in the first screen on any device. */
 export function Hero() {
   const { meeting } = content.settings;
 
@@ -38,17 +38,30 @@ export function Hero() {
             if you want to.
           </p>
 
-          <div data-hero-item className="flex flex-col gap-4 md:col-span-6 md:items-end">
-            <p className="text-muted text-sm">
+          <div className="flex flex-col gap-4 md:col-span-6 md:items-end">
+            <p data-hero-item className="text-muted text-sm">
               Next meeting: {meeting.schedule}, {meeting.startTime}, {meeting.venue}
             </p>
             <div className="flex flex-wrap gap-3">
-              <ButtonLink href="/join">Book a guest visit</ButtonLink>
-              <ButtonLink href="/#why-join" variant="ghost">
-                What happens at a meeting
-              </ButtonLink>
+              <span data-hero-item>
+                <ButtonLink href="/join">Book a guest visit</ButtonLink>
+              </span>
+              <span data-hero-item>
+                <ButtonLink href="/#inside-a-meeting" variant="ghost">
+                  What happens at a meeting
+                </ButtonLink>
+              </span>
             </div>
           </div>
+        </div>
+
+        <div
+          data-scroll-cue
+          aria-hidden="true"
+          className="text-muted mt-10 hidden flex-col items-center gap-3 text-xs md:flex"
+        >
+          <span>Scroll to explore</span>
+          <span className="scroll-cue-line block h-10 w-px bg-white/30" />
         </div>
       </HeroIntro>
     </section>

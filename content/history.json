@@ -1,9 +1,32 @@
 {
   "foundedYear": 2019,
-  "story": [
-    "Placeholder: how the club began. Who had the idea, and what were they missing that made them start a club of their own?",
-    "Placeholder: the first meeting. Where was it, how many people came, and what do the founders remember about that evening?",
-    "Placeholder: how the club grew into a community open to everyone, of every age and background."
+  "why": [
+    "Placeholder: why the founders started the club. What did they wish had existed when they first tried to speak up?",
+    "Placeholder: the challenges people faced: fear of speaking, nowhere safe to practise, no one to give honest, kind feedback.",
+    "Placeholder: the vision. A community open to everyone, of every age and background, where anyone can find their voice.",
+    "Placeholder: the gap the club filled in the community."
   ],
+  "timeline": [
+    { "stage": "idea", "date": "Date", "text": "Placeholder: the conversation where the idea began." },
+    {
+      "stage": "planning",
+      "date": "Date",
+      "text": "Placeholder: finding founding members, a venue and a meeting night."
+    },
+    { "stage": "club-formation", "date": "Date", "text": "Placeholder: the first group comes together." },
+    {
+      "stage": "chartering",
+      "date": "Date",
+      "text": "Placeholder: officially chartered by Toastmasters International."
+    },
+    { "stage": "first-meeting", "date": "Date", "text": "Placeholder: who came, and what it felt like." },
+    { "stage": "first-achievement", "date": "Date", "text": "Placeholder: the first award or recognition." },
+    {
+      "stage": "today",
+      "date": "Today",
+      "text": "Placeholder: members of every age and background, meeting every month."
+    }
+  ],
+  "legacy": "Today the club continues the mission started by its founders, helping people of every age and background become confident communicators and leaders.",
   "placeholder": true
 }

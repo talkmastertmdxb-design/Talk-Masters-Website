@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:content": "node scripts/check-content.ts",
-    "verify": "npm run lint && npm run typecheck && npm run test:coverage && npm run build"
+    "verify": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
+    "images:unsplash": "node scripts/fetch-unsplash.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

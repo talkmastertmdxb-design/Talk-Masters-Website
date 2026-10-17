@@ -4,105 +4,159 @@
     "alt": "A speaker at the lectern under warm stage light, the audience softly out of focus",
     "aspectRatio": "4/5",
     "brief": "Speaker at the lectern, three-quarter angle, warm dramatic light",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "photoId": "edroxDz_ngM",
+      "query": "microphone dark stage spotlight",
+      "orientation": "landscape"
+    }
   },
   {
     "id": "manifesto-bento",
     "alt": "Club members of different ages talking together after a meeting",
     "aspectRatio": "1/1",
     "brief": "Mixed-age group laughing together after a meeting",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "photoId": "ckVjMurwKIs",
+      "query": "audience raising hands conference",
+      "orientation": "squarish"
+    }
   },
   {
     "id": "fear-split",
     "alt": "A first-time speaker smiling as the audience applauds",
     "aspectRatio": "4/5",
     "brief": "Nervous-then-smiling moment, applause in the background",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "photoId": "ojVMh1QTVGY",
+      "query": "microphone foggy stage",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "agenda-welcome",
     "alt": "Guests being welcomed at the door of a meeting",
     "aspectRatio": "3/4",
     "brief": "Guests welcomed at the entrance, name badges",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "conference name badge welcome",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "agenda-prepared-speeches",
     "alt": "A member delivering a prepared speech",
     "aspectRatio": "3/4",
     "brief": "Prepared speech in progress, gesture mid-sentence",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "speaker presenting to audience",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "agenda-table-topics",
     "alt": "A member answering an impromptu Table Topics question",
     "aspectRatio": "3/4",
     "brief": "Table Topics moment, speaker thinking on their feet",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "person speaking microphone audience",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "agenda-evaluations",
     "alt": "An evaluator giving supportive feedback",
     "aspectRatio": "3/4",
     "brief": "Evaluator giving feedback, speaker listening",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "people discussion feedback meeting",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "agenda-timer",
     "alt": "The timer holding up green, amber and red cards",
     "aspectRatio": "3/4",
     "brief": "Timer with the coloured timing cards or lights",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "stopwatch timer",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "agenda-awards",
     "alt": "Members receiving ribbons at the end of a meeting",
     "aspectRatio": "3/4",
     "brief": "Best Speaker ribbons and applause",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "audience applause clapping",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "statement-fullbleed",
     "alt": "An audience of all ages listening intently",
     "aspectRatio": "16/9",
     "brief": "Wide audience shot showing a range of ages and backgrounds",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "photoId": "-w_UfjjPe8o",
+      "query": "empty theater seats darkness",
+      "orientation": "landscape"
+    }
   },
   {
     "id": "journey-feature",
     "alt": "An experienced member mentoring a newer member",
     "aspectRatio": "4/5",
     "brief": "Mentor and mentee, one-to-one",
-    "src": null
-  },
-  {
-    "id": "officer-president",
-    "alt": "Portrait of the club president",
-    "aspectRatio": "1/1",
-    "brief": "Officer portrait, plain background, natural light",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "photoId": "3gAiajAfjXI",
+      "query": "two people coffee conversation",
+      "orientation": "portrait"
+    }
   },
   {
     "id": "event-featured",
     "alt": "A Talk-Masters meeting in progress",
     "aspectRatio": "16/9",
     "brief": "Featured event banner: the room mid-meeting",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "conference audience room presentation",
+      "orientation": "landscape"
+    }
   },
   {
     "id": "venue-entrance",
     "alt": "The entrance to the meeting venue",
     "aspectRatio": "16/9",
     "brief": "Venue entrance so first-time guests recognise it",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "conference venue entrance",
+      "orientation": "landscape"
+    }
   },
   {
     "id": "club-history",
     "alt": "An early Talk-Masters meeting",
     "aspectRatio": "3/2",
     "brief": "An early or founding-era club photo, if one exists",
-    "src": null
+    "src": null,
+    "unsplash": {
+      "query": "vintage microphone",
+      "orientation": "landscape"
+    }
   },
   {
     "id": "founder-one",
@@ -144,6 +198,92 @@
     "alt": "The club’s award certificate",
     "aspectRatio": "4/3",
     "brief": "Photo or scan of the award certificate or trophy",
+    "src": null
+  },
+  {
+    "id": "story-hero",
+    "alt": "An empty stage lit by a single spotlight",
+    "aspectRatio": "16/9",
+    "brief": "Atmospheric stage shot for the Our Story header",
+    "src": null,
+    "unsplash": {
+      "query": "empty stage spotlight theatre",
+      "orientation": "landscape"
+    }
+  },
+  {
+    "id": "achievements-hero",
+    "alt": "Gold trophies under warm light",
+    "aspectRatio": "16/9",
+    "brief": "Club trophies or certificates for the Achievements header",
+    "src": null,
+    "unsplash": {
+      "query": "gold trophy award",
+      "orientation": "landscape"
+    }
+  },
+  {
+    "id": "members-hero",
+    "alt": "An audience listening to a speaker",
+    "aspectRatio": "16/9",
+    "brief": "Wide shot of members in the audience",
+    "src": null,
+    "unsplash": {
+      "query": "audience listening speaker",
+      "orientation": "landscape"
+    }
+  },
+  {
+    "id": "team-hero",
+    "alt": "A meeting room set up for an evening session",
+    "aspectRatio": "16/9",
+    "brief": "The committee at work, or the meeting room",
+    "src": null,
+    "unsplash": {
+      "query": "meeting room chairs evening",
+      "orientation": "landscape"
+    }
+  },
+  {
+    "id": "member-four",
+    "alt": "Portrait of a club member",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait for their journey card",
+    "src": null
+  },
+  {
+    "id": "officer-president",
+    "alt": "Portrait of a committee member",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait, natural light",
+    "src": null
+  },
+  {
+    "id": "officer-vp-education",
+    "alt": "Portrait of a committee member",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait, natural light",
+    "src": null
+  },
+  {
+    "id": "officer-vp-public-relations",
+    "alt": "Portrait of a committee member",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait, natural light",
+    "src": null
+  },
+  {
+    "id": "officer-secretary",
+    "alt": "Portrait of a committee member",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait, natural light",
+    "src": null
+  },
+  {
+    "id": "officer-treasurer",
+    "alt": "Portrait of a committee member",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait, natural light",
     "src": null
   }
 ]

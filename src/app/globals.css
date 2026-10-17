@@ -284,3 +284,202 @@
     }
   }
 }
+
+@layer components {
+  /* Hero scroll cue: a slow drip down the line */
+  .scroll-cue-line {
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0.5), transparent);
+    animation: cue-drip 2.4s var(--ease-breath) infinite;
+    transform-origin: top;
+  }
+  @keyframes cue-drip {
+    0% {
+      transform: scaleY(0);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+    100% {
+      transform: scaleY(1);
+      opacity: 0;
+    }
+  }
+
+  /* Sticky storytelling (Animation 08) */
+  .story-panel {
+    opacity: 0;
+    scale: 1.03;
+    transition:
+      opacity var(--duration-base) var(--ease-deliver),
+      scale var(--duration-slow) var(--ease-deliver);
+  }
+  .story-panel[data-current] {
+    opacity: 1;
+    scale: 1;
+  }
+  .story-progress {
+    display: none;
+  }
+  .sticky-story[data-pinned] .story-progress {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1.25rem;
+    width: 2px;
+    background: var(--color-hairline);
+  }
+  .sticky-story[data-pinned] .story-progress::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-maroon);
+    transform-origin: top;
+    transform: scaleY(var(--story-progress, 0));
+  }
+  .sticky-story[data-pinned] .story-row {
+    opacity: 0.4;
+    transition: opacity var(--duration-quick) var(--ease-deliver);
+  }
+  .sticky-story[data-pinned] .story-row[data-current] {
+    opacity: 1;
+  }
+
+  /* Agenda scrub (Animations 10-12) */
+  .agenda[data-pinned] .agenda-card {
+    opacity: 0.45;
+    transition: opacity var(--duration-base) var(--ease-deliver);
+  }
+  .agenda[data-pinned] .agenda-card[data-current] {
+    opacity: 1;
+  }
+  .agenda-track,
+  .slider-track {
+    scrollbar-width: none;
+  }
+  .agenda-track::-webkit-scrollbar,
+  .slider-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Slider arrows */
+  .slider-btn {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-white);
+    transition: background-color var(--duration-quick) var(--ease-deliver);
+  }
+  .slider-btn:hover:not(:disabled) {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+  .slider-btn:disabled {
+    opacity: 0.35;
+  }
+
+  /* Table Topics booth (Animations 13-14): the light drives every colour */
+  .booth {
+    --signal: rgb(255 255 255 / 0.25);
+  }
+  .booth[data-signal="green"] {
+    --signal: var(--color-signal-green);
+  }
+  .booth[data-signal="amber"] {
+    --signal: var(--color-gold);
+  }
+  .booth[data-signal="red"] {
+    --signal: var(--color-maroon-hover);
+  }
+  .booth-ring {
+    stroke: var(--signal);
+    transition:
+      stroke var(--duration-quick) var(--ease-deliver),
+      stroke-dashoffset 200ms linear;
+  }
+  .booth-lamp {
+    background: var(--signal);
+    box-shadow: 0 0 18px 4px var(--signal);
+    transition:
+      background-color var(--duration-quick),
+      box-shadow var(--duration-quick);
+  }
+  .booth-btn {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    padding-inline: 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: border-color var(--duration-quick);
+  }
+  .booth-btn:hover:not(:disabled) {
+    border-color: var(--color-gold);
+  }
+  .booth-btn:disabled {
+    opacity: 0.4;
+  }
+  .booth-btn-primary {
+    border-color: transparent;
+    background: var(--color-maroon);
+  }
+  .booth-btn-primary:hover:not(:disabled) {
+    background: var(--color-maroon-hover);
+  }
+
+  /* Member journey dialog */
+  .journey-dialog[open] {
+    animation: dialog-in var(--duration-base) var(--ease-deliver);
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+  }
+}
+
+@layer components {
+  /* Pinned sections must fit one screen (docs: SCROLL_ANIMATION_SYSTEM.md §3-4) */
+  .story-stage {
+    aspect-ratio: 4 / 5;
+    height: min(76vh, 46rem);
+    margin-inline: auto;
+    --slot-ratio: auto;
+  }
+  .story-stage [data-image-slot] {
+    height: 100%;
+  }
+  .sticky-story[data-pinned] .story-row {
+    padding-block: 0.875rem;
+  }
+  .sticky-story[data-pinned] .story-body {
+    display: grid;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      max-height var(--duration-base) var(--ease-deliver),
+      opacity var(--duration-quick) var(--ease-deliver);
+  }
+  .sticky-story[data-pinned] .story-row[data-current] .story-body {
+    max-height: 6rem;
+    opacity: 1;
+  }
+  .agenda[data-pinned] .agenda-card {
+    --slot-ratio: 4 / 3;
+  }
+}
+
+/* Unlayered on purpose: must beat the bg/text utilities on the icon */
+.sticky-story[data-pinned] .story-row[data-current] .story-icon {
+  background: var(--color-tm-blue);
+  color: var(--color-white);
+}

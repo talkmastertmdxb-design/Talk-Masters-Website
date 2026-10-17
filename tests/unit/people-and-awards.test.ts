@@ -1,23 +1,35 @@
 import { describe, expect, it } from "vitest";
 import { content } from "@/lib/content";
 import { createRepository, type RawContent } from "@/lib/content/repository";
-import { awardSchema, founderSchema, historySchema, memberSchema } from "@/lib/content/schemas";
-import { awardsByYear, firstName } from "@/lib/content/people";
+import {
+  awardSchema,
+  founderSchema,
+  historySchema,
+  memberSchema,
+  officerSchema,
+  FOUNDING_STAGES,
+} from "@/lib/content/schemas";
+import { achievementYear, achievementsByYear, firstName, isMemberAchievement } from "@/lib/content/people";
 
 const member = {
   slug: "aisha-rahman",
   name: "Aisha Rahman",
-  role: "Vice President Education",
+  position: "Vice President Education",
   occupation: "Civil engineer",
   organisation: "Example Engineering",
-  memberSince: 2022,
-  quote: "I stopped dreading Monday meetings.",
-  before: "Froze whenever she had to present.",
-  today: "Leads site briefings for 40 people.",
-  story: ["First paragraph.", "Second paragraph."],
+  linkedin: "https://www.linkedin.com/in/example",
+  segment: "professional",
+  challenge: "I used to avoid speaking in meetings.",
+  transformation: "Today I confidently present to clients across the region.",
+  journey: [
+    { milestone: "first-meeting", text: "Came along with a colleague and just watched." },
+    { milestone: "first-speech", text: "Gave my Ice Breaker three weeks later." },
+  ],
+  impact: { career: "Promoted to lead engineer.", confidence: "I volunteer to present now." },
+  advice: "Come once and just listen. That's enough to start.",
   imageSlot: "member-one",
   consent: true,
-  featured: true,
+  spotlight: true,
   status: "published",
 };
 
@@ -30,38 +42,72 @@ const award = {
   description: "Our highest recognition for meeting club goals.",
 };
 
-describe("memberSchema", () => {
-  it("accepts a complete member story", () => {
+const timeline = FOUNDING_STAGES.map((stage) => ({ stage, text: `${stage} happened.` }));
+
+describe("memberSchema (Plan.md member directory + journey cards)", () => {
+  it("accepts a complete member journey", () => {
     expect(memberSchema.safeParse(member).success).toBe(true);
   });
 
-  it("keeps workplace optional, so members can choose not to share it", () => {
-    const withoutWork = Object.fromEntries(
-      Object.entries(member).filter(([key]) => key !== "organisation" && key !== "occupation"),
+  it("keeps position, work, company and LinkedIn optional", () => {
+    const minimal = Object.fromEntries(
+      Object.entries(member).filter(
+        ([key]) => !["position", "occupation", "organisation", "linkedin", "segment"].includes(key),
+      ),
     );
-    expect(memberSchema.safeParse(withoutWork).success).toBe(true);
+    expect(memberSchema.safeParse(minimal).success).toBe(true);
   });
 
-  it("requires at least one story paragraph", () => {
-    expect(memberSchema.safeParse({ ...member, story: [] }).success).toBe(false);
+  it("only accepts LinkedIn profile links", () => {
+    expect(memberSchema.safeParse({ ...member, linkedin: "https://example.com/me" }).success).toBe(false);
   });
 
-  it("rejects an implausible membership year", () => {
-    expect(memberSchema.safeParse({ ...member, memberSince: 1850 }).success).toBe(false);
+  it("needs at least one journey milestone and one area of impact", () => {
+    expect(memberSchema.safeParse({ ...member, journey: [] }).success).toBe(false);
+    expect(memberSchema.safeParse({ ...member, impact: {} }).success).toBe(false);
   });
 });
 
 describe("founderSchema", () => {
-  it("accepts a founder with their part of the founding story", () => {
+  it("accepts a founder with role, degree/profession, story and quote", () => {
     const founder = {
       slug: "founder-one",
       name: "Founder name",
       role: "Founding President",
-      quote: "We wanted a room where anyone could practise.",
+      profession: "MBA, Marketing Manager",
+      quote: "Creating Talk-Masters became my way of helping others overcome that same fear.",
       story: ["How it began."],
       consent: true,
     };
     expect(founderSchema.safeParse(founder).success).toBe(true);
+  });
+});
+
+describe("historySchema (Our Story)", () => {
+  const history = {
+    foundedYear: 2019,
+    why: ["Why the club was created."],
+    timeline,
+    legacy: "Today the club continues the mission.",
+  };
+
+  it("keeps the founders timeline exactly: Idea → Planning → … → Today", () => {
+    expect(FOUNDING_STAGES).toEqual([
+      "idea",
+      "planning",
+      "club-formation",
+      "chartering",
+      "first-meeting",
+      "first-achievement",
+      "today",
+    ]);
+    expect(historySchema.safeParse(history).success).toBe(true);
+  });
+
+  it("rejects a timeline that skips or reorders a stage", () => {
+    expect(historySchema.safeParse({ ...history, timeline: timeline.slice(1) }).success).toBe(false);
+    const swapped = [timeline[1], timeline[0], ...timeline.slice(2)];
+    expect(historySchema.safeParse({ ...history, timeline: swapped }).success).toBe(false);
   });
 });
 
@@ -74,39 +120,27 @@ describe("awardSchema", () => {
     expect(awardSchema.safeParse({ ...award, year: "2024" }).success).toBe(false);
     expect(awardSchema.safeParse({ ...award, year: "2024-2026" }).success).toBe(false);
   });
-
-  it("accepts the Smedley Award and contest wins", () => {
-    expect(awardSchema.safeParse({ ...award, programme: "smedley" }).success).toBe(true);
-    expect(
-      awardSchema.safeParse({ ...award, programme: "contest", level: "district", recipient: "A member" })
-        .success,
-    ).toBe(true);
-  });
 });
 
-describe("historySchema", () => {
-  it("requires a founding year and at least one paragraph", () => {
-    expect(historySchema.safeParse({ foundedYear: 2019, story: ["It began…"] }).success).toBe(true);
-    expect(historySchema.safeParse({ foundedYear: 2019, story: [] }).success).toBe(false);
+describe("officerSchema (Executive Committee)", () => {
+  it("requires a personal leadership statement", () => {
+    const officer = {
+      slug: "president",
+      name: "Officer name",
+      role: "President",
+      term: "2026-2027",
+      statement: "Helping people turn confidence into leadership.",
+      consent: true,
+    };
+    expect(officerSchema.safeParse(officer).success).toBe(true);
+    expect(officerSchema.safeParse({ ...officer, statement: "" }).success).toBe(false);
   });
 });
 
 describe("repository rules for people", () => {
-  const base: RawContent = {
-    settings: content.settings,
-    history: content.history,
-    events: [],
-    members: [],
-    founders: [],
-    awards: [],
-    testimonials: [],
-    officers: [],
-    faqs: [],
-    tableTopics: [],
-    imageSlots: [],
-  };
+  const base: RawContent = { ...content, members: [], founders: [], awards: [], officers: [] };
 
-  it("never publishes members or founders without consent", () => {
+  it("never publishes members or founders without consent, nor drafts", () => {
     const repo = createRepository({
       ...base,
       members: [
@@ -141,20 +175,31 @@ describe("repository rules for people", () => {
   });
 });
 
-describe("people helpers", () => {
-  it("groups awards by programme year, keeping order", () => {
+describe("achievement helpers", () => {
+  it("splits club awards from member achievements", () => {
+    expect(isMemberAchievement(awardSchema.parse(award))).toBe(false);
+    expect(isMemberAchievement(awardSchema.parse({ ...award, recipient: "A member" }))).toBe(true);
+  });
+
+  it("places an achievement in the calendar year it happened", () => {
+    expect(achievementYear(awardSchema.parse({ ...award, achievedOn: "2024-11-02" }))).toBe(2024);
+    // Without a date, use the year the Toastmasters year ends (results are announced then).
+    expect(achievementYear(awardSchema.parse(award))).toBe(2025);
+  });
+
+  it("groups the achievement timeline by year, newest first", () => {
     const awards = [
-      awardSchema.parse({ ...award, slug: "a", year: "2024-2025" }),
-      awardSchema.parse({ ...award, slug: "b", year: "2024-2025" }),
-      awardSchema.parse({ ...award, slug: "c", year: "2023-2024" }),
+      awardSchema.parse({ ...award, slug: "a", achievedOn: "2023-05-01" }),
+      awardSchema.parse({ ...award, slug: "b", achievedOn: "2025-06-01" }),
+      awardSchema.parse({ ...award, slug: "c", achievedOn: "2025-02-01" }),
     ];
-    expect(awardsByYear(awards).map(([year, items]) => [year, items.length])).toEqual([
-      ["2024-2025", 2],
-      ["2023-2024", 1],
+    expect(achievementsByYear(awards).map(([year, items]) => [year, items.map((i) => i.slug)])).toEqual([
+      [2025, ["b", "c"]],
+      [2023, ["a"]],
     ]);
   });
 
-  it("finds a first name for 'Read Aisha's story' links", () => {
+  it("finds a first name for 'Read Aisha's journey' links", () => {
     expect(firstName("Aisha Rahman")).toBe("Aisha");
     expect(firstName("  Mary-Jane  O'Neil ")).toBe("Mary-Jane");
   });

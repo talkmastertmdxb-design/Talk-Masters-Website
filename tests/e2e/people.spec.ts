@@ -1,44 +1,85 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
-const seriousViolations = async (page: import("@playwright/test").Page) => {
+// Content checks: run without motion so reveals and pins never hide what is being checked.
+test.use({ contextOptions: { reducedMotion: "reduce" } });
+
+const seriousViolations = async (page: Page) => {
   const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag22aa"]).analyze();
   return results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
 };
 
-test("Our story shows the founding year, founders and awards", async ({ page }) => {
-  await page.goto("/about");
-  await expect(page.getByRole("heading", { level: 1, name: "Our story" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "The people who started it" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Recognised by Toastmasters International" })).toBeVisible();
-  await expect(page.getByText("Smedley Award").first()).toBeVisible();
+test("Our Story follows Plan.md: why, the founders timeline, founders, legacy", async ({ page }) => {
+  await page.goto("/our-story");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Every great speaker starts with a single conversation." }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Why Talk-Masters was created" })).toBeVisible();
+  const stages = page.getByRole("heading", { level: 3 }).filter({
+    hasText: /^(Idea|Planning|Club Formation|Chartering|First Meeting|First Achievement|Today)$/,
+  });
+  await expect(stages).toHaveText([
+    "Idea",
+    "Planning",
+    "Club Formation",
+    "Chartering",
+    "First Meeting",
+    "First Achievement",
+    "Today",
+  ]);
+  await expect(page.getByRole("heading", { name: "Meet the founders" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Legacy" })).toBeVisible();
   expect(await seriousViolations(page)).toEqual([]);
 });
 
-test("members list links to each member's story page", async ({ page }) => {
+test("/about permanently redirects to /our-story", async ({ request }) => {
+  const response = await request.get("/about", { maxRedirects: 0 });
+  expect(response.status()).toBe(308);
+  expect(response.headers().location).toBe("/our-story");
+});
+
+test("Achievements shows club awards, member achievements, a timeline and impact", async ({ page }) => {
+  await page.goto("/achievements");
+  await expect(page.getByRole("heading", { name: "Club awards" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Smedley Award" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Member achievements" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Achievement timeline" })).toBeVisible();
+  await expect(page.getByText("This recognition reflects the commitment")).toBeVisible();
+  expect(await seriousViolations(page)).toEqual([]);
+});
+
+test("Members: journey cards open in a dialog, and there are no individual pages", async ({
+  page,
+  request,
+}) => {
   await page.goto("/members");
-  await expect(page.getByRole("heading", { level: 1, name: "Our members" })).toBeVisible();
-  const first = page.getByRole("article").first().getByRole("link");
-  const href = await first.getAttribute("href");
-  expect(href).toMatch(/^\/members\/[a-z0-9-]+$/);
-  await first.click();
-  await expect(page).toHaveURL(new RegExp(`${href}$`));
-  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await expect(page.getByText("Before", { exact: true })).toBeVisible();
-  await expect(page.getByText("Today", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Meet the people behind the voices" }),
+  ).toBeVisible();
+  const trigger = page.getByRole("button", { name: /journey$/ }).first();
+  await trigger.click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  for (const heading of ["Before Toastmasters", "Their journey", "Today"]) {
+    await expect(dialog.getByRole("heading", { name: heading })).toBeVisible();
+  }
+  await expect(dialog.getByRole("heading", { name: /advice for new guests/ })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
   expect(await seriousViolations(page)).toEqual([]);
+
+  const oldDetailPage = await request.get("/members/member-one");
+  expect(oldDetailPage.status()).not.toBe(200);
 });
 
-// With Cache Components the shell streams first, so the status stays 200; Next.js
-// renders the not-found page with noindex instead (docs: migrating-to-cache-components).
-test("unknown member pages show not-found and are never indexed", async ({ page }) => {
-  await page.goto("/members/not-a-real-member");
-  await expect(page.getByText("This page could not be found")).toBeVisible();
-  await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content", /noindex/);
+test("a Spotlight 'Read more' link opens that member's journey", async ({ page }) => {
+  await page.goto("/members#member-two");
+  await expect(page.getByRole("dialog")).toBeVisible();
 });
 
-test("the home page features member stories", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.getByRole("heading", { name: "How Toastmasters changed things for them" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Meet our members" })).toHaveAttribute("href", "/members");
+test("Team lists the Executive Committee with leadership statements", async ({ page }) => {
+  await page.goto("/team");
+  await expect(page.getByRole("heading", { level: 1, name: "The Executive Committee" })).toBeVisible();
+  await expect(page.getByText("Vice President Education")).toBeVisible();
+  expect(await seriousViolations(page)).toEqual([]);
 });

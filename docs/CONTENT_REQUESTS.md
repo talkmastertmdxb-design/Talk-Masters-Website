@@ -12,28 +12,30 @@ Send these to the people involved. Each section matches a file in `content/`, so
 
 ### Questions
 
-| #   | Question                                                                                                                               | Required            | Goes into      |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | -------------- |
-| 1   | Your name, as you'd like it shown                                                                                                      | Yes                 | `name`         |
-| 2   | Your club role, if any (e.g. VP Education, or "Member")                                                                                | Yes                 | `role`         |
-| 3   | Your job title                                                                                                                         | Optional            | `occupation`   |
-| 4   | Where you work or study                                                                                                                | Optional            | `organisation` |
-| 5   | The year you joined Talk-Masters                                                                                                       | Yes                 | `memberSince`  |
-| 6   | Before Toastmasters, what was speaking like for you? (one sentence)                                                                    | Yes                 | `before`       |
-| 7   | And today? (one sentence)                                                                                                              | Yes                 | `today`        |
-| 8   | Your story: why you came to your first meeting, a moment things changed, and how it shows up in your work or life now. (100-300 words) | Yes                 | `story`        |
-| 9   | One line you'd like quoted on your card                                                                                                | Yes                 | `quote`        |
-| 10  | A photo of yourself (see photo guide below)                                                                                            | Strongly encouraged | image slot     |
-| 11  | Consent (see below)                                                                                                                    | **Yes**             | `consent`      |
+| #   | Question                                                                                                                                  | Required            | Goes into        |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ---------------- |
+| 1   | Your name, as you'd like it shown                                                                                                         | Yes                 | `name`           |
+| 2   | Your club position, if any (e.g. VP Education)                                                                                            | Optional            | `position`       |
+| 3   | Your degree or job role                                                                                                                   | Optional            | `occupation`     |
+| 4   | Your company or organisation                                                                                                              | Optional            | `organisation`   |
+| 5   | Your LinkedIn profile link                                                                                                                | Optional            | `linkedin`       |
+| 6   | Which fits you best: student, professional, executive, alumni, officer                                                                    | Optional            | `segment`        |
+| 7   | **Before Toastmasters:** what challenge did you face? (one sentence: fear of speaking, low confidence, presenting ideas, leading people…) | Yes                 | `challenge`      |
+| 8   | **Today:** what has changed? (one sentence)                                                                                               | Yes                 | `transformation` |
+| 9   | **Your journey:** a line each about your first meeting, first Table Topic, first speech, and any leadership role                          | At least one        | `journey`        |
+| 10  | **Impact:** how has Toastmasters affected your career, leadership, confidence and network?                                                | At least one        | `impact`         |
+| 11  | **One piece of advice** for someone coming to their first meeting                                                                         | Yes                 | `advice`         |
+| 12  | A photo of yourself (see photo guide below)                                                                                               | Strongly encouraged | image slot       |
+| 13  | Consent (see below)                                                                                                                       | **Yes**             | `consent`        |
 
 ### Consent wording (copy exactly, one tick box each)
 
 - ☐ I agree that Talk-Masters Club may publish my **name, story and quote** on its website.
 - ☐ I agree that my **photo** may be published with my story.
-- ☐ I agree that my **job title and workplace** may be published. _(Leave unticked to keep them private.)_
+- ☐ I agree that my **job title, workplace and LinkedIn link** may be published. _(Leave unticked to keep them private.)_
 - ☐ I understand I can ask for any of this to be changed or removed at any time by emailing the club.
 
-Record the date and keep the form response. That's the "written permission" the site's rules require. Only set `"consent": true` when the first box is ticked, and leave out `occupation` and `organisation` if the third isn't.
+Record the date and keep the form response. That's the "written permission" the site's rules require. Only set `"consent": true` when the first box is ticked, and leave out `occupation`, `organisation` and `linkedin` if the third isn't.
 
 ---
 

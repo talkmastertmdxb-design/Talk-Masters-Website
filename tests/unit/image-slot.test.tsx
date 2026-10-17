@@ -35,7 +35,8 @@ describe("ImagePlaceholder", () => {
   it("exposes the alt text as an accessible image and keeps the aspect ratio", () => {
     render(<ImagePlaceholder slot={slots[0]} showLabel />);
     const img = screen.getByRole("img", { name: "Speaker on stage" });
-    expect(img).toHaveStyle({ aspectRatio: "4/5" });
+    // The ratio can be overridden per context with --slot-ratio (e.g. pinned sections).
+    expect(img.getAttribute("style")).toContain("var(--slot-ratio, 4/5)");
     expect(screen.getByText("Speaker at lectern")).toBeInTheDocument();
   });
 

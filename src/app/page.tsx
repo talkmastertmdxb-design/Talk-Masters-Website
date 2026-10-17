@@ -1,20 +1,27 @@
 import { About } from "@/components/sections/About";
+import { ExecutiveCommittee } from "@/components/sections/ExecutiveCommittee";
+import { FearStory } from "@/components/sections/FearStory";
 import { Hero } from "@/components/sections/Hero";
-import { MemberStories } from "@/components/sections/MemberStories";
-import { WhyJoin } from "@/components/sections/WhyJoin";
+import { InsideMeeting } from "@/components/sections/InsideMeeting";
+import { MemberSpotlight } from "@/components/sections/MemberSpotlight";
+import { TableTopicsBooth } from "@/components/sections/TableTopicsBooth";
 
 /**
- * The home page is a speech (docs/IMPLEMENTATION_PLAN.md §1.1).
- * Opening and the start of the Body are built; the remaining bands
- * (agenda, Table Topics booth, impact, journey, stories, events, FAQ) follow.
+ * The home page is a speech (docs/IMPLEMENTATION_PLAN.md §1.1, SCROLL_ANIMATION_SYSTEM.md).
+ * Opening: Hero, Manifesto. Body: Overcome the Fear, Inside a Meeting, Table Topics Booth,
+ * Member Spotlight. Close: Executive Committee, then the final CTA in the footer.
+ * Still to come (Phase 6): stacked statement, impact metrics, journey, events, FAQ.
  */
 export default function Home() {
   return (
     <main id="main">
       <Hero />
       <About />
-      <WhyJoin />
-      <MemberStories />
+      <FearStory />
+      <InsideMeeting />
+      <TableTopicsBooth />
+      <MemberSpotlight />
+      <ExecutiveCommittee />
     </main>
   );
 }

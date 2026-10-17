@@ -53,3 +53,11 @@ export function voicePath(shape: VoiceShape): string {
     .map(([x, y], i) => `${i === 0 ? "M" : "L"}${round(x)},${round(y)}`)
     .join("");
 }
+
+/** The same voice, running down the page: x and y swapped, for vertical timelines. */
+export function voicePathVertical({ width, height, ...rest }: VoiceShape): string {
+  const round = (n: number): number => Math.round(n * 100) / 100;
+  return voicePoints({ width: height, height: width, ...rest })
+    .map(([along, across], i) => `${i === 0 ? "M" : "L"}${round(across)},${round(along)}`)
+    .join("");
+}

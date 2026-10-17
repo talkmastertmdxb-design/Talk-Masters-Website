@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { useEffect, type ReactNode } from "react";
 import { media } from "@/lib/motion/tokens";
+import { ScrollReveals } from "./ScrollReveals";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,13 +18,20 @@ const isFormField = (el: Element | null): boolean =>
 
 /**
  * Owns smooth scrolling (Lenis) and keeps ScrollTrigger in sync with it.
- * Off entirely under reduced motion; paused while someone is typing in a form.
+ * Desktop: full smoothing. Touch: lightweight (native momentum, no syncTouch).
+ * Reduced motion: Lenis is never created. Paused while someone types in a form.
  */
 export function MotionProvider({ children }: MotionProviderProps) {
   useEffect(() => {
     if (window.matchMedia(media.reducedMotion).matches) return;
 
-    const lenis = new Lenis({ lerp: 0.1, anchors: true });
+    const lenis = new Lenis({
+      lerp: 0.09,
+      wheelMultiplier: 1,
+      syncTouch: false,
+      anchors: { offset: -96 },
+      autoRaf: false,
+    });
     lenis.on("scroll", ScrollTrigger.update);
 
     const raf = (time: number) => lenis.raf(time * 1000);
@@ -46,5 +54,10 @@ export function MotionProvider({ children }: MotionProviderProps) {
     };
   }, []);
 
-  return children;
+  return (
+    <>
+      {children}
+      <ScrollReveals />
+    </>
+  );
 }

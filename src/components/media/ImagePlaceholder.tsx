@@ -30,7 +30,7 @@ export function ImagePlaceholder({
       aria-label={slot.alt}
       data-image-slot={slot.id}
       data-placeholder="true"
-      style={isBackdrop ? undefined : { aspectRatio: slot.aspectRatio }}
+      style={isBackdrop ? undefined : { aspectRatio: `var(--slot-ratio, ${slot.aspectRatio})` }}
       className={
         isBackdrop
           ? `absolute inset-0 -z-20 ${className}`

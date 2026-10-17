@@ -70,7 +70,10 @@ export function SiteFooter({ items }: SiteFooterProps) {
 
       <div className="container-site border-hairline-dark text-muted flex flex-col gap-3 border-t py-8 text-sm md:flex-row md:justify-between">
         <p>
-          © {buildYear} {clubName}, a club of {parentOrganisation}.
+          © {buildYear} {clubName}, a club of {parentOrganisation}.{" "}
+          <Link href="/credits" className="nav-link">
+            Photo credits
+          </Link>
         </p>
         {/* TODO(launch): replace with the trademark notice required by the Toastmasters brand portal. */}
         <p className="max-w-[60ch]">

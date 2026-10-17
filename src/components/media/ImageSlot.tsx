@@ -44,7 +44,7 @@ export function ImageSlot({
   return (
     <div
       data-image-slot={slot.id}
-      style={isBackdrop ? undefined : { aspectRatio: slot.aspectRatio }}
+      style={isBackdrop ? undefined : { aspectRatio: `var(--slot-ratio, ${slot.aspectRatio})` }}
       className={
         isBackdrop
           ? `backdrop-photo absolute inset-0 -z-20 ${className}`

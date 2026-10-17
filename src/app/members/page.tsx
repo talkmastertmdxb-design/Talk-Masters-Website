@@ -1,30 +1,36 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { MemberCard } from "@/components/people/MemberCard";
+import { MemberDirectoryCard } from "@/components/people/MemberDirectoryCard";
 import { content } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Our members",
+  title: "Members",
   description:
-    "Meet the members of Talk-Masters Club: people of every age and background, and how Toastmasters changed their lives.",
+    "Meet the people behind the voices at Talk-Masters Club: members of every age and background, and how Toastmasters changed their lives.",
 };
 
+/**
+ * Plan.md: Members Page. A directory with expandable journey cards; no individual
+ * member pages. Filters (students, professionals, executives, alumni, officers)
+ * are a future enhancement; `segment` is already stored for them.
+ */
 export default function MembersPage() {
   const { members } = content;
 
   return (
     <main id="main">
       <PageHeader
-        title="Our members"
-        lead="Engineers and teachers, students and retirees, parents and career changers. In their own words, here's what changed."
+        title="Meet the people behind the voices"
+        lead="Students and retirees, engineers and teachers, parents and career changers. Different starting points, the same room, and stories worth hearing."
+        imageSlot="members-hero"
       />
 
-      <section aria-label="Member stories" className="py-section bg-soft-gray">
+      <section aria-label="Member directory" className="py-section bg-soft-gray">
         <div className="container-site">
           {members.length > 0 ? (
             <div className="grid gap-x-6 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
               {members.map((member) => (
-                <MemberCard key={member.slug} member={member} />
+                <MemberDirectoryCard key={member.slug} member={member} />
               ))}
             </div>
           ) : (

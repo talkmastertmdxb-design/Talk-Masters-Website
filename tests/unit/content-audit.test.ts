@@ -26,3 +26,12 @@ describe("findPlaceholders", () => {
     expect(report).toEqual(['images.json → [0] (image slot "hero-stage" has no photo)']);
   });
 });
+
+describe("findPlaceholders with stock photos", () => {
+  it("flags temporary Unsplash photos so they get replaced before launch", () => {
+    const report = findPlaceholders({
+      "images.json": [{ id: "hero-stage", src: "https://images.unsplash.com/photo-1?w=2400" }],
+    });
+    expect(report).toEqual(['images.json → [0] (image slot "hero-stage" uses a temporary Unsplash photo)']);
+  });
+});

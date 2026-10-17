@@ -6,11 +6,17 @@
 
 export type TimingSignal = "off" | "green" | "amber" | "red";
 
-export const SPEECH = {
-  green: 300,
-  amber: 360,
-  red: 420,
-} as const;
+export interface TimingThresholds {
+  green: number;
+  amber: number;
+  red: number;
+}
+
+/** A standard 5-7 minute prepared speech. */
+export const SPEECH: TimingThresholds = { green: 300, amber: 360, red: 420 };
+
+/** Table Topics: 1-2 minutes. */
+export const TABLE_TOPIC: TimingThresholds = { green: 60, amber: 90, red: 120 };
 
 /** Scroll progress (0-1) → elapsed speech time in seconds. */
 export function speechTime(progress: number): number {
@@ -18,10 +24,10 @@ export function speechTime(progress: number): number {
   return Math.round(clamped * SPEECH.red);
 }
 
-export function timingSignal(seconds: number): TimingSignal {
-  if (seconds >= SPEECH.red) return "red";
-  if (seconds >= SPEECH.amber) return "amber";
-  if (seconds >= SPEECH.green) return "green";
+export function timingSignal(seconds: number, thresholds: TimingThresholds = SPEECH): TimingSignal {
+  if (seconds >= thresholds.red) return "red";
+  if (seconds >= thresholds.amber) return "amber";
+  if (seconds >= thresholds.green) return "green";
   return "off";
 }
 

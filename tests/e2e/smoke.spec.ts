@@ -26,6 +26,8 @@ test.describe("home", () => {
   });
 
   test("has no serious accessibility violations", async ({ page }) => {
+    // Scan the settled page: mid-animation opacity would distort contrast results.
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
     const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag22aa"]).analyze();
     const serious = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");

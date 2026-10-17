@@ -1,9 +1,13 @@
 import type { NavItem } from "@/components/layout/SiteHeader";
 
-/** Only links to content that exists. Add items as each page ships (docs/IMPLEMENTATION_PLAN.md §2.4). */
+/**
+ * Plan.md launch navigation: Home · Join · Meetings · Events · Team · Members · Our Story · Achievements.
+ * Home is the wordmark and Join is the "Book a guest visit" button. Meetings and Events
+ * are added when those pages ship (Phase 6): only link to pages that exist.
+ */
 export const mainNav: readonly NavItem[] = [
-  { href: "/about", label: "Our story" },
+  { href: "/team", label: "Team" },
   { href: "/members", label: "Members" },
-  { href: "/#why-join", label: "Why join" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/our-story", label: "Our Story" },
+  { href: "/achievements", label: "Achievements" },
 ];

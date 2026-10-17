@@ -66,3 +66,11 @@ describe("speech timing (Toastmasters 5-7 minute speech)", () => {
     expect(formatSpeechTime(420)).toBe("7:00");
   });
 });
+
+describe("voicePathVertical (founders timeline connector)", () => {
+  it("runs top to bottom, centred, with the same wave as the horizontal line", async () => {
+    const { voicePathVertical } = await import("@/lib/motion/voice");
+    const d = voicePathVertical({ width: 40, height: 1000, amplitude: 0, phase: 0, samples: 4 });
+    expect(d).toBe("M20,0L20,250L20,500L20,750L20,1000");
+  });
+});
