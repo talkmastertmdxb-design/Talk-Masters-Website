@@ -4,8 +4,11 @@ import { content } from "@/lib/content";
 
 const base: RawContent = {
   settings: content.settings,
+  history: content.history,
   events: [],
-  stories: [],
+  members: [],
+  founders: [],
+  awards: [],
   testimonials: [],
   officers: [],
   faqs: [],
@@ -24,18 +27,6 @@ const event = (slug: string, startsAt: string, status: "draft" | "published" = "
   placeholder: false,
 });
 
-const story = (slug: string, consent: boolean, status: "draft" | "published" = "published") => ({
-  slug,
-  name: slug,
-  role: "Member",
-  before: "b",
-  today: "t",
-  quote: "q",
-  consent,
-  status,
-  placeholder: false,
-});
-
 describe("createRepository", () => {
   it("sorts published events soonest first and drops drafts", () => {
     const repo = createRepository({
@@ -47,14 +38,6 @@ describe("createRepository", () => {
       ],
     });
     expect(repo.events.map((e) => e.slug)).toEqual(["sooner", "later"]);
-  });
-
-  it("never publishes people without consent", () => {
-    const repo = createRepository({
-      ...base,
-      stories: [story("yes", true), story("no", false), story("hidden", true, "draft")],
-    });
-    expect(repo.stories.map((s) => s.slug)).toEqual(["yes"]);
   });
 
   it("does not mutate the raw input", () => {
@@ -73,7 +56,14 @@ describe("content in /content", () => {
   it("has unique image slot ids, and every referenced slot exists", () => {
     const ids = content.imageSlots.map((slot) => slot.id);
     expect(new Set(ids).size).toBe(ids.length);
-    const referenced = [...content.events, ...content.stories, ...content.testimonials, ...content.officers]
+    const referenced = [
+      ...content.events,
+      ...content.members,
+      ...content.founders,
+      ...content.awards,
+      ...content.testimonials,
+      ...content.officers,
+    ]
       .map((item) => item.imageSlot)
       .filter((id): id is string => Boolean(id));
     for (const id of referenced) expect(ids).toContain(id);

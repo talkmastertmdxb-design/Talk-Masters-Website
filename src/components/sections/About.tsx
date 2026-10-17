@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { CountUp } from "@/components/motion/CountUp";
 import { content } from "@/lib/content";
@@ -18,6 +19,9 @@ export function About() {
             Students and retirees, engineers and artists, people new to the city and people who&apos;ve lived
             here all their lives. Everyone practises together, and everyone improves at their own pace.
           </p>
+          <Link href="/about" className="nav-link text-tm-blue mt-8 inline-block font-semibold">
+            Read how the club began
+          </Link>
         </div>
 
         <div className="mt-6 md:col-span-5 md:mt-16">

@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "founder-one",
+    "name": "Founder name",
+    "role": "Founding President",
+    "quote": "Placeholder quote: why they started the club.",
+    "story": ["Placeholder: this founder's part of the story, in their own words."],
+    "imageSlot": "founder-one",
+    "consent": true,
+    "placeholder": true
+  },
+  {
+    "slug": "founder-two",
+    "name": "Founder name",
+    "role": "Founding member",
+    "quote": "Placeholder quote: what the first meetings were like.",
+    "story": ["Placeholder: this founder's part of the story, in their own words."],
+    "imageSlot": "founder-two",
+    "consent": true,
+    "placeholder": true
+  }
+]

@@ -271,3 +271,16 @@
     scroll-margin-top: 6.5rem;
   }
 }
+
+@layer components {
+  /* Slow, small image zoom on card hover (docs/DESIGN.md §6) */
+  .media-zoom img,
+  .media-zoom.stage-placeholder {
+    transition: scale 1.4s var(--ease-deliver);
+  }
+  @media (hover: hover) {
+    .group:hover .media-zoom img {
+      scale: 1.05;
+    }
+  }
+}

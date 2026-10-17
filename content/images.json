@@ -77,13 +77,6 @@
     "src": null
   },
   {
-    "id": "story-one",
-    "alt": "Portrait of a club member",
-    "aspectRatio": "4/5",
-    "brief": "Member portrait for a Before / Today story",
-    "src": null
-  },
-  {
     "id": "officer-president",
     "alt": "Portrait of the club president",
     "aspectRatio": "1/1",
@@ -102,6 +95,55 @@
     "alt": "The entrance to the meeting venue",
     "aspectRatio": "16/9",
     "brief": "Venue entrance so first-time guests recognise it",
+    "src": null
+  },
+  {
+    "id": "club-history",
+    "alt": "An early Talk-Masters meeting",
+    "aspectRatio": "3/2",
+    "brief": "An early or founding-era club photo, if one exists",
+    "src": null
+  },
+  {
+    "id": "founder-one",
+    "alt": "Portrait of a club founder",
+    "aspectRatio": "4/5",
+    "brief": "Founder portrait, natural light, plain background",
+    "src": null
+  },
+  {
+    "id": "founder-two",
+    "alt": "Portrait of a club founder",
+    "aspectRatio": "4/5",
+    "brief": "Founder portrait, natural light, plain background",
+    "src": null
+  },
+  {
+    "id": "member-one",
+    "alt": "Portrait of a club member",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait for their story",
+    "src": null
+  },
+  {
+    "id": "member-two",
+    "alt": "Portrait of a club member",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait for their story",
+    "src": null
+  },
+  {
+    "id": "member-three",
+    "alt": "Portrait of a club member",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait for their story",
+    "src": null
+  },
+  {
+    "id": "award-one",
+    "alt": "The club’s award certificate",
+    "aspectRatio": "4/3",
+    "brief": "Photo or scan of the award certificate or trophy",
     "src": null
   }
 ]

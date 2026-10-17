@@ -1,5 +1,6 @@
 import { About } from "@/components/sections/About";
 import { Hero } from "@/components/sections/Hero";
+import { MemberStories } from "@/components/sections/MemberStories";
 import { WhyJoin } from "@/components/sections/WhyJoin";
 
 /**
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <About />
       <WhyJoin />
+      <MemberStories />
     </main>
   );
 }

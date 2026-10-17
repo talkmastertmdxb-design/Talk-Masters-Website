@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "member-one",
+    "name": "Member name",
+    "role": "Member",
+    "occupation": "Occupation",
+    "organisation": "Workplace (optional)",
+    "memberSince": 2023,
+    "quote": "Placeholder: one line about what changed.",
+    "before": "Placeholder: what speaking felt like before joining.",
+    "today": "Placeholder: what they can do now.",
+    "story": [
+      "Placeholder: why they came to their first meeting.",
+      "Placeholder: the moment things started to change.",
+      "Placeholder: how Toastmasters shows up in their work and life today."
+    ],
+    "imageSlot": "member-one",
+    "consent": true,
+    "featured": true,
+    "status": "published",
+    "placeholder": true
+  },
+  {
+    "slug": "member-two",
+    "name": "Member name",
+    "role": "Member",
+    "occupation": "Occupation",
+    "memberSince": 2021,
+    "quote": "Placeholder: one line about what changed.",
+    "before": "Placeholder: what speaking felt like before joining.",
+    "today": "Placeholder: what they can do now.",
+    "story": ["Placeholder: their story in their own words."],
+    "imageSlot": "member-two",
+    "consent": true,
+    "featured": true,
+    "status": "published",
+    "placeholder": true
+  },
+  {
+    "slug": "member-three",
+    "name": "Member name",
+    "role": "Member",
+    "memberSince": 2024,
+    "quote": "Placeholder: one line about what changed.",
+    "before": "Placeholder: what speaking felt like before joining.",
+    "today": "Placeholder: what they can do now.",
+    "story": ["Placeholder: their story in their own words."],
+    "imageSlot": "member-three",
+    "consent": true,
+    "featured": true,
+    "status": "published",
+    "placeholder": true
+  }
+]

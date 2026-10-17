@@ -47,6 +47,7 @@ Edit the JSON in `content/`. Every file is validated at build time; a mistake fa
 
 ## Docs
 
+- [What to ask members, founders and officers for](docs/CONTENT_REQUESTS.md)
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md): experience, journey, visual and motion language, architecture, phases
 - [PRD](docs/PRD.md) · [Brand](docs/BRAND.md) · [Design](docs/DESIGN.md) · [Features](docs/FEATURES.md) · [Architecture](docs/ARCHITECTURE.md)
 

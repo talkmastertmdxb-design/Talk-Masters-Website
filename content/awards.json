@@ -1,0 +1,31 @@
+[
+  {
+    "slug": "distinguished-club-placeholder",
+    "title": "Distinguished Club",
+    "programme": "distinguished-club",
+    "level": "club",
+    "year": "2024-2025",
+    "description": "Placeholder: recognition from Toastmasters International for meeting club education, membership and training goals. Confirm the exact level and year.",
+    "imageSlot": "award-one",
+    "placeholder": true
+  },
+  {
+    "slug": "smedley-award-placeholder",
+    "title": "Smedley Award",
+    "programme": "smedley",
+    "level": "club",
+    "year": "2024-2025",
+    "description": "Placeholder: awarded for welcoming new members during August and September. Confirm the year.",
+    "placeholder": true
+  },
+  {
+    "slug": "contest-placeholder",
+    "title": "Area Humorous Speech Contest, 1st place",
+    "programme": "contest",
+    "level": "area",
+    "year": "2023-2024",
+    "recipient": "Member name",
+    "description": "Placeholder: a member's contest win. Confirm the contest, level, place and the member's consent.",
+    "placeholder": true
+  }
+]

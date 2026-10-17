@@ -45,7 +45,7 @@ test.describe("mobile menu", () => {
     await page.getByRole("button", { name: "Open menu" }).click();
     const menu = page.getByRole("dialog", { name: "Menu" });
     await expect(menu).toBeVisible();
-    await expect(menu.getByRole("link", { name: "About" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "Our story" })).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
   });

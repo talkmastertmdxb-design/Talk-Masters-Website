@@ -76,14 +76,85 @@ const consentedPerson = {
   placeholder,
 };
 
-export const storySchema = z.object({
+/** A story told in paragraphs, so members can write as much or as little as they like. */
+const paragraphs = z.array(z.string().min(1)).min(1, "Add at least one paragraph");
+
+const thisYear = new Date().getFullYear();
+
+/** A member's own story: who they are, and how Toastmasters changed things. */
+export const memberSchema = z.object({
   slug,
   ...consentedPerson,
+  /** Job title, only if the member chose to share it. */
+  occupation: z.string().min(1).optional(),
+  /** Employer or school, only if the member chose to share it. */
+  organisation: z.string().min(1).optional(),
+  memberSince: z
+    .number()
+    .int()
+    .min(1924)
+    .max(thisYear + 1),
+  /** One line, shown on cards. */
+  quote: z.string().min(1),
   before: z.string().min(1),
   today: z.string().min(1),
-  quote: z.string().min(1),
+  story: paragraphs,
+  /** Shown on the home page. */
+  featured: z.boolean().default(false),
   status: publishStatus,
 });
+
+export const founderSchema = z.object({
+  slug,
+  ...consentedPerson,
+  occupation: z.string().min(1).optional(),
+  quote: z.string().min(1),
+  /** Their part of how the club began. */
+  story: paragraphs,
+});
+
+/** The club's founding story (content/history.json). */
+export const historySchema = z.object({
+  foundedYear: z.number().int().min(1924).max(thisYear),
+  charterDate: z.iso.date().optional(),
+  clubNumber: z.string().min(1).optional(),
+  district: z.string().min(1).optional(),
+  story: paragraphs,
+  placeholder,
+});
+
+/**
+ * Toastmasters recognition. Programme years run July to June, e.g. "2024-2025".
+ * Smedley = the Smedley Award for adding new members in August and September.
+ */
+export const awardSchema = z
+  .object({
+    slug,
+    title: z.string().min(1),
+    programme: z.enum([
+      "distinguished-club",
+      "smedley",
+      "talk-up-toastmasters",
+      "beat-the-clock",
+      "contest",
+      "education",
+      "other",
+    ]),
+    level: z.enum(["club", "area", "division", "district", "region", "international"]),
+    year: z.string().regex(/^\d{4}-\d{4}$/, "Use the Toastmasters year, e.g. 2024-2025"),
+    /** Omit when the club itself won; otherwise the member's name (with their consent). */
+    recipient: z.string().min(1).optional(),
+    description: z.string().min(1),
+    imageSlot: imageSlotId.optional(),
+    placeholder,
+  })
+  .refine(
+    (award) => {
+      const [start, end] = award.year.split("-").map(Number);
+      return end === start! + 1;
+    },
+    { message: "A Toastmasters year spans two consecutive years, e.g. 2024-2025", path: ["year"] },
+  );
 
 export const testimonialSchema = z.object({
   quote: z.string().min(1),
@@ -123,7 +194,10 @@ export const imageSlotSchema = z.object({
 
 export type Settings = z.infer<typeof settingsSchema>;
 export type ClubEvent = z.infer<typeof eventSchema>;
-export type Story = z.infer<typeof storySchema>;
+export type Member = z.infer<typeof memberSchema>;
+export type Founder = z.infer<typeof founderSchema>;
+export type History = z.infer<typeof historySchema>;
+export type Award = z.infer<typeof awardSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
