@@ -1,3 +1,4 @@
+import { RevealScope } from "@/components/motion/RevealScope";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { OfficerCard } from "@/components/people/OfficerCard";
@@ -12,7 +13,7 @@ export default function TeamPage() {
   const { officers } = content;
 
   return (
-    <main id="main">
+    <RevealScope as="main" id="main">
       <PageHeader
         title="The Executive Committee"
         lead="Volunteer members who run the club this year, and who were once nervous first-time guests too."
@@ -28,6 +29,6 @@ export default function TeamPage() {
           ))}
         </div>
       </section>
-    </main>
+    </RevealScope>
   );
 }

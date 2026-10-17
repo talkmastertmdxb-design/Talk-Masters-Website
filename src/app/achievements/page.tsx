@@ -1,3 +1,4 @@
+import { RevealScope } from "@/components/motion/RevealScope";
 import { Award as AwardIcon, Trophy } from "lucide-react";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -18,7 +19,7 @@ export default function AchievementsPage() {
   const timeline = achievementsByYear(awards);
 
   return (
-    <main id="main">
+    <RevealScope as="main" id="main">
       <PageHeader
         title="Recognised for growth"
         lead="Awards from Toastmasters International, and the members who have represented the club on bigger stages."
@@ -130,6 +131,6 @@ export default function AchievementsPage() {
           </blockquote>
         </div>
       </section>
-    </main>
+    </RevealScope>
   );
 }

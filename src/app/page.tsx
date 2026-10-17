@@ -1,3 +1,4 @@
+import { RevealScope } from "@/components/motion/RevealScope";
 import { About } from "@/components/sections/About";
 import { ExecutiveCommittee } from "@/components/sections/ExecutiveCommittee";
 import { FearStory } from "@/components/sections/FearStory";
@@ -14,7 +15,7 @@ import { TableTopicsBooth } from "@/components/sections/TableTopicsBooth";
  */
 export default function Home() {
   return (
-    <main id="main">
+    <RevealScope as="main" id="main">
       <Hero />
       <About />
       <FearStory />
@@ -22,6 +23,6 @@ export default function Home() {
       <TableTopicsBooth />
       <MemberSpotlight />
       <ExecutiveCommittee />
-    </main>
+    </RevealScope>
   );
 }

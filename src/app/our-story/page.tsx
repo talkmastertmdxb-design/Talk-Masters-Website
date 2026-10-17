@@ -1,3 +1,4 @@
+import { RevealScope } from "@/components/motion/RevealScope";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
@@ -16,7 +17,7 @@ export default function OurStoryPage() {
   const { history, founders } = content;
 
   return (
-    <main id="main">
+    <RevealScope as="main" id="main">
       <PageHeader
         title="Every great speaker starts with a single conversation."
         lead="Talk-Masters began the same way: a few people who wanted to speak with confidence, and a room where anyone could practise."
@@ -104,6 +105,6 @@ export default function OurStoryPage() {
           </div>
         </div>
       </section>
-    </main>
+    </RevealScope>
   );
 }

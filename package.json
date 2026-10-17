@@ -16,7 +16,8 @@
     "format:check": "prettier --check .",
     "check:content": "node scripts/check-content.ts",
     "verify": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
-    "images:unsplash": "node scripts/fetch-unsplash.ts"
+    "images:unsplash": "node scripts/fetch-unsplash.ts",
+    "test:hydration": "playwright test -c playwright.dev.config.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

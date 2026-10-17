@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { useEffect, type ReactNode } from "react";
 import { media } from "@/lib/motion/tokens";
-import { ScrollReveals } from "./ScrollReveals";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,10 +53,5 @@ export function MotionProvider({ children }: MotionProviderProps) {
     };
   }, []);
 
-  return (
-    <>
-      {children}
-      <ScrollReveals />
-    </>
-  );
+  return children;
 }

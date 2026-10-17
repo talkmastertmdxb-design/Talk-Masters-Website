@@ -1,3 +1,4 @@
+import { RevealScope } from "@/components/motion/RevealScope";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { MemberDirectoryCard } from "@/components/people/MemberDirectoryCard";
@@ -18,7 +19,7 @@ export default function MembersPage() {
   const { members } = content;
 
   return (
-    <main id="main">
+    <RevealScope as="main" id="main">
       <PageHeader
         title="Meet the people behind the voices"
         lead="Students and retirees, engineers and teachers, parents and career changers. Different starting points, the same room, and stories worth hearing."
@@ -40,6 +41,6 @@ export default function MembersPage() {
           )}
         </div>
       </section>
-    </main>
+    </RevealScope>
   );
 }

@@ -4,13 +4,21 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { usePathname } from "next/navigation";
+import { useRef, type ReactNode } from "react";
 import { duration, ease, media, parallaxMax, stagger } from "@/lib/motion/tokens";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
+interface RevealScopeProps {
+  children: ReactNode;
+  /** Rendered element. Pages use "main" so the scope is also the skip-link target. */
+  as?: "main" | "div";
+  id?: string;
+  className?: string;
+}
+
 /**
- * One controller for every scroll reveal on the page (SCROLL_ANIMATION_SYSTEM.md).
+ * Scroll reveals for everything inside this element (SCROLL_ANIMATION_SYSTEM.md).
  * Server components opt in with attributes, so content stays server-rendered:
  *
  *   data-reveal="up"       fade + rise ("Settle")
@@ -22,17 +30,26 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
  *   data-draw              SVG path draws with scroll (needs pathLength="1")
  *   data-scroll-cue        fades away as soon as scrolling begins (Animation 05)
  *
+ * Why a scope and not one global controller: React must finish hydrating DOM before
+ * GSAP writes to it. This component's effect runs only after its own subtree has
+ * hydrated, and it only touches elements inside that subtree. A document-wide
+ * controller in the root layout ran before the page segment hydrated and caused
+ * hydration attribute mismatches (inline styles, SplitText aria-labels).
+ *
  * Elements are visible until JS runs, and stay visible under reduced motion.
  */
-export function ScrollReveals() {
-  const pathname = usePathname();
+export function RevealScope({ children, as: Tag = "div", id, className }: RevealScopeProps) {
+  const root = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
+      const scope = root.current;
+      if (!scope) return;
+      const all = <T extends Element = HTMLElement>(selector: string) =>
+        gsap.utils.toArray<T>(selector, scope);
+
       const mm = gsap.matchMedia();
       mm.add(`not ${media.reducedMotion}`, () => {
-        const all = <T extends Element = HTMLElement>(selector: string) => gsap.utils.toArray<T>(selector);
-
         // Explicit end values plus clearProps: nothing is left inline afterwards, so
         // CSS states (e.g. dimmed rows in a pinned section) always win once revealed.
         all("[data-reveal='up']").forEach((el) => {
@@ -140,8 +157,12 @@ export function ScrollReveals() {
       });
       return () => mm.revert();
     },
-    { dependencies: [pathname], revertOnUpdate: true },
+    { scope: root },
   );
 
-  return null;
+  return (
+    <Tag ref={root as React.Ref<HTMLElement & HTMLDivElement>} id={id} className={className}>
+      {children}
+    </Tag>
+  );
 }
