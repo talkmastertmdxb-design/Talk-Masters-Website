@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { afterIntro } from "@/lib/motion/intro";
 import { duration, media } from "@/lib/motion/tokens";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -13,6 +14,10 @@ interface CountUpProps {
   suffix?: string;
   /** Colour of the suffix. Gold only on dark bands; it fails contrast on light ones. */
   suffixClassName?: string;
+  /** Seconds to wait once in view (e.g. to follow the hero headline). */
+  delay?: number;
+  /** ScrollTrigger start. Hero stats use "top bottom": count as soon as they are visible at all. */
+  start?: string;
   className?: string;
 }
 
@@ -24,27 +29,36 @@ export function CountUp({
   value,
   suffix = "",
   suffixClassName = "text-maroon",
+  delay = 0,
+  start = "top 85%",
   className = "",
 }: CountUpProps) {
   const number = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
-    mm.add(`not ${media.reducedMotion}`, () => {
+    mm.add(`not ${media.reducedMotion}`, (context) => {
       const el = number.current;
       if (!el) return;
       const state = { n: 0 };
       el.textContent = "0";
-      gsap.to(state, {
-        n: value,
-        duration: duration.slow * 1.4,
-        ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 85%", once: true },
-        onUpdate: () => {
-          el.textContent = String(Math.round(state.n));
-        },
-      });
+      // Hero stats wait for the first-visit intro; everywhere else this runs at once.
+      const cancel = afterIntro(() =>
+        context.add(() => {
+          gsap.to(state, {
+            n: value,
+            duration: duration.slow * 1.4,
+            delay,
+            ease: "power2.out",
+            scrollTrigger: { trigger: el, start, once: true },
+            onUpdate: () => {
+              el.textContent = String(Math.round(state.n));
+            },
+          });
+        }),
+      );
       return () => {
+        cancel();
         el.textContent = String(value);
       };
     });

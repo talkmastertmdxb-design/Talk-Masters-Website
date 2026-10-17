@@ -483,3 +483,117 @@
   background: var(--color-tm-blue);
   color: var(--color-white);
 }
+
+/* ---------- Hero (reference layout) ---------- */
+@layer components {
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 1rem + 3.8vw, 5rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+
+  /* Navy carries the type on the left; the speaker stays bright on the right. */
+  .hero-scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(11 18 32 / 0.97) 0%,
+        rgb(11 18 32 / 0.86) 30%,
+        rgb(11 18 32 / 0.4) 58%,
+        rgb(11 18 32 / 0.1) 80%
+      ),
+      linear-gradient(0deg, var(--color-ink) 0%, rgb(11 18 32 / 0) 34%),
+      linear-gradient(180deg, rgb(11 18 32 / 0.55) 0%, rgb(11 18 32 / 0) 22%),
+      /* Navy grade over the whole photo, so any stock or club photo matches the brand */
+        linear-gradient(rgb(0 65 101 / 0.22), rgb(0 65 101 / 0.22));
+  }
+  @media (max-width: 56.24rem) {
+    /* On phones the photo becomes atmosphere and the type stays crisp. */
+    .hero-scrim {
+      background: linear-gradient(
+        180deg,
+        rgb(11 18 32 / 0.55) 0%,
+        rgb(11 18 32 / 0.82) 34%,
+        rgb(11 18 32 / 0.94) 62%,
+        var(--color-ink) 100%
+      );
+    }
+  }
+  .hero-media img {
+    object-position: 68% 35%;
+  }
+  @media (max-width: 56.24rem) {
+    .hero-media img {
+      object-position: 62% 20%;
+    }
+  }
+
+  /* ---------- First-visit intro (Hero_animation/8, adapted) ---------- */
+  .intro-overlay {
+    display: none;
+  }
+  html.intro .intro-overlay {
+    display: block;
+    /* Failsafe: never block the page if the script doesn't arrive. */
+    animation: intro-failsafe 0.6s ease 6s forwards;
+  }
+  @keyframes intro-failsafe {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  html.intro .intro-frame {
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+  }
+  .intro-counter {
+    display: flex;
+    height: 1em;
+    overflow: hidden;
+    font-size: clamp(4rem, 2.6rem + 6vw, 9rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .intro-digit {
+    display: block;
+    height: 1em;
+    overflow: hidden;
+  }
+  .intro-digit-track {
+    display: block;
+  }
+  .intro-digit-track > span {
+    height: 1em;
+    line-height: 1;
+  }
+
+  /* The nav waits off-screen during the intro and glides in when it ends. */
+  .site-header {
+    transition: transform 0.9s var(--ease-deliver);
+  }
+  html.intro .site-header {
+    transform: translateY(-140%);
+    animation: nav-failsafe 0s linear 6.5s forwards;
+  }
+  @keyframes nav-failsafe {
+    to {
+      transform: none;
+    }
+  }
+  /* Hero content stays hidden under the intro; the late failsafe still applies. */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js.intro [data-hero-reveal],
+    html.js.intro [data-hero-item] {
+      animation-delay: 6.5s;
+    }
+  }
+}
+
+@layer components {
+  /* Hero scroll cue lives in the left margin, outside the content column. */
+  .scroll-cue {
+    left: max(0.5rem, calc((100vw - 80rem) / 2 - 2.5rem));
+  }
+}

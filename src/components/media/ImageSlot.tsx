@@ -13,6 +13,8 @@ interface ImageSlotProps {
   /** Set only for the LCP image above the fold. */
   priority?: boolean;
   variant?: ImageVariant;
+  /** Backdrops only: "dim" (default) sits behind text; "full" shows the photo at full strength. */
+  tone?: "dim" | "full";
   className?: string;
 }
 
@@ -26,6 +28,7 @@ export function ImageSlot({
   sizes,
   priority = false,
   variant = "frame",
+  tone = "dim",
   className = "",
 }: ImageSlotProps) {
   const slot = resolveImageSlot(content.imageSlots, id);
@@ -51,7 +54,7 @@ export function ImageSlot({
       style={isBackdrop ? undefined : { aspectRatio: `var(--slot-ratio, ${slot.aspectRatio})` }}
       className={
         isBackdrop
-          ? `backdrop-photo absolute inset-0 -z-20 ${className}`
+          ? `${tone === "dim" ? "backdrop-photo" : ""} absolute inset-0 -z-20 ${className}`
           : `rounded-card relative overflow-hidden ${className}`
       }
     >

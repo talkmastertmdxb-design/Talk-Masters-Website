@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { afterIntro } from "@/lib/motion/intro";
 import { duration, ease, media } from "@/lib/motion/tokens";
 import { voicePath, type VoiceShape } from "@/lib/motion/voice";
 
@@ -52,8 +53,11 @@ export function VoiceLine({ variant, introDelay = 0, className = "" }: VoiceLine
           delay: introDelay,
           ease: ease.deliver,
           onUpdate: draw,
-          paused: variant === "underline",
+          paused: true,
         });
+
+        // The hero line speaks after the first-visit intro (or right away); others when scrolled into view.
+        const cancelIntroWait = variant === "hero" ? afterIntro(() => intro.play()) : () => {};
 
         // After speaking, the line keeps breathing gently. Paused off-screen.
         const breath = gsap
@@ -69,13 +73,16 @@ export function VoiceLine({ variant, introDelay = 0, className = "" }: VoiceLine
           trigger: root.current,
           start: "top bottom",
           end: "bottom top",
-          onEnter: () => intro.play(),
+          onEnter: () => {
+            if (variant === "underline") intro.play();
+          },
           onToggle: (self) => {
             if (intro.progress() < 1) return;
             if (self.isActive) breath.play();
             else breath.pause();
           },
         });
+        return cancelIntroWait;
       });
       return () => mm.revert();
     },

@@ -5,7 +5,7 @@ test.describe("home", () => {
   test("renders one H1 and the club identity", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-    await expect(page.getByText(/Talk-Masters Club/)).toBeVisible();
+    await expect(page.getByRole("link", { name: /Talk-Masters.*home/ }).first()).toBeVisible();
     await expect(page).toHaveTitle(/Talk-Masters Club/);
   });
 
@@ -18,9 +18,9 @@ test.describe("home", () => {
     await expect(page).toHaveURL(/#main$/);
   });
 
-  test("shows image placeholders without layout-breaking labels in production", async ({ page }) => {
+  test("shows hero photography without placeholder labels in production", async ({ page }) => {
     await page.goto("/");
-    const slot = page.locator('[data-image-slot="hero-stage"]');
+    const slot = page.locator('[data-hero-backdrop] [data-image-slot="hero-speaker"]');
     await expect(slot).toBeVisible();
     await expect(slot.getByText("Photo needed")).toHaveCount(0);
   });

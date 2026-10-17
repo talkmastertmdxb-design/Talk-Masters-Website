@@ -1,5 +1,22 @@
 [
   {
+    "id": "hero-speaker",
+    "alt": "A speaker addressing an audience on stage, mid-gesture",
+    "aspectRatio": "16/9",
+    "brief": "Hero: a member speaking on stage, three-quarter view, audience softly out of focus in the foreground, warm stage light",
+    "src": "https://images.unsplash.com/photo-1679579664878-2c025e3f87b0?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI3fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "9zutjaUEN3Q",
+      "query": "woman speaking on stage audience",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Jametlene Reskp",
+      "profileUrl": "https://unsplash.com/@reskp?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-woman-standing-on-a-stage-with-a-microphone-9zutjaUEN3Q?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
     "id": "hero-stage",
     "alt": "A speaker at the lectern under warm stage light, the audience softly out of focus",
     "aspectRatio": "4/5",
@@ -21,10 +38,15 @@
     "alt": "Club members of different ages talking together after a meeting",
     "aspectRatio": "1/1",
     "brief": "Mixed-age group laughing together after a meeting",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1615037440415-b81af6c9d314?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8ZGl2ZXJzZSUyMHBlb3BsZSUyMGxpc3RlbmluZyUyMHdvcmtzaG9wfGVufDF8Mnx8fDE3OTIyNDI2MTV8MA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "diverse people listening workshop",
       "orientation": "squarish"
+    },
+    "credit": {
+      "name": "Fanueal Mengistu",
+      "profileUrl": "https://unsplash.com/@fanueal?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/woman-in-black-dress-standing-beside-woman-in-white-long-sleeve-shirt-OxIfYgDe-iI?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -179,10 +201,15 @@
     "alt": "A Talk-Masters meeting in progress",
     "aspectRatio": "16/9",
     "brief": "Featured event banner: the room mid-meeting",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXVkaWVuY2UlMjBsaXN0ZW5pbmclMjB0byUyMHByZXNlbnRhdGlvbnxlbnwxfDB8fHwxNzkyMjQyNjE1fDA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "audience listening to presentation",
       "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Miguel Henriques",
+      "profileUrl": "https://unsplash.com/@miguel_photo?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/man-speaking-in-front-of-crowd-RfiBK6Y_upQ?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -190,10 +217,15 @@
     "alt": "The entrance to the meeting venue",
     "aspectRatio": "16/9",
     "brief": "Venue entrance so first-time guests recognise it",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1724660583307-e7b0c5c5fcd9?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bW9kZXJuJTIwYnVpbGRpbmclMjBlbnRyYW5jZSUyMGdsYXNzJTIwZG9vcnN8ZW58MXwwfHx8MTc5MjI0MjYxNnww&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "modern building entrance glass doors",
       "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Declan Sun",
+      "profileUrl": "https://unsplash.com/@declansun?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/an-empty-room-with-a-lot-of-windows-mB6cIRzrOeE?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -329,10 +361,15 @@
     "alt": "Gold trophies under warm light",
     "aspectRatio": "16/9",
     "brief": "Club trophies or certificates for the Achievements header",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1576514129883-2f1d47a65da6?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXdhcmQlMjBjZXJlbW9ueSUyMHN0YWdlJTIwbGlnaHRzfGVufDF8MHx8fDE3OTIyNDI2MTd8MA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "award ceremony stage lights",
       "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Elijah Ekdahl",
+      "profileUrl": "https://unsplash.com/@elijahekdahl?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/empty-stage-with-lights-8XxF2kYHIgo?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -388,10 +425,15 @@
     "alt": "Portrait of a committee member",
     "aspectRatio": "4/5",
     "brief": "Committee portrait, natural light",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1624797432677-6f803a98acb3?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWFuJTIwcG9ydHJhaXQlMjBzbWlsaW5nJTIwcHJvZmVzc2lvbmFsfGVufDF8MXx8fDE3OTIyNDI2MTh8MA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "man portrait smiling professional",
       "orientation": "portrait"
+    },
+    "credit": {
+      "name": "Danny Ocean",
+      "profileUrl": "https://unsplash.com/@d_ocean?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/man-in-gray-suit-jacket-smiling-ehUYU820lcA?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -399,10 +441,15 @@
     "alt": "Portrait of a committee member",
     "aspectRatio": "4/5",
     "brief": "Committee portrait, natural light",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1525786210598-d527194d3e9a?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjB3aXRoJTIwZ2xhc3NlcyUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjQyNjE5fDA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "woman with glasses portrait smiling",
       "orientation": "portrait"
+    },
+    "credit": {
+      "name": "Vinicius Wiesehofer",
+      "profileUrl": "https://unsplash.com/@wiesehofer?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/closeup-photo-of-woman-wearing-black-framed-eyeglasses-BBEbl2WKRlU?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -410,10 +457,16 @@
     "alt": "Portrait of a committee member",
     "aspectRatio": "4/5",
     "brief": "Committee portrait, natural light",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1606841216827-d1217fa5fe27?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8Mnx8eW91bmclMjB3b21hbiUyMHBvcnRyYWl0JTIwc21pbGluZyUyMG91dGRvb3JzfGVufDF8MXx8fDE3OTIyNDI2MjB8MA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "young woman portrait smiling outdoors",
-      "orientation": "portrait"
+      "orientation": "portrait",
+      "pick": 1
+    },
+    "credit": {
+      "name": "Jack Lucas Smith",
+      "profileUrl": "https://unsplash.com/@jacklucassmith?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/woman-in-black-jacket-smiling-sRgls0QgQas?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -421,10 +474,15 @@
     "alt": "Portrait of a committee member",
     "aspectRatio": "4/5",
     "brief": "Committee portrait, natural light",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1764084052338-23a317e34ea1?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWlkZGxlJTIwYWdlZCUyMG1hbiUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjQyNjIxfDA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "middle aged man portrait smiling",
       "orientation": "portrait"
+    },
+    "credit": {
+      "name": "Sophie Paterson",
+      "profileUrl": "https://unsplash.com/@patersophie?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-man-smiling-in-a-city-street-i6GucO5PeSc?utm_source=talk_masters_club&utm_medium=referral"
     }
   },
   {
@@ -432,10 +490,83 @@
     "alt": "Portrait of a committee member",
     "aspectRatio": "4/5",
     "brief": "Committee portrait, natural light",
-    "src": null,
+    "src": "https://images.unsplash.com/photo-1661254601903-0edfe1cd736c?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBoaWphYiUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjQyNjIxfDA&ixlib=rb-4.1.0&w=2400&q=80",
     "unsplash": {
       "query": "woman hijab portrait smiling",
       "orientation": "portrait"
+    },
+    "credit": {
+      "name": "Umar ben",
+      "profileUrl": "https://unsplash.com/@umarben?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-person-wearing-a-head-scarf-Gs39c7ShZIA?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "intro-1",
+    "alt": "An audience watching a speaker on a large screen",
+    "aspectRatio": "16/9",
+    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
+    "src": "https://images.unsplash.com/photo-1627931539006-d5c4677e05ea?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI4fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "-NXNaE9lu6w",
+      "query": "public speaking stage",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Kevin Gonzalez",
+      "profileUrl": "https://unsplash.com/@typegon?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/audience-watching-speaker-on-bright-screen--NXNaE9lu6w?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "intro-2",
+    "alt": "A speaker with a microphone facing a crowd",
+    "aspectRatio": "16/9",
+    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
+    "src": "https://images.unsplash.com/photo-1662089691295-7ef1baa0d0d4?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI4fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "udmN0M2qYTQ",
+      "query": "public speaking stage",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "AMONWAT DUMKRUT",
+      "profileUrl": "https://unsplash.com/@amonwatdumkrut?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-person-holding-a-microphone-udmN0M2qYTQ?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "intro-3",
+    "alt": "A woman speaking into a microphone on stage",
+    "aspectRatio": "16/9",
+    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
+    "src": "https://images.unsplash.com/photo-1666858852072-d9198dab504b?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI5fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "rLmrhyz0pZ4",
+      "query": "public speaking stage",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "AMONWAT DUMKRUT",
+      "profileUrl": "https://unsplash.com/@amonwatdumkrut?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-woman-speaking-into-a-microphone-rLmrhyz0pZ4?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "intro-4",
+    "alt": "A speaker silhouetted by a single spotlight",
+    "aspectRatio": "16/9",
+    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
+    "src": "https://images.unsplash.com/photo-1619890486820-327a18d844e3?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI5fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "mOHXMm77fX0",
+      "query": "public speaking stage",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Soheb Zaidi",
+      "profileUrl": "https://unsplash.com/@msohebzaidi?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/silhouette-of-woman-in-dark-room-mOHXMm77fX0?utm_source=talk_masters_club&utm_medium=referral"
     }
   }
 ]

@@ -366,6 +366,8 @@ Each phase ends with a **gate**: tests green, a code review with no CRITICAL or 
 - 2026-10-17: Phases 1-3 built. D4 reverted to brand soft gray (cream + serif is the most common generated-site look).
 - 2026-10-17: Plan.md people pages and the full scroll animation system built; Unsplash pipeline ready; Plan.md wording adapted to "open to everyone" (the club is not a student club).
 
+- 2026-10-17: Hero redesigned from the club's reference (eyebrow, three-line headline, stats strip, quote, speaker photo with navy grade) and a first-visit intro adapted from `Hero_animation/8`: preloader counter 00→100%, speaking photos wiping in as the stage settles, nav glides in, headline delivered. Cut from ~12s to ~4s; plays once per 12 hours, home page only, skippable with any input, never under reduced motion, CSS failsafes if JS is late. The template's own photos are not used (unrelated fashion shoot, unknown licence).
+
 Estimated time to launch from here: **about 2-3 weeks for one developer**, once real content arrives.
 
 ---

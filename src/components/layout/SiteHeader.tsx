@@ -34,7 +34,7 @@ export function SiteHeader({ items }: SiteHeaderProps) {
   const closeMenu = () => menuRef.current?.close();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-5">
+    <header className="site-header fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-5">
       <div
         data-frosted={frosted}
         className="theme-dark data-[frosted=true]:bg-ink/85 mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 rounded-full border border-transparent px-5 text-white transition-[background-color,border-color,backdrop-filter] duration-(--duration-base) ease-(--ease-deliver) data-[frosted=true]:border-white/10 data-[frosted=true]:backdrop-blur-xl md:px-7"

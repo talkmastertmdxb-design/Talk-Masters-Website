@@ -12,6 +12,17 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${port}`,
     trace: "on-first-retry",
+    // Mark the first-visit intro as seen, so it doesn't sit over the page in every test.
+    // tests/e2e/intro.spec.ts clears this to test the intro itself.
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: `http://localhost:${port}`,
+          localStorage: [{ name: "tm-intro-seen", value: String(Date.now()) }],
+        },
+      ],
+    },
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },

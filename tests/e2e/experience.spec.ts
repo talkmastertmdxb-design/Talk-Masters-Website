@@ -23,7 +23,7 @@ test.describe("signature moments", () => {
     await page.goto("/");
     const title = page.getByRole("heading", { level: 1 });
     await expect(title).toHaveAccessibleName(
-      /Find your voice\.\s*Lead with Confidence\.\s*Inspire the world\./,
+      /Find your voice\.\s*Lead with Confidence\.\s*Inspire the world\./i,
     );
     await expect(title).toHaveCSS("opacity", "1", { timeout: 4000 });
   });

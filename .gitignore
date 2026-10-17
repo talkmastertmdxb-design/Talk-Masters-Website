@@ -51,3 +51,7 @@ next-env.d.ts
 
 # locally installed agent skills: symlinks hold absolute paths; reinstall from skills-lock.json
 /.claude/skills/
+
+# Reference animation template (third-party photos, unknown licence; not used by the site)
+/Hero_animation/
+.DS_Store

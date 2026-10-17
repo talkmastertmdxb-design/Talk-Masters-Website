@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { content } from "@/lib/content";
+import { introScript } from "@/lib/motion/intro";
 import { mainNav } from "@/lib/navigation";
 import { siteUrl } from "@/lib/site";
 import "lenis/dist/lenis.css";
@@ -39,8 +40,8 @@ export const viewport: Viewport = {
   themeColor: "#0b1220",
 };
 
-/** Marks JS as available before first paint, so the hero can hide for its intro without a flash. */
-const jsFlag = "document.documentElement.classList.add('js')";
+/** Before first paint: marks JS as available and decides whether the home intro plays. */
+const jsFlag = introScript;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
