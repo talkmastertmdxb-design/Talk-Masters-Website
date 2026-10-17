@@ -6,7 +6,8 @@
 
 export const INTRO_CLASS = "intro";
 export const INTRO_EVENT = "tm:intro-done";
-export const INTRO_STORAGE_KEY = "tm-intro-seen";
+/** Versioned: v1 was saved by a bug that ended the intro instantly in development. */
+export const INTRO_STORAGE_KEY = "tm-intro-v2";
 /** Play at most once in this window, across all tabs. */
 export const INTRO_REPEAT_MS = 12 * 60 * 60 * 1000;
 

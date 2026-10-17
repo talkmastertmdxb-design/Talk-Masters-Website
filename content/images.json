@@ -1,20 +1,16 @@
 [
   {
     "id": "hero-speaker",
-    "alt": "A speaker addressing an audience on stage, mid-gesture",
+    "alt": "A Talk-Masters member speaking beside the club banner, the audience in the foreground",
     "aspectRatio": "16/9",
     "brief": "Hero: a member speaking on stage, three-quarter view, audience softly out of focus in the foreground, warm stage light",
-    "src": "https://images.unsplash.com/photo-1679579664878-2c025e3f87b0?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI3fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/club-speaker-banner.jpg",
     "unsplash": {
       "photoId": "9zutjaUEN3Q",
       "query": "woman speaking on stage audience",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Jametlene Reskp",
-      "profileUrl": "https://unsplash.com/@reskp?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-woman-standing-on-a-stage-with-a-microphone-9zutjaUEN3Q?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "62% 30%"
   },
   {
     "id": "hero-stage",
@@ -35,19 +31,15 @@
   },
   {
     "id": "manifesto-bento",
-    "alt": "Club members of different ages talking together after a meeting",
+    "alt": "Club members of different backgrounds sharing dinner",
     "aspectRatio": "1/1",
     "brief": "Mixed-age group laughing together after a meeting",
-    "src": "https://images.unsplash.com/photo-1615037440415-b81af6c9d314?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8ZGl2ZXJzZSUyMHBlb3BsZSUyMGxpc3RlbmluZyUyMHdvcmtzaG9wfGVufDF8Mnx8fDE3OTIyNDI2MTV8MA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/club-dinner.jpg",
     "unsplash": {
       "query": "diverse people listening workshop",
       "orientation": "squarish"
     },
-    "credit": {
-      "name": "Fanueal Mengistu",
-      "profileUrl": "https://unsplash.com/@fanueal?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/woman-in-black-dress-standing-beside-woman-in-white-long-sleeve-shirt-OxIfYgDe-iI?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 50%"
   },
   {
     "id": "fear-split",
@@ -87,32 +79,24 @@
     "alt": "A member delivering a prepared speech",
     "aspectRatio": "3/4",
     "brief": "Prepared speech in progress, gesture mid-sentence",
-    "src": "https://images.unsplash.com/photo-1546872006-42c78c0ccb29?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8c3BlYWtlciUyMHByZXNlbnRpbmclMjB0byUyMGF1ZGllbmNlfGVufDF8MXx8fDE3OTIyMjY5ODR8MA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/member-prepared-speech.jpg",
     "unsplash": {
       "query": "speaker presenting to audience",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "Alberto Bigoni",
-      "profileUrl": "https://unsplash.com/@albertobigoni?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/grayscale-of-man-in-dress-shirt-kvinEq5Utfw?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 25%"
   },
   {
     "id": "agenda-table-topics",
-    "alt": "A member answering an impromptu Table Topics question",
+    "alt": "A member answering a Table Topics question",
     "aspectRatio": "3/4",
     "brief": "Table Topics moment, speaker thinking on their feet",
-    "src": "https://images.unsplash.com/photo-1544531585-b3fadf704c02?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8cGVyc29uJTIwc3BlYWtpbmclMjBtaWNyb3Bob25lJTIwYXVkaWVuY2V8ZW58MXwxfHx8MTc5MjIyNjk4NXww&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/member-table-topics.jpg",
     "unsplash": {
       "query": "person speaking microphone audience",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "Miguel Henriques",
-      "profileUrl": "https://unsplash.com/@miguel_photo?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/man-speaking-in-front-of-crowd-w5HePd_eKx0?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 25%"
   },
   {
     "id": "agenda-evaluations",
@@ -148,19 +132,15 @@
   },
   {
     "id": "agenda-awards",
-    "alt": "Members receiving ribbons at the end of a meeting",
+    "alt": "Members together at the end of a meeting",
     "aspectRatio": "3/4",
     "brief": "Best Speaker ribbons and applause",
-    "src": "https://images.unsplash.com/photo-1788885944643-e9d99cf94bf6?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXVkaWVuY2UlMjBhcHBsYXVzZSUyMGNsYXBwaW5nfGVufDF8MXx8fDE3OTIyMjY5ODh8MA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/club-group.jpg",
     "unsplash": {
       "query": "audience applause clapping",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "Olympia Petrou",
-      "profileUrl": "https://unsplash.com/@olympiiapetrou?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/woman-with-hands-pressed-together-VAXtC_2bRpc?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 35%"
   },
   {
     "id": "statement-fullbleed",
@@ -246,19 +226,15 @@
   },
   {
     "id": "founder-one",
-    "alt": "Portrait of a club founder",
+    "alt": "Portrait of a Talk-Masters founder",
     "aspectRatio": "4/5",
     "brief": "Founder portrait, natural light, plain background",
-    "src": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8cHJvZmVzc2lvbmFsJTIwd29tYW4lMjBwb3J0cmFpdCUyMHNtaWxpbmclMjBuYXR1cmFsJTIwbGlnaHR8ZW58MXwxfHx8MTc5MjIyNjk5M3ww&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/founder-one.jpg",
     "unsplash": {
       "query": "professional woman portrait smiling natural light",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "Christina @ wocintechchat.com M",
-      "profileUrl": "https://unsplash.com/@wocintechchat?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/woman-on-focus-photography-SJvDxw0azqw?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 30%"
   },
   {
     "id": "founder-two",
@@ -358,35 +334,27 @@
   },
   {
     "id": "achievements-hero",
-    "alt": "Gold trophies under warm light",
+    "alt": "Talk-Masters members with the Smedley Award",
     "aspectRatio": "16/9",
     "brief": "Club trophies or certificates for the Achievements header",
-    "src": "https://images.unsplash.com/photo-1576514129883-2f1d47a65da6?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXdhcmQlMjBjZXJlbW9ueSUyMHN0YWdlJTIwbGlnaHRzfGVufDF8MHx8fDE3OTIyNDI2MTd8MA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/smedley-award.jpg",
     "unsplash": {
       "query": "award ceremony stage lights",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Elijah Ekdahl",
-      "profileUrl": "https://unsplash.com/@elijahekdahl?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/empty-stage-with-lights-8XxF2kYHIgo?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 35%"
   },
   {
     "id": "members-hero",
-    "alt": "An audience listening to a speaker",
+    "alt": "Talk-Masters members together after a meeting",
     "aspectRatio": "16/9",
     "brief": "Wide shot of members in the audience",
-    "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXVkaWVuY2UlMjBsaXN0ZW5pbmclMjBzcGVha2VyfGVufDF8MHx8fDE3OTIyMjcwMDB8MA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/club-group.jpg",
     "unsplash": {
       "query": "audience listening speaker",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Headway",
-      "profileUrl": "https://unsplash.com/@headwayio?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/crowd-of-people-sitting-on-chairs-inside-room-F2KRf_QfCqw?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 35%"
   },
   {
     "id": "team-hero",
@@ -503,70 +471,54 @@
   },
   {
     "id": "intro-1",
-    "alt": "An audience watching a speaker on a large screen",
+    "alt": "Talk-Masters members together after a meeting",
     "aspectRatio": "16/9",
     "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "https://images.unsplash.com/photo-1627931539006-d5c4677e05ea?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI4fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/club-group.jpg",
     "unsplash": {
       "photoId": "-NXNaE9lu6w",
       "query": "public speaking stage",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Kevin Gonzalez",
-      "profileUrl": "https://unsplash.com/@typegon?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/audience-watching-speaker-on-bright-screen--NXNaE9lu6w?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 35%"
   },
   {
     "id": "intro-2",
-    "alt": "A speaker with a microphone facing a crowd",
+    "alt": "Club members sharing dinner together",
     "aspectRatio": "16/9",
     "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "https://images.unsplash.com/photo-1662089691295-7ef1baa0d0d4?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI4fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/club-dinner.jpg",
     "unsplash": {
       "photoId": "udmN0M2qYTQ",
       "query": "public speaking stage",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "AMONWAT DUMKRUT",
-      "profileUrl": "https://unsplash.com/@amonwatdumkrut?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-person-holding-a-microphone-udmN0M2qYTQ?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 45%"
   },
   {
     "id": "intro-3",
-    "alt": "A woman speaking into a microphone on stage",
+    "alt": "A member delivering a speech, hand raised",
     "aspectRatio": "16/9",
     "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "https://images.unsplash.com/photo-1666858852072-d9198dab504b?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI5fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/member-prepared-speech.jpg",
     "unsplash": {
       "photoId": "rLmrhyz0pZ4",
       "query": "public speaking stage",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "AMONWAT DUMKRUT",
-      "profileUrl": "https://unsplash.com/@amonwatdumkrut?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-woman-speaking-into-a-microphone-rLmrhyz0pZ4?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 16%"
   },
   {
     "id": "intro-4",
-    "alt": "A speaker silhouetted by a single spotlight",
+    "alt": "A member speaking with expressive gestures",
     "aspectRatio": "16/9",
     "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "https://images.unsplash.com/photo-1619890486820-327a18d844e3?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjQyNzI5fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/member-table-topics.jpg",
     "unsplash": {
       "photoId": "mOHXMm77fX0",
       "query": "public speaking stage",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Soheb Zaidi",
-      "profileUrl": "https://unsplash.com/@msohebzaidi?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/silhouette-of-woman-in-dark-room-mOHXMm77fX0?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 12%"
   }
 ]

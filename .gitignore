@@ -55,3 +55,8 @@ next-env.d.ts
 # Reference animation template (third-party photos, unknown licence; not used by the site)
 /Hero_animation/
 .DS_Store
+
+# Original photo uploads (copied into public/images with clean names)
+/src/*.jpeg
+/Founder_1_Photo.jpeg
+/Smedley Award Photo.jpeg

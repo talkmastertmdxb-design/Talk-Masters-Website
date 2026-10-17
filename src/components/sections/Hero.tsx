@@ -8,8 +8,8 @@ import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 import { HeroIntro } from "./HeroIntro";
 
-/** Photos that wipe in during the first-visit intro; the last one is the hero itself. */
-const INTRO_FRAMES = ["intro-1", "intro-2", "intro-3", "intro-4", "hero-speaker"] as const;
+/** Club moments that wipe in during the first-visit intro, before the stage frame. */
+const INTRO_MOMENTS = ["intro-1", "intro-2", "intro-3", "intro-4"] as const;
 
 /** Rolling digit columns for the 00→100% counter (hundreds, tens, ones). */
 const DIGITS: ReadonlyArray<readonly string[]> = [
@@ -17,6 +17,22 @@ const DIGITS: ReadonlyArray<readonly string[]> = [
   ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
   [..."01234567890123456789", "0"],
 ];
+
+/** The hero photo panel: right side on desktop, full-bleed atmosphere on phones. */
+function HeroPhoto({ priority = false }: { priority?: boolean }) {
+  return (
+    <>
+      <ImageSlot
+        id="hero-speaker"
+        variant="backdrop"
+        tone="full"
+        sizes="(min-width: 900px) 58vw, 100vw"
+        priority={priority}
+      />
+      <div aria-hidden="true" className="hero-panel-fade absolute inset-0" />
+    </>
+  );
+}
 
 /** The Opening (Section 1): one promise, proof in numbers, and the way in. */
 export function Hero() {
@@ -28,14 +44,12 @@ export function Hero() {
       className="theme-dark grain bg-ink relative isolate overflow-hidden text-white"
     >
       <HeroIntro className="relative isolate flex min-h-dvh flex-col">
-        {/* Backdrop: the speaker sits right; navy carries the type on the left. */}
-        <div data-hero-backdrop className="hero-media absolute inset-0 -z-20">
-          <ImageSlot id="hero-speaker" variant="backdrop" tone="full" sizes="100vw" priority />
+        <div data-hero-backdrop className="hero-panel absolute inset-y-0 right-0 isolate -z-20">
+          <HeroPhoto priority />
         </div>
-        <div aria-hidden="true" className="hero-scrim absolute inset-0 -z-10" />
         <Spotlight />
 
-        <div className="container-site flex flex-1 flex-col justify-center pt-24 pb-4 md:pt-28">
+        <div className="container-site relative flex flex-1 flex-col justify-center pt-24 pb-4 md:pt-28">
           <p data-hero-item className="text-eyebrow text-white/70">
             Communicate <span className="text-gold">·</span> Lead <span className="text-gold">·</span> Belong
           </p>
@@ -50,7 +64,7 @@ export function Hero() {
           <div data-hero-reveal aria-hidden="true" className="text-gold mt-4 w-[min(22rem,70%)]">
             <VoiceLine variant="hero" introDelay={0.5} className="h-10 w-full" />
           </div>
-          <p data-hero-item className="text-lead mt-4 max-w-[46ch] text-white/80">
+          <p data-hero-item className="text-lead mt-4 max-w-[44ch] text-white/80">
             Talk-Masters Club helps people of every age and background build the confidence to speak, lead and
             be heard, one friendly meeting at a time.
           </p>
@@ -70,7 +84,7 @@ export function Hero() {
               Read Our Story
             </Link>
           </div>
-          <p data-hero-item className="text-muted mt-4 text-sm">
+          <p data-hero-item className="text-muted mt-4 max-w-[52ch] text-sm">
             Next meeting: {meeting.schedule}, {meeting.startTime}, {meeting.venue}. Guests are always welcome.
           </p>
 
@@ -101,7 +115,7 @@ export function Hero() {
           className="container-site pointer-events-none absolute inset-x-0 bottom-16 hidden justify-end lg:flex"
         >
           <div className="max-w-[17rem] text-right">
-            <blockquote className="font-serif text-lg leading-snug text-white/85 italic">
+            <blockquote className="font-serif text-lg leading-snug text-white/90 italic">
               “Every confident speaker was once a nervous first-time guest.”
             </blockquote>
             <span aria-hidden="true" className="bg-gold mt-4 ml-auto block h-px w-12" />
@@ -116,39 +130,50 @@ export function Hero() {
           <span className="scroll-cue-line block h-12 w-px bg-white/40" />
         </div>
 
-        {/* First-visit intro (html.intro). Decorative; skippable with any key or click. */}
+        {/* First-visit intro (html.intro). Decorative; any key, click or scroll skips it. */}
         <div
           data-intro-overlay
           aria-hidden="true"
           className="intro-overlay bg-ink fixed inset-0 z-[70] overflow-hidden"
         >
           <div data-intro-stack className="absolute inset-0">
-            {INTRO_FRAMES.map((id) => (
-              <div key={id} data-intro-frame className="intro-frame absolute inset-0">
-                <ImageSlot id={id} variant="backdrop" tone="full" sizes="80vw" />
-                {id === "hero-speaker" && <div className="hero-scrim absolute inset-0 -z-10" />}
+            {INTRO_MOMENTS.map((id) => (
+              <div key={id} data-intro-frame className="intro-frame absolute inset-0 isolate">
+                <ImageSlot id={id} variant="backdrop" tone="full" sizes="100vw" />
+                <div className="intro-frame-grade absolute inset-0" />
               </div>
             ))}
+            {/* The stage frame lands exactly where the hero photo sits. */}
+            <div data-intro-frame className="intro-frame hero-panel absolute inset-y-0 right-0 isolate">
+              <HeroPhoto />
+            </div>
           </div>
+
           <div data-intro-ui className="absolute inset-x-0 bottom-0 p-6 md:p-10">
             <div className="flex items-end justify-between gap-6">
-              <p className="text-eyebrow text-white/60">Talk-Masters Club</p>
+              <p data-intro-mark className="text-eyebrow text-white/60">
+                Talk-Masters Club
+              </p>
               <div className="flex items-end gap-4">
-                <p className="text-eyebrow pb-3 text-white/60">Loading</p>
-                <p className="intro-counter font-serif tabular-nums">
-                  {DIGITS.map((column, i) => (
-                    <span key={i} className="intro-digit">
-                      <span data-digit className="intro-digit-track">
-                        {column.map((digit, j) => (
-                          <span key={j} className="block">
-                            {digit}
-                          </span>
-                        ))}
-                      </span>
-                    </span>
-                  ))}
-                  <span className="text-gold">%</span>
+                <p data-intro-mark className="text-eyebrow pb-3 text-white/60">
+                  Loading
                 </p>
+                <span className="block overflow-hidden">
+                  <span data-intro-count className="intro-counter font-serif tabular-nums">
+                    {DIGITS.map((column, i) => (
+                      <span key={i} className="intro-digit">
+                        <span data-digit className="intro-digit-track">
+                          {column.map((digit, j) => (
+                            <span key={j} className="block">
+                              {digit}
+                            </span>
+                          ))}
+                        </span>
+                      </span>
+                    ))}
+                    <span className="text-gold">%</span>
+                  </span>
+                </span>
               </div>
             </div>
             <span data-intro-bar className="bg-gold mt-4 block h-px origin-left" />

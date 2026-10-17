@@ -19,7 +19,7 @@ export default defineConfig({
       origins: [
         {
           origin: `http://localhost:${port}`,
-          localStorage: [{ name: "tm-intro-seen", value: String(Date.now()) }],
+          localStorage: [{ name: "tm-intro-v2", value: String(Date.now()) }],
         },
       ],
     },

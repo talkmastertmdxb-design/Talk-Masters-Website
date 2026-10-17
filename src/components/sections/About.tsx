@@ -48,6 +48,7 @@ export function About() {
               <ImageSlot
                 id="manifesto-bento"
                 variant="backdrop"
+                tone="full"
                 sizes="(min-width: 1280px) 50vw, (min-width: 640px) 50vw, 100vw"
               />
             </div>

@@ -18,7 +18,7 @@ test.describe("first-visit hero intro", () => {
     await expect(overlay).toBeHidden();
     await expect(page.getByRole("heading", { level: 1 })).toHaveCSS("opacity", "1", { timeout: 3000 });
     await expect(page.locator(".site-header")).toHaveCSS("transform", "none", { timeout: 2000 });
-    expect(await page.evaluate(() => localStorage.getItem("tm-intro-seen"))).not.toBeNull();
+    expect(await page.evaluate(() => localStorage.getItem("tm-intro-v2"))).not.toBeNull();
   });
 
   test("any key skips it straight to the hero", async ({ page }, testInfo) => {

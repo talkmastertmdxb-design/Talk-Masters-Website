@@ -494,40 +494,44 @@
     font-weight: 400;
   }
 
-  /* Navy carries the type on the left; the speaker stays bright on the right. */
-  .hero-scrim {
+  /*
+   * Hero photo panel: the right 58% on desktop (club photos are ~1000px wide, so a
+   * panel keeps them sharp), full-bleed atmosphere on phones. The intro's last frame
+   * uses the same class, so it lands exactly here.
+   */
+  .hero-panel {
+    width: 100%;
+  }
+  @media (min-width: 56.25rem) {
+    .hero-panel {
+      width: 58%;
+    }
+  }
+  .hero-panel-fade {
+    background: linear-gradient(
+      180deg,
+      rgb(11 18 32 / 0.55) 0%,
+      rgb(11 18 32 / 0.82) 34%,
+      rgb(11 18 32 / 0.94) 62%,
+      var(--color-ink) 100%
+    );
+  }
+  @media (min-width: 56.25rem) {
+    .hero-panel-fade {
+      background:
+        /* Feather into the navy on the left, where the headline sits */
+        linear-gradient(90deg, var(--color-ink) 0%, rgb(11 18 32 / 0.72) 16%, rgb(11 18 32 / 0) 46%),
+        linear-gradient(0deg, var(--color-ink) 0%, rgb(11 18 32 / 0) 30%),
+        linear-gradient(180deg, rgb(11 18 32 / 0.5) 0%, rgb(11 18 32 / 0) 20%),
+        /* Navy grade so any club photo sits inside the brand */
+          linear-gradient(rgb(0 65 101 / 0.2), rgb(0 65 101 / 0.2));
+    }
+  }
+  /* A light grade so the intro's club moments read as one sequence */
+  .intro-frame-grade {
     background:
-      linear-gradient(
-        90deg,
-        rgb(11 18 32 / 0.97) 0%,
-        rgb(11 18 32 / 0.86) 30%,
-        rgb(11 18 32 / 0.4) 58%,
-        rgb(11 18 32 / 0.1) 80%
-      ),
-      linear-gradient(0deg, var(--color-ink) 0%, rgb(11 18 32 / 0) 34%),
-      linear-gradient(180deg, rgb(11 18 32 / 0.55) 0%, rgb(11 18 32 / 0) 22%),
-      /* Navy grade over the whole photo, so any stock or club photo matches the brand */
-        linear-gradient(rgb(0 65 101 / 0.22), rgb(0 65 101 / 0.22));
-  }
-  @media (max-width: 56.24rem) {
-    /* On phones the photo becomes atmosphere and the type stays crisp. */
-    .hero-scrim {
-      background: linear-gradient(
-        180deg,
-        rgb(11 18 32 / 0.55) 0%,
-        rgb(11 18 32 / 0.82) 34%,
-        rgb(11 18 32 / 0.94) 62%,
-        var(--color-ink) 100%
-      );
-    }
-  }
-  .hero-media img {
-    object-position: 68% 35%;
-  }
-  @media (max-width: 56.24rem) {
-    .hero-media img {
-      object-position: 62% 20%;
-    }
+      linear-gradient(0deg, rgb(11 18 32 / 0.55) 0%, rgb(11 18 32 / 0) 40%),
+      linear-gradient(rgb(0 65 101 / 0.18), rgb(0 65 101 / 0.18));
   }
 
   /* ---------- First-visit intro (Hero_animation/8, adapted) ---------- */
