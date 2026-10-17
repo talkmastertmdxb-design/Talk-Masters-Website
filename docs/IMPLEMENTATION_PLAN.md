@@ -26,7 +26,7 @@ Toastmasters International brand rules restrict changing its emblem or combining
 
 1. Check club-logo rules on the official Toastmasters brand portal, plus the trademark notice and disclaimer that club sites must carry.
 2. Likely outcome: a **typographic club wordmark** ("Talk-Masters", with the microphone glyph) next to the **official, unaltered TI emblem** downloaded from the portal, as SVG.
-3. Until then, the build uses an SVG placeholder wordmark, so design work isn't blocked.
+3. **Update 2026-10-17:** the club supplied a cleaner version (`assets/source/Talk-Masters New Logo.png`, transparent background, no AI watermark). It is now used in the nav, footer and favicon, next to the club name in type. The globe inside it is still a redrawing of the TI emblem, so step 1 is still required before launch.
 
 ---
 

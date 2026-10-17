@@ -7,7 +7,7 @@ Single source of truth for identity, color, type and voice. Everything in DESIGN
 - **Name:** Talk-Masters Club, a club of Toastmasters International
 - **Audience:** open to everyone: all ages, genders and backgrounds. Never position it as a student or university club.
 - **Tagline (on logo):** "A Club with Difference"
-- **Logo:** circular navy badge, gold ring, gold "TALK-MASTERS" wordmark with microphone, Toastmasters International globe in the centre. Draft at `assets/source/logo-badge-draft.jpg` (AI-generated, redraws the TI emblem: not for production, see IMPLEMENTATION_PLAN §0.1).
+- **Logo:** circular navy badge, gold ring, gold "TALK-MASTERS" wordmark with microphone, Toastmasters International globe in the centre. Current file: `assets/source/Talk-Masters New Logo.png` (500×500, transparent), used on the site as `public/brand/talk-masters-badge.png`, the favicon and the Apple touch icon. Older draft: `assets/source/logo-badge-draft.jpg`. Both still contain a redrawn Toastmasters International globe, so the lockup must be checked against the Toastmasters brand portal before launch (IMPLEMENTATION_PLAN §0.1). A vector (SVG) version would also look sharper at large sizes.
 - **Logo rules:** never recolor, stretch or crop. Keep clear space equal to the height of the globe's banner on every side. Minimum size 32px on screen. The embedded Toastmasters International mark must stay unaltered. Verify club-name lockup rules against the official Toastmasters brand portal before launch.
 - **Brand position:** a premium leadership brand, not a student club.
 - **Reference blend:** Apple elegance 40%, Awwwards experimentation 25%, Toastmasters professionalism 20%, TED inspiration 10%, premium editorial 5%.

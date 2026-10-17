@@ -39,7 +39,10 @@ export function SiteHeader({ items }: SiteHeaderProps) {
         data-frosted={frosted}
         className="theme-dark data-[frosted=true]:bg-ink/85 mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 rounded-full border border-transparent px-5 text-white transition-[background-color,border-color,backdrop-filter] duration-(--duration-base) ease-(--ease-deliver) data-[frosted=true]:border-white/10 data-[frosted=true]:backdrop-blur-xl md:px-7"
       >
-        <Wordmark className="origin-left transition-transform duration-(--duration-base) ease-(--ease-deliver) in-data-[frosted=true]:scale-[0.94]" />
+        <Wordmark
+          eager
+          className="origin-left transition-transform duration-(--duration-base) ease-(--ease-deliver) in-data-[frosted=true]:scale-[0.94]"
+        />
 
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex items-center gap-8 text-[0.9375rem]">

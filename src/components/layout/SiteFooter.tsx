@@ -31,7 +31,7 @@ export function SiteFooter({ items }: SiteFooterProps) {
 
       <div className="container-site border-hairline-dark grid gap-12 border-t py-16 md:grid-cols-12">
         <div className="md:col-span-5">
-          <Wordmark />
+          <Wordmark size={64} />
           <p className="mt-6 max-w-[34ch] text-white/70">
             {tagline}. Open to everyone, of every age and background.
           </p>
