@@ -16,12 +16,14 @@ const APP_NAME = "talk_masters_club";
 const root = join(import.meta.dirname, "..");
 const imagesFile = join(root, "content", "images.json");
 const force = process.argv.includes("--force");
+const onlyIndex = process.argv.indexOf("--slot");
+const only = onlyIndex > -1 ? process.argv[onlyIndex + 1] : undefined;
 
 interface Slot {
   id: string;
   src: string | null;
   credit?: unknown;
-  unsplash?: { photoId?: string; query: string; orientation: string };
+  unsplash?: { photoId?: string; query: string; orientation: string; pick?: number };
   [key: string]: unknown;
 }
 
@@ -72,7 +74,7 @@ async function findPhoto(config: NonNullable<Slot["unsplash"]>): Promise<Unsplas
   const { results } = await api<{ results: UnsplashPhoto[] }>(
     `https://api.unsplash.com/search/photos?${params}`,
   );
-  return pickPhoto(results);
+  return pickPhoto(results, config.pick ?? 0);
 }
 
 const isUnsplash = (src: string | null): boolean => Boolean(src?.startsWith("https://images.unsplash.com/"));
@@ -82,7 +84,9 @@ const updated: Slot[] = [];
 let filled = 0;
 
 for (const slot of slots) {
-  const wanted = slot.unsplash && (slot.src === null || (force && isUnsplash(slot.src)));
+  const selected = only === undefined || only === slot.id;
+  const wanted =
+    selected && slot.unsplash && (slot.src === null || ((force || only) && isUnsplash(slot.src)));
   if (!wanted || !slot.unsplash) {
     updated.push(slot);
     continue;

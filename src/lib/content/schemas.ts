@@ -267,6 +267,8 @@ export const imageSlotSchema = z.object({
       photoId: z.string().min(1).optional(),
       query: z.string().min(1),
       orientation: z.enum(["landscape", "portrait", "squarish"]),
+      /** 0 = first suitable search result; raise it to try the next one. */
+      pick: z.number().int().nonnegative().optional(),
     })
     .optional(),
 });

@@ -28,6 +28,22 @@ describe("pickPhoto", () => {
     expect(pickPhoto([photo({ id: "tiny", width: 800, height: 600 }), photo({ id: "big" })])?.id).toBe("big");
   });
 
+  it("can pick a later result to swap a weak photo", () => {
+    expect(
+      pickPhoto([photo({ id: "a" }), photo({ id: "paid", premium: true }), photo({ id: "b" })], 1)?.id,
+    ).toBe("b");
+  });
+
+  it("skips anything described as AI-generated, a render or an illustration", () => {
+    const picked = pickPhoto([
+      photo({ id: "ai", alt_description: "AI generated portrait of a speaker" }),
+      photo({ id: "render", description: "3D render of a stage" }),
+      photo({ id: "art", alt_description: "an illustration of a microphone" }),
+      photo({ id: "real", alt_description: "a woman speaking at a conference" }),
+    ]);
+    expect(picked?.id).toBe("real");
+  });
+
   it("returns undefined when nothing qualifies", () => {
     expect(pickPhoto([photo({ premium: true })])).toBeUndefined();
   });

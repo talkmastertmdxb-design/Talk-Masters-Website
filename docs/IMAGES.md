@@ -33,7 +33,9 @@ Until club photos arrive, scene slots (stage, audience, meeting rooms, venue) ca
 3. Run `npm run images:unsplash`. Each slot with an `unsplash` setting in `images.json` gets a free photo (Unsplash+ is skipped), hotlinked from the Unsplash CDN as their API rules require, with the photographer credited on `/credits`.
 4. Check the picks at `/styleguide`. To change one, set `unsplash.photoId` to the ID at the end of the photo's Unsplash URL and run `npm run images:unsplash -- --force`.
 
-Portrait slots (founders, members, committee, awards) have no `unsplash` setting on purpose: a stranger's face must never stand in for a real person. `npm run check:content` lists every stock photo still to replace.
+For the demo, portrait slots (founders, members, committee) also use Unsplash portraits chosen across ages, genders and backgrounds. They are placeholders only: names stay "Member name" until real content arrives, and `npm run check:content -- --strict` fails until every stock photo is replaced with a real club photo.
+
+Quality rules the script enforces: free photos only (Unsplash+ skipped), at least 2000px on the long edge, and nothing described as AI-generated, rendered or illustrated. Re-pick a weak result with `"pick": 1` (the next result) and `npm run images:unsplash -- --slot <id>`.
 
 ## Where to see them
 
@@ -42,6 +44,7 @@ Portrait slots (founders, members, committee, awards) have no `unsplash` setting
 
 ## Rules
 
-- Real club photos are the goal. Unsplash is a temporary stand-in for scenes only; never for people who are named on the site, and never AI-generated people (docs/BRAND.md §5).
+- Real club photos are the goal. Unsplash photos are temporary demo stand-ins, and never AI-generated (docs/BRAND.md §5).
+- Before launch, replace every portrait with the real person's photo: a stranger's face must never appear above a real member's name.
 - Show the full range of members: all ages, genders and backgrounds.
 - The shot list is in docs/IMPLEMENTATION_PLAN.md §3.5.

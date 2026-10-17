@@ -15,8 +15,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    // Temporary Unsplash scene photos (scripts/fetch-unsplash.ts). Club photos live in /public/images.
-    remotePatterns: [new URL("https://images.unsplash.com/photo-**")],
+    // No remotePatterns on purpose: Unsplash photos use their own CDN via
+    // src/lib/images/unsplash-loader.ts, so the optimizer only serves /public/images.
   },
   async redirects() {
     return [{ source: "/about", destination: "/our-story", permanent: true }];

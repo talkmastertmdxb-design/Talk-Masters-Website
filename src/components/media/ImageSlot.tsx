@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { content } from "@/lib/content";
 import { resolveImageSlot, shouldShowPlaceholderLabels } from "@/lib/images/slots";
+import { isUnsplashSrc } from "@/lib/images/unsplash-loader";
 import { ImagePlaceholder, type ImageVariant } from "./ImagePlaceholder";
+import { UnsplashImage } from "./UnsplashImage";
 
 interface ImageSlotProps {
   /** Id from content/images.json */
@@ -40,6 +42,8 @@ export function ImageSlot({
   }
 
   const isBackdrop = variant === "backdrop";
+  // Club photos go through the Next.js optimizer; Unsplash photos are served by their CDN.
+  const Picture = isUnsplashSrc(slot.src) ? UnsplashImage : Image;
 
   return (
     <div
@@ -51,7 +55,7 @@ export function ImageSlot({
           : `rounded-card relative overflow-hidden ${className}`
       }
     >
-      <Image
+      <Picture
         src={slot.src}
         alt={slot.alt}
         fill
