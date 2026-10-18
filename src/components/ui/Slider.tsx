@@ -42,7 +42,7 @@ export function Slider({ label, children }: SliderProps) {
       <ul
         ref={track}
         aria-label={label}
-        className="slider-track flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pb-6 md:scroll-px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]"
+        className="slider-track flex snap-x snap-mandatory scroll-px-(--site-inset) gap-6 overflow-x-auto px-(--site-inset) pb-6"
       >
         {children}
       </ul>

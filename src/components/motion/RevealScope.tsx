@@ -28,7 +28,6 @@ interface RevealScopeProps {
  *   data-reveal="image"    image unmasks from a soft inset
  *   data-parallax          soft parallax, ±5% (Animation 07)
  *   data-draw              SVG path draws with scroll (needs pathLength="1")
- *   data-scroll-cue        fades away as soon as scrolling begins (Animation 05)
  *
  * Why a scope and not one global controller: React must finish hydrating DOM before
  * GSAP writes to it. This component's effect runs only after its own subtree has
@@ -142,15 +141,6 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
               },
             },
           );
-        });
-
-        all("[data-scroll-cue]").forEach((el) => {
-          gsap.to(el, {
-            opacity: 0,
-            y: 12,
-            ease: "none",
-            scrollTrigger: { start: 0, end: 160, scrub: true },
-          });
         });
 
         ScrollTrigger.refresh();

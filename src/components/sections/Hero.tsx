@@ -116,14 +116,6 @@ export function Hero() {
             <span aria-hidden="true" className="bg-gold mt-4 ml-auto block h-px w-12" />
           </div>
         </figure>
-        <div
-          data-scroll-cue
-          aria-hidden="true"
-          className="scroll-cue text-eyebrow absolute bottom-8 hidden flex-col items-center gap-3 text-white/55 xl:flex"
-        >
-          <span className="[writing-mode:vertical-rl]">Scroll to explore</span>
-          <span className="scroll-cue-line block h-12 w-px bg-white/40" />
-        </div>
 
         {/* First-visit intro (html.intro). Decorative; any key, click or scroll skips it. */}
         <div

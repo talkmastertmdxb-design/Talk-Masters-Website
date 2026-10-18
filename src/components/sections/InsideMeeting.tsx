@@ -65,7 +65,7 @@ export function InsideMeeting() {
           data-agenda-track
           aria-label="Meeting agenda"
           tabIndex={0}
-          className="agenda-track mt-6 flex snap-x snap-mandatory scroll-px-4 gap-5 overflow-x-auto px-4 pb-4 md:mt-8 md:overflow-visible md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]"
+          className="agenda-track mt-6 flex snap-x snap-mandatory scroll-px-(--site-inset) gap-5 overflow-x-auto px-(--site-inset) pb-4 md:mt-8 md:overflow-visible"
         >
           {agenda.map((item, index) => (
             <li
