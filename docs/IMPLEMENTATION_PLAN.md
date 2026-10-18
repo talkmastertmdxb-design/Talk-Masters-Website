@@ -368,6 +368,8 @@ Each phase ends with a **gate**: tests green, a code review with no CRITICAL or 
 
 - 2026-10-17: Hero redesigned from the club's reference (eyebrow, three-line headline, stats strip, quote, speaker photo with navy grade) and a first-visit intro adapted from `Hero_animation/8`: preloader counter 00→100%, speaking photos wiping in as the stage settles, nav glides in, headline delivered. Cut from ~12s to ~4s; plays once per 12 hours, home page only, skippable with any input, never under reduced motion, CSS failsafes if JS is late. The template's own photos are not used (unrelated fashion shoot, unknown licence).
 
+- 2026-10-18: Intro replaced with an adaptation of `Hero_Animation_2`: a serif counter grows on the left while counting to 100, its digits slide away, then the hero photo opens as an "iris" (point → held square → exactly the photo panel, with the template's "hop" ease) and the brand grade fades in as it opens. Headline letters slide in from the right. ~8.5s cut to ~4.3s. Fixed: the intro never played in development (React Strict Mode re-mount ended it).
+
 Estimated time to launch from here: **about 2-3 weeks for one developer**, once real content arrives.
 
 ---

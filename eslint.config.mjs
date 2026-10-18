@@ -13,6 +13,8 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "coverage/**",
+    "Hero_animation/**",
+    "Hero_Animation_2/**",
     "playwright-report/**",
     "test-results/**",
   ]),

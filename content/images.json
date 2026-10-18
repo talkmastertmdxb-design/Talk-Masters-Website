@@ -468,57 +468,5 @@
       "profileUrl": "https://unsplash.com/@umarben?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/a-person-wearing-a-head-scarf-Gs39c7ShZIA?utm_source=talk_masters_club&utm_medium=referral"
     }
-  },
-  {
-    "id": "intro-1",
-    "alt": "Talk-Masters members together after a meeting",
-    "aspectRatio": "16/9",
-    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "/images/club-group.jpg",
-    "unsplash": {
-      "photoId": "-NXNaE9lu6w",
-      "query": "public speaking stage",
-      "orientation": "landscape"
-    },
-    "focalPoint": "50% 35%"
-  },
-  {
-    "id": "intro-2",
-    "alt": "Club members sharing dinner together",
-    "aspectRatio": "16/9",
-    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "/images/club-dinner.jpg",
-    "unsplash": {
-      "photoId": "udmN0M2qYTQ",
-      "query": "public speaking stage",
-      "orientation": "landscape"
-    },
-    "focalPoint": "50% 45%"
-  },
-  {
-    "id": "intro-3",
-    "alt": "A member delivering a speech, hand raised",
-    "aspectRatio": "16/9",
-    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "/images/member-prepared-speech.jpg",
-    "unsplash": {
-      "photoId": "rLmrhyz0pZ4",
-      "query": "public speaking stage",
-      "orientation": "landscape"
-    },
-    "focalPoint": "50% 16%"
-  },
-  {
-    "id": "intro-4",
-    "alt": "A member speaking with expressive gestures",
-    "aspectRatio": "16/9",
-    "brief": "Hero intro sequence: a moment from a real meeting (speaker, audience, applause)",
-    "src": "/images/member-table-topics.jpg",
-    "unsplash": {
-      "photoId": "mOHXMm77fX0",
-      "query": "public speaking stage",
-      "orientation": "landscape"
-    },
-    "focalPoint": "50% 12%"
   }
 ]

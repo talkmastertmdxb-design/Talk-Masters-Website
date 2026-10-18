@@ -8,18 +8,8 @@ import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 import { HeroIntro } from "./HeroIntro";
 
-/** Club moments that wipe in during the first-visit intro, before the stage frame. */
-const INTRO_MOMENTS = ["intro-1", "intro-2", "intro-3", "intro-4"] as const;
-
-/** Rolling digit columns for the 00→100% counter (hundreds, tens, ones). */
-const DIGITS: ReadonlyArray<readonly string[]> = [
-  ["0", "1"],
-  ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
-  [..."01234567890123456789", "0"],
-];
-
 /** The hero photo panel: right side on desktop, full-bleed atmosphere on phones. */
-function HeroPhoto({ priority = false }: { priority?: boolean }) {
+function HeroPhoto({ priority = false, intro = false }: { priority?: boolean; intro?: boolean }) {
   return (
     <>
       <ImageSlot
@@ -29,7 +19,12 @@ function HeroPhoto({ priority = false }: { priority?: boolean }) {
         sizes="(min-width: 900px) 58vw, 100vw"
         priority={priority}
       />
-      <div aria-hidden="true" className="hero-panel-fade absolute inset-0" />
+      {/* In the intro the grade fades in as the iris opens, so the photo starts vivid. */}
+      <div
+        aria-hidden="true"
+        data-intro-grade={intro || undefined}
+        className="hero-panel-fade absolute inset-0"
+      />
     </>
   );
 }
@@ -136,47 +131,35 @@ export function Hero() {
           aria-hidden="true"
           className="intro-overlay bg-ink fixed inset-0 z-[70] overflow-hidden"
         >
-          <div data-intro-stack className="absolute inset-0">
-            {INTRO_MOMENTS.map((id) => (
-              <div key={id} data-intro-frame className="intro-frame absolute inset-0 isolate">
-                <ImageSlot id={id} variant="backdrop" tone="full" sizes="100vw" />
-                <div className="intro-frame-grade absolute inset-0" />
+          {/* The iris: opens from a point to exactly the hero photo panel. */}
+          <div data-intro-iris className="intro-iris absolute inset-0">
+            <div className="hero-panel absolute inset-y-0 right-0 isolate overflow-hidden">
+              <div data-intro-zoom className="absolute inset-0">
+                <HeroPhoto intro />
               </div>
-            ))}
-            {/* The stage frame lands exactly where the hero photo sits. */}
-            <div data-intro-frame className="intro-frame hero-panel absolute inset-y-0 right-0 isolate">
-              <HeroPhoto />
             </div>
           </div>
 
-          <div data-intro-ui className="absolute inset-x-0 bottom-0 p-6 md:p-10">
-            <div className="flex items-end justify-between gap-6">
+          <div data-intro-ui className="absolute inset-0">
+            <div className="intro-counter-wrap">
+              <span data-intro-count className="intro-count font-serif tabular-nums">
+                0
+              </span>
+            </div>
+            <div className="absolute inset-x-6 bottom-16 md:inset-x-10 md:bottom-20">
+              <span data-intro-track className="intro-track block">
+                <span data-intro-fill className="intro-fill block" />
+              </span>
+            </div>
+            <div className="absolute inset-x-6 bottom-7 flex justify-between md:inset-x-10 md:bottom-9">
               <p data-intro-mark className="text-eyebrow text-white/60">
                 Talk-Masters Club
               </p>
-              <div className="flex items-end gap-4">
-                <p data-intro-mark className="text-eyebrow pb-3 text-white/60">
-                  Loading
-                </p>
-                <span className="block overflow-hidden">
-                  <span data-intro-count className="intro-counter font-serif tabular-nums">
-                    {DIGITS.map((column, i) => (
-                      <span key={i} className="intro-digit">
-                        <span data-digit className="intro-digit-track">
-                          {column.map((digit, j) => (
-                            <span key={j} className="block">
-                              {digit}
-                            </span>
-                          ))}
-                        </span>
-                      </span>
-                    ))}
-                    <span className="text-gold">%</span>
-                  </span>
-                </span>
-              </div>
+              <p data-intro-mark className="text-eyebrow hidden text-white/60 sm:block">
+                Communicate <span className="text-gold">·</span> Lead <span className="text-gold">·</span>{" "}
+                Belong
+              </p>
             </div>
-            <span data-intro-bar className="bg-gold mt-4 block h-px origin-left" />
           </div>
         </div>
       </HeroIntro>

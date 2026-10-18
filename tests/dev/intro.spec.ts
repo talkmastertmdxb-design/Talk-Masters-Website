@@ -16,7 +16,11 @@ test("the intro really plays in development (survives Strict Mode re-mounting)",
   await page.waitForTimeout(900);
   await expect(html).toHaveClass(/\bintro\b/);
   await expect(page.locator("[data-intro-overlay]")).toBeVisible();
-  await expect(page.locator("[data-digit]").nth(1)).toHaveAttribute("style", /translate/);
+  // The counter is genuinely counting (not stuck at 0) and the photo iris exists.
+  await expect
+    .poll(async () => Number(await page.locator("[data-intro-count]").textContent()))
+    .toBeGreaterThan(0);
+  await expect(page.locator("[data-intro-iris]")).toBeAttached();
 
   // And it hands over to the hero by itself.
   await expect(html).not.toHaveClass(/\bintro\b/, { timeout: 10_000 });

@@ -527,14 +527,7 @@
           linear-gradient(rgb(0 65 101 / 0.2), rgb(0 65 101 / 0.2));
     }
   }
-  /* A light grade so the intro's club moments read as one sequence */
-  .intro-frame-grade {
-    background:
-      linear-gradient(0deg, rgb(11 18 32 / 0.55) 0%, rgb(11 18 32 / 0) 40%),
-      linear-gradient(rgb(0 65 101 / 0.18), rgb(0 65 101 / 0.18));
-  }
-
-  /* ---------- First-visit intro (Hero_animation/8, adapted) ---------- */
+  /* ---------- First-visit intro (Hero_Animation_2, adapted) ---------- */
   .intro-overlay {
     display: none;
   }
@@ -549,28 +542,53 @@
       visibility: hidden;
     }
   }
-  html.intro .intro-frame {
-    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+  /* The iris starts closed at the centre of the photo panel (JS takes over from here). */
+  html.intro .intro-iris {
+    clip-path: polygon(71% 50%, 71% 50%, 71% 50%, 71% 50%);
   }
-  .intro-counter {
-    display: flex;
-    height: 1em;
-    overflow: hidden;
-    font-size: clamp(4rem, 2.6rem + 6vw, 9rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
+  @media (max-width: 56.24rem) {
+    html.intro .intro-iris {
+      clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    }
   }
-  .intro-digit {
+
+  /* The counter grows on the left, in the navy where the headline will sit. */
+  .intro-counter-wrap {
+    position: absolute;
+    left: 1.5rem;
+    top: 34svh;
+  }
+  @media (min-width: 56.25rem) {
+    .intro-counter-wrap {
+      left: 2.5rem;
+      top: 50svh;
+      translate: 0 -55%;
+    }
+  }
+  .intro-count {
     display: block;
-    height: 1em;
+    font-size: clamp(5rem, 1rem + 17vw, 17rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    transform: scale(0.25);
+    transform-origin: left bottom;
+  }
+
+  /* Hairline progress: the track draws while counting, gold fills as the stage opens. */
+  .intro-track {
+    position: relative;
+    height: 1px;
     overflow: hidden;
+    background: rgb(255 255 255 / 0.16);
+    transform: scaleX(0);
+    transform-origin: left;
   }
-  .intro-digit-track {
-    display: block;
-  }
-  .intro-digit-track > span {
-    height: 1em;
-    line-height: 1;
+  .intro-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left;
   }
 
   /* The nav waits off-screen during the intro and glides in when it ends. */
@@ -599,5 +617,12 @@
   /* Hero scroll cue lives in the left margin, outside the content column. */
   .scroll-cue {
     left: max(0.5rem, calc((100vw - 80rem) / 2 - 2.5rem));
+  }
+}
+
+@layer components {
+  /* Intro: the iris photo starts ungraded; the grade fades in as it opens. */
+  html.intro [data-intro-grade] {
+    opacity: 0;
   }
 }
