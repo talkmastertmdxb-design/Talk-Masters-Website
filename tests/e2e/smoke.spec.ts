@@ -53,3 +53,18 @@ test("hides the internal style guide in production", async ({ request }) => {
   const response = await request.get("/styleguide");
   expect(response.status()).toBe(404);
 });
+
+test("serves a sitemap, and robots.txt keeps non-production builds out of search", async ({ request }) => {
+  const sitemap = await request.get("/sitemap.xml");
+  expect(sitemap.status()).toBe(200);
+  expect(await sitemap.text()).toContain("/members</loc>");
+  const robots = await request.get("/robots.txt");
+  expect(robots.status()).toBe(200);
+  // Local and preview builds are never indexed; production is (src/lib/site.ts).
+  expect(await robots.text()).toMatch(/Disallow: \/\s*$/m);
+});
+
+test("caches the video and photos in the browser", async ({ request }) => {
+  const video = await request.head("/videos/member-voices.mp4");
+  expect(video.headers()["cache-control"]).toContain("max-age=2592000");
+});

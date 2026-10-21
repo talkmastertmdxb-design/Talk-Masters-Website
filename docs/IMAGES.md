@@ -16,6 +16,8 @@ Every photo on the site has a named **slot** in [`content/images.json`](../conte
 
 Next.js produces AVIF/WebP at every size automatically. Don't resize by hand.
 
+**Replacing a photo? Give the new file a new name** (e.g. `member-hadi-2.webp`) and update `src`. Browsers and Vercel keep images for up to 31 days, so a file replaced under the same name keeps showing the old picture.
+
 ## To add a new slot
 
 Add an entry with `id` (kebab-case), `alt`, `aspectRatio` (e.g. `"4/5"`), `brief` (what the photographer should capture) and `"src": null`. Use it in a page with:

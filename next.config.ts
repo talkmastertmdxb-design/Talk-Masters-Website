@@ -17,12 +17,26 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // No remotePatterns on purpose: Unsplash photos use their own CDN via
     // src/lib/images/unsplash-loader.ts, so the optimizer only serves /public/images.
+    // Club photos are at most ~1300px wide, so larger variants would only resize up.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    // Keep optimised images for 31 days: fewer re-transformations on Vercel's free plan.
+    // Replacing a photo? Give the file a new name (docs/IMAGES.md), or visitors keep the old one.
+    minimumCacheTTL: 2_678_400,
   },
   async redirects() {
     return [{ source: "/about", destination: "/our-story", permanent: true }];
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    // Photos, the video and brand files change rarely and are renamed when they do.
+    const longCache = [
+      { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+    ];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      { source: "/videos/:file*", headers: longCache },
+      { source: "/images/:file*", headers: longCache },
+      { source: "/brand/:file*", headers: longCache },
+    ];
   },
   turbopack: {
     rules: {

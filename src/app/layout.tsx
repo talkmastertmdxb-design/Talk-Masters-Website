@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -60,6 +62,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <SiteFooter items={mainNav} />
           </div>
         </MotionProvider>
+        {/* Cookieless visit counts and real-visitor Core Web Vitals; both report only on Vercel. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
