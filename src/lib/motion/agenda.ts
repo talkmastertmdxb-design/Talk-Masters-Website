@@ -1,6 +1,6 @@
 /**
  * Signature moment S3, "Inside a meeting" (SCROLL_ANIMATION_SYSTEM.md, Animations 10-12).
- * Scroll progress drives the meeting clock from 7:00 to 8:45.
+ * Scroll progress drives the meeting clock from 10:30 to 12:15.
  */
 
 export interface AgendaItem {
@@ -12,31 +12,31 @@ export interface AgendaItem {
 
 export const agenda: readonly AgendaItem[] = [
   {
-    time: "7:00",
+    time: "10:30",
     title: "Welcome",
-    body: "Guests are greeted at the door, given a name badge and a seat. You'll meet the evening's host, the Toastmaster.",
+    body: "Guests are greeted at the door, given a name badge and a seat. You'll meet the meeting's host, the Toastmaster.",
     imageSlot: "agenda-welcome",
   },
   {
-    time: "7:10",
+    time: "10:40",
     title: "Prepared Speeches",
     body: "Members give speeches they've planned, each one a step in their own learning path. Five to seven minutes, timed with lights.",
     imageSlot: "agenda-prepared-speeches",
   },
   {
-    time: "7:45",
+    time: "11:15",
     title: "Table Topics",
     body: "Volunteers answer a surprise question for one to two minutes. Guests can try it, or just enjoy watching.",
     imageSlot: "agenda-table-topics",
   },
   {
-    time: "8:15",
+    time: "11:45",
     title: "Evaluations",
     body: "Every speaker gets kind, specific feedback: what worked, and one thing to try next time.",
     imageSlot: "agenda-evaluations",
   },
   {
-    time: "8:45",
+    time: "12:15",
     title: "Awards",
     body: "The room votes for the best speaker, evaluator and Table Topics answer. Then everyone stays to chat.",
     imageSlot: "agenda-awards",
@@ -55,7 +55,7 @@ export function activeAgendaIndex(progress: number): number {
   return Math.round(clamp01(progress) * (agenda.length - 1));
 }
 
-/** Clock for any scroll position, interpolating between agenda times (e.g. 7:27 mid-way). */
+/** Clock for any scroll position, interpolating between agenda times (e.g. 10:57 mid-way). */
 export function agendaClock(progress: number): string {
   const position = clamp01(progress) * (agenda.length - 1);
   const index = Math.min(Math.floor(position), agenda.length - 2);

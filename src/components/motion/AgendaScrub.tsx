@@ -15,7 +15,7 @@ interface AgendaScrubProps {
 }
 
 /**
- * Signature moment S3. Desktop: the section pins and scroll moves the evening
+ * Signature moment S3. Desktop: the section pins and scroll moves the meeting
  * along: the card track slides (Animation 10), the clock counts (11) and the
  * Voice Line draws through the meeting (12).
  * Expects [data-agenda-track], [data-agenda-clock], [data-agenda-line] and

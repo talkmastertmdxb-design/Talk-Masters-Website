@@ -39,7 +39,7 @@ const steps: readonly Step[] = [
   {
     icon: Users,
     title: "Leadership",
-    body: "Run part of the evening as timer, evaluator or host, and practise leading a room.",
+    body: "Run part of the meeting as timer, evaluator or host, and practise leading a room.",
     imageSlot: "journey-feature",
   },
 ];

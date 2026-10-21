@@ -201,13 +201,30 @@
 }
 
 @layer components {
-  /* Hero intro: hidden only when JS is running and motion is allowed. A CSS
-     failsafe reveals it anyway if the script never arrives. */
-  @media (prefers-reduced-motion: no-preference) {
+  /* Laptops: hidden only when JS is running and motion is allowed, for the GSAP letter
+     reveal (HeroIntro). A CSS failsafe reveals it anyway if the script never arrives. */
+  @media (min-width: 56.25rem) and (prefers-reduced-motion: no-preference) {
     html.js [data-hero-reveal],
     html.js [data-hero-item] {
       opacity: 0;
       animation: hero-failsafe 0s linear 2.6s forwards;
+    }
+  }
+  /* Phones (most visitors): a CSS-only settle that starts with the HTML. The text is visible
+     from the very first paint (only its position animates, on the compositor), so the first
+     screen never waits for JavaScript on a slow phone. */
+  @media (max-width: 56.24rem) and (prefers-reduced-motion: no-preference) {
+    [data-hero-reveal],
+    [data-hero-item] {
+      animation: hero-settle 0.9s var(--ease-deliver) both;
+    }
+    [data-hero-item] {
+      animation-delay: 0.08s;
+    }
+  }
+  @keyframes hero-settle {
+    from {
+      transform: translateY(18px);
     }
   }
   @keyframes hero-failsafe {
@@ -419,17 +436,6 @@
   .booth-btn-primary:hover:not(:disabled) {
     background: var(--color-maroon-hover);
   }
-
-  /* Member journey dialog */
-  .journey-dialog[open] {
-    animation: dialog-in var(--duration-base) var(--ease-deliver);
-  }
-  @keyframes dialog-in {
-    from {
-      opacity: 0;
-      transform: translateY(24px) scale(0.98);
-    }
-  }
 }
 
 @layer components {
@@ -474,7 +480,8 @@
 @layer components {
   .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.6rem, 1rem + 3.8vw, 5rem);
+    /* Phones: small enough that "Lead With Confidence." stays on one line. */
+    font-size: clamp(2.05rem, 1.25rem + 3.6vw, 5rem);
     line-height: 1.06;
     letter-spacing: -0.02em;
     font-weight: 400;
@@ -603,5 +610,127 @@
   /* Intro: the iris photo starts ungraded; the grade fades in as it opens. */
   html.intro [data-intro-grade] {
     opacity: 0;
+  }
+}
+
+@layer components {
+  /* Social profile links: a brand circle that widens into a labelled pill on hover or focus. */
+  .social-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    overflow: hidden;
+    border-radius: 9999px;
+    /* At rest: an outline in the surrounding text colour, so links never compete with the member. */
+    background: transparent;
+    color: inherit;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 35%, transparent);
+    transition:
+      width 400ms var(--ease-deliver),
+      background-color 300ms ease,
+      box-shadow 300ms ease,
+      color 300ms ease;
+  }
+  /* Active: the network's own colour arrives with the label. */
+  .social-btn:focus-visible {
+    background: var(--social-bg);
+    color: #fff;
+    box-shadow: none;
+  }
+  .social-btn__icon {
+    width: 1.05rem;
+    height: 1.05rem;
+    transition:
+      opacity 300ms ease,
+      transform 400ms var(--ease-deliver);
+  }
+  .social-btn__text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.4rem);
+    transition:
+      opacity 300ms ease,
+      transform 400ms var(--ease-deliver);
+  }
+  .social-btn:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  /* Touch screens keep the circle: no hover to reveal, and the icon is the label people know. */
+  @media (hover: hover) {
+    .social-btn:hover {
+      width: var(--social-open);
+      background: var(--social-bg);
+      color: #fff;
+      box-shadow: none;
+    }
+    .social-btn:hover .social-btn__icon {
+      opacity: 0;
+      transform: translateY(-0.4rem);
+    }
+    .social-btn:hover .social-btn__text {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .social-btn:focus-visible {
+    width: var(--social-open);
+  }
+  .social-btn:focus-visible .social-btn__icon {
+    opacity: 0;
+  }
+  .social-btn:focus-visible .social-btn__text {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .social-btn,
+    .social-btn__icon,
+    .social-btn__text {
+      transition: none;
+    }
+  }
+}
+
+@layer components {
+  /* Member profile: a full-screen sheet over the page; the page underneath stays put. */
+  html.profile-open {
+    overflow: hidden;
+  }
+  .member-profile::backdrop {
+    background: transparent;
+  }
+}
+
+@layer components {
+  /*
+   * Member profile portraits: a light, shared grade (slightly calmer colour, a navy wash and a
+   * fade into the text panel) so bright clothes and busy backgrounds never outshine the story.
+   */
+  .profile-portrait img {
+    filter: saturate(0.82) brightness(0.94);
+  }
+  .profile-portrait__grade {
+    background:
+      linear-gradient(0deg, var(--color-ink) 0%, rgb(11 18 32 / 0) 38%),
+      linear-gradient(rgb(0 65 101 / 0.14), rgb(0 65 101 / 0.14));
+  }
+  @media (min-width: 64rem) {
+    .profile-portrait__grade {
+      background:
+        linear-gradient(270deg, var(--color-ink) 0%, rgb(11 18 32 / 0) 22%),
+        linear-gradient(0deg, rgb(11 18 32 / 0.55) 0%, rgb(11 18 32 / 0) 30%),
+        linear-gradient(rgb(0 65 101 / 0.14), rgb(0 65 101 / 0.14));
+    }
   }
 }

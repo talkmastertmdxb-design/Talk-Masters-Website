@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { Slider } from "@/components/ui/Slider";
 import { content } from "@/lib/content";
 import { workLine } from "@/lib/content/people";
@@ -17,7 +18,11 @@ export function MemberSpotlight() {
         <h2 id="spotlight-title" data-reveal="lines" className="text-display max-w-[10ch]">
           Real People. Real Growth.
         </h2>
-        <Link href="/members" data-reveal="up" className="nav-link text-tm-blue w-fit font-semibold">
+        <Link
+          href="/members"
+          data-reveal="up"
+          className="nav-link text-tm-blue inline-flex min-h-11 w-fit items-center font-semibold"
+        >
           Meet all our members
         </Link>
       </div>
@@ -40,13 +45,23 @@ export function MemberSpotlight() {
                     />
                   </div>
                 )}
-                <h3 className="text-h3 mt-6">{member.name}</h3>
-                {work && <p className="text-ink-muted mt-1">{work}</p>}
-                <p className="text-ink-muted mt-5 italic">“{member.challenge}”</p>
-                <p className="mt-2 font-serif text-xl leading-snug">“{member.transformation}”</p>
+                <div className="mt-6 flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-h3">{member.name}</h3>
+                    {work && <p className="text-ink-muted mt-1">{work}</p>}
+                  </div>
+                </div>
+                {/* Above the card-wide "Read more" link, so the buttons stay clickable. */}
+                <SocialLinks
+                  links={member.links}
+                  name={member.name}
+                  className="text-ink/70 relative z-10 mt-4"
+                />
+                <p className="text-ink-muted mt-5">{member.challenge}</p>
+                <p className="mt-3 font-serif text-xl leading-snug">{member.transformation}</p>
                 <Link
                   href={`/members#${member.slug}`}
-                  className="nav-link text-tm-blue mt-5 inline-block font-semibold after:absolute after:inset-0"
+                  className="nav-link text-tm-blue mt-3 inline-flex min-h-11 items-center font-semibold after:absolute after:inset-0"
                 >
                   Read more<span className="sr-only"> about {member.name}</span>
                 </Link>

@@ -354,6 +354,8 @@ Each phase ends with a **gate**: tests green, a code review with no CRITICAL or 
 | **10. Launch**                     | Planned                              | Production                                   | Vercel, domain, CSP, uptime; publish checklist: no placeholders or stock photos left, consent recorded, TI logo approved                                                                                                                                                                                                                 | `npm run check:content -- --strict` passes              |
 | **11. v1.1**                       | Later                                | Self-serve content                           | Google Drive CMS + sync worker, member directory filters (students, professionals, executives, alumni, officers), gallery                                                                                                                                                                                                                | An officer adds an event with no developer              |
 
+**Growth work** (booking data, moment picker, wins, invitations, events, landing pages) is planned in [GROWTH_PLAN.md](GROWTH_PLAN.md) as phases G0-G6. G1 replaces Phase 6's form scope.
+
 ### What happens next, in order
 
 1. **You:** add `UNSPLASH_ACCESS_KEY` to `.env.local` (free at unsplash.com/oauth/applications), then run `npm run images:unsplash` or ask me to.

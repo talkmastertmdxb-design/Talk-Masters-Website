@@ -64,8 +64,9 @@ export default function OurStoryPage() {
               {founders.map((founder) => (
                 <article key={founder.slug} aria-labelledby={`founder-${founder.slug}`}>
                   {founder.imageSlot && (
-                    <div data-reveal="image" className="rounded-card overflow-hidden">
-                      <ImageSlot id={founder.imageSlot} sizes="(min-width: 900px) 45vw, 100vw" />
+                    // Capped so a portrait never outgrows its photo on wide or high-density screens.
+                    <div data-reveal="image" className="rounded-card max-w-md overflow-hidden">
+                      <ImageSlot id={founder.imageSlot} sizes="(min-width: 640px) 28rem, 100vw" />
                     </div>
                   )}
                   <div data-reveal="up">

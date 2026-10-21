@@ -1,155 +1,199 @@
 [
   {
-    "slug": "member-one",
-    "name": "Member name",
-    "occupation": "Degree / job role",
-    "organisation": "Company / organisation",
+    "slug": "hadi-abdulkader",
+    "name": "Hadi Abdulkader",
+    "occupation": "Public speaking and soft-skills coach",
+    "organisation": "Public Speaking Gym",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/hadiabdulkader/"
+      },
+      {
+        "network": "youtube",
+        "url": "https://www.youtube.com/c/hadiabdulkader"
+      },
+      {
+        "network": "website",
+        "url": "https://www.hadiabdulkader.com/"
+      }
+    ],
     "segment": "professional",
-    "challenge": "Placeholder: I used to avoid speaking in meetings.",
-    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "challenge": "Trained as an HVAC and building automation engineer, he knew his systems inside out and wanted to explain them with the same confidence.",
+    "transformation": "Today he coaches professionals to speak with confidence through his own Public Speaking Gym, in English and Malayalam.",
     "journey": [
       {
         "milestone": "first-meeting",
-        "text": "Placeholder: why they came to their first meeting."
-      },
-      {
-        "milestone": "first-table-topic",
-        "text": "Placeholder: their first Table Topic."
+        "text": "Came to Toastmasters for a friendly, honest room to practise speaking in."
       },
       {
         "milestone": "first-speech",
-        "text": "Placeholder: their first prepared speech."
+        "text": "Turned what he learned about storytelling, pauses and rhetoric into speeches, then into a blog and two YouTube channels."
+      },
+      {
+        "milestone": "other",
+        "text": "Moved from engineering into training, coaching people on public speaking, interviews and team building."
       },
       {
         "milestone": "leadership-role",
-        "text": "Placeholder: a leadership role they took on."
+        "text": "Was the featured speaker at Talk-Masters' 100th meeting, the Grand Jubilee \"Century of Voice\"."
       }
     ],
     "impact": {
-      "career": "Placeholder: impact on their career.",
-      "leadership": "Placeholder: impact on their leadership.",
-      "confidence": "Placeholder: impact on their confidence.",
-      "networking": "Placeholder: impact on their network."
+      "career": "Changed careers, from engineering to training and executive coaching.",
+      "confidence": "Speaks on stage and on camera, sharing public speaking lessons in English and Malayalam.",
+      "leadership": "Coaches individuals and teams on speaking, interviews and team building."
     },
-    "advice": "Placeholder: one piece of advice for new guests.",
-    "imageSlot": "member-one",
-    "consent": true,
-    "spotlight": true,
-    "status": "published",
-    "placeholder": true,
-    "position": "Vice President Education"
-  },
-  {
-    "slug": "member-two",
-    "name": "Member name",
-    "occupation": "Degree / course",
-    "segment": "student",
-    "challenge": "Placeholder: I used to avoid speaking in meetings.",
-    "transformation": "Placeholder: Today I confidently present to clients across the region.",
-    "journey": [
-      {
-        "milestone": "first-meeting",
-        "text": "Placeholder: why they came to their first meeting."
-      },
-      {
-        "milestone": "first-table-topic",
-        "text": "Placeholder: their first Table Topic."
-      },
-      {
-        "milestone": "first-speech",
-        "text": "Placeholder: their first prepared speech."
-      },
-      {
-        "milestone": "leadership-role",
-        "text": "Placeholder: a leadership role they took on."
-      }
-    ],
-    "impact": {
-      "career": "Placeholder: impact on their career.",
-      "leadership": "Placeholder: impact on their leadership.",
-      "confidence": "Placeholder: impact on their confidence.",
-      "networking": "Placeholder: impact on their network."
-    },
-    "advice": "Placeholder: one piece of advice for new guests.",
-    "imageSlot": "member-two",
+    "advice": "Treat speaking like a gym: small, regular reps beat waiting until you feel ready.",
+    "story": "For Hadi, the club is where coaching comes full circle: the room where he still practises what he teaches. Every meeting is another rep, and every evaluation another chance to sharpen the craft he passes on.",
+    "contribution": "A coach's eye for structure. He helps members tighten their openings, use the pause, and land their message.",
+    "clubHighlights": ["Featured speaker, 100th meeting"],
+    "imageSlot": "member-hadi",
     "consent": true,
     "spotlight": true,
     "status": "published",
     "placeholder": true
   },
   {
-    "slug": "member-three",
-    "name": "Member name",
-    "occupation": "Degree / job role",
-    "organisation": "Company / organisation",
-    "segment": "executive",
-    "challenge": "Placeholder: I used to avoid speaking in meetings.",
-    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "slug": "prathiba-leo",
+    "name": "Prathiba Leo",
+    "occupation": "TEDx speaker and business communication coach",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/prathibaleo12/"
+      },
+      {
+        "network": "x",
+        "url": "https://x.com/prathibal"
+      },
+      {
+        "network": "instagram",
+        "url": "https://www.instagram.com/prathiba_leo/"
+      }
+    ],
+    "segment": "professional",
+    "challenge": "Before the stage, her voice lived on the page: a writer with an MBA from the University of Madras and corporate roles at Amazon and Walmart.",
+    "transformation": "Today she is a TEDx speaker and business communication coach in Dubai, helping professionals and teams speak with clarity.",
     "journey": [
       {
         "milestone": "first-meeting",
-        "text": "Placeholder: why they came to their first meeting."
+        "text": "Began her Toastmasters journey at another club, before making Talk-Masters her home in Dubai."
       },
       {
-        "milestone": "first-table-topic",
-        "text": "Placeholder: their first Table Topic."
-      },
-      {
-        "milestone": "first-speech",
-        "text": "Placeholder: their first prepared speech."
+        "milestone": "other",
+        "text": "Spoke at TEDxChennaiInstituteOfTechnology, invited under the theme of empowered women."
       },
       {
         "milestone": "leadership-role",
-        "text": "Placeholder: a leadership role they took on."
+        "text": "Moderated the \"Real Transformers\" panel at Talk-Masters' 100th meeting."
       }
     ],
     "impact": {
-      "career": "Placeholder: impact on their career.",
-      "leadership": "Placeholder: impact on their leadership.",
-      "confidence": "Placeholder: impact on their confidence.",
-      "networking": "Placeholder: impact on their network."
+      "career": "Built a coaching practice in business communication, offering one-to-one coaching and team training.",
+      "confidence": "Went from writing about ideas to delivering them on a TEDx stage.",
+      "leadership": "Leads panels and trains teams to communicate with clarity."
     },
-    "advice": "Placeholder: one piece of advice for new guests.",
-    "imageSlot": "member-three",
+    "advice": "Write it down first. Clear writing is the fastest way to clear speaking.",
+    "story": "Toastmasters has travelled with Prathiba, from another club to her home at Talk-Masters. Here she gives back what those rooms gave her, encouraging first-time speakers to trust their own voice.",
+    "contribution": "Experience from the TEDx stage, and a moderator's gift for drawing people out.",
+    "clubHighlights": ["Panel moderator, 100th meeting"],
+    "imageSlot": "member-prathiba",
     "consent": true,
     "spotlight": true,
     "status": "published",
     "placeholder": true
   },
   {
-    "slug": "member-four",
-    "name": "Member name",
-    "occupation": "Degree / job role",
-    "organisation": "Company / organisation",
-    "segment": "alumni",
-    "challenge": "Placeholder: I used to avoid speaking in meetings.",
-    "transformation": "Placeholder: Today I confidently present to clients across the region.",
+    "slug": "tarannum-sheikh",
+    "name": "Tarannum Sheikh",
+    "occupation": "Founder, educationist and author",
+    "organisation": "Active Kids",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/tarannum-sheikh-381309171/"
+      },
+      {
+        "network": "website",
+        "url": "https://activekidsonline.com/"
+      }
+    ],
+    "segment": "professional",
+    "challenge": "An educator for nearly a decade across India and the UAE, she wanted children to build the confidence that years on stage had given her.",
+    "transformation": "Today she runs Active Kids, an online academy where she and her team teach children public speaking and life skills, and she speaks on the TEDx stage herself.",
     "journey": [
       {
         "milestone": "first-meeting",
-        "text": "Placeholder: why they came to their first meeting."
+        "text": "Started as a Toastmaster at another club, and has spent more than nine years in Toastmasters, with over 100 speeches."
       },
       {
-        "milestone": "first-table-topic",
-        "text": "Placeholder: their first Table Topic."
+        "milestone": "other",
+        "text": "Founded Active Kids in May 2020, a virtual academy for children's skill development."
       },
       {
-        "milestone": "first-speech",
-        "text": "Placeholder: their first prepared speech."
+        "milestone": "other",
+        "text": "Created Speak & Shine, live public speaking and debate classes for children aged 5 to 14."
       },
       {
-        "milestone": "leadership-role",
-        "text": "Placeholder: a leadership role they took on."
+        "milestone": "other",
+        "text": "Joined Talk-Masters recently, bringing years of experience to a new room."
       }
     ],
     "impact": {
-      "career": "Placeholder: impact on their career.",
-      "leadership": "Placeholder: impact on their leadership.",
-      "confidence": "Placeholder: impact on their confidence.",
-      "networking": "Placeholder: impact on their network."
+      "career": "Turned public speaking into an academy that has taught hundreds of children.",
+      "leadership": "Leads the Active Kids team of trainers.",
+      "confidence": "Shares her story on the TEDx stage and in her writing as an author."
     },
-    "advice": "Placeholder: one piece of advice for new guests.",
-    "imageSlot": "member-four",
+    "advice": "Start small: one minute on your feet is a beginning.",
+    "story": "After more than nine years in Toastmasters, Tarannum still treats every meeting as practice. She brings that habit to Talk-Masters, and the same message to the children she teaches: start small, and keep showing up.",
+    "contribution": "Nearly a decade of Toastmasters experience and more than 100 speeches, shared generously with newer members.",
+    "clubHighlights": ["9+ years in Toastmasters", "100+ speeches"],
+    "imageSlot": "member-tarannum",
+    "consent": true,
+    "spotlight": true,
+    "status": "published",
+    "placeholder": true
+  },
+  {
+    "slug": "suhayb-shaik",
+    "name": "Suhayb Shaik",
+    "position": "Vice President Public Relations",
+    "occupation": "Head of the Cyber Team",
+    "organisation": "University of Wollongong in Dubai",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/suhayb-shaik-13985231a"
+      }
+    ],
+    "segment": "officer",
+    "challenge": "He started out more at home with code and networks than with a microphone and a room full of faces.",
+    "transformation": "Today he leads the cyber team at UOWD and the club's public relations, and designed and built this website.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Came to Talk-Masters to practise speaking to people, not just screens."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Took on Vice President Public Relations for 2026–27, telling the club's story to Dubai."
+      },
+      {
+        "milestone": "other",
+        "text": "Designed and built the club's website, so anyone can see what a meeting is like before they visit."
+      }
+    ],
+    "impact": {
+      "career": "Leads a university cyber team, where explaining a risk clearly matters as much as fixing it.",
+      "leadership": "Runs the club's public relations as part of the Executive Committee.",
+      "confidence": "Speaks up in rooms where he once would have stayed quiet."
+    },
+    "advice": "You don't need to feel ready. Come and watch once, and let the room do the rest.",
+    "story": "Suhayb joined to practise speaking to people, not just screens, and stayed for the community. As Vice President Public Relations, he now helps tell the club's story to Dubai.",
+    "contribution": "A technologist's knack for explaining things clearly, and the club's public face online.",
+    "clubHighlights": ["Executive Committee 2026–27"],
+    "imageSlot": "member-suhayb",
     "consent": true,
     "spotlight": true,
     "status": "published",

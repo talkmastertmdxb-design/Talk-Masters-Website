@@ -6,17 +6,17 @@ import { nextTopicIndex, ringOffset } from "@/lib/booth/booth";
 describe("agenda (Inside a meeting)", () => {
   it("follows the meeting order from the plan", () => {
     expect(agenda.map((item) => `${item.time} ${item.title}`)).toEqual([
-      "7:00 Welcome",
-      "7:10 Prepared Speeches",
-      "7:45 Table Topics",
-      "8:15 Evaluations",
-      "8:45 Awards",
+      "10:30 Welcome",
+      "10:40 Prepared Speeches",
+      "11:15 Table Topics",
+      "11:45 Evaluations",
+      "12:15 Awards",
     ]);
   });
 
-  it("runs the clock from 7:00 to 8:45 as the section scrolls", () => {
-    expect(agendaClock(0)).toBe("7:00");
-    expect(agendaClock(1)).toBe("8:45");
+  it("runs the clock from 10:30 to 12:15 as the section scrolls", () => {
+    expect(agendaClock(0)).toBe("10:30");
+    expect(agendaClock(1)).toBe("12:15");
   });
 
   it("shows each agenda time exactly when its card becomes active", () => {
@@ -28,8 +28,8 @@ describe("agenda (Inside a meeting)", () => {
   });
 
   it("clamps progress outside 0-1", () => {
-    expect(agendaClock(-0.5)).toBe("7:00");
-    expect(agendaClock(3)).toBe("8:45");
+    expect(agendaClock(-0.5)).toBe("10:30");
+    expect(agendaClock(3)).toBe("12:15");
     expect(activeAgendaIndex(3)).toBe(agenda.length - 1);
   });
 });

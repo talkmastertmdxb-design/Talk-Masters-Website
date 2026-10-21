@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
+import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
 import { VoiceLine } from "@/components/signature/VoiceLine";
 import { content } from "@/lib/content";
+import { meetingTimeRange } from "@/lib/content/meeting";
+import { clubFacts } from "@/lib/content/people";
 import { buildYear } from "@/lib/site";
 import type { NavItem } from "./SiteHeader";
 import { Wordmark } from "./Wordmark";
@@ -12,7 +15,8 @@ interface SiteFooterProps {
 
 /** The Close: the last call to action, then everything a guest needs to find us. */
 export function SiteFooter({ items }: SiteFooterProps) {
-  const { meeting, contactEmail, clubName, parentOrganisation, tagline } = content.settings;
+  const { meeting, contacts, clubName, parentOrganisation, tagline } = content.settings;
+  const facts = clubFacts(content.history);
 
   return (
     <footer className="theme-dark footer-glow grain bg-ink relative isolate overflow-hidden text-white">
@@ -35,18 +39,22 @@ export function SiteFooter({ items }: SiteFooterProps) {
           <p className="mt-6 max-w-[34ch] text-white/70">
             {tagline}. Open to everyone, of every age and background.
           </p>
+          {facts.length > 0 && <p className="text-muted mt-4 text-sm">{facts.join(" · ")}</p>}
         </div>
 
         <div className="md:col-span-4">
           <h3 className="font-semibold">Meetings</h3>
           <p className="mt-3 text-white/70">
-            {meeting.schedule}, from {meeting.startTime}
+            {meeting.schedule}
+            <br />
+            {meetingTimeRange(meeting)}
             <br />
             {meeting.venue}, {meeting.city}
           </p>
-          <a href={`mailto:${contactEmail}`} className="nav-link mt-3 inline-block text-white">
-            {contactEmail}
-          </a>
+          <h3 className="mt-8 font-semibold">WhatsApp us</h3>
+          <div className="mt-2">
+            <WhatsAppContacts contacts={contacts} />
+          </div>
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3">

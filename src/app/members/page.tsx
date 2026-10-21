@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Plan.md: Members Page. A directory with expandable journey cards; no individual
- * member pages. Filters (students, professionals, executives, alumni, officers)
+ * Plan.md: Members Page. A directory of compact cards that open into full-screen
+ * profiles (MemberProfile); no individual member pages. Filters (students, professionals, executives, alumni, officers)
  * are a future enhancement; `segment` is already stored for them.
  */
 export default function MembersPage() {
@@ -29,7 +29,7 @@ export default function MembersPage() {
       <section aria-label="Member directory" className="py-section bg-soft-gray">
         <div className="container-site">
           {members.length > 0 ? (
-            <div className="grid gap-x-6 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-14 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4">
               {members.map((member) => (
                 <MemberDirectoryCard key={member.slug} member={member} />
               ))}

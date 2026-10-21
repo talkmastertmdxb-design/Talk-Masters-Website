@@ -17,7 +17,7 @@ const member = {
   position: "Vice President Education",
   occupation: "Civil engineer",
   organisation: "Example Engineering",
-  linkedin: "https://www.linkedin.com/in/example",
+  links: [{ network: "linkedin", url: "https://www.linkedin.com/in/example" }],
   segment: "professional",
   challenge: "I used to avoid speaking in meetings.",
   transformation: "Today I confidently present to clients across the region.",
@@ -27,7 +27,8 @@ const member = {
   ],
   impact: { career: "Promoted to lead engineer.", confidence: "I volunteer to present now." },
   advice: "Come once and just listen. That's enough to start.",
-  imageSlot: "member-one",
+  story: "The club became her weekly practice room, and then her community.",
+  imageSlot: "member-hadi",
   consent: true,
   spotlight: true,
   status: "published",
@@ -52,14 +53,24 @@ describe("memberSchema (Plan.md member directory + journey cards)", () => {
   it("keeps position, work, company and LinkedIn optional", () => {
     const minimal = Object.fromEntries(
       Object.entries(member).filter(
-        ([key]) => !["position", "occupation", "organisation", "linkedin", "segment"].includes(key),
+        ([key]) => !["position", "occupation", "organisation", "links", "segment"].includes(key),
       ),
     );
     expect(memberSchema.safeParse(minimal).success).toBe(true);
   });
 
-  it("only accepts LinkedIn profile links", () => {
-    expect(memberSchema.safeParse({ ...member, linkedin: "https://example.com/me" }).success).toBe(false);
+  it("only accepts links that match their network, once each", () => {
+    const withLinks = (links: unknown) => memberSchema.safeParse({ ...member, links }).success;
+    expect(withLinks([{ network: "linkedin", url: "https://example.com/me" }])).toBe(false);
+    expect(withLinks([{ network: "youtube", url: "https://www.youtube.com/c/someone" }])).toBe(true);
+    expect(withLinks([{ network: "x", url: "https://twitter.com/someone" }])).toBe(true);
+    expect(withLinks([{ network: "website", url: "http://insecure.example" }])).toBe(false);
+    expect(
+      withLinks([
+        { network: "x", url: "https://x.com/a" },
+        { network: "x", url: "https://x.com/b" },
+      ]),
+    ).toBe(false);
   });
 
   it("needs at least one journey milestone and one area of impact", () => {
@@ -185,6 +196,10 @@ describe("achievement helpers", () => {
     expect(achievementYear(awardSchema.parse({ ...award, achievedOn: "2024-11-02" }))).toBe(2024);
     // Without a date, use the year the Toastmasters year ends (results are announced then).
     expect(achievementYear(awardSchema.parse(award))).toBe(2025);
+    // Except the Smedley Award, which is earned in August and September: the year's first half.
+    expect(achievementYear(awardSchema.parse({ ...award, programme: "smedley", year: "2026-2027" }))).toBe(
+      2026,
+    );
   });
 
   it("groups the achievement timeline by year, newest first", () => {

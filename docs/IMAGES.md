@@ -5,11 +5,11 @@ Every photo on the site has a named **slot** in [`content/images.json`](../conte
 ## To add a photo
 
 1. **Check consent.** Everyone recognisable in the photo has given written permission (docs/PRD.md §8).
-2. **Prepare the file.** JPG or WebP, at least 2000px on the long edge, roughly the slot's `aspectRatio`. Name it after the slot, e.g. `hero-stage.jpg`.
+2. **Prepare the file.** Convert it to **WebP** (the content check rejects JPG and PNG), at least 1600px on the long edge where the original allows, roughly the slot's `aspectRatio`. Name it after the slot, e.g. `hero-stage.webp`. Keep the original in `assets/source/`, not in `public/`.
 3. **Put it in** `public/images/`.
 4. **Point the slot at it** in `content/images.json`:
    ```json
-   { "id": "hero-stage", "src": "/images/hero-stage.jpg", ... }
+   { "id": "hero-stage", "src": "/images/hero-stage.webp", ... }
    ```
    Update `alt` so it describes the real photo. Optionally add `"focalPoint": "50% 30%"` to keep a face in frame when cropped.
 5. **Check** with `npm run check:content`. The slot disappears from the "still to replace" list.

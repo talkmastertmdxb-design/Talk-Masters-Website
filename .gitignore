@@ -61,3 +61,6 @@ next-env.d.ts
 /Founder_1_Photo.jpeg
 /Smedley Award Photo.jpeg
 /Hero_Animation_2/
+
+# Raw, uncompressed video. Compressed cuts live in public/videos (see docs/IMAGES.md).
+/assets/source/video/

@@ -1,7 +1,7 @@
 [
   {
     "slug": "president",
-    "name": "Officer name",
+    "name": "Anees",
     "role": "President",
     "term": "2026-2027",
     "statement": "Helping people transform confidence into leadership, and leadership into impact.",
@@ -11,7 +11,7 @@
   },
   {
     "slug": "vp-education",
-    "name": "Officer name",
+    "name": "Mansoor",
     "role": "Vice President Education",
     "term": "2026-2027",
     "statement": "Creating an environment where every meeting becomes a practical learning experience.",
@@ -20,8 +20,18 @@
     "placeholder": true
   },
   {
+    "slug": "vp-membership",
+    "name": "Lulu",
+    "role": "Vice President Membership",
+    "term": "2026-2027",
+    "statement": "Making sure every guest who walks in feels welcome, and every member feels at home.",
+    "imageSlot": "officer-vp-membership",
+    "consent": true,
+    "placeholder": true
+  },
+  {
     "slug": "vp-public-relations",
-    "name": "Officer name",
+    "name": "Suhayb",
     "role": "Vice President Public Relations",
     "term": "2026-2027",
     "statement": "Ensuring everyone knows they have a place to find their voice.",
@@ -30,8 +40,18 @@
     "placeholder": true
   },
   {
+    "slug": "treasurer",
+    "name": "Nabeel",
+    "role": "Treasurer",
+    "term": "2026-2027",
+    "statement": "Creating opportunities that help members invest in their own growth.",
+    "imageSlot": "officer-treasurer",
+    "consent": true,
+    "placeholder": true
+  },
+  {
     "slug": "secretary",
-    "name": "Officer name",
+    "name": "Nasar",
     "role": "Secretary",
     "term": "2026-2027",
     "statement": "Building a club culture where every member feels supported and valued.",
@@ -40,12 +60,12 @@
     "placeholder": true
   },
   {
-    "slug": "treasurer",
-    "name": "Officer name",
-    "role": "Treasurer",
+    "slug": "sergeant-at-arms",
+    "name": "Noufal",
+    "role": "Sergeant at Arms",
     "term": "2026-2027",
-    "statement": "Creating opportunities that help members invest in their own growth.",
-    "imageSlot": "officer-treasurer",
+    "statement": "Setting the room so that every speaker can focus on their message.",
+    "imageSlot": "officer-sergeant-at-arms",
     "consent": true,
     "placeholder": true
   }

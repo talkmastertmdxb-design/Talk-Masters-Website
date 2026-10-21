@@ -51,9 +51,12 @@ describe("finishIntro", () => {
 });
 
 describe("introScript (runs in <head> before paint)", () => {
-  const run = (path: string, reduced = false) => {
+  /** Each media query answered on its own: reduced motion, and a laptop-sized screen. */
+  const run = (path: string, reduced = false, laptop = true) => {
     window.history.replaceState(null, "", path);
-    window.matchMedia = vi.fn().mockReturnValue({ matches: reduced }) as unknown as typeof window.matchMedia;
+    window.matchMedia = vi.fn((query: string) => ({
+      matches: query.includes("reduced-motion") ? reduced : query.includes("min-width") ? laptop : false,
+    })) as unknown as typeof window.matchMedia;
     new Function(introScript)();
     return document.documentElement.classList;
   };
@@ -74,6 +77,10 @@ describe("introScript (runs in <head> before paint)", () => {
     document.documentElement.className = "";
     localStorage.clear();
     expect(run("/", true).contains(INTRO_CLASS)).toBe(false);
+  });
+
+  it("never plays on phones, where it would hold most visitors back for four seconds", () => {
+    expect(run("/", false, false).contains(INTRO_CLASS)).toBe(false);
   });
 
   it("plays again once the repeat window has passed", () => {

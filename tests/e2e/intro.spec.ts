@@ -39,6 +39,22 @@ test.describe("first-visit hero intro", () => {
     await expect(page.locator("[data-intro-overlay]")).toBeHidden();
   });
 
+  test("never plays on phones: the hero shows at once", async ({ browser }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Opens its own phone-sized context");
+    const phone = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      isMobile: true,
+      hasTouch: true,
+      storageState: { cookies: [], origins: [] },
+    });
+    const page = await phone.newPage();
+    await page.goto(testInfo.project.use.baseURL!);
+    await expect(page.locator("html")).not.toHaveClass(/intro/);
+    await expect(page.locator("[data-intro-overlay]")).toBeHidden();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCSS("opacity", "1", { timeout: 1500 });
+    await phone.close();
+  });
+
   test("never plays under reduced motion, or on other pages", async ({ page, browser }) => {
     await page.goto("/members");
     await expect(page.locator("html")).not.toHaveClass(/\bintro\b/);

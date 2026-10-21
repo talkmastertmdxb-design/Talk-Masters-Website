@@ -20,6 +20,25 @@ const paragraphs = z.array(z.string().min(1)).min(1, "Add at least one paragraph
 
 const thisYear = new Date().getFullYear();
 
+/** Club photos are WebP only: smaller files, and every current browser supports it (docs/IMAGES.md). */
+const localImage = /^\/images\/[\w./-]+\.webp$/i;
+const localVideo = /^\/videos\/[\w./-]+\.mp4$/i;
+
+/**
+ * A short, compressed video in /public/videos (raw footage stays in assets/source/video).
+ * Captions must be burned in: it plays muted until the visitor turns the sound on.
+ */
+export const videoSchema = z.object({
+  src: z.string().regex(localVideo, "Use an .mp4 file in /public/videos, e.g. /videos/member-voices.mp4"),
+  poster: z.string().regex(localImage, "Use a .webp image in /public/images"),
+  /** What the video shows, for screen readers and as the player's accessible name. */
+  title: z.string().min(1),
+  durationSeconds: z.number().positive(),
+  captionsBurnedIn: z.literal(true, "Burn the captions into the video so it works without sound"),
+  /** Lines quoted word for word from the video, shown beside it. */
+  quotes: z.array(z.string().min(1)).max(3, "Quote at most 3 lines").default([]),
+});
+
 export const statSchema = z.object({
   label: z.string().min(1),
   value: z.number().int().nonnegative(),
@@ -41,7 +60,19 @@ export const settingsSchema = z.object({
     mapUrl: z.url().optional(),
     placeholder,
   }),
-  contactEmail: z.email(),
+  /** Optional: the club has no shared inbox yet, so guests contact officers on WhatsApp. */
+  contactEmail: z.email().optional(),
+  /** Who guests can message, in the order shown. */
+  contacts: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        role: z.string().min(1),
+        /** International format, digits only after the +, e.g. +971502837168. */
+        whatsapp: z.string().regex(/^\+[1-9]\d{7,14}$/, "Use the international format, e.g. +971502837168"),
+      }),
+    )
+    .min(1, "Add at least one contact"),
   socials: z
     .array(
       z.object({
@@ -51,6 +82,13 @@ export const settingsSchema = z.object({
     )
     .default([]),
   stats: z.array(statSchema),
+  /** Image slot ids the hero rotates through, first one first (it is also the intro photo). */
+  heroSlides: z
+    .array(imageSlotId)
+    .min(1, "Add at least one hero photo")
+    .max(5, "Keep the hero to 5 photos or fewer"),
+  /** The members' video on the home page. Leave it out to hide the section. */
+  highlightVideo: videoSchema.optional(),
   placeholder,
 });
 
@@ -82,6 +120,24 @@ const person = {
 
 const consentedPerson = { ...person, role: z.string().min(1) };
 
+export const PROFILE_NETWORKS = ["linkedin", "youtube", "x", "instagram", "website"] as const;
+
+/** Each network's link must point at that network, so a typo can't send people somewhere else. */
+const profileHosts: Record<(typeof PROFILE_NETWORKS)[number], RegExp> = {
+  linkedin: /^https:\/\/([a-z]{2,3}\.)?linkedin\.com\//,
+  youtube: /^https:\/\/(www\.)?youtube\.com\//,
+  x: /^https:\/\/(www\.)?(x|twitter)\.com\//,
+  instagram: /^https:\/\/(www\.)?instagram\.com\//,
+  website: /^https:\/\//,
+};
+
+export const profileLinkSchema = z
+  .object({ network: z.enum(PROFILE_NETWORKS), url: z.url() })
+  .refine((link) => profileHosts[link.network].test(link.url), {
+    message: "The link doesn't match its network (e.g. a linkedin.com address for LinkedIn)",
+    path: ["url"],
+  });
+
 /** Plan.md member journey milestones. */
 export const JOURNEY_MILESTONES = [
   "first-meeting",
@@ -104,10 +160,14 @@ export const memberSchema = z.object({
   occupation: z.string().min(1).optional(),
   /** Company or organisation. */
   organisation: z.string().min(1).optional(),
-  linkedin: z
-    .url()
-    .regex(/^https:\/\/([a-z]{2,3}\.)?linkedin\.com\//, "Use a linkedin.com profile link")
-    .optional(),
+  /** Public profiles the member chose to share, shown in this order. One per network. */
+  links: z
+    .array(profileLinkSchema)
+    .refine(
+      (links) => new Set(links.map((link) => link.network)).size === links.length,
+      "List each network once",
+    )
+    .default([]),
   /** For the future directory filter. */
   segment: z.enum(["student", "professional", "executive", "alumni", "officer"]).optional(),
   /** Before Toastmasters: the challenge they faced, in one sentence. */
@@ -127,6 +187,17 @@ export const memberSchema = z.object({
     .refine((impact) => Object.values(impact).some(Boolean), "Describe at least one area of impact"),
   /** One piece of advice for new guests. */
   advice: z.string().min(1),
+  /**
+   * The profile's lead paragraph: their personal story with the club, or what Toastmasters
+   * means to them. Not a repeat of their job title (that is `occupation`).
+   */
+  story: z.string().min(1),
+  /** What they bring to the club, for "What [name] brings to the club". */
+  contribution: z.string().min(1).optional(),
+  /** The year they joined Talk-Masters, for "Member since 2024". */
+  memberSince: z.number().int().min(1924).max(thisYear).optional(),
+  /** Short club facts shown under the name, e.g. "Featured speaker, 100th meeting". */
+  clubHighlights: z.array(z.string().min(1).max(48)).max(3, "Keep it to 3 highlights").default([]),
   /** Shown in the home page Member Spotlight. */
   spotlight: z.boolean().default(false),
   status: publishStatus,
@@ -159,6 +230,8 @@ export const historySchema = z.object({
   charterDate: z.iso.date().optional(),
   clubNumber: z.string().min(1).optional(),
   district: z.string().min(1).optional(),
+  division: z.string().min(1).optional(),
+  area: z.string().min(1).optional(),
   /** Why Talk-Masters was created. */
   why: paragraphs,
   timeline: z
@@ -241,7 +314,6 @@ export const tableTopicSchema = z.object({
   prompt: z.string().min(1),
 });
 
-const localImage = /^\/images\/[\w./-]+\.(jpe?g|png|webp|avif)$/i;
 const unsplashImage = /^https:\/\/images\.unsplash\.com\/photo-[\w-]+(\?[\w=&.%-]*)?$/;
 
 export const imageSlotSchema = z.object({
@@ -255,7 +327,7 @@ export const imageSlotSchema = z.object({
     .string()
     .refine(
       (src) => localImage.test(src) || unsplashImage.test(src),
-      "Use a file in /public/images or an images.unsplash.com URL",
+      "Use a .webp file in /public/images (convert JPG/PNG first) or an images.unsplash.com URL",
     )
     .nullable(),
   focalPoint: z.string().optional(),
@@ -276,6 +348,8 @@ export const imageSlotSchema = z.object({
 export type Settings = z.infer<typeof settingsSchema>;
 export type ClubEvent = z.infer<typeof eventSchema>;
 export type Member = z.infer<typeof memberSchema>;
+export type ProfileLink = z.infer<typeof profileLinkSchema>;
+export type ProfileNetwork = ProfileLink["network"];
 export type JourneyMilestone = (typeof JOURNEY_MILESTONES)[number];
 export type Founder = z.infer<typeof founderSchema>;
 export type History = z.infer<typeof historySchema>;
@@ -286,6 +360,7 @@ export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
 export type TableTopic = z.infer<typeof tableTopicSchema>;
 export type ImageSlot = z.infer<typeof imageSlotSchema>;
+export type Video = z.infer<typeof videoSchema>;
 
 export class ContentError extends Error {
   constructor(source: string, details: string) {

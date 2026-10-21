@@ -1,40 +1,52 @@
 [
   {
     "id": "hero-speaker",
-    "alt": "A Talk-Masters member speaking beside the club banner, the audience in the foreground",
+    "alt": "A Talk-Masters member speaking in front of the club banner",
     "aspectRatio": "16/9",
     "brief": "Hero: a member speaking on stage, three-quarter view, audience softly out of focus in the foreground, warm stage light",
-    "src": "/images/club-speaker-banner.jpg",
+    "src": "/images/speaker-club-banner.webp",
     "unsplash": {
       "photoId": "9zutjaUEN3Q",
       "query": "woman speaking on stage audience",
       "orientation": "landscape"
     },
-    "focalPoint": "62% 30%"
+    "focalPoint": "56% 28%"
   },
   {
     "id": "hero-stage",
-    "alt": "A speaker at the lectern under warm stage light, the audience softly out of focus",
+    "alt": "A member walking the stage mid-speech, notes in hand",
     "aspectRatio": "4/5",
     "brief": "Speaker at the lectern, three-quarter angle, warm dramatic light",
-    "src": "https://images.unsplash.com/photo-1729108629303-3d957cbb306d?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjI2OTgxfA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/speaker-on-stage.webp",
     "unsplash": {
       "photoId": "edroxDz_ngM",
       "query": "microphone dark stage spotlight",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "jymy duhomme",
-      "profileUrl": "https://unsplash.com/@jymlens?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-man-standing-in-front-of-a-microphone-in-a-dark-room-edroxDz_ngM?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "hero-microphone",
+    "alt": "A member speaking into a microphone during a session on job guidance",
+    "aspectRatio": "16/9",
+    "brief": "Hero rotation: a member mid-speech with a microphone",
+    "src": "/images/speaker-microphone.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "hero-audience",
+    "alt": "Members of all backgrounds listening during a meeting",
+    "aspectRatio": "16/9",
+    "brief": "Hero rotation: a mixed audience listening",
+    "src": "/images/audience-listening.webp",
+    "focalPoint": "45% 60%"
   },
   {
     "id": "manifesto-bento",
     "alt": "Club members of different backgrounds sharing dinner",
     "aspectRatio": "1/1",
     "brief": "Mixed-age group laughing together after a meeting",
-    "src": "/images/club-dinner.jpg",
+    "src": "/images/club-dinner.webp",
     "unsplash": {
       "query": "diverse people listening workshop",
       "orientation": "squarish"
@@ -60,26 +72,22 @@
   },
   {
     "id": "agenda-welcome",
-    "alt": "Guests being welcomed at the door of a meeting",
+    "alt": "Members beside the club banner at the venue entrance, ready to welcome guests",
     "aspectRatio": "3/4",
     "brief": "Guests welcomed at the entrance, name badges",
-    "src": "https://images.unsplash.com/photo-1781559877355-48eaba6a19a0?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8Y29uZmVyZW5jZSUyMG5hbWUlMjBiYWRnZSUyMHdlbGNvbWV8ZW58MXwxfHx8MTc5MjIyNjk4M3ww&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/welcome-entrance.webp",
     "unsplash": {
       "query": "conference name badge welcome",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "Rodrigo Rodrigues | WOLF Λ R T",
-      "profileUrl": "https://unsplash.com/@wolfart32?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/blonde-woman-in-white-shirt-with-event-badge-smiling-NgBbSIV2TTY?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 45%"
   },
   {
     "id": "agenda-prepared-speeches",
     "alt": "A member delivering a prepared speech",
     "aspectRatio": "3/4",
     "brief": "Prepared speech in progress, gesture mid-sentence",
-    "src": "/images/member-prepared-speech.jpg",
+    "src": "/images/member-prepared-speech.webp",
     "unsplash": {
       "query": "speaker presenting to audience",
       "orientation": "portrait"
@@ -91,7 +99,7 @@
     "alt": "A member answering a Table Topics question",
     "aspectRatio": "3/4",
     "brief": "Table Topics moment, speaker thinking on their feet",
-    "src": "/images/member-table-topics.jpg",
+    "src": "/images/member-table-topics.webp",
     "unsplash": {
       "query": "person speaking microphone audience",
       "orientation": "portrait"
@@ -100,19 +108,15 @@
   },
   {
     "id": "agenda-evaluations",
-    "alt": "An evaluator giving supportive feedback",
+    "alt": "Members giving feedback as an evaluation panel",
     "aspectRatio": "3/4",
     "brief": "Evaluator giving feedback, speaker listening",
-    "src": "https://images.unsplash.com/photo-1511376979163-f804dff7ad7b?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8cGVvcGxlJTIwZGlzY3Vzc2lvbiUyMGZlZWRiYWNrJTIwbWVldGluZ3xlbnwxfDF8fHwxNzkyMjI2OTg3fDA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/panel-evaluation.webp",
     "unsplash": {
       "query": "people discussion feedback meeting",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "charlesdeluvio",
-      "profileUrl": "https://unsplash.com/@charlesdeluvio?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/person-sitting-in-a-chair-in-front-of-a-man-rRWiVQzLm7k?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "58% 62%"
   },
   {
     "id": "agenda-timer",
@@ -132,15 +136,15 @@
   },
   {
     "id": "agenda-awards",
-    "alt": "Members together at the end of a meeting",
+    "alt": "A member receiving a certificate beside the club banner",
     "aspectRatio": "3/4",
     "brief": "Best Speaker ribbons and applause",
-    "src": "/images/club-group.jpg",
+    "src": "/images/award-presentation.webp",
     "unsplash": {
       "query": "audience applause clapping",
       "orientation": "portrait"
     },
-    "focalPoint": "50% 35%"
+    "focalPoint": "52% 60%"
   },
   {
     "id": "statement-fullbleed",
@@ -161,36 +165,28 @@
   },
   {
     "id": "journey-feature",
-    "alt": "An experienced member mentoring a newer member",
+    "alt": "An experienced member presenting a certificate to a newer member",
     "aspectRatio": "4/5",
     "brief": "Mentor and mentee, one-to-one",
-    "src": "https://images.unsplash.com/photo-1604881991405-b273c7a4386a?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjI2OTkwfA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/mentor-certificate.webp",
     "unsplash": {
       "photoId": "3gAiajAfjXI",
       "query": "two people coffee conversation",
       "orientation": "portrait"
     },
-    "credit": {
-      "name": "Priscilla Du Preez 🇨🇦",
-      "profileUrl": "https://unsplash.com/@priscilladupreez?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-couple-of-people-sitting-at-a-table-with-cups-of-coffee-3gAiajAfjXI?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 45%"
   },
   {
     "id": "event-featured",
-    "alt": "A Talk-Masters meeting in progress",
+    "alt": "A Talk-Masters meeting in progress, members seated around the room",
     "aspectRatio": "16/9",
     "brief": "Featured event banner: the room mid-meeting",
-    "src": "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXVkaWVuY2UlMjBsaXN0ZW5pbmclMjB0byUyMHByZXNlbnRhdGlvbnxlbnwxfDB8fHwxNzkyMjQyNjE1fDA&ixlib=rb-4.1.0&w=2400&q=80",
+    "src": "/images/meeting-in-progress.webp",
     "unsplash": {
       "query": "audience listening to presentation",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Miguel Henriques",
-      "profileUrl": "https://unsplash.com/@miguel_photo?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/man-speaking-in-front-of-crowd-RfiBK6Y_upQ?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 55%"
   },
   {
     "id": "venue-entrance",
@@ -210,31 +206,23 @@
   },
   {
     "id": "club-history",
-    "alt": "An early Talk-Masters meeting",
+    "alt": "Members cutting a cake together at a club celebration",
     "aspectRatio": "3/2",
     "brief": "An early or founding-era club photo, if one exists",
-    "src": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8dmludGFnZSUyMG1pY3JvcGhvbmV8ZW58MXwwfHx8MTc5MjIyNjk5Mnww&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/club-celebration.webp",
     "unsplash": {
       "query": "vintage microphone",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "israel palacio",
-      "profileUrl": "https://unsplash.com/@othentikisra?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/bokeh-photography-of-condenser-microphone-Y20JJ_ddy9M?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 50%"
   },
   {
     "id": "founder-one",
     "alt": "Portrait of a Talk-Masters founder",
     "aspectRatio": "4/5",
     "brief": "Founder portrait, natural light, plain background",
-    "src": "/images/founder-one.jpg",
-    "unsplash": {
-      "query": "professional woman portrait smiling natural light",
-      "orientation": "portrait"
-    },
-    "focalPoint": "50% 30%"
+    "src": "/images/founder-one-portrait.webp",
+    "focalPoint": "50% 28%"
   },
   {
     "id": "founder-two",
@@ -253,52 +241,36 @@
     }
   },
   {
-    "id": "member-one",
-    "alt": "Portrait of a club member",
+    "id": "member-hadi",
+    "alt": "Hadi Abdulkader, smiling, in a beige blazer",
     "aspectRatio": "4/5",
-    "brief": "Member portrait for their story",
-    "src": "https://images.unsplash.com/photo-1688841747582-41097036109d?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBlbmdpbmVlciUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjI2OTk1fDA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "query": "woman engineer portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Joseph Okon",
-      "profileUrl": "https://unsplash.com/@joecreativestudio?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-man-wearing-a-hard-hat-and-safety-gear-hSD_Igxu4r0?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/member-hadi.webp",
+    "focalPoint": "50% 30%"
   },
   {
-    "id": "member-two",
-    "alt": "Portrait of a club member",
+    "id": "member-prathiba",
+    "alt": "Prathiba Leo, smiling, arms folded",
     "aspectRatio": "4/5",
-    "brief": "Member portrait for their story",
-    "src": "https://images.unsplash.com/photo-1525457136159-8878648a7ad0?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8eW91bmclMjBtYW4lMjBzdHVkZW50JTIwcG9ydHJhaXQlMjBzbWlsaW5nfGVufDF8MXx8fDE3OTIyMjY5OTZ8MA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "query": "young man student portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Gabriel Arancibia",
-      "profileUrl": "https://unsplash.com/@gabrieeel?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/man-in-brown-coat-standing-near-concrete-wall-smiles-wYvCXc-xUTg?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/member-prathiba.webp",
+    "focalPoint": "50% 30%"
   },
   {
-    "id": "member-three",
-    "alt": "Portrait of a club member",
+    "id": "member-tarannum",
+    "alt": "Tarannum Sheikh, smiling, arms folded",
     "aspectRatio": "4/5",
-    "brief": "Member portrait for their story",
-    "src": "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YnVzaW5lc3NtYW4lMjBwb3J0cmFpdCUyMGNvbmZpZGVudHxlbnwxfDF8fHwxNzkyMjI2OTk3fDA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "query": "businessman portrait confident",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "LinkedIn Sales Solutions",
-      "profileUrl": "https://unsplash.com/@linkedinsalesnavigator?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/man-standing-beside-wall-pAtA8xe_iVM?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/member-tarannum.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "member-suhayb",
+    "alt": "Suhayb Shaik, holding an award",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/member-suhayb.webp",
+    "focalPoint": "50% 25%"
   },
   {
     "id": "award-one",
@@ -318,26 +290,22 @@
   },
   {
     "id": "story-hero",
-    "alt": "An empty stage lit by a single spotlight",
+    "alt": "Talk-Masters members and their families together after a meeting",
     "aspectRatio": "16/9",
     "brief": "Atmospheric stage shot for the Our Story header",
-    "src": "https://images.unsplash.com/photo-1514306191717-452ec28c7814?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8ZW1wdHklMjBzdGFnZSUyMHNwb3RsaWdodCUyMHRoZWF0cmV8ZW58MXwwfHx8MTc5MjIyNjk5OXww&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/club-community.webp",
     "unsplash": {
       "query": "empty stage spotlight theatre",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Rob Laughter",
-      "profileUrl": "https://unsplash.com/@roblaughter?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/red-theater-curtain-WW1jsInXgwM?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 45%"
   },
   {
     "id": "achievements-hero",
     "alt": "Talk-Masters members with the Smedley Award",
     "aspectRatio": "16/9",
     "brief": "Club trophies or certificates for the Achievements header",
-    "src": "/images/smedley-award.jpg",
+    "src": "/images/smedley-award.webp",
     "unsplash": {
       "query": "award ceremony stage lights",
       "orientation": "landscape"
@@ -349,7 +317,7 @@
     "alt": "Talk-Masters members together after a meeting",
     "aspectRatio": "16/9",
     "brief": "Wide shot of members in the audience",
-    "src": "/images/club-group.jpg",
+    "src": "/images/club-group.webp",
     "unsplash": {
       "query": "audience listening speaker",
       "orientation": "landscape"
@@ -358,115 +326,84 @@
   },
   {
     "id": "team-hero",
-    "alt": "A meeting room set up for an evening session",
+    "alt": "Club leaders holding certificates in front of the Talk-Masters banner",
     "aspectRatio": "16/9",
     "brief": "The committee at work, or the meeting room",
-    "src": "https://images.unsplash.com/photo-1628062699790-7c45262b82b4?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWVldGluZyUyMHJvb20lMjBjaGFpcnMlMjBldmVuaW5nfGZyfDF8MHx8fDE3OTIyMjcwMDF8MA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
+    "src": "/images/officers-certificates.webp",
     "unsplash": {
       "query": "meeting room chairs evening",
       "orientation": "landscape"
     },
-    "credit": {
-      "name": "Michael Fousert",
-      "profileUrl": "https://unsplash.com/fr/@michaelfousert?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/fr/photos/chaises-de-bureau-a-la-table-de-conference-RNsKphkdBTk?utm_source=talk_masters_club&utm_medium=referral"
-    }
-  },
-  {
-    "id": "member-four",
-    "alt": "Portrait of a club member",
-    "aspectRatio": "4/5",
-    "brief": "Member portrait for their journey card",
-    "src": "https://images.unsplash.com/photo-1665062173657-3912ae7991e0?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8b2xkZXIlMjB3b21hbiUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjI3MDAyfDA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "query": "older woman portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Daniel Lara",
-      "profileUrl": "https://unsplash.com/@overfly?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-woman-smiling-for-the-camera-t9tDSXN2U2E?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "focalPoint": "50% 40%"
   },
   {
     "id": "officer-president",
-    "alt": "Portrait of a committee member",
+    "alt": "Anees, Club President, speaking at a meeting",
     "aspectRatio": "4/5",
-    "brief": "Committee portrait, natural light",
-    "src": "https://images.unsplash.com/photo-1624797432677-6f803a98acb3?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWFuJTIwcG9ydHJhaXQlMjBzbWlsaW5nJTIwcHJvZmVzc2lvbmFsfGVufDF8MXx8fDE3OTIyNDI2MTh8MA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "man portrait smiling professional",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Danny Ocean",
-      "profileUrl": "https://unsplash.com/@d_ocean?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/man-in-gray-suit-jacket-smiling-ehUYU820lcA?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Committee portrait",
+    "src": "/images/officer-president.webp",
+    "focalPoint": "50% 22%"
   },
   {
     "id": "officer-vp-education",
-    "alt": "Portrait of a committee member",
+    "alt": "Mansoor, Vice President Education",
     "aspectRatio": "4/5",
-    "brief": "Committee portrait, natural light",
-    "src": "https://images.unsplash.com/photo-1525786210598-d527194d3e9a?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjB3aXRoJTIwZ2xhc3NlcyUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjQyNjE5fDA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "woman with glasses portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Vinicius Wiesehofer",
-      "profileUrl": "https://unsplash.com/@wiesehofer?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/closeup-photo-of-woman-wearing-black-framed-eyeglasses-BBEbl2WKRlU?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Committee portrait",
+    "src": "/images/officer-vp-education.webp",
+    "focalPoint": "50% 25%"
   },
   {
     "id": "officer-vp-public-relations",
-    "alt": "Portrait of a committee member",
+    "alt": "Suhayb, Vice President Public Relations, speaking at a meeting",
     "aspectRatio": "4/5",
-    "brief": "Committee portrait, natural light",
-    "src": "https://images.unsplash.com/photo-1606841216827-d1217fa5fe27?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8Mnx8eW91bmclMjB3b21hbiUyMHBvcnRyYWl0JTIwc21pbGluZyUyMG91dGRvb3JzfGVufDF8MXx8fDE3OTIyNDI2MjB8MA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "young woman portrait smiling outdoors",
-      "orientation": "portrait",
-      "pick": 1
-    },
-    "credit": {
-      "name": "Jack Lucas Smith",
-      "profileUrl": "https://unsplash.com/@jacklucassmith?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/woman-in-black-jacket-smiling-sRgls0QgQas?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Committee portrait",
+    "src": "/images/officer-vp-public-relations.webp",
+    "focalPoint": "50% 25%"
   },
   {
     "id": "officer-secretary",
-    "alt": "Portrait of a committee member",
+    "alt": "Nasar, Secretary",
     "aspectRatio": "4/5",
-    "brief": "Committee portrait, natural light",
-    "src": "https://images.unsplash.com/photo-1764084052338-23a317e34ea1?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWlkZGxlJTIwYWdlZCUyMG1hbiUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjQyNjIxfDA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "middle aged man portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Sophie Paterson",
-      "profileUrl": "https://unsplash.com/@patersophie?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-man-smiling-in-a-city-street-i6GucO5PeSc?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Committee portrait",
+    "src": "/images/officer-secretary.webp",
+    "focalPoint": "50% 25%"
   },
   {
     "id": "officer-treasurer",
-    "alt": "Portrait of a committee member",
+    "alt": "Nabeel, Treasurer, speaking at a meeting",
     "aspectRatio": "4/5",
-    "brief": "Committee portrait, natural light",
-    "src": "https://images.unsplash.com/photo-1661254601903-0edfe1cd736c?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBoaWphYiUyMHBvcnRyYWl0JTIwc21pbGluZ3xlbnwxfDF8fHwxNzkyMjQyNjIxfDA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "woman hijab portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Umar ben",
-      "profileUrl": "https://unsplash.com/@umarben?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-person-wearing-a-head-scarf-Gs39c7ShZIA?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "Committee portrait",
+    "src": "/images/officer-treasurer.webp",
+    "focalPoint": "50% 25%"
+  },
+  {
+    "id": "officer-vp-membership",
+    "alt": "Lulu, Vice President Membership, speaking at the lectern",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait",
+    "src": "/images/officer-vp-membership.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "officer-sergeant-at-arms",
+    "alt": "Noufal, Sergeant at Arms, speaking at a meeting",
+    "aspectRatio": "4/5",
+    "brief": "Committee portrait",
+    "src": "/images/officer-sergeant-at-arms.webp",
+    "focalPoint": "50% 25%"
+  },
+  {
+    "id": "excom-poster",
+    "alt": "EXCOM 2026-27 poster for Talk-Masters Club (Club 07956953, Area 11, Division C, District 127): Anees, President; Mansoor, VP Education; Lulu, VP Membership; Suhayb, VP Public Relations; Nabeel, Treasurer; Nasar, Secretary; Noufal, Sergeant at Arms",
+    "aspectRatio": "859/1280",
+    "brief": "The committee announcement poster",
+    "src": "/images/excom-2026-27-poster.webp"
+  },
+  {
+    "id": "award-smedley-2026",
+    "alt": "District 127 Club Growth Awards 2026-27 graphic: Smedley Award, Bronze, presented to Talk-Masters Toastmasters, Area 11, Division C",
+    "aspectRatio": "1/1",
+    "brief": "The award announcement graphic",
+    "src": "/images/smedley-award-bronze-2026-27.webp"
   }
 ]

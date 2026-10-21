@@ -40,15 +40,18 @@ const imageReady = (root: HTMLElement): Promise<unknown> => {
  * "The first word": the headline's letters slide in from the right through a mask
  * (from Hero_Animation_2), then the supporting content settles.
  */
-function buildReveal(chars: Element[], root: HTMLElement, settleBackdrop: boolean): gsap.core.Timeline {
+function buildReveal(chars: Element[], root: HTMLElement): gsap.core.Timeline {
   const q = gsap.utils.selector(root);
-  const tl = gsap
-    .timeline({ defaults: { ease: ease.deliver } })
-    .set(q("[data-hero-reveal]"), { opacity: 1 })
-    .from(chars, { xPercent: 105, duration: 0.9, ease: "power4.out", stagger: 0.012 }, 0.05)
-    .from(q("[data-hero-item]"), { opacity: 0, y: 24, duration: duration.base, stagger: stagger.item }, 0.55);
-  if (settleBackdrop) {
-    tl.fromTo(q("[data-hero-backdrop]"), { scale: 1.06 }, { scale: 1, duration: 2.4, ease: "power3.out" }, 0);
+  // After client navigation Next.js can mount the hero before every child has rendered,
+  // so only animate what is there (an empty target makes GSAP warn). The CSS failsafe
+  // reveals anything that arrives later.
+  const reveals = q("[data-hero-reveal]");
+  const items = q("[data-hero-item]");
+  const tl = gsap.timeline({ defaults: { ease: ease.deliver } });
+  if (reveals.length > 0) tl.set(reveals, { opacity: 1 });
+  tl.from(chars, { xPercent: 105, duration: 0.9, ease: "power4.out", stagger: 0.012 }, 0.05);
+  if (items.length > 0) {
+    tl.from(items, { opacity: 0, y: 24, duration: duration.base, stagger: stagger.item }, 0.55);
   }
   return tl;
 }
@@ -136,7 +139,9 @@ export function HeroIntro({ children, className = "" }: HeroIntroProps) {
       mountedHeroes += 1;
 
       const mm = gsap.matchMedia();
-      mm.add(`not ${media.reducedMotion}`, () => {
+      // Laptops only. Phones get a CSS rise instead (globals.css), so their first paint
+      // never waits for SplitText and GSAP on a slow CPU.
+      mm.add(`${media.desktop} and (prefers-reduced-motion: no-preference)`, () => {
         const withIntro = isIntroPlaying();
         let reveal: gsap.core.Timeline | undefined;
         let introDone = !withIntro;
@@ -147,7 +152,7 @@ export function HeroIntro({ children, className = "" }: HeroIntroProps) {
           mask: "chars",
           autoSplit: true,
           onSplit(self) {
-            reveal = buildReveal(self.chars, el, !withIntro);
+            reveal = buildReveal(self.chars, el);
             if (!introDone) reveal.pause(0);
             return reveal;
           },

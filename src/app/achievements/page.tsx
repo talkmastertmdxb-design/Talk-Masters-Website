@@ -2,8 +2,16 @@ import { RevealScope } from "@/components/motion/RevealScope";
 import { Award as AwardIcon, Trophy } from "lucide-react";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ImageSlot } from "@/components/media/ImageSlot";
 import { content } from "@/lib/content";
-import { achievementsByYear, isMemberAchievement, levelLabel, programmeLabel } from "@/lib/content/people";
+import {
+  achievementsByYear,
+  featuredAward,
+  isMemberAchievement,
+  levelLabel,
+  programmeLabel,
+  shortTerm,
+} from "@/lib/content/people";
 
 export const metadata: Metadata = {
   title: "Achievements",
@@ -13,8 +21,9 @@ export const metadata: Metadata = {
 
 /** Plan.md: Achievements Page. Builds credibility and shows the club's impact. */
 export default function AchievementsPage() {
-  const { awards } = content;
-  const clubAwards = awards.filter((award) => !isMemberAchievement(award));
+  const { awards, history } = content;
+  const featured = featuredAward(awards);
+  const clubAwards = awards.filter((award) => !isMemberAchievement(award) && award !== featured);
   const memberAchievements = awards.filter(isMemberAchievement);
   const timeline = achievementsByYear(awards);
 
@@ -25,6 +34,34 @@ export default function AchievementsPage() {
         lead="Awards from Toastmasters International, and the members who have represented the club on bigger stages."
         imageSlot="achievements-hero"
       />
+
+      {featured?.imageSlot && (
+        <section aria-labelledby="featured-award-title" className="py-section bg-white">
+          <div className="container-site grid items-center gap-12 md:grid-cols-12">
+            <div data-reveal="image" className="md:col-span-6 lg:col-span-5">
+              <ImageSlot
+                id={featured.imageSlot}
+                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 90vw"
+              />
+            </div>
+            <div className="md:col-span-6 lg:col-span-6 lg:col-start-7">
+              <p data-reveal="up" className="text-eyebrow text-ink-muted">
+                Latest recognition
+              </p>
+              <h2 id="featured-award-title" data-reveal="lines" className="text-h2 mt-5 max-w-[14ch]">
+                {featured.title}
+              </h2>
+              <p data-reveal="up" className="text-maroon mt-4 font-semibold">
+                {history.district ? `District ${history.district}` : `${levelLabel(featured)} level`},{" "}
+                {shortTerm(featured.year)}
+              </p>
+              <p data-reveal="up" className="text-ink-muted mt-6 max-w-[46ch] text-lg">
+                {featured.description}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="club-awards-title" className="py-section bg-soft-gray">
         <div className="container-site">

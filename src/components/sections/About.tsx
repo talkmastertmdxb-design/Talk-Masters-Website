@@ -31,7 +31,7 @@ export function About() {
             <Link
               href="/our-story"
               data-reveal="up"
-              className="nav-link text-tm-blue mt-8 inline-block font-semibold"
+              className="nav-link text-tm-blue mt-6 inline-flex min-h-11 items-center font-semibold"
             >
               Read how the club began
             </Link>

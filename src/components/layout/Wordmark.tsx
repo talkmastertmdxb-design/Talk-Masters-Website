@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import badge from "../../../public/brand/talk-masters-badge.png";
+import badge from "../../../public/brand/talk-masters-badge.webp";
 
 interface WordmarkProps {
   /** Badge size in px. The club name is set in type beside it, so it stays legible at any size. */
@@ -17,7 +17,7 @@ interface WordmarkProps {
  */
 export function Wordmark({ size = 44, eager = false, className = "" }: WordmarkProps) {
   return (
-    <Link href="/" className={`group inline-flex items-center gap-3 leading-none ${className}`}>
+    <Link href="/" className={`group inline-flex min-h-11 items-center gap-3 leading-none ${className}`}>
       <Image
         src={badge}
         alt=""
@@ -30,9 +30,7 @@ export function Wordmark({ size = 44, eager = false, className = "" }: WordmarkP
       />
       <span className="flex flex-col">
         <span className="font-serif text-[1.375rem] tracking-[-0.01em]">Talk-Masters</span>
-        <span className="mt-1 text-[0.6875rem] tracking-[0.04em] opacity-70">
-          A Toastmasters International club
-        </span>
+        <span className="mt-1 text-xs tracking-[0.03em] opacity-75">A Toastmasters International club</span>
       </span>
       <span className="sr-only">, home</span>
     </Link>

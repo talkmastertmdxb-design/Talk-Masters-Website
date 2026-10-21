@@ -1,4 +1,4 @@
-import type { Award, FoundingStage, JourneyMilestone, Member } from "./schemas";
+import type { Award, FoundingStage, History, JourneyMilestone, Member, Officer } from "./schemas";
 
 export function firstName(fullName: string): string {
   return fullName.trim().split(/\s+/)[0] ?? fullName;
@@ -11,15 +11,57 @@ export function workLine(member: Pick<Member, "occupation" | "organisation">): s
   return occupation ?? organisation;
 }
 
+/** "2026-2027" → "2026–27", the way Toastmasters writes a programme year. Other text is returned as is. */
+export function shortTerm(term: string): string {
+  return term.replace(/^(\d{4})-\d{2}(\d{2})$/, "$1–$2");
+}
+
+/** The President leads the committee section; everyone else follows in content order. */
+export function splitCommittee(officers: readonly Officer[]): { president?: Officer; others: Officer[] } {
+  const president = officers.find((officer) => officer.role === "President");
+  return { president, others: officers.filter((officer) => officer !== president) };
+}
+
+/** "Club 07956953 · Area 11 · …": the club's identity in Toastmasters, from whatever is known. */
+export function clubFacts(history: Pick<History, "clubNumber" | "area" | "division" | "district">): string[] {
+  const facts: Array<[label: string, value: string | undefined]> = [
+    ["Club", history.clubNumber],
+    ["Area", history.area],
+    ["Division", history.division],
+    ["District", history.district],
+  ];
+  return facts.filter(([, value]) => value).map(([label, value]) => `${label} ${value}`);
+}
+
+/** The newest confirmed club award that has its own image, to lead the Achievements page. */
+export function featuredAward(awards: readonly Award[]): Award | undefined {
+  return awards.find((award) => award.imageSlot && !award.placeholder && !isMemberAchievement(award));
+}
+
+/** The club line under a member's name: "Member since 2024 · Vice President Education · …". */
+export function clubLine(member: Pick<Member, "memberSince" | "position" | "clubHighlights">): string[] {
+  return [
+    member.memberSince ? `Member since ${member.memberSince}` : undefined,
+    member.position,
+    ...member.clubHighlights,
+  ].filter((item): item is string => Boolean(item));
+}
+
 /** Club awards have no recipient; member achievements name the member. */
 export function isMemberAchievement(award: Award): boolean {
   return Boolean(award.recipient);
 }
 
-/** Calendar year for the achievement timeline. Undated awards use the year their Toastmasters year ends. */
+/** Programmes earned between July and December fall in the first calendar year of a Toastmasters year. */
+const earnedInFirstHalf: ReadonlySet<Award["programme"]> = new Set(["smedley"]);
+
+/**
+ * Calendar year for the achievement timeline. Undated awards use the year their Toastmasters year
+ * ends (results are announced then), except programmes earned in July-December, such as the Smedley Award.
+ */
 export function achievementYear(award: Award): number {
   if (award.achievedOn) return Number(award.achievedOn.slice(0, 4));
-  return Number(award.year.slice(5, 9));
+  return Number(earnedInFirstHalf.has(award.programme) ? award.year.slice(0, 4) : award.year.slice(5, 9));
 }
 
 /** Achievement timeline groups, newest year first; within a year, most recent first. */

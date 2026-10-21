@@ -50,7 +50,7 @@ test.describe("signature moments", () => {
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
   });
 
-  test("Inside a meeting lists the evening from 7:00 to 8:45", async ({ page }) => {
+  test("Inside a meeting lists the morning from 10:30 to 12:15", async ({ page }) => {
     await page.goto("/");
     const agenda = page.getByRole("list", { name: "Meeting agenda" });
     await expect(agenda.getByRole("heading")).toHaveText([
@@ -70,7 +70,7 @@ test.describe("signature moments", () => {
       .locator("#inside-a-meeting")
       .evaluate((el) => el.getBoundingClientRect().top + scrollY);
     await page.evaluate((y) => window.scrollTo(0, y + 1200), top);
-    await expect.poll(async () => clock.textContent(), { timeout: 5000 }).not.toBe("7:00");
+    await expect.poll(async () => clock.textContent(), { timeout: 5000 }).not.toBe("10:30");
   });
 
   test("the Table Topics booth gives a topic and starts the timer", async ({ page }) => {
@@ -87,8 +87,117 @@ test.describe("signature moments", () => {
   });
 });
 
+test("arriving on the home page from another page animates cleanly, with no GSAP warnings", async ({
+  page,
+}) => {
+  const warnings: string[] = [];
+  page.on("console", (message) => {
+    if (message.text().includes("GSAP target")) warnings.push(message.text());
+  });
+  await page.goto("/team");
+  await page.locator("header a[href='/']").first().click();
+  await page.waitForURL("/");
+  await expect(page.locator("section[aria-labelledby='hero-title'] [data-hero-item]").first()).toHaveCSS(
+    "opacity",
+    "1",
+  );
+  await page.waitForTimeout(1000);
+  expect(warnings).toEqual([]);
+});
+
+test.describe("hero photos", () => {
+  test("rotate through the club photos, with a working pause button", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name === "reduced-motion", "Covered by the reduced-motion test below");
+    await page.goto("/");
+    const slides = page.locator("[data-hero-backdrop] [data-slide]");
+    await expect(slides).toHaveCount(4);
+    // Only the photo on show is exposed to assistive technology.
+    await expect(page.locator("[data-hero-backdrop] [data-slide]:not([aria-hidden])")).toHaveCount(1);
+    // The slideshow has started once it has layered the photos.
+    await expect(slides.first()).toHaveCSS("z-index", "1");
+
+    // Keyboard, not a pointer: the controls can sit below the fold, where smooth scrolling moves them mid-click.
+    await page.getByRole("button", { name: "Show photo 3 of 4" }).press("Enter");
+    await expect(slides.nth(2)).toHaveCSS("opacity", "1", { timeout: 3000 });
+    await expect(slides.nth(2)).not.toHaveAttribute("aria-hidden");
+    await expect(page.getByRole("button", { name: "Show photo 3 of 4" })).toHaveAttribute(
+      "aria-current",
+      "true",
+    );
+
+    await page.getByRole("button", { name: "Pause photo slideshow" }).press("Enter");
+    await expect(page.getByRole("button", { name: "Play photo slideshow" })).toBeVisible();
+  });
+
+  test("advance on their own after the hold", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name === "reduced-motion", "Reduced motion never advances on its own");
+    await page.clock.install();
+    await page.goto("/");
+    await page.mouse.move(5, 5);
+    await page.clock.runFor(13_000);
+    await expect(page.getByRole("button", { name: "Show photo 2 of 4" })).toHaveAttribute(
+      "aria-current",
+      "true",
+    );
+  });
+
+  test("show when and where we meet", async ({ page }) => {
+    await page.goto("/");
+    const hero = page.locator("section[aria-labelledby='hero-title']");
+    await expect(hero.getByText("Every second Saturday (twice a month)")).toBeVisible();
+    await expect(hero.getByText("10:30 am – 12:30 pm")).toBeVisible();
+    await expect(hero.getByText(/Hor Al Anz Public Library, Dubai/)).toBeVisible();
+  });
+});
+
+test.describe("members' video", () => {
+  test("previews silently, then plays from the start with sound and native controls", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "reduced-motion", "Covered by the reduced-motion test below");
+    await page.goto("/");
+    const section = page.locator("section:has(#voices-title)");
+    const video = section.locator("video");
+    await expect(video).toHaveAttribute("preload", "none");
+    await section.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && v.muted), { timeout: 8000 })
+      .toBe(true);
+
+    await section.getByRole("button", { name: "Play with sound" }).press("Enter");
+    await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.muted)).toBe(false);
+    await expect(video).toHaveAttribute("controls", "");
+  });
+
+  test("the published video is the compressed cut, not the raw footage", async ({ page }) => {
+    const response = await page.request.get("/videos/member-voices.mp4");
+    expect(response.status()).toBe(200);
+    expect(Number(response.headers()["content-length"])).toBeLessThan(8_000_000);
+    expect((await page.request.get("/Video/Toastmasters%20Video.mp4")).status()).toBe(404);
+  });
+});
+
 test.describe("reduced motion", () => {
   test.use({ contextOptions: { reducedMotion: "reduce" } });
+
+  test("the members' video never plays by itself", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("section:has(#voices-title)");
+    await section.scrollIntoViewIfNeeded();
+    await expect(section.getByRole("button", { name: "Play the preview without sound" })).toBeVisible();
+    // Give an autoplay, if there were one, time to start.
+    await page.waitForTimeout(1500);
+    expect(await section.locator("video").evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
+  });
+
+  test("the hero photos start paused and change only when asked", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("button", { name: "Play photo slideshow" })).toBeVisible();
+    await page.getByRole("button", { name: "Show photo 2 of 4" }).press("Enter");
+    await expect(page.locator("[data-hero-backdrop] [data-slide]").nth(1)).toHaveCSS("opacity", "1", {
+      timeout: 300,
+    });
+  });
 
   test("shows the hero immediately, with no intro", async ({ page }) => {
     await page.goto("/");
@@ -136,4 +245,8 @@ test("every 'Book a guest visit' link goes to /join, which loads", async ({ page
   const response = await page.goto("/join");
   expect(response?.status()).toBe(200);
   await expect(page.getByRole("heading", { level: 1, name: "Book a guest visit" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Get directions/ })).toHaveAttribute(
+    "href",
+    /google\.com\/maps.*Hor%20Al%20Anz%20Public%20Library/,
+  );
 });

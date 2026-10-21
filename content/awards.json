@@ -1,13 +1,13 @@
 [
   {
     "slug": "smedley-award",
-    "title": "Smedley Award",
+    "title": "Smedley Award, Bronze",
     "programme": "smedley",
-    "level": "club",
-    "year": "2024-2025",
-    "achievedOn": "2024-10-01",
-    "description": "Placeholder: for welcoming new members during August and September. Confirm the year.",
-    "placeholder": true
+    "level": "district",
+    "year": "2026-2027",
+    "description": "Bronze in District 127's Club Growth Awards, for welcoming new members to the club in August and September.",
+    "imageSlot": "award-smedley-2026",
+    "placeholder": false
   },
   {
     "slug": "talk-up-toastmasters",

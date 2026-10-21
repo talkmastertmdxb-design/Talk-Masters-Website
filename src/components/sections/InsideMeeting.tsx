@@ -5,7 +5,7 @@ import { voicePath } from "@/lib/motion/voice";
 
 const line = voicePath({ width: 1000, height: 60, amplitude: 0.55, phase: 0.6, samples: 160 });
 
-/** Inside a Meeting (Section 4, signature moment S3): one evening, 7:00 to 8:45. */
+/** Inside a Meeting (Section 4, signature moment S3): one Saturday morning, 10:30 to 12:15. */
 export function InsideMeeting() {
   return (
     <section

@@ -29,6 +29,13 @@ export const parallaxMax = 0.1;
 /** Hero intro must finish (or be skippable) within this many seconds. */
 export const heroBudget = 1.8;
 
+/** Hero photo rotation: each photo holds, crossfades slowly, and drifts in scale while shown. */
+export const heroSlideshow = {
+  hold: 12,
+  crossfade: 1.6,
+  drift: 1.06,
+} as const;
+
 export const media = {
   reducedMotion: "(prefers-reduced-motion: reduce)",
   pointerFine: "(hover: hover) and (pointer: fine)",

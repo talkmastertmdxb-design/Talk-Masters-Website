@@ -20,8 +20,10 @@ const validSettings = {
     city: "Dubai",
   },
   contactEmail: "hello@example.com",
+  contacts: [{ name: "Lulu", role: "Vice President Membership", whatsapp: "+971502837168" }],
   socials: [],
   stats: [{ label: "Speeches delivered", value: 500, suffix: "+" }],
+  heroSlides: ["hero-speaker", "hero-audience"],
 };
 
 describe("settingsSchema", () => {
@@ -29,6 +31,14 @@ describe("settingsSchema", () => {
     const parsed = settingsSchema.parse(validSettings);
     expect(parsed.meeting.placeholder).toBe(false);
     expect(parsed.stats[0]?.placeholder).toBe(false);
+  });
+
+  it("needs one to five hero photos, by slot id", () => {
+    const withSlides = (heroSlides: string[]) => settingsSchema.safeParse({ ...validSettings, heroSlides });
+    expect(withSlides([]).success).toBe(false);
+    expect(withSlides(["a", "b", "c", "d", "e", "f"]).success).toBe(false);
+    expect(withSlides(["Hero Speaker"]).success).toBe(false);
+    expect(withSlides(["hero-speaker"]).success).toBe(true);
   });
 
   it("rejects a malformed meeting time", () => {
@@ -78,7 +88,9 @@ describe("imageSlotSchema", () => {
 
   it("accepts an empty slot (placeholder) and a filled slot", () => {
     expect(imageSlotSchema.safeParse(slot).success).toBe(true);
-    expect(imageSlotSchema.safeParse({ ...slot, src: "/images/hero-stage.jpg" }).success).toBe(true);
+    expect(imageSlotSchema.safeParse({ ...slot, src: "/images/hero-stage.webp" }).success).toBe(true);
+    // Club photos must be converted to WebP first.
+    expect(imageSlotSchema.safeParse({ ...slot, src: "/images/hero-stage.jpg" }).success).toBe(false);
   });
 
   it("only allows images served from /images/", () => {

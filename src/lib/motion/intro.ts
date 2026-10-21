@@ -13,9 +13,10 @@ export const INTRO_REPEAT_MS = 12 * 60 * 60 * 1000;
 
 /**
  * Inline <head> script: runs before first paint. Marks JS as available and decides
- * whether the intro plays (home page, not seen in the last 12 hours, motion allowed).
+ * whether the intro plays (home page, laptop-sized screen, not seen in the last 12 hours,
+ * motion allowed). Phones skip it: a four-second preloader costs most visitors too much.
  */
-export const introScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(location.pathname==='/'&&Date.now()-(+localStorage.getItem('${INTRO_STORAGE_KEY}')||0)>${INTRO_REPEAT_MS}&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('${INTRO_CLASS}')}}catch(e){}})()`;
+export const introScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(location.pathname==='/'&&Date.now()-(+localStorage.getItem('${INTRO_STORAGE_KEY}')||0)>${INTRO_REPEAT_MS}&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&window.matchMedia('(min-width: 56.25rem)').matches){d.classList.add('${INTRO_CLASS}')}}catch(e){}})()`;
 
 export function isIntroPlaying(): boolean {
   return document.documentElement.classList.contains(INTRO_CLASS);

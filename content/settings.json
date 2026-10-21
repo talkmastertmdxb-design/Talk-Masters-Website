@@ -4,20 +4,65 @@
   "tagline": "A Club with Difference",
   "description": "A public speaking and leadership club for everyone, of every age and background. Find your voice, lead with confidence, inspire the world.",
   "meeting": {
-    "schedule": "Meeting day to be confirmed",
-    "startTime": "19:00",
+    "schedule": "Every second Saturday (twice a month)",
+    "startTime": "10:30",
     "durationMinutes": 120,
-    "venue": "Venue to be confirmed",
+    "venue": "Hor Al Anz Public Library",
     "city": "Dubai",
-    "placeholder": true
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Hor%20Al%20Anz%20Public%20Library%20Dubai",
+    "placeholder": false
   },
-  "contactEmail": "hello@example.com",
+  "heroSlides": ["hero-speaker", "hero-microphone", "hero-stage", "hero-audience"],
+  "highlightVideo": {
+    "src": "/videos/member-voices.mp4",
+    "poster": "/images/member-voices-poster.webp",
+    "title": "Talk-Masters members describe what changed after they joined the club",
+    "durationSeconds": 68,
+    "captionsBurnedIn": true,
+    "quotes": [
+      "Joining Toastmasters has completely renovated my life.",
+      "For me, Toastmasters is a gym for communication.",
+      "It gave me not only the confidence, but also the leadership skills."
+    ]
+  },
+  "contacts": [
+    {
+      "name": "Lulu",
+      "role": "Vice President Membership",
+      "whatsapp": "+971502837168"
+    },
+    {
+      "name": "Mansoor",
+      "role": "Vice President Education",
+      "whatsapp": "+971501600212"
+    }
+  ],
   "socials": [],
   "stats": [
-    { "label": "Speeches delivered", "value": 500, "suffix": "+", "placeholder": true },
-    { "label": "Active members", "value": 50, "suffix": "+", "placeholder": true },
-    { "label": "Leadership roles", "value": 100, "suffix": "+", "placeholder": true },
-    { "label": "Nationalities", "value": 20, "suffix": "+", "placeholder": true }
+    {
+      "label": "Meetings held",
+      "value": 100,
+      "suffix": "+",
+      "placeholder": false
+    },
+    {
+      "label": "Active members",
+      "value": 37,
+      "suffix": "",
+      "placeholder": false
+    },
+    {
+      "label": "Speeches delivered",
+      "value": 500,
+      "suffix": "+",
+      "placeholder": true
+    },
+    {
+      "label": "Leadership roles",
+      "value": 100,
+      "suffix": "+",
+      "placeholder": true
+    }
   ],
   "placeholder": true
 }
