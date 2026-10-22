@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { voicePath, voicePoints } from "@/lib/motion/voice";
-import { speechTime, timingSignal, formatSpeechTime } from "@/lib/motion/timing";
+import { timingSignal, formatSpeechTime } from "@/lib/motion/timing";
 
 describe("voicePoints", () => {
   it("is perfectly flat at zero amplitude (silence)", () => {
@@ -41,17 +41,6 @@ describe("voicePath", () => {
 });
 
 describe("speech timing (Toastmasters 5-7 minute speech)", () => {
-  it("maps scroll progress onto a 7-minute speech", () => {
-    expect(speechTime(0)).toBe(0);
-    expect(speechTime(1)).toBe(420);
-    expect(speechTime(0.5)).toBe(210);
-  });
-
-  it("clamps out-of-range progress", () => {
-    expect(speechTime(-1)).toBe(0);
-    expect(speechTime(2)).toBe(420);
-  });
-
   it("shows no light before the minimum time, then green, amber, red", () => {
     expect(timingSignal(0)).toBe("off");
     expect(timingSignal(299)).toBe("off");

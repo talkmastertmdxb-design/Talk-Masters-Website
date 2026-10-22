@@ -7,6 +7,8 @@ interface WordmarkProps {
   size?: number;
   /** Load immediately: the header badge is above the fold on every page. */
   eager?: boolean;
+  /** Phones: badge only, so the header has room for the booking button. The name stays for screen readers. */
+  compact?: boolean;
   className?: string;
 }
 
@@ -15,7 +17,7 @@ interface WordmarkProps {
  * International emblem: confirm this lockup with the Toastmasters brand portal
  * before launch (docs/IMPLEMENTATION_PLAN.md §0.1, decision D2).
  */
-export function Wordmark({ size = 44, eager = false, className = "" }: WordmarkProps) {
+export function Wordmark({ size = 44, eager = false, compact = false, className = "" }: WordmarkProps) {
   return (
     <Link href="/" className={`group inline-flex min-h-11 items-center gap-3 leading-none ${className}`}>
       <Image
@@ -28,7 +30,7 @@ export function Wordmark({ size = 44, eager = false, className = "" }: WordmarkP
         fetchPriority={eager ? "high" : "auto"}
         className="shrink-0 drop-shadow-[0_2px_8px_rgb(0_0_0/0.35)]"
       />
-      <span className="flex flex-col">
+      <span className={`flex flex-col ${compact ? "max-sm:sr-only" : ""}`}>
         <span className="font-serif text-[1.375rem] tracking-[-0.01em]">Talk-Masters</span>
         <span className="mt-1 text-xs tracking-[0.03em] opacity-75">A Toastmasters International club</span>
       </span>

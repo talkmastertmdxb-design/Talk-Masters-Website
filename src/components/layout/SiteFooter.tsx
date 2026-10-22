@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
 import { VoiceLine } from "@/components/signature/VoiceLine";
 import { content } from "@/lib/content";
-import { meetingTimeRange } from "@/lib/content/meeting";
+import { meetingSchedule, meetingTimeRange } from "@/lib/content/meeting";
 import { clubFacts } from "@/lib/content/people";
 import { buildYear } from "@/lib/site";
 import type { NavItem } from "./SiteHeader";
@@ -45,7 +45,7 @@ export function SiteFooter({ items }: SiteFooterProps) {
         <div className="md:col-span-4">
           <h3 className="font-semibold">Meetings</h3>
           <p className="mt-3 text-white/70">
-            {meeting.schedule}
+            {meetingSchedule(meeting)}
             <br />
             {meetingTimeRange(meeting)}
             <br />

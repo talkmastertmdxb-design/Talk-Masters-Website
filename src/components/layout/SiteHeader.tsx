@@ -3,8 +3,9 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { ButtonLink } from "@/components/ui/Button";
-import { TimingLight } from "@/components/signature/TimingLight";
+import type { MeetingRule } from "@/lib/content/meeting";
 import { Wordmark } from "./Wordmark";
 
 export interface NavItem {
@@ -14,12 +15,14 @@ export interface NavItem {
 
 interface SiteHeaderProps {
   items: readonly NavItem[];
+  /** For the "Next meeting" chip on wide screens. */
+  meeting: MeetingRule;
 }
 
 const FROST_AFTER_PX = 40;
 
 /** Floating glass pill: transparent over the hero, frosted once the page moves. */
-export function SiteHeader({ items }: SiteHeaderProps) {
+export function SiteHeader({ items, meeting }: SiteHeaderProps) {
   const [frosted, setFrosted] = useState(false);
   const menuRef = useRef<HTMLDialogElement>(null);
 
@@ -41,6 +44,7 @@ export function SiteHeader({ items }: SiteHeaderProps) {
       >
         <Wordmark
           eager
+          compact
           className="origin-left transition-transform duration-(--duration-base) ease-(--ease-deliver) in-data-[frosted=true]:scale-[0.94]"
         />
 
@@ -57,12 +61,22 @@ export function SiteHeader({ items }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <TimingLight />
-          <span className="hidden sm:block">
-            <ButtonLink href="/join" className="min-h-11 px-5">
-              Book a guest visit
-            </ButtonLink>
-          </span>
+          <Link
+            href="/join"
+            className="hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) xl:inline-flex"
+          >
+            <span className="text-white/85">Next meeting</span>
+            <span aria-hidden="true" className="bg-gold size-1 rounded-full" />
+            <span className="font-semibold text-white">
+              <NextMeetingDate rule={meeting} style="short" />
+            </span>
+          </Link>
+          {/* Always visible: on phones it is the one action beside the menu. */}
+          <ButtonLink href="/join" className="min-h-11 px-5 whitespace-nowrap">
+            <span>
+              Book a <span className="hidden sm:inline">guest </span>visit
+            </span>
+          </ButtonLink>
           <button
             type="button"
             onClick={openMenu}

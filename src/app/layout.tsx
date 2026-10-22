@@ -56,7 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <MotionProvider>
-          <SiteHeader items={mainNav} />
+          <SiteHeader items={mainNav} meeting={content.settings.meeting} />
           {children}
           <div id="contact">
             <SiteFooter items={mainNav} />

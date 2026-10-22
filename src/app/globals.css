@@ -285,6 +285,40 @@
       transform: translateY(16px);
     }
   }
+
+  /* Guest form stage art: ambient light, and the guest's chair lighting up as they type their name */
+  .stage-bokeh {
+    transform-box: fill-box;
+    animation: stage-bokeh 9s var(--ease-breath) infinite alternate;
+  }
+  .stage-voice {
+    animation: stage-voice 4.5s var(--ease-breath) infinite alternate;
+  }
+  @keyframes stage-bokeh {
+    to {
+      opacity: 0.35;
+      transform: translateY(-18px);
+    }
+  }
+  @keyframes stage-voice {
+    from {
+      opacity: 0.55;
+    }
+  }
+  .stage-seat,
+  .stage-seat-empty,
+  .stage-seat-glow {
+    transition: opacity var(--duration-base) var(--ease-deliver);
+  }
+  .stage-art[data-reserved="false"] .stage-seat {
+    opacity: 0;
+  }
+  .stage-art[data-reserved="false"] .stage-seat-glow {
+    opacity: 0.3;
+  }
+  .stage-art[data-reserved="true"] .stage-seat-empty {
+    opacity: 0;
+  }
 }
 
 @layer base {

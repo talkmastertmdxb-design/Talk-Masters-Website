@@ -1,6 +1,7 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { CountUp } from "@/components/motion/CountUp";
 import { Spotlight } from "@/components/motion/Spotlight";
 import { VoiceLine } from "@/components/signature/VoiceLine";
@@ -66,7 +67,7 @@ export function Hero() {
               className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 md:mt-7 md:gap-x-8"
             >
               <ButtonLink href="/join" className="group">
-                Join Our Next Meeting
+                Book a Free Guest Visit
                 <ArrowRight
                   aria-hidden="true"
                   className="size-4 transition-transform duration-(--duration-quick) group-hover:translate-x-0.5"
@@ -85,7 +86,8 @@ export function Hero() {
             </div>
             <p data-hero-item className="text-muted mt-4 max-w-[52ch] text-sm">
               <span className="text-white/85">
-                {meeting.schedule}, <span className="whitespace-nowrap">{meetingTimeRange(meeting)}</span>
+                Next meeting: <NextMeetingDate rule={meeting} />,{" "}
+                <span className="whitespace-nowrap">{meetingTimeRange(meeting)}</span>
               </span>
               <br />
               {meeting.venue}, {meeting.city}. Guests are always welcome.

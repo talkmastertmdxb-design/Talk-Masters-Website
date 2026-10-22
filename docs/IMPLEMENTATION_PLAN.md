@@ -56,12 +56,12 @@ A thin gold line runs through the whole site and changes as the story moves:
 
 ### 1.3 Signature moments (no more than four; restraint is the point)
 
-| #   | Moment                                                                                                                                                                                               | Why it earns its place                                                                                       |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| S1  | **Hero: "The first word"**: dark stage, spotlight, masked headline, the Voice Line becomes a waveform                                                                                                | First impression and the brand idea in five seconds                                                          |
-| S2  | **Timing Light progress**: a small pill in the nav glows green → amber → red (maroon) as you scroll through the "speech", ending at the CTA. Tooltip: "Toastmasters speakers are timed with lights." | Smart for insiders, teaches outsiders, and is useful as a progress cue                                       |
-| S3  | **Inside a meeting**: a pinned horizontal "agenda" that scrubs through a real evening (7:00 Welcome → 7:10 Prepared speeches → 7:45 Table Topics → 8:15 Evaluations → 8:45 Awards)                   | Answers the biggest fear ("what happens? will I have to speak?")                                             |
-| S4  | **Table Topics booth**: an interactive impromptu prompt with a 60-second timer and the timing light. Ends with: "You just did a Table Topic. Do it for real at our next meeting."                    | Interaction with a purpose, shareable, and the strongest conversion hook. No microphone access, no recording |
+| #   | Moment                                                                                                                                                                                                                                                                     | Why it earns its place                                                                                       |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| S1  | **Hero: "The first word"**: dark stage, spotlight, masked headline, the Voice Line becomes a waveform                                                                                                                                                                      | First impression and the brand idea in five seconds                                                          |
+| S2  | ~~**Timing Light progress**~~ **Removed 2026-10-22.** Guests read the scroll timer as an unexplained countdown, so the nav shows a **Next meeting** chip instead (`src/components/meeting/NextMeetingDate.tsx`). The timing lights live on in the Table Topics booth (S4). | Clear logistics beat an insider joke in the most visible spot on the page                                    |
+| S3  | **Inside a meeting**: a pinned horizontal "agenda" that scrubs through a real evening (7:00 Welcome → 7:10 Prepared speeches → 7:45 Table Topics → 8:15 Evaluations → 8:45 Awards)                                                                                         | Answers the biggest fear ("what happens? will I have to speak?")                                             |
+| S4  | **Table Topics booth**: an interactive impromptu prompt with a 60-second timer and the timing light. Ends with: "You just did a Table Topic. Do it for real at our next meeting."                                                                                          | Interaction with a purpose, shareable, and the strongest conversion hook. No microphone access, no recording |
 
 ### 1.4 Experience principles
 
@@ -137,7 +137,7 @@ Rule: **a page ships only when it has real content.** No placeholder pages in pr
 
 - **Light bands (revised 2026-10-17):** brand soft gray `#F5F7F8` alternating with white. Warm ivory was dropped: cream + serif is the most common generated-site look.
 - **Gold never as text on light backgrounds** (contrast). On light bands, gold appears only as a line or shape: the Voice Line, rules, dots.
-- **Timing-light colours** (only in S2 and S4): green `#3C8D5A`, amber `#D6B06A` (our gold), red = maroon `#772432`. Each check is paired with a label or icon, never colour alone.
+- **Timing-light colours** (only in S4): green `#3C8D5A`, amber `#D6B06A` (our gold), red = maroon `#772432`. Each check is paired with a label or icon, never colour alone.
 - Ratio from BRAND §3 still applies: 60 / 25 / 10 / 5.
 
 ### 3.2 Typography **[Change]**
@@ -212,7 +212,7 @@ Good speakers pause before the important line. Our motion does the same: **a sho
 | **Voice**        | SVG path morph from flat to waveform; amplitude tied to a scroll or timeline value | Hero, journey, CTA underline |
 | **Agenda scrub** | Pinned horizontal track driven by ScrollTrigger scrub; time stamp counts along     | S3                           |
 | **Count**        | Number count-up; the real value is in the HTML first                               | Metrics                      |
-| **Signal**       | Timing-light colour transition (0.45 s) + `aria-live` text                         | S2, S4                       |
+| **Signal**       | Timing-light colour transition (0.45 s) + `aria-live` text                         | S4                           |
 | **Lift**         | Hover: media scale to 1.05 over 1.4 s, card up 4px, magnetic CTA at 18% max        | Pointer devices only         |
 | **Curtain**      | Route change: a quick ink wipe (View Transitions API, CSS-only fallback)           | Page transitions (P2)        |
 
@@ -259,7 +259,7 @@ ARCHITECTURE.md stays the base. Amendments:
 ### 5.2 Structure (additions to ARCHITECTURE §5)
 
 ```
-/components/signature/   Hero, VoiceLine, TimingLight, AgendaScrub, TableTopicsBooth
+/components/signature/   Hero, VoiceLine, AgendaScrub, TableTopicsBooth
 /components/motion/      MotionProvider (Lenis + ScrollTrigger + matchMedia), Rise, Settle, Count, Spotlight
 /lib/content/            schemas.ts, repository.ts (interface), local.ts, drive.ts (later)
 /lib/motion/tokens.ts    mirrors §4.2; the single source for JS motion values
@@ -318,9 +318,9 @@ Plus the **21st.dev Magic MCP** (not configured yet):
 
 ### 6.2 Where 21st.dev helps, and where it must not be used
 
-| Use 21st.dev (search first, generate once, then restyle to our tokens)                                                                                       | Build custom (these are what get an award)                                                               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| Accordion, marquee, pill input/form fields, mobile menu, event card shell, testimonial ticker, lightbox (later), 404 layout ideas, logo search (none needed) | Hero, Voice Line, Timing Light, Agenda scrub, Table Topics booth, metrics panel, the whole motion system |
+| Use 21st.dev (search first, generate once, then restyle to our tokens)                                                                                       | Build custom (these are what get an award)                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Accordion, marquee, pill input/form fields, mobile menu, event card shell, testimonial ticker, lightbox (later), 404 layout ideas, logo search (none needed) | Hero, Voice Line, Agenda scrub, Table Topics booth, metrics panel, the whole motion system |
 
 Rule: anything from 21st.dev is **rebuilt to our tokens, typography and motion library** before it's merged, so nothing looks like it came from a component library.
 
@@ -371,6 +371,9 @@ Each phase ends with a **gate**: tests green, a code review with no CRITICAL or 
 - 2026-10-17: Hero redesigned from the club's reference (eyebrow, three-line headline, stats strip, quote, speaker photo with navy grade) and a first-visit intro adapted from `Hero_animation/8`: preloader counter 00→100%, speaking photos wiping in as the stage settles, nav glides in, headline delivered. Cut from ~12s to ~4s; plays once per 12 hours, home page only, skippable with any input, never under reduced motion, CSS failsafes if JS is late. The template's own photos are not used (unrelated fashion shoot, unknown licence).
 
 - 2026-10-18: Intro replaced with an adaptation of `Hero_Animation_2`: a serif counter grows on the left while counting to 100, its digits slide away, then the hero photo opens as an "iris" (point → held square → exactly the photo panel, with the template's "hop" ease) and the brand grade fades in as it opens. Headline letters slide in from the right. ~8.5s cut to ~4.3s. Fixed: the intro never played in development (React Strict Mode re-mount ended it).
+
+- 2026-10-22: Guest booking is **WhatsApp only** (the club's most active channel). Meetings are the 1st and 3rd Saturday; the site works out the next dates in the browser (`src/lib/content/meeting.ts`), with Google Calendar and `/meetings.ics` links for the recurring series. The header Timing Light (S2) was removed for a "Next meeting" chip. FAQ added to the home page and `/join`.
+- 2026-10-22: `/join` guest form (`src/components/booking/`): name, meeting date, optional "what's coming up" and note, and which officer to message. It writes the WhatsApp message live (a phone preview over abstract stage art, where the guest's chair lights up with their name) and opens WhatsApp with it ready to send. Nothing is stored, so the Server Action, Turnstile, Resend and Sheet in §5.1 are not needed for now.
 
 Estimated time to launch from here: **about 2-3 weeks for one developer**, once real content arrives.
 

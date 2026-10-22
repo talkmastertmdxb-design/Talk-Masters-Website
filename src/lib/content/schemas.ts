@@ -20,6 +20,26 @@ const paragraphs = z.array(z.string().min(1)).min(1, "Add at least one paragraph
 
 const thisYear = new Date().getFullYear();
 
+/** Lowercase weekday names, Sunday first (the order Date#getDay uses). */
+export const WEEKDAYS = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+] as const;
+
+function isTimeZone(timeZone: string): boolean {
+  try {
+    new Intl.DateTimeFormat("en", { timeZone });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /** Club photos are WebP only: smaller files, and every current browser supports it (docs/IMAGES.md). */
 const localImage = /^\/images\/[\w./-]+\.webp$/i;
 const localVideo = /^\/videos\/[\w./-]+\.mp4$/i;
@@ -51,10 +71,19 @@ export const settingsSchema = z.object({
   parentOrganisation: z.string().min(1),
   tagline: z.string().min(1),
   description: z.string().min(1),
+  /** When regular meetings happen, e.g. the 1st and 3rd Saturday. The site works out the dates. */
   meeting: z.object({
-    schedule: z.string().min(1),
+    weekday: z.enum(WEEKDAYS),
+    weeksOfMonth: z
+      .array(z.number().int().min(1).max(5))
+      .min(1, "Add at least one week, e.g. [1, 3] for the 1st and 3rd")
+      .refine((weeks) => new Set(weeks).size === weeks.length, "List each week once"),
     startTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Use 24-hour HH:MM, e.g. 19:00"),
     durationMinutes: z.number().int().positive(),
+    /** IANA time zone the meeting times are in. */
+    timeZone: z.string().refine(isTimeZone, "Use a time zone name such as Asia/Dubai").default("Asia/Dubai"),
+    /** Dates with no meeting (holidays, Ramadan breaks), e.g. "2026-12-19". */
+    cancelled: z.array(z.iso.date()).default([]),
     venue: z.string().min(1),
     city: z.string().min(1),
     mapUrl: z.url().optional(),

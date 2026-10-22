@@ -1,7 +1,6 @@
 /**
- * The Timing Light. Toastmasters speeches are timed with lights: green at the
- * minimum time, amber halfway, red at the maximum. Scrolling the home page is
- * "giving the speech": a standard 5-7 minute speech mapped onto scroll progress.
+ * Toastmasters timing lights: green at the minimum time, amber halfway, red at the
+ * maximum. Used by the Table Topics booth's stopwatch.
  */
 
 export type TimingSignal = "off" | "green" | "amber" | "red";
@@ -17,12 +16,6 @@ export const SPEECH: TimingThresholds = { green: 300, amber: 360, red: 420 };
 
 /** Table Topics: 1-2 minutes. */
 export const TABLE_TOPIC: TimingThresholds = { green: 60, amber: 90, red: 120 };
-
-/** Scroll progress (0-1) → elapsed speech time in seconds. */
-export function speechTime(progress: number): number {
-  const clamped = Math.max(0, Math.min(1, progress));
-  return Math.round(clamped * SPEECH.red);
-}
 
 export function timingSignal(seconds: number, thresholds: TimingThresholds = SPEECH): TimingSignal {
   if (seconds >= thresholds.red) return "red";

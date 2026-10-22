@@ -13,7 +13,8 @@ const validSettings = {
   tagline: "A Club with Difference",
   description: "A public speaking and leadership club open to everyone.",
   meeting: {
-    schedule: "Every second Tuesday",
+    weekday: "tuesday",
+    weeksOfMonth: [2, 4],
     startTime: "19:00",
     durationMinutes: 120,
     venue: "Venue to be confirmed",
@@ -44,6 +45,24 @@ describe("settingsSchema", () => {
   it("rejects a malformed meeting time", () => {
     const bad = { ...validSettings, meeting: { ...validSettings.meeting, startTime: "7pm" } };
     expect(settingsSchema.safeParse(bad).success).toBe(false);
+  });
+
+  it("defaults the meeting to Dubai time with no cancellations", () => {
+    const { meeting } = settingsSchema.parse(validSettings);
+    expect(meeting.timeZone).toBe("Asia/Dubai");
+    expect(meeting.cancelled).toEqual([]);
+  });
+
+  it("rejects an impossible meeting rule", () => {
+    const withMeeting = (change: object) =>
+      settingsSchema.safeParse({ ...validSettings, meeting: { ...validSettings.meeting, ...change } })
+        .success;
+    expect(withMeeting({ weeksOfMonth: [] })).toBe(false);
+    expect(withMeeting({ weeksOfMonth: [6] })).toBe(false);
+    expect(withMeeting({ weeksOfMonth: [1, 1] })).toBe(false);
+    expect(withMeeting({ weekday: "Saturday" })).toBe(false);
+    expect(withMeeting({ timeZone: "Dubai" })).toBe(false);
+    expect(withMeeting({ cancelled: ["19/12/2026"] })).toBe(false);
   });
 
   it("rejects an invalid contact email", () => {

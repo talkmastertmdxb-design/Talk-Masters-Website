@@ -1,24 +1,6 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("signature moments", () => {
-  test("the Timing Light reaches red at the end of the page", async ({ page, isMobile }) => {
-    test.skip(isMobile, "The timing light is hidden on small screens");
-    await page.goto("/");
-    const light = page.locator("header [data-signal]");
-    await expect(light).toHaveAttribute("data-signal", "off");
-    // Pinned sections add height once measured, so keep going until the true end.
-    await expect
-      .poll(
-        async () => {
-          await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-          return light.getAttribute("data-signal");
-        },
-        { timeout: 8000 },
-      )
-      .toBe("red");
-    await expect(light).toHaveText("7:00");
-  });
-
   test("the hero headline finishes its intro and stays readable", async ({ page }) => {
     await page.goto("/");
     const title = page.getByRole("heading", { level: 1 });
@@ -142,9 +124,10 @@ test.describe("hero photos", () => {
   });
 
   test("show when and where we meet", async ({ page }) => {
+    await page.clock.setFixedTime(new Date("2026-10-22T08:00:00Z"));
     await page.goto("/");
     const hero = page.locator("section[aria-labelledby='hero-title']");
-    await expect(hero.getByText("Every second Saturday (twice a month)")).toBeVisible();
+    await expect(hero.getByText(/Next meeting: Saturday 7 November/)).toBeVisible();
     await expect(hero.getByText("10:30 am – 12:30 pm")).toBeVisible();
     await expect(hero.getByText(/Hor Al Anz Public Library, Dubai/)).toBeVisible();
   });

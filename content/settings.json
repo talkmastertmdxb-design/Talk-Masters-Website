@@ -4,9 +4,12 @@
   "tagline": "A Club with Difference",
   "description": "A public speaking and leadership club for everyone, of every age and background. Find your voice, lead with confidence, inspire the world.",
   "meeting": {
-    "schedule": "Every second Saturday (twice a month)",
+    "weekday": "saturday",
+    "weeksOfMonth": [1, 3],
     "startTime": "10:30",
     "durationMinutes": 120,
+    "timeZone": "Asia/Dubai",
+    "cancelled": [],
     "venue": "Hor Al Anz Public Library",
     "city": "Dubai",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Hor%20Al%20Anz%20Public%20Library%20Dubai",

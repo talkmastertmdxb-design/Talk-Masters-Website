@@ -82,6 +82,8 @@ No code. These unblock everything else and run alongside G1.
 
 ### 5.1 The guest record
 
+> **2026-10-22:** for now the form hands off to WhatsApp instead of storing a record (`src/lib/booking/message.ts`): name, meeting, moment and note become a ready-to-send message to the VP Membership or VP Education. The fields below still apply if the club later wants bookings stored.
+
 One Zod schema for everything the form sends, in `src/lib/booking/schema.ts` (it's a submission, not content, so it stays out of `content/schemas.ts`).
 
 | Field       | Rule                                                                                     | Why                                          |
