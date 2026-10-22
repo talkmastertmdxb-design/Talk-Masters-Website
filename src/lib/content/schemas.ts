@@ -31,6 +31,8 @@ export const WEEKDAYS = [
   "saturday",
 ] as const;
 
+const clockTime = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Use 24-hour HH:MM, e.g. 19:00");
+
 function isTimeZone(timeZone: string): boolean {
   try {
     new Intl.DateTimeFormat("en", { timeZone });
@@ -71,24 +73,40 @@ export const settingsSchema = z.object({
   parentOrganisation: z.string().min(1),
   tagline: z.string().min(1),
   description: z.string().min(1),
-  /** When regular meetings happen, e.g. the 1st and 3rd Sunday. The site works out the dates. */
-  meeting: z.object({
-    weekday: z.enum(WEEKDAYS),
-    weeksOfMonth: z
-      .array(z.number().int().min(1).max(5))
-      .min(1, "Add at least one week, e.g. [1, 3] for the 1st and 3rd")
-      .refine((weeks) => new Set(weeks).size === weeks.length, "List each week once"),
-    startTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Use 24-hour HH:MM, e.g. 19:00"),
-    durationMinutes: z.number().int().positive(),
-    /** IANA time zone the meeting times are in. */
-    timeZone: z.string().refine(isTimeZone, "Use a time zone name such as Asia/Dubai").default("Asia/Dubai"),
-    /** Dates with no meeting (holidays, Ramadan breaks), e.g. "2026-12-19". */
-    cancelled: z.array(z.iso.date()).default([]),
-    venue: z.string().min(1),
-    city: z.string().min(1),
-    mapUrl: z.url().optional(),
-    placeholder,
-  }),
+  /** When regular meetings happen, e.g. the 2nd and 4th Sunday. The site works out the dates. */
+  meeting: z
+    .object({
+      weekday: z.enum(WEEKDAYS),
+      weeksOfMonth: z
+        .array(z.number().int().min(1).max(5))
+        .min(1, "Add at least one week, e.g. [1, 3] for the 1st and 3rd")
+        .refine((weeks) => new Set(weeks).size === weeks.length, "List each week once"),
+      startTime: clockTime,
+      durationMinutes: z.number().int().positive(),
+      /** IANA time zone the meeting times are in. */
+      timeZone: z
+        .string()
+        .refine(isTimeZone, "Use a time zone name such as Asia/Dubai")
+        .default("Asia/Dubai"),
+      /** Dates with no meeting (holidays, Ramadan breaks), e.g. "2026-12-19". */
+      cancelled: z.array(z.iso.date()).default([]),
+      /** When guests can arrive, before the start, e.g. "10:15". */
+      arriveTime: clockTime.optional(),
+      /** Practical details for a first visit, shown on /join (parking, food, where to go). */
+      guestInfo: z
+        .array(
+          z.object({ kind: z.enum(["parking", "food", "room", "other"]), text: z.string().min(1).max(80) }),
+        )
+        .default([]),
+      venue: z.string().min(1),
+      city: z.string().min(1),
+      mapUrl: z.url().optional(),
+      placeholder,
+    })
+    .refine((meeting) => !meeting.arriveTime || meeting.arriveTime <= meeting.startTime, {
+      message: "Guests can't arrive after the meeting starts",
+      path: ["arriveTime"],
+    }),
   /** Optional: the club has no shared inbox yet, so guests contact officers on WhatsApp. */
   contactEmail: z.email().optional(),
   /** Who guests can message, in the order shown. */
@@ -99,6 +117,8 @@ export const settingsSchema = z.object({
         role: z.string().min(1),
         /** International format, digits only after the +, e.g. +971502837168. */
         whatsapp: z.string().regex(/^\+[1-9]\d{7,14}$/, "Use the international format, e.g. +971502837168"),
+        /** Their photo (content/images.json), shown on the guest form so guests see who they message. */
+        imageSlot: imageSlotId.optional(),
       }),
     )
     .min(1, "Add at least one contact"),

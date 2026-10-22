@@ -12,8 +12,12 @@ import {
  * and the .ics file never go stale and never need the current date (pages are static).
  */
 
-/** The calendar series starts with the first meeting on or after this date. */
-const SERIES_FROM = "2026-11-01";
+/**
+ * The calendar series starts with the first meeting on or after this date: Sunday 25 October
+ * 2026, the first meeting after the "Add to calendar" links went live. Earlier dates would
+ * only fill calendars with past meetings.
+ */
+const SERIES_FROM = "2026-10-25";
 const BYDAY: Record<MeetingRule["weekday"], string> = {
   sunday: "SU",
   monday: "MO",
@@ -30,6 +34,8 @@ export interface CalendarDetails {
   /** Where guests book, linked from the event. */
   url: string;
   meeting: MeetingRule & { venue: string; city: string };
+  /** Practical advice added to the event, e.g. "Arrive from 10:15. Parking is free on Sundays." */
+  tips?: string;
 }
 
 /** "FREQ=MONTHLY;BYDAY=1SU,3SU". */
@@ -60,8 +66,14 @@ function localStamp(instant: Date, timeZone: string): string {
 
 const title = (clubName: string): string => `${clubName} meeting`;
 const location = ({ venue, city }: CalendarDetails["meeting"]): string => `${venue}, ${city}`;
-const description = ({ meeting, url }: CalendarDetails): string =>
-  `${meetingTimeRange(meeting)}. Guests are always welcome, and never have to speak. Book your seat: ${url}`;
+const description = ({ meeting, url, tips }: CalendarDetails): string =>
+  [
+    `${meetingTimeRange(meeting)}.`,
+    tips,
+    `Guests are always welcome, and never have to speak. Book your seat: ${url}`,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
 /** A Google Calendar link that adds the whole recurring series. */
 export function googleCalendarUrl(details: CalendarDetails): string {
@@ -74,6 +86,20 @@ export function googleCalendarUrl(details: CalendarDetails): string {
     ctz: meeting.timeZone,
     recur: `RRULE:${meetingRRule(meeting)}`,
     location: location(meeting),
+    details: description(details),
+  });
+  return `https://calendar.google.com/calendar/render?${params}`;
+}
+
+/** A Google Calendar link for one meeting: the date a guest has chosen. */
+export function singleMeetingGoogleUrl(details: CalendarDetails, visit: MeetingOccurrence): string {
+  const zone = details.meeting.timeZone;
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `${title(details.clubName)} (guest visit)`,
+    dates: `${localStamp(visit.start, zone)}/${localStamp(visit.end, zone)}`,
+    ctz: zone,
+    location: location(details.meeting),
     details: description(details),
   });
   return `https://calendar.google.com/calendar/render?${params}`;
@@ -112,24 +138,17 @@ function fixedOffset(timeZone: string, year: number): string {
   return `${sign}${pad(Math.floor(absolute / 60))}${pad(absolute % 60)}`;
 }
 
-/** The .ics file for the recurring meeting. Identical on every build, so subscribers see no changes. */
-export function meetingCalendar(details: CalendarDetails): string {
-  const { meeting } = details;
-  const zone = meeting.timeZone;
-  const first = seriesStart(meeting);
-  const offset = fixedOffset(zone, first.start.getUTCFullYear());
-  const startClock = localStamp(first.start, zone).slice(8);
-  const excluded = meeting.cancelled.map(
-    (date) => `EXDATE;TZID=${zone}:${date.replaceAll("-", "")}${startClock}`,
-  );
-
+/** Wraps one event in a calendar with its time zone; CRLF line endings, folded lines. */
+function calendarFile(details: CalendarDetails, name: string, year: number, event: string[]): string {
+  const zone = details.meeting.timeZone;
+  const offset = fixedOffset(zone, year);
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
     `PRODID:-//${escapeText(details.clubName)}//Website//EN`,
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    `X-WR-CALNAME:${escapeText(`${details.clubName} meetings`)}`,
+    `X-WR-CALNAME:${escapeText(name)}`,
     "BEGIN:VTIMEZONE",
     `TZID:${zone}`,
     "BEGIN:STANDARD",
@@ -139,18 +158,43 @@ export function meetingCalendar(details: CalendarDetails): string {
     "END:STANDARD",
     "END:VTIMEZONE",
     "BEGIN:VEVENT",
-    `UID:meetings@${new URL(details.url).host}`,
-    `DTSTAMP:${first.start.toISOString().replace(/[-:]|\.\d{3}/g, "")}`,
-    `DTSTART;TZID=${zone}:${localStamp(first.start, zone)}`,
-    `DTEND;TZID=${zone}:${localStamp(first.end, zone)}`,
-    `RRULE:${meetingRRule(meeting)}`,
-    ...excluded,
-    `SUMMARY:${escapeText(title(details.clubName))}`,
-    `LOCATION:${escapeText(location(meeting))}`,
+    ...event,
+    `LOCATION:${escapeText(location(details.meeting))}`,
     `DESCRIPTION:${escapeText(description(details))}`,
     `URL:${details.url}`,
     "END:VEVENT",
     "END:VCALENDAR",
   ];
   return `${lines.flatMap(fold).join("\r\n")}\r\n`;
+}
+
+const utcStamp = (instant: Date): string => instant.toISOString().replace(/[-:]|\.\d{3}/g, "");
+
+/** The .ics file for the recurring meeting. Identical on every build, so subscribers see no changes. */
+export function meetingCalendar(details: CalendarDetails): string {
+  const { meeting } = details;
+  const zone = meeting.timeZone;
+  const first = seriesStart(meeting);
+  const startClock = localStamp(first.start, zone).slice(8);
+  return calendarFile(details, `${details.clubName} meetings`, first.start.getUTCFullYear(), [
+    `UID:meetings@${new URL(details.url).host}`,
+    `DTSTAMP:${utcStamp(first.start)}`,
+    `DTSTART;TZID=${zone}:${localStamp(first.start, zone)}`,
+    `DTEND;TZID=${zone}:${localStamp(first.end, zone)}`,
+    `RRULE:${meetingRRule(meeting)}`,
+    ...meeting.cancelled.map((date) => `EXDATE;TZID=${zone}:${date.replaceAll("-", "")}${startClock}`),
+    `SUMMARY:${escapeText(title(details.clubName))}`,
+  ]);
+}
+
+/** An .ics file for one meeting: the date a guest has chosen (Apple Calendar, Outlook). */
+export function singleMeetingCalendar(details: CalendarDetails, visit: MeetingOccurrence): string {
+  const zone = details.meeting.timeZone;
+  return calendarFile(details, `${details.clubName}: your visit`, visit.start.getUTCFullYear(), [
+    `UID:guest-${visit.date}@${new URL(details.url).host}`,
+    `DTSTAMP:${utcStamp(visit.start)}`,
+    `DTSTART;TZID=${zone}:${localStamp(visit.start, zone)}`,
+    `DTEND;TZID=${zone}:${localStamp(visit.end, zone)}`,
+    `SUMMARY:${escapeText(`${title(details.clubName)} (guest visit)`)}`,
+  ]);
 }

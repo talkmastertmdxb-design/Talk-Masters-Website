@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { googleCalendarUrl, meetingCalendar, meetingRRule } from "@/lib/content/calendar";
+import {
+  googleCalendarUrl,
+  meetingCalendar,
+  meetingRRule,
+  singleMeetingCalendar,
+  singleMeetingGoogleUrl,
+} from "@/lib/content/calendar";
+import { nextMeeting } from "@/lib/content/meeting";
 import type { MeetingRule } from "@/lib/content/meeting";
 
 const meeting: MeetingRule & { venue: string; city: string } = {
@@ -69,5 +76,31 @@ describe("meetingCalendar", () => {
   it("is the same on every build, so calendars don't see a new event", () => {
     expect(meetingCalendar(details)).toBe(ics);
     expect(lines.some((line) => line.startsWith("UID:"))).toBe(true);
+  });
+});
+
+describe("one meeting (the guest's chosen date)", () => {
+  const visit = nextMeeting(meeting, new Date("2026-11-10T08:00:00Z"))!;
+
+  it("adds just that meeting to Google Calendar, no repeat", () => {
+    const url = new URL(singleMeetingGoogleUrl(details, visit));
+    expect(url.searchParams.get("dates")).toBe("20261121T103000/20261121T123000");
+    expect(url.searchParams.get("ctz")).toBe("Asia/Dubai");
+    expect(url.searchParams.get("recur")).toBeNull();
+    expect(url.searchParams.get("text")).toBe("Talk-Masters Club meeting (guest visit)");
+  });
+
+  it("is a one-event .ics file with its own id", () => {
+    const lines = singleMeetingCalendar(details, visit).split("\r\n");
+    expect(lines).toContain("DTSTART;TZID=Asia/Dubai:20261121T103000");
+    expect(lines).toContain("DTEND;TZID=Asia/Dubai:20261121T123000");
+    expect(lines.some((line) => line.startsWith("RRULE"))).toBe(false);
+    expect(lines).toContain("UID:guest-2026-11-21@example.com");
+  });
+
+  it("can carry arrival advice", () => {
+    const withTips = { ...details, tips: "Arrive from 10:15. Parking is free on Sundays." };
+    const url = new URL(singleMeetingGoogleUrl(withTips, visit));
+    expect(url.searchParams.get("details")).toContain("Arrive from 10:15. Parking is free on Sundays.");
   });
 });

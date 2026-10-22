@@ -2,7 +2,7 @@
 
 import { track } from "@vercel/analytics";
 import { MessageCircle, UserRound } from "lucide-react";
-import { useId, useRef, useState, type FormEvent } from "react";
+import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useNow } from "@/components/meeting/useNow";
 import {
   guestMessage,
@@ -13,16 +13,32 @@ import {
   UNSURE,
   type Moment,
 } from "@/lib/booking/message";
+import type { CalendarDetails } from "@/lib/content/calendar";
 import { whatsappLink, type Contact } from "@/lib/content/contact";
-import { formatMeetingDate, upcomingMeetings, type MeetingRule } from "@/lib/content/meeting";
+import {
+  formatClock,
+  formatMeetingDate,
+  invitationDay,
+  upcomingMeetings,
+  type MeetingRule,
+} from "@/lib/content/meeting";
+import { AfterSend } from "./AfterSend";
 import { ChatPreview } from "./ChatPreview";
 import { ChoicePill } from "./ChoicePill";
+import { NextSteps } from "./NextSteps";
+import { OfficerChoice } from "./OfficerChoice";
 import { StageIllustration } from "./StageIllustration";
 
 interface GuestFormProps {
   /** Officers guests can message, first one preselected (content/settings.json). */
   contacts: readonly Contact[];
-  meeting: MeetingRule;
+  meeting: MeetingRule & { arriveTime?: string; guestInfo: readonly { kind: string; text: string }[] };
+  /** For "add your visit to your calendar" once WhatsApp opens. */
+  calendar: CalendarDetails;
+  /** Officer photos, rendered on the server, by WhatsApp number. */
+  avatars: Readonly<Record<string, ReactNode>>;
+  /** A member's words from the members' video, shown beside the button. */
+  quote?: string;
 }
 
 type Field = "name" | "meeting" | "note";
@@ -37,7 +53,7 @@ const clockFormat = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: 
  * stage art lights up with the guest's name, and "Open in WhatsApp" hands the finished
  * message to the chosen officer. The guest presses send in WhatsApp; this site stores nothing.
  */
-export function GuestForm({ contacts, meeting }: GuestFormProps) {
+export function GuestForm({ contacts, meeting, calendar, avatars, quote }: GuestFormProps) {
   const id = useId();
   const nameRef = useRef<HTMLInputElement>(null);
   const noteRef = useRef<HTMLTextAreaElement>(null);
@@ -49,17 +65,21 @@ export function GuestForm({ contacts, meeting }: GuestFormProps) {
   const [note, setNote] = useState("");
   const [contactNumber, setContactNumber] = useState(contacts[0]!.whatsapp);
   const [errors, setErrors] = useState<Errors>({});
-  const [sentTo, setSentTo] = useState<{ url: string; name: string } | null>(null);
+  const [sentUrl, setSentUrl] = useState<string | null>(null);
 
   const dates = now ? upcomingMeetings(meeting, now, MEETING_CHOICES) : [];
   const chosenMeeting = meetingChoice ?? dates[0]?.date ?? UNSURE;
-  const chosenDate = dates.find((date) => date.date === chosenMeeting);
+  const chosenDate = dates.find((date) => date.date === chosenMeeting) ?? null;
+  const chosenLabel = chosenDate ? formatMeetingDate(chosenDate.start, meeting.timeZone) : null;
   const contact = contacts.find((option) => option.whatsapp === contactNumber) ?? contacts[0]!;
+  const weekday = meeting.weekday.charAt(0).toUpperCase() + meeting.weekday.slice(1);
+  const invitation =
+    now && dates[0] ? invitationDay(dates[0].start, meeting.timeZone, now) : `on a ${weekday}`;
 
   const message = guestMessage({
     name,
     contactName: contact.name,
-    meetingLabel: chosenDate ? formatMeetingDate(chosenDate.start, meeting.timeZone) : null,
+    meetingLabel: chosenLabel,
     moment: moment || undefined,
     note,
   });
@@ -91,38 +111,61 @@ export function GuestForm({ contacts, meeting }: GuestFormProps) {
     const opened = window.open(url, "_blank");
     if (opened) opened.opener = null;
     else window.location.assign(url);
-    setSentTo({ url, name: contact.name });
+    setSentUrl(url);
   };
 
   const time = now ? clockFormat.format(now) : null;
+  const arriveTime = formatClock(meeting.arriveTime ?? meeting.startTime);
+  const arriveNote = meeting.guestInfo
+    .filter((info) => info.kind === "parking" || info.kind === "food")
+    .map((info) => `${info.text}.`)
+    .join(" ");
+  const sendingTo = chosenDate
+    ? `To ${contact.name} · ${formatMeetingDate(chosenDate.start, meeting.timeZone, "short")}`
+    : `To ${contact.name}`;
 
   return (
-    // overflow-clip, not overflow-hidden: hidden would stop the stage from sticking.
-    <div className="rounded-panel border-hairline-dark bg-ink grid overflow-clip border lg:grid-cols-12">
-      <div className="lg:col-span-7">
+    // overflow-clip, not overflow-hidden: hidden would stop the stage and the phone button from sticking.
+    // minmax(0, 1fr): the sideways-scrolling chip row must not widen the column past the screen.
+    <div className="rounded-panel border-hairline-dark bg-ink grid grid-cols-[minmax(0,1fr)] overflow-clip border lg:grid-cols-12">
+      <div className="lg:col-span-6">
         {/* Wide screens: the stage stays in view while the form scrolls, so the preview is always beside it. */}
-        <div className="relative h-60 overflow-clip sm:h-80 lg:sticky lg:top-0 lg:h-[min(100dvh,52rem)]">
+        <div className="relative h-36 overflow-clip sm:h-56 lg:sticky lg:top-0 lg:h-[min(100dvh,52rem)]">
           {/* Phones: zoom onto the lectern and the guest's chair, so the banner reads at a glance. */}
           <StageIllustration
             guestName={name}
-            className="absolute inset-0 size-full origin-[37.5%_70%] max-lg:scale-[1.8]"
+            className="absolute inset-0 size-full origin-[37.5%_64%] max-lg:scale-[1.6]"
           />
-          <div className="absolute inset-y-0 right-8 hidden items-center lg:flex xl:right-14">
-            <ChatPreview variant="phone" contact={contact} message={message} time={time} />
+          <div className="absolute inset-y-0 right-6 hidden items-center lg:flex xl:right-10">
+            <ChatPreview
+              variant="phone"
+              contact={contact}
+              message={message}
+              time={time}
+              avatar={avatars[contact.whatsapp]}
+            />
           </div>
         </div>
       </div>
 
-      <div className="border-hairline-dark p-6 sm:p-10 lg:col-span-5 lg:border-l xl:p-12">
+      {/* The form leads: a lighter panel with a gold edge, so it outweighs the art beside it. */}
+      <div className="bg-surface relative p-6 sm:p-10 lg:col-span-6 lg:border-l lg:border-white/10 xl:p-12">
+        <span
+          aria-hidden="true"
+          className="via-gold/60 absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent"
+        />
         <p className="text-eyebrow text-gold">Free · You never have to speak</p>
-        <h1 className="text-h2 mt-4">Book a guest visit</h1>
-        <p className="mt-4 max-w-[40ch] text-white/75">
-          Tell us a little about you. WhatsApp opens with your message ready, and we&apos;ll save you a seat.
+        <h1 className="mt-4 font-serif text-[clamp(2.375rem,1.7rem+2.9vw,4.5rem)] leading-[1.04] tracking-[-0.02em]">
+          Join us <span data-invitation>{invitation}</span> as our guest
+        </h1>
+        <p className="mt-4 max-w-[42ch] text-white/80">
+          Tell us your name and pick a date. WhatsApp opens with your message ready, and we&apos;ll save you a
+          seat.
         </p>
 
         <form noValidate onSubmit={onSubmit} className="mt-8 flex flex-col gap-7">
-          <div className="rounded-card border-hairline-dark focus-within:border-gold/70 border bg-white/[0.03] px-5 py-4 transition-colors duration-(--duration-quick)">
-            <label htmlFor={`${id}-name`} className="text-sm text-white/70">
+          <div className="rounded-card focus-within:border-gold/70 border border-white/15 bg-white/[0.04] px-5 py-4 transition-colors duration-(--duration-quick)">
+            <label htmlFor={`${id}-name`} className="text-sm text-white/75">
               Your name
             </label>
             <div className="mt-1 flex items-center gap-3">
@@ -150,7 +193,7 @@ export function GuestForm({ contacts, meeting }: GuestFormProps) {
           )}
 
           <fieldset>
-            <legend className="text-sm text-white/70">Which meeting?</legend>
+            <legend className="text-sm text-white/75">Which meeting?</legend>
             <div className="mt-3 flex flex-wrap gap-2">
               {dates.map((date, index) => (
                 <ChoicePill
@@ -176,27 +219,29 @@ export function GuestForm({ contacts, meeting }: GuestFormProps) {
           </fieldset>
 
           <fieldset>
-            <legend className="text-sm text-white/70">
+            <legend className="text-sm text-white/75">
               What&apos;s coming up for you? <span className="text-white/50">(optional)</span>
             </legend>
-            <div className="mt-3 flex flex-wrap gap-2">
+            {/* Phones: one row that scrolls sideways, instead of four rows of chips. */}
+            <div className="mt-3 flex gap-2 max-sm:-mx-6 max-sm:[scrollbar-width:none] max-sm:overflow-x-auto max-sm:px-6 max-sm:pb-1 sm:flex-wrap">
               {MOMENT_IDS.map((option) => (
-                <ChoicePill
-                  key={option}
-                  name="moment"
-                  value={option}
-                  checked={moment === option}
-                  onSelect={(value) => setMoment(value as Moment | "")}
-                >
-                  {MOMENTS[option].label}
-                </ChoicePill>
+                <span key={option} className="shrink-0">
+                  <ChoicePill
+                    name="moment"
+                    value={option}
+                    checked={moment === option}
+                    onSelect={(value) => setMoment(value as Moment | "")}
+                  >
+                    {MOMENTS[option].label}
+                  </ChoicePill>
+                </span>
               ))}
             </div>
           </fieldset>
 
-          <div className="rounded-card border-hairline-dark focus-within:border-gold/70 border bg-white/[0.03] px-5 py-4 transition-colors duration-(--duration-quick)">
+          <div className="rounded-card focus-within:border-gold/70 border border-white/15 bg-white/[0.04] px-5 py-4 transition-colors duration-(--duration-quick)">
             <div className="flex items-baseline justify-between gap-4">
-              <label htmlFor={`${id}-note`} className="text-sm text-white/70">
+              <label htmlFor={`${id}-note`} className="text-sm text-white/75">
                 Anything we should know? <span className="text-white/50">(optional)</span>
               </label>
               <span aria-hidden="true" className="text-xs text-white/50 tabular-nums">
@@ -224,41 +269,22 @@ export function GuestForm({ contacts, meeting }: GuestFormProps) {
             </p>
           )}
 
-          <fieldset>
-            <legend className="text-sm text-white/70">Send it to</legend>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {contacts.map((option) => (
-                <label key={option.whatsapp} className="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="contact"
-                    value={option.whatsapp}
-                    checked={contactNumber === option.whatsapp}
-                    onChange={() => setContactNumber(option.whatsapp)}
-                    className="peer sr-only"
-                  />
-                  <span className="rounded-card peer-checked:border-gold peer-focus-visible:outline-gold flex min-h-11 items-center gap-3 border border-white/15 p-3 transition-colors duration-(--duration-quick) peer-checked:bg-white/[0.06] peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2">
-                    <span
-                      aria-hidden="true"
-                      className="bg-maroon inline-flex size-10 shrink-0 items-center justify-center rounded-full font-semibold"
-                    >
-                      {option.name.charAt(0)}
-                    </span>
-                    <span className="leading-tight">
-                      <span className="block font-semibold">{option.name}</span>
-                      <span className="text-muted block text-sm">{option.role}</span>
-                    </span>
-                  </span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+          <OfficerChoice
+            contacts={contacts}
+            value={contactNumber}
+            onChange={setContactNumber}
+            avatars={avatars}
+          />
 
           <div className="lg:hidden">
             <ChatPreview variant="bubble" contact={contact} message={message} time={time} />
           </div>
 
-          <div>
+          {/* Phones: the button stays on screen while the form is in view. */}
+          <div
+            data-send-bar
+            className="z-10 max-lg:sticky max-lg:bottom-0 max-lg:-mx-6 max-lg:border-t max-lg:border-white/10 max-lg:bg-[rgb(17_24_39/0.94)] max-lg:px-6 max-lg:pt-3 max-lg:pb-[max(0.75rem,env(safe-area-inset-bottom))] max-lg:backdrop-blur-md"
+          >
             <button
               type="submit"
               className="bg-maroon hover:bg-maroon-hover inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 font-semibold text-white transition-[background-color,box-shadow] duration-(--duration-quick) ease-(--ease-deliver) hover:shadow-[0_0_0_6px_rgb(214_176_106/0.18)]"
@@ -267,25 +293,42 @@ export function GuestForm({ contacts, meeting }: GuestFormProps) {
               Open in WhatsApp
               <span className="sr-only"> (opens in a new tab)</span>
             </button>
-            <p className="text-muted mt-3 text-center text-sm">
-              Nothing is sent until you press send in WhatsApp. This site doesn&apos;t store your details.
-            </p>
-            <p role="status" className="mt-4 text-center text-sm text-white/85">
-              {sentTo && (
-                <>
-                  WhatsApp is opening with your message to {sentTo.name}. Press send there to book your seat.{" "}
-                  <a
-                    href={sentTo.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="nav-link text-gold"
-                  >
-                    Didn&apos;t open?<span className="sr-only"> Open WhatsApp in a new tab</span>
-                  </a>
-                </>
-              )}
-            </p>
+            <p className="text-muted mt-2 text-center text-xs">{sendingTo}</p>
           </div>
+
+          <p className="text-muted -mt-3 text-center text-sm">
+            Nothing is sent until you press send in WhatsApp. This site doesn&apos;t store your details.
+          </p>
+
+          <div role="status">
+            {sentUrl && (
+              <AfterSend
+                contactName={contact.name}
+                url={sentUrl}
+                calendar={calendar}
+                visit={chosenDate}
+                visitLabel={chosenLabel}
+              />
+            )}
+          </div>
+
+          <NextSteps
+            contactName={contact.name}
+            arriveTime={arriveTime}
+            arriveNote={arriveNote}
+            sent={sentUrl !== null}
+          />
+
+          {quote && (
+            <figure className="border-gold/50 border-l-2 pl-4">
+              <blockquote className="font-serif text-lg leading-snug text-white/90 italic">
+                “{quote}”
+              </blockquote>
+              <figcaption className="text-muted mt-2 text-sm">
+                A Talk-Masters member, in our members&apos; video
+              </figcaption>
+            </figure>
+          )}
         </form>
       </div>
     </div>

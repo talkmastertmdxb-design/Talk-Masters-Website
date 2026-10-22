@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { content } from "@/lib/content";
 import {
+  formatClock,
+  invitationDay,
   meetingDayLabel,
   meetingSchedule,
   meetingTimeRange,
   nextMeeting,
+  upcomingMeetings,
   type MeetingRule,
 } from "@/lib/content/meeting";
 
@@ -116,11 +119,46 @@ describe("meetingDayLabel", () => {
 });
 
 describe("the club's own schedule (content/settings.json)", () => {
-  it("is the 1st and 3rd Sunday, 10:30 am to 12:30 pm, in Dubai", () => {
+  it("is the 2nd and 4th Sunday, 10:30 am to 12:30 pm, in Dubai", () => {
     const { meeting } = content.settings;
-    expect(meetingSchedule(meeting)).toBe("1st & 3rd Sunday of every month");
+    expect(meetingSchedule(meeting)).toBe("2nd & 4th Sunday of every month");
     expect(meetingTimeRange(meeting)).toBe("10:30 am – 12:30 pm");
     expect(meeting.timeZone).toBe("Asia/Dubai");
-    expect(nextMeeting(meeting, at("2026-10-22T08:00:00Z"))?.date).toBe("2026-11-01");
+    // The club's next meeting after Thursday 22 October 2026 is Sunday 25 October.
+    expect(nextMeeting(meeting, at("2026-10-22T08:00:00Z"))?.date).toBe("2026-10-25");
+    expect(upcomingMeetings(meeting, at("2026-10-22T08:00:00Z"), 6).map((m) => m.date)).toEqual([
+      "2026-10-25",
+      "2026-11-08",
+      "2026-11-22",
+      "2026-12-13",
+      "2026-12-27",
+      "2027-01-10",
+    ]);
+  });
+});
+
+describe("invitationDay (the guest page headline: “Join us … as our guest”)", () => {
+  const sunday = at("2026-10-25T06:30:00Z");
+  const zone = "Asia/Dubai";
+
+  it("says today and tomorrow by the club's calendar", () => {
+    expect(invitationDay(sunday, zone, at("2026-10-25T05:00:00Z"))).toBe("today");
+    expect(invitationDay(sunday, zone, at("2026-10-24T09:00:00Z"))).toBe("tomorrow");
+  });
+
+  it("says “this Sunday” within the coming week", () => {
+    expect(invitationDay(sunday, zone, at("2026-10-22T08:00:00Z"))).toBe("this Sunday");
+    expect(invitationDay(sunday, zone, at("2026-10-19T08:00:00Z"))).toBe("this Sunday");
+  });
+
+  it("names the date when it is further away", () => {
+    expect(invitationDay(sunday, zone, at("2026-10-18T09:00:00Z"))).toBe("on Sunday 25 October");
+  });
+});
+
+describe("formatClock", () => {
+  it("shows a 24-hour time the way people say it", () => {
+    expect(formatClock("10:15")).toBe("10:15 am");
+    expect(formatClock("18:45")).toBe("6:45 pm");
   });
 });

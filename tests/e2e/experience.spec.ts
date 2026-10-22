@@ -141,7 +141,7 @@ test.describe("hero photos", () => {
     await page.clock.setFixedTime(new Date("2026-10-22T08:00:00Z"));
     await page.goto("/");
     const hero = page.locator("section[aria-labelledby='hero-title']");
-    await expect(hero.getByText(/Next meeting: Sunday 1 November/)).toBeVisible();
+    await expect(hero.getByText(/Next meeting: Sunday 25 October/)).toBeVisible();
     await expect(hero.getByText("10:30 am – 12:30 pm")).toBeVisible();
     await expect(hero.getByText(/Hor Al Anz Public Library, Dubai/)).toBeVisible();
   });
@@ -241,7 +241,7 @@ test("every 'Book a guest visit' link goes to /join, which loads", async ({ page
   expect(new Set(hrefs)).toEqual(new Set(["/join"]));
   const response = await page.goto("/join");
   expect(response?.status()).toBe(200);
-  await expect(page.getByRole("heading", { level: 1, name: "Book a guest visit" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: /^Join us .+ as our guest$/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /Get directions/ })).toHaveAttribute(
     "href",
     /google\.com\/maps.*Hor%20Al%20Anz%20Public%20Library/,

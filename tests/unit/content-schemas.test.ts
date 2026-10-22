@@ -66,6 +66,32 @@ describe("settingsSchema", () => {
     expect(withMeeting({ cancelled: ["19/12/2026"] })).toBe(false);
   });
 
+  it("accepts the guest's practical details and officer photos", () => {
+    const parsed = settingsSchema.parse({
+      ...validSettings,
+      meeting: {
+        ...validSettings.meeting,
+        arriveTime: "18:45",
+        guestInfo: [
+          { kind: "parking", text: "Free parking" },
+          { kind: "food", text: "Breakfast included" },
+        ],
+      },
+      contacts: [{ ...validSettings.contacts[0]!, imageSlot: "officer-vp-membership" }],
+    });
+    expect(parsed.meeting.arriveTime).toBe("18:45");
+    expect(parsed.meeting.guestInfo).toHaveLength(2);
+    expect(parsed.contacts[0]?.imageSlot).toBe("officer-vp-membership");
+  });
+
+  it("rejects an arrival time after the start, and unknown info kinds", () => {
+    const withMeeting = (change: object) =>
+      settingsSchema.safeParse({ ...validSettings, meeting: { ...validSettings.meeting, ...change } })
+        .success;
+    expect(withMeeting({ arriveTime: "19:30" })).toBe(false);
+    expect(withMeeting({ guestInfo: [{ kind: "wifi", text: "Free wifi" }] })).toBe(false);
+  });
+
   it("rejects an invalid contact email", () => {
     expect(settingsSchema.safeParse({ ...validSettings, contactEmail: "nope" }).success).toBe(false);
   });

@@ -17,7 +17,7 @@ test.beforeEach(async ({ page, context }) => {
   await page.clock.setFixedTime(THURSDAY);
   await page.goto("/join");
   // The date choices appear once the form has hydrated; before that the button can't hand off yet.
-  await expect(page.locator("input[name='meeting'][value='2026-11-01']")).toBeAttached();
+  await expect(page.locator("input[name='meeting'][value='2026-10-25']")).toBeAttached();
 });
 
 const visiblePreview = (page: Page) => page.locator("[data-chat-message]").filter({ visible: true });
@@ -25,12 +25,12 @@ const visiblePreview = (page: Page) => page.locator("[data-chat-message]").filte
 test("the message is written live and opens in WhatsApp, ready for the chosen officer", async ({ page }) => {
   await page.getByLabel("Your name").fill("Sara Ahmed");
   await page.getByText("A job interview").click();
-  await page.getByText("Sun 15 Nov").click();
+  await page.getByText("Sun 8 Nov").click();
   await page.getByText("Mansoor", { exact: true }).click();
   await page.getByLabel(/Anything we should know/).fill("I'm a little nervous!");
 
   const expected =
-    "Hi Mansoor! I'm Sara Ahmed, and I'd like to visit Talk-Masters as a guest at the meeting on Sunday 15 November. Could you save me a seat?\n\n" +
+    "Hi Mansoor! I'm Sara Ahmed, and I'd like to visit Talk-Masters as a guest at the meeting on Sunday 8 November. Could you save me a seat?\n\n" +
     "I have a job interview coming up.\n\nI'm a little nervous!";
   await expect(visiblePreview(page)).toHaveText(expected, { useInnerText: true });
 
@@ -39,7 +39,7 @@ test("the message is written live and opens in WhatsApp, ready for the chosen of
   const url = new URL((await popup).url());
   expect(url.origin + url.pathname).toBe("https://wa.me/971501600212");
   expect(url.searchParams.get("text")).toBe(expected);
-  await expect(page.getByRole("status")).toContainText("WhatsApp is opening with your message to Mansoor");
+  await expect(page.getByRole("status")).toContainText("Your message to Mansoor is ready");
 });
 
 test("a guest's chair is reserved in their name", async ({ page, isMobile }) => {
@@ -68,6 +68,74 @@ test("guests who aren't sure of the date can still ask", async ({ page }) => {
   await expect(visiblePreview(page)).toHaveText(
     "Hi Lulu! I'm Omar, and I'd like to visit Talk-Masters as a guest. I'm not sure which date yet.",
   );
+});
+
+test("the headline invites guests to the next meeting by day", async ({ page }) => {
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Join us this Sunday as our guest");
+});
+
+test("guests see the officer they're messaging", async ({ page }) => {
+  const form = page.locator("form");
+  await expect(form.locator("[data-image-slot='officer-vp-membership'] img")).toBeAttached();
+  await expect(form.locator("[data-image-slot='officer-vp-education'] img")).toBeAttached();
+});
+
+test("what happens next, and adding the chosen date to a calendar", async ({ page }) => {
+  const steps = page.getByRole("list").filter({ hasText: "Open WhatsApp" });
+  await expect(steps.getByRole("listitem")).toHaveText([
+    /Open WhatsApp/,
+    /Press send.*Lulu/,
+    /We save your seat/,
+    /Arrive from 10:15 am.*Free parking on Sundays\..*Breakfast included/,
+  ]);
+  await expect(steps.locator("[aria-current='step']")).toContainText("Open WhatsApp");
+
+  await page.getByLabel("Your name").fill("Sara Ahmed");
+  await page.getByText("Sun 8 Nov").click();
+  const popup = page.waitForEvent("popup");
+  await page.getByRole("button", { name: /Open in WhatsApp/ }).click();
+  await (await popup).close();
+
+  await expect(steps.locator("[aria-current='step']")).toContainText("Press send");
+  const status = page.getByRole("status");
+  await expect(status).toContainText("Add Sunday 8 November to your calendar");
+  const google = new URL((await status.getByRole("link", { name: /Google Calendar/ }).getAttribute("href"))!);
+  expect(google.searchParams.get("dates")).toBe("20261108T103000/20261108T123000");
+  expect(google.searchParams.get("details")).toContain("Arrive from 10:15 am.");
+  await expect(status.getByRole("link", { name: /Apple or Outlook/ })).toHaveAttribute(
+    "download",
+    "talk-masters-visit-2026-11-08.ics",
+  );
+});
+
+test("phones keep the WhatsApp button on screen while filling in the form", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "The sticky button is for phones");
+  const name = page.getByLabel("Your name");
+  await name.scrollIntoViewIfNeeded();
+  await expect(name).toBeInViewport();
+  await expect(page.getByRole("button", { name: /Open in WhatsApp/ })).toBeInViewport();
+  await expect(page.locator("[data-send-bar]")).toContainText("To Lulu · Sun 25 Oct");
+});
+
+test("on phones, nothing in the form is cut off at the screen edge", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "A phone-width check");
+  // The card clips overflow, so a too-wide column hides controls instead of scrolling the page.
+  const overflow = await page.evaluate(() => {
+    const panel = document.querySelector("form")!.parentElement!;
+    return panel.getBoundingClientRect().right - window.innerWidth;
+  });
+  expect(overflow).toBeLessThanOrEqual(0);
+  await expect(page.getByText("Not sure yet")).toBeInViewport();
+});
+
+test("shows real meeting photos and what to expect on arrival", async ({ page }) => {
+  const strip = page.locator("section[aria-labelledby='walk-into-title']");
+  await expect(strip.locator("[data-image-slot]")).toHaveCount(4);
+  const visit = page.locator("dl").filter({ hasText: "Your first visit" });
+  await expect(visit).toContainText("Arrive from 10:15 am");
+  await expect(visit).toContainText("Free parking on Sundays");
+  await expect(visit).toContainText("Breakfast included");
+  await expect(visit).toContainText("inside the library");
 });
 
 test.describe("with smooth scrolling", () => {

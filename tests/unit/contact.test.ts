@@ -27,10 +27,20 @@ describe("formatPhone", () => {
 });
 
 describe("club contacts", () => {
-  it("are the VP Membership and VP Education on WhatsApp", () => {
+  it("are the VP Membership and VP Education on WhatsApp, with their photos", () => {
     expect(content.settings.contacts).toEqual([
-      { name: "Lulu", role: "Vice President Membership", whatsapp: "+971502837168" },
-      { name: "Mansoor", role: "Vice President Education", whatsapp: "+971501600212" },
+      {
+        name: "Lulu",
+        role: "Vice President Membership",
+        whatsapp: "+971502837168",
+        imageSlot: "officer-vp-membership",
+      },
+      {
+        name: "Mansoor",
+        role: "Vice President Education",
+        whatsapp: "+971501600212",
+        imageSlot: "officer-vp-education",
+      },
     ]);
   });
 

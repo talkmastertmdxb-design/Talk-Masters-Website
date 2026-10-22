@@ -34,6 +34,11 @@ function startMinutes(startTime: string): number {
   return hours! * 60 + minutes!;
 }
 
+/** "10:15" → "10:15 am". */
+export function formatClock(time: string): string {
+  return clockTime(startMinutes(time));
+}
+
 /** The meeting's start and end for display, e.g. "10:30 am – 12:30 pm". */
 export function meetingTimeRange({ startTime, durationMinutes }: MeetingTimes): string {
   const start = startMinutes(startTime);
@@ -42,7 +47,7 @@ export function meetingTimeRange({ startTime, durationMinutes }: MeetingTimes): 
 
 const capitalise = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
-/** [1, 3] Sunday → "1st & 3rd Sunday of every month" (long) / "1st & 3rd Sun" (short). */
+/** [2, 4] Sunday → "2nd & 4th Sunday of every month" (long) / "2nd & 4th Sun" (short). */
 export function meetingSchedule(
   { weekday, weeksOfMonth }: Pick<MeetingRule, "weekday" | "weeksOfMonth">,
   style: "long" | "short" = "long",
@@ -168,14 +173,14 @@ function daysUntil(start: Date, timeZone: string, now: Date): number {
   return dayNumber(start) - dayNumber(now);
 }
 
-/** "Sunday 1 November" (long) / "Sun 1 Nov" (short), on the club's calendar. */
+/** "Sunday 25 October" (long) / "Sun 25 Oct" (short), on the club's calendar. */
 export function formatMeetingDate(start: Date, timeZone: string, style: "long" | "short" = "long"): string {
   return new Intl.DateTimeFormat("en-GB", { timeZone, weekday: style, day: "numeric", month: style })
     .format(start)
     .replace(",", "");
 }
 
-/** "Today", "Tomorrow", or the date: "Sunday 1 November" (long) / "Sun 1 Nov" (short). */
+/** "Today", "Tomorrow", or the date: "Sunday 25 October" (long) / "Sun 25 Oct" (short). */
 export function meetingDayLabel(
   start: Date,
   timeZone: string,
@@ -186,4 +191,21 @@ export function meetingDayLabel(
   if (days === 0) return "Today";
   if (days === 1) return "Tomorrow";
   return formatMeetingDate(start, timeZone, style);
+}
+
+/** Within this many days, a meeting is "this Sunday" rather than a date. */
+const THIS_WEEK_DAYS = 6;
+
+/**
+ * How the guest page invites people: "Join us today / tomorrow / this Sunday / on Sunday
+ * 8 November as our guest". A concrete day reads as an invitation, not a form.
+ */
+export function invitationDay(start: Date, timeZone: string, now: Date): string {
+  const days = daysUntil(start, timeZone, now);
+  if (days === 0) return "today";
+  if (days === 1) return "tomorrow";
+  if (days <= THIS_WEEK_DAYS) {
+    return `this ${new Intl.DateTimeFormat("en-GB", { timeZone, weekday: "long" }).format(start)}`;
+  }
+  return `on ${formatMeetingDate(start, timeZone)}`;
 }

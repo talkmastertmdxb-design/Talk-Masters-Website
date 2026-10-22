@@ -1,5 +1,7 @@
 import { CheckCheck, SendHorizontal } from "lucide-react";
+import type { ReactNode } from "react";
 import type { Contact } from "@/lib/content/contact";
+import { OfficerAvatar } from "./OfficerChoice";
 
 interface ChatPreviewProps {
   contact: Contact;
@@ -8,6 +10,8 @@ interface ChatPreviewProps {
   time: string | null;
   /** phone: a handset floating over the stage art (wide screens); bubble: the message alone (phones). */
   variant: "phone" | "bubble";
+  /** The officer's photo, for the chat header. */
+  avatar?: ReactNode;
 }
 
 function Bubble({ message, time }: Pick<ChatPreviewProps, "message" | "time">) {
@@ -28,7 +32,7 @@ function Bubble({ message, time }: Pick<ChatPreviewProps, "message" | "time">) {
  * What the officer will receive, updating as the guest types. Shown, not sent:
  * the message only leaves when the guest presses send inside WhatsApp.
  */
-export function ChatPreview({ contact, message, time, variant }: ChatPreviewProps) {
+export function ChatPreview({ contact, message, time, variant, avatar }: ChatPreviewProps) {
   const label = `Preview of your WhatsApp message to ${contact.name}`;
 
   if (variant === "bubble") {
@@ -50,12 +54,7 @@ export function ChatPreview({ contact, message, time, variant }: ChatPreviewProp
       <div className="bg-ink flex h-[31rem] flex-col overflow-hidden rounded-[1.8rem]">
         <div className="mx-auto mt-2 h-1.5 w-16 rounded-full bg-white/15" aria-hidden="true" />
         <figcaption className="border-hairline-dark flex items-center gap-3 border-b px-4 py-3">
-          <span
-            aria-hidden="true"
-            className="bg-maroon inline-flex size-9 shrink-0 items-center justify-center rounded-full font-semibold"
-          >
-            {contact.name.charAt(0)}
-          </span>
+          <OfficerAvatar name={contact.name} photo={avatar} size="size-9" />
           <span className="min-w-0 leading-tight">
             <span className="block truncate font-semibold">{contact.name}</span>
             <span className="text-muted block truncate text-xs">{contact.role}</span>

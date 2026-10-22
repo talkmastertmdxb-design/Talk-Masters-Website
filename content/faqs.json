@@ -5,6 +5,16 @@
     "placeholder": true
   },
   {
+    "question": "When should I arrive, and where do I go?",
+    "answer": "Arrive from 10:15; we start at 10:30 and finish at 12:30. We meet in a room inside Hor Al Anz Public Library, Dubai.",
+    "placeholder": false
+  },
+  {
+    "question": "Is there parking, and is food included?",
+    "answer": "Parking is free on Sundays. Breakfast is included, with a 15-minute break to eat and meet everyone.",
+    "placeholder": false
+  },
+  {
     "question": "Who can join?",
     "answer": "Everyone. Our members come from every age group, gender and background: students, professionals, parents, career changers and retirees.",
     "placeholder": true

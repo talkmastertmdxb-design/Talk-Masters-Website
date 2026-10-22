@@ -1,14 +1,1 @@
-[
-  {
-    "slug": "open-house",
-    "title": "Open House Meeting",
-    "type": "meeting",
-    "startsAt": "2026-11-14T10:30:00+04:00",
-    "endsAt": "2026-11-14T12:30:00+04:00",
-    "venue": "Hor Al Anz Public Library, Dubai",
-    "summary": "See a real meeting from the audience. Guests never have to speak.",
-    "status": "published",
-    "imageSlot": "event-featured",
-    "placeholder": true
-  }
-]
+[]

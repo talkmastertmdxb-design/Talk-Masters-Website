@@ -5,12 +5,12 @@ import { useNow } from "./useNow";
 
 interface NextMeetingDateProps {
   rule: MeetingRule;
-  /** "Sunday 1 November" or "Sun 1 Nov". */
+  /** "Sunday 25 October" or "Sun 25 Oct". */
   style?: "long" | "short";
 }
 
 /**
- * The next meeting's date ("Today", "Tomorrow", "Sunday 1 November"), worked out in the
+ * The next meeting's date ("Today", "Tomorrow", "Sunday 25 October"), worked out in the
  * visitor's browser. Before hydration (and without JavaScript) it shows the schedule instead.
  */
 export function NextMeetingDate({ rule, style = "long" }: NextMeetingDateProps) {

@@ -322,6 +322,13 @@
 }
 
 @layer base {
+  /* Phones on the guest form: focused fields and scrolled-to targets stay above the sticky send bar */
+  @media (max-width: 56.24rem) {
+    html:has([data-send-bar]) {
+      scroll-padding-bottom: 8rem;
+    }
+  }
+
   /* Keep anchor targets clear of the fixed header */
   [id] {
     scroll-margin-top: 6.5rem;

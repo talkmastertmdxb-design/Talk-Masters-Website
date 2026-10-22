@@ -42,6 +42,7 @@ const BOKEH = [
  * Abstract stage art, no people (docs/IMPLEMENTATION_PLAN.md §3.5): the meeting room
  * moments before it starts. A spotlit lectern, the voice leaving the microphone, and
  * one front-row chair that lights up with the guest's name as they fill in the form.
+ * Kept quiet on purpose (dimmed 2026-10-22): the form beside it should win the eye.
  */
 export function StageIllustration({ guestName, className = "" }: StageIllustrationProps) {
   const name = guestName.trim().split(/\s+/)[0] ?? "";
@@ -57,16 +58,16 @@ export function StageIllustration({ guestName, className = "" }: StageIllustrati
     >
       <defs>
         <radialGradient id="stage-sky" cx="38%" cy="18%" r="75%">
-          <stop offset="0" style={{ stopColor: "var(--color-tm-blue)" }} stopOpacity="0.55" />
+          <stop offset="0" style={{ stopColor: "var(--color-tm-blue)" }} stopOpacity="0.4" />
           <stop offset="0.55" style={{ stopColor: "var(--color-ink)" }} stopOpacity="0.2" />
           <stop offset="1" style={{ stopColor: "var(--color-ink)" }} stopOpacity="0" />
         </radialGradient>
         <linearGradient id="stage-beam" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" style={{ stopColor: "var(--color-gold)" }} stopOpacity="0.32" />
+          <stop offset="0" style={{ stopColor: "var(--color-gold)" }} stopOpacity="0.22" />
           <stop offset="1" style={{ stopColor: "var(--color-gold)" }} stopOpacity="0" />
         </linearGradient>
         <radialGradient id="stage-pool" cx="50%" cy="50%" r="50%">
-          <stop offset="0" style={{ stopColor: "var(--color-gold)" }} stopOpacity="0.38" />
+          <stop offset="0" style={{ stopColor: "var(--color-gold)" }} stopOpacity="0.28" />
           <stop offset="1" style={{ stopColor: "var(--color-gold)" }} stopOpacity="0" />
         </radialGradient>
         <linearGradient id="stage-lectern" x1="0" y1="0" x2="0" y2="1">
@@ -94,7 +95,7 @@ export function StageIllustration({ guestName, className = "" }: StageIllustrati
       <rect width="800" height="720" fill="url(#stage-sky)" />
 
       {/* The room's acoustics: faint rings around the lectern. */}
-      <g fill="none" stroke="var(--color-white)" strokeOpacity="0.06">
+      <g fill="none" stroke="var(--color-white)" strokeOpacity="0.04">
         <circle cx="300" cy="430" r="190" />
         <circle cx="300" cy="430" r="290" />
         <circle cx="300" cy="430" r="400" />
@@ -144,7 +145,7 @@ export function StageIllustration({ guestName, className = "" }: StageIllustrati
           <circle
             key={`${dot.cx}-${dot.cy}`}
             {...dot}
-            fillOpacity="0.55"
+            fillOpacity="0.4"
             className="stage-bokeh"
             style={{ animationDelay: dot.delay }}
           />
