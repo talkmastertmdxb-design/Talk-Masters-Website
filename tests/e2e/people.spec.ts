@@ -149,6 +149,52 @@ test("Achievements leads with the Smedley Award, filed under 2026", async ({ pag
   expect(await seriousViolations(page)).toEqual([]);
 });
 
+test("Achievements celebrates the 2026-27 Triple Crowns and the club's 2025-26 DCP points", async ({
+  page,
+}) => {
+  await page.goto("/achievements");
+  const members = page.locator("section[aria-labelledby='member-achievements-title']");
+  for (const [name, slot] of [
+    ["Ganesan Venkatachalam, DTM", "award-triple-crown-ganesan"],
+    ["Mohammed Jabir", "award-triple-crown-jabir"],
+  ]) {
+    const card = members.getByRole("listitem").filter({ has: page.getByRole("heading", { name }) });
+    await expect(card).toContainText("Triple Crown · District level · 2026-2027");
+    await expect(card.locator(`[data-image-slot='${slot}'] img`)).toHaveAttribute("alt", /Triple Crown/);
+  }
+  const clubAwards = page.locator("section[aria-labelledby='club-awards-title']");
+  await expect(
+    clubAwards.getByRole("heading", { name: "6 Distinguished Club Program points" }),
+  ).toBeVisible();
+  await expect(clubAwards.locator("[data-image-slot='award-dcp-points-2025-26'] img")).toBeAttached();
+  // This year's awards sit under 2026, never under 2027 (a year that hasn't started).
+  const year2026 = page.getByRole("region", { name: "2026" });
+  await expect(year2026.getByText("Triple Crown Award")).toHaveCount(2);
+  await expect(page.getByRole("region", { name: "2027" })).toHaveCount(0);
+  expect(await seriousViolations(page)).toEqual([]);
+});
+
+test("Jasim's profile shows his background and work, and leaves out what he hasn't shared yet", async ({
+  page,
+}) => {
+  await page.goto("/members");
+  await page.getByRole("button", { name: "Open Jasim Eranhole's profile" }).click();
+  const profile = page.getByRole("dialog", { name: "Jasim Eranhole" });
+  await expect(profile).toBeVisible();
+  await expect(profile).toContainText("IKEA");
+  await expect(profile).toContainText("Member since 2024");
+  await expect(profile.getByRole("heading", { name: "Where it started" })).toBeVisible();
+  await expect(profile.getByRole("heading", { name: "Jasim's Toastmasters journey" })).toBeVisible();
+  // His advice for guests and "what changed" come from him; until then they're not shown.
+  await expect(profile.getByRole("heading", { name: /advice for new guests/ })).toHaveCount(0);
+  await expect(profile.getByRole("heading", { name: "What changed" })).toHaveCount(0);
+  await expect(profile.locator("[data-image-slot='member-jassim'] img")).toHaveAttribute(
+    "alt",
+    "Jasim Eranhole, smiling, in a blue blazer",
+  );
+  expect(await seriousViolations(page)).toEqual([]);
+});
+
 test("the footer names the club in Toastmasters terms", async ({ page }) => {
   await page.goto("/");
   await expect(
@@ -156,7 +202,7 @@ test("the footer names the club in Toastmasters terms", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("Members shows the four member stories, with LinkedIn and every other profile they shared", async ({
+test("Members shows the five member stories, with LinkedIn and every other profile they shared", async ({
   page,
 }) => {
   await page.goto("/members");
@@ -165,6 +211,7 @@ test("Members shows the four member stories, with LinkedIn and every other profi
     "Prathiba Leo": "https://www.linkedin.com/in/prathibaleo12/",
     "Tarannum Sheikh": "https://www.linkedin.com/in/tarannum-sheikh-381309171/",
     "Suhayb Shaik": "https://www.linkedin.com/in/suhayb-shaik-13985231a",
+    "Jasim Eranhole": "https://www.linkedin.com/in/jassim-eranhole-90300b76/",
   };
   for (const [name, href] of Object.entries(profiles)) {
     // The closed profile holds a hidden copy of each link; check the one on the card.

@@ -10,6 +10,38 @@
     "placeholder": false
   },
   {
+    "slug": "triple-crown-ganesan",
+    "title": "Triple Crown Award",
+    "programme": "triple-crown",
+    "level": "district",
+    "year": "2026-2027",
+    "recipient": "Ganesan Venkatachalam, DTM",
+    "description": "Recognised by District 127 for completing three Pathways levels in a single Toastmasters year.",
+    "imageSlot": "award-triple-crown-ganesan",
+    "placeholder": false
+  },
+  {
+    "slug": "triple-crown-jabir",
+    "title": "Triple Crown Award",
+    "programme": "triple-crown",
+    "level": "district",
+    "year": "2026-2027",
+    "recipient": "Mohammed Jabir",
+    "description": "Completed three levels across the Presentation Mastery and Dynamic Leadership paths in one Toastmasters year. Jabir is the Immediate Past Area 11 Director and Division C Coordinator.",
+    "imageSlot": "award-triple-crown-jabir",
+    "placeholder": false
+  },
+  {
+    "slug": "dcp-points-2025-26",
+    "title": "6 Distinguished Club Program points",
+    "programme": "distinguished-club",
+    "level": "club",
+    "year": "2025-2026",
+    "description": "The club finished the 2025-26 Toastmasters year with 6 points in the Distinguished Club Program, recognised by District 127.",
+    "imageSlot": "award-dcp-points-2025-26",
+    "placeholder": false
+  },
+  {
     "slug": "talk-up-toastmasters",
     "title": "Talk Up Toastmasters Award",
     "programme": "talk-up-toastmasters",

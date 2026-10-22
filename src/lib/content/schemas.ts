@@ -233,9 +233,10 @@ export const memberSchema = z.object({
       confidence: z.string().min(1).optional(),
       networking: z.string().min(1).optional(),
     })
-    .refine((impact) => Object.values(impact).some(Boolean), "Describe at least one area of impact"),
-  /** One piece of advice for new guests. */
-  advice: z.string().min(1),
+    /** In the member's own words; leave it out until they share it (the section is then hidden). */
+    .default({}),
+  /** One piece of advice for new guests, in their own words. Optional until they give it. */
+  advice: z.string().min(1).optional(),
   /**
    * The profile's lead paragraph: their personal story with the club, or what Toastmasters
    * means to them. Not a repeat of their job title (that is `occupation`).
@@ -315,6 +316,8 @@ export const awardSchema = z
       "smedley",
       "talk-up-toastmasters",
       "beat-the-clock",
+      /** Triple Crown: three Pathways levels completed in one Toastmasters year. */
+      "triple-crown",
       "contest",
       "representation",
       "education",

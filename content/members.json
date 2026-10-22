@@ -198,5 +198,37 @@
     "spotlight": true,
     "status": "published",
     "placeholder": true
+  },
+  {
+    "slug": "jasim-eranhole",
+    "name": "Jasim Eranhole",
+    "occupation": "Regional Digital Optimization Specialist, UI/UX Specialist and Graphic Leader",
+    "organisation": "IKEA",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/jassim-eranhole-90300b76/"
+      }
+    ],
+    "segment": "professional",
+    "challenge": "He started out as a freelance artist and art teacher in India, painting commissions in acrylic and oil, before moving to Kuwait as a graphic designer in 2008.",
+    "transformation": "Today he leads digital optimisation, UI/UX and graphics for IKEA across the region, from Dubai.",
+    "journey": [
+      {
+        "milestone": "other",
+        "text": "Spent more than 15 years in design and digital for retail brands: FedEx Office, Debenhams and IKEA in Kuwait, then Alghanim Industries' Xcite.com, before joining IKEA in Dubai in 2022."
+      },
+      {
+        "milestone": "first-meeting",
+        "text": "Joined Talk-Masters in June 2024."
+      }
+    ],
+    "story": "Jasim has spent his career making ideas clear to other people: first in paint, then in print, shop windows and websites for some of the region's best-known retailers. Since June 2024, he has been practising the spoken side of that craft at Talk-Masters.",
+    "memberSince": 2024,
+    "imageSlot": "member-jassim",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": true
   }
 ]

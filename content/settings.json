@@ -21,7 +21,7 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Hor%20Al%20Anz%20Public%20Library%20Dubai",
     "placeholder": false
   },
-  "heroSlides": ["hero-speaker", "hero-microphone", "hero-stage", "hero-audience"],
+  "heroSlides": ["hero-microphone", "hero-stage", "hero-audience", "hero-banner-speaker"],
   "highlightVideo": {
     "src": "/videos/member-voices.mp4",
     "poster": "/images/member-voices-poster.webp",

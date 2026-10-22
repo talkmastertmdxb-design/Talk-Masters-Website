@@ -73,9 +73,16 @@ describe("memberSchema (Plan.md member directory + journey cards)", () => {
     ).toBe(false);
   });
 
-  it("needs at least one journey milestone and one area of impact", () => {
+  it("needs at least one journey milestone", () => {
     expect(memberSchema.safeParse({ ...member, journey: [] }).success).toBe(false);
-    expect(memberSchema.safeParse({ ...member, impact: {} }).success).toBe(false);
+  });
+
+  it("lets a new member join before they've shared their advice or what changed", () => {
+    // Their own words only: these stay empty (and hidden) until the member gives them.
+    const parsed = memberSchema.parse({ ...member, advice: undefined, impact: undefined });
+    expect(parsed.advice).toBeUndefined();
+    expect(parsed.impact).toEqual({});
+    expect(memberSchema.safeParse({ ...member, advice: "" }).success).toBe(false);
   });
 });
 
@@ -200,6 +207,15 @@ describe("achievement helpers", () => {
     expect(achievementYear(awardSchema.parse({ ...award, programme: "smedley", year: "2026-2027" }))).toBe(
       2026,
     );
+  });
+
+  it("puts an undated award from a year still in progress in that year's first calendar year", () => {
+    const tripleCrown = awardSchema.parse({ ...award, programme: "triple-crown", year: "2026-2027" });
+    // Built in 2026: the 2026-2027 year hasn't ended, so the award can only have happened in 2026.
+    expect(achievementYear(tripleCrown, 2026)).toBe(2026);
+    // Once the year is over, the usual rule applies: the year its results are announced.
+    expect(achievementYear(tripleCrown, 2027)).toBe(2027);
+    expect(achievementsByYear([tripleCrown], 2026)[0]?.[0]).toBe(2026);
   });
 
   it("groups the achievement timeline by year, newest first", () => {

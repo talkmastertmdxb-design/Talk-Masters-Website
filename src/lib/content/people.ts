@@ -58,18 +58,27 @@ const earnedInFirstHalf: ReadonlySet<Award["programme"]> = new Set(["smedley"]);
 /**
  * Calendar year for the achievement timeline. Undated awards use the year their Toastmasters year
  * ends (results are announced then), except programmes earned in July-December, such as the Smedley Award.
+ * Pass `currentYear` (the build year) so an award from a year still in progress is never placed in a
+ * year that hasn't started: it goes in that Toastmasters year's first calendar year instead.
  */
-export function achievementYear(award: Award): number {
+export function achievementYear(award: Award, currentYear?: number): number {
   if (award.achievedOn) return Number(award.achievedOn.slice(0, 4));
-  return Number(earnedInFirstHalf.has(award.programme) ? award.year.slice(0, 4) : award.year.slice(5, 9));
+  const start = Number(award.year.slice(0, 4));
+  const end = Number(award.year.slice(5, 9));
+  if (earnedInFirstHalf.has(award.programme)) return start;
+  return currentYear !== undefined && end > currentYear ? start : end;
 }
 
 /** Achievement timeline groups, newest year first; within a year, most recent first. */
-export function achievementsByYear(awards: readonly Award[]): Array<[year: number, awards: Award[]]> {
-  const sortKey = (award: Award): string => award.achievedOn ?? `${achievementYear(award)}-00-00`;
+export function achievementsByYear(
+  awards: readonly Award[],
+  currentYear?: number,
+): Array<[year: number, awards: Award[]]> {
+  const sortKey = (award: Award): string =>
+    award.achievedOn ?? `${achievementYear(award, currentYear)}-00-00`;
   const sorted = awards.toSorted((a, b) => sortKey(b).localeCompare(sortKey(a)));
   return sorted.reduce<Array<[number, Award[]]>>((groups, award) => {
-    const year = achievementYear(award);
+    const year = achievementYear(award, currentYear);
     const last = groups.at(-1);
     if (last && last[0] === year) {
       return [...groups.slice(0, -1), [year, [...last[1], award]]];
@@ -83,6 +92,7 @@ const programmeLabels: Record<Award["programme"], string> = {
   smedley: "Smedley Award",
   "talk-up-toastmasters": "Talk Up Toastmasters",
   "beat-the-clock": "Beat the Clock",
+  "triple-crown": "Triple Crown",
   contest: "Speech contest",
   representation: "Representation",
   education: "Education award",

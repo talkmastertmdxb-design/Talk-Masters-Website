@@ -42,6 +42,14 @@
     "focalPoint": "45% 60%"
   },
   {
+    "id": "hero-banner-speaker",
+    "alt": "A Talk-Masters member in a navy suit speaking beside the club banner, members listening in the foreground",
+    "aspectRatio": "4/5",
+    "brief": "A speaker at the lectern beside the club banner, seen over the audience",
+    "src": "/images/club-speaker-banner.webp",
+    "focalPoint": "60% 35%"
+  },
+  {
     "id": "manifesto-bento",
     "alt": "Club members of different backgrounds sharing dinner",
     "aspectRatio": "1/1",
@@ -273,6 +281,14 @@
     "focalPoint": "50% 25%"
   },
   {
+    "id": "member-jassim",
+    "alt": "Jasim Eranhole, smiling, in a blue blazer",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/member-jassim.webp",
+    "focalPoint": "50% 25%"
+  },
+  {
     "id": "award-one",
     "alt": "The club’s award certificate",
     "aspectRatio": "4/3",
@@ -405,5 +421,26 @@
     "aspectRatio": "1/1",
     "brief": "The award announcement graphic",
     "src": "/images/smedley-award-bronze-2026-27.webp"
+  },
+  {
+    "id": "award-triple-crown-ganesan",
+    "alt": "District 127 Program Quality graphic congratulating Ganesan Venkatachalam, DTM, of Talk-Masters Toastmasters Club, Area 11, Division C, on the Triple Crown Award",
+    "aspectRatio": "2/3",
+    "brief": "The award announcement graphic",
+    "src": "/images/award-triple-crown-ganesan.webp"
+  },
+  {
+    "id": "award-triple-crown-jabir",
+    "alt": "Talk-Masters poster congratulating TM Mohammed Jabir on achieving the Triple Crown Award",
+    "aspectRatio": "2/3",
+    "brief": "The award announcement graphic",
+    "src": "/images/award-triple-crown-jabir.webp"
+  },
+  {
+    "id": "award-dcp-points-2025-26",
+    "alt": "District 127 Program Quality graphic: 6 Distinguished Club Program points, presented to Talk-Masters Toastmasters Club, Division C, Area 11",
+    "aspectRatio": "527/746",
+    "brief": "The award announcement graphic",
+    "src": "/images/award-dcp-points-2025-26.webp"
   }
 ]

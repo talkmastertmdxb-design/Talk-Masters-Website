@@ -167,10 +167,12 @@ export function MemberDirectoryCard({ member }: MemberDirectoryCardProps) {
           </section>
         )}
 
-        <section data-profile-item className="border-gold mt-16 max-w-[48ch] border-l-2 pl-6">
-          <h3 className="text-sm text-white/55">{first}&apos;s advice for new guests</h3>
-          <p className="mt-3 font-serif text-2xl leading-snug italic">{member.advice}</p>
-        </section>
+        {member.advice && (
+          <section data-profile-item className="border-gold mt-16 max-w-[48ch] border-l-2 pl-6">
+            <h3 className="text-sm text-white/55">{first}&apos;s advice for new guests</h3>
+            <p className="mt-3 font-serif text-2xl leading-snug italic">{member.advice}</p>
+          </section>
+        )}
 
         <div data-profile-item className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-3">
           <ButtonLink href="/join">Book a guest visit</ButtonLink>

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { content } from "@/lib/content";
+import { buildYear } from "@/lib/site";
 import {
   achievementsByYear,
   featuredAward,
@@ -25,7 +26,11 @@ export default function AchievementsPage() {
   const featured = featuredAward(awards);
   const clubAwards = awards.filter((award) => !isMemberAchievement(award) && award !== featured);
   const memberAchievements = awards.filter(isMemberAchievement);
-  const timeline = achievementsByYear(awards);
+  // Achievements with their announcement poster lead; the rest follow as a list.
+  const memberPosters = memberAchievements.filter((award) => award.imageSlot);
+  const memberList = memberAchievements.filter((award) => !award.imageSlot);
+  // The build year keeps this year's undated awards out of a calendar year that hasn't started.
+  const timeline = achievementsByYear(awards, buildYear);
 
   return (
     <RevealScope as="main" id="main">
@@ -71,7 +76,15 @@ export default function AchievementsPage() {
           <ul data-reveal="stagger" className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {clubAwards.map((award) => (
               <li key={award.slug} className="rounded-panel flex flex-col bg-white p-7">
-                <AwardIcon aria-hidden="true" className="text-maroon size-7" strokeWidth={1.5} />
+                {award.imageSlot ? (
+                  <ImageSlot
+                    id={award.imageSlot}
+                    sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, 90vw"
+                    className="mx-auto w-full max-w-64"
+                  />
+                ) : (
+                  <AwardIcon aria-hidden="true" className="text-maroon size-7" strokeWidth={1.5} />
+                )}
                 <h3 className="mt-8 font-serif text-2xl">{award.title}</h3>
                 <p className="text-ink-muted mt-1 text-sm">
                   {programmeLabel(award)}, {award.year}
@@ -93,26 +106,47 @@ export default function AchievementsPage() {
             >
               Member achievements
             </h2>
-            <ul className="md:col-span-8">
-              {memberAchievements.map((award) => (
-                <li
-                  key={award.slug}
-                  data-reveal="up"
-                  className="border-hairline grid gap-2 border-t py-6 last:border-b sm:grid-cols-[1fr_auto] sm:gap-8"
-                >
-                  <div>
-                    <h3 className="text-xl font-semibold">{award.title}</h3>
-                    <p className="text-ink-muted mt-1">{award.recipient}</p>
-                    <p className="text-ink-muted mt-3 max-w-[56ch] text-base">{award.description}</p>
-                  </div>
-                  <p className="text-ink-muted text-sm sm:text-right">
-                    {levelLabel(award)} level
-                    <br />
-                    {award.year}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <div className="md:col-span-8">
+              {memberPosters.length > 0 && (
+                <ul className="grid gap-10 sm:grid-cols-2">
+                  {memberPosters.map((award) => (
+                    <li key={award.slug} data-reveal="up">
+                      <ImageSlot
+                        id={award.imageSlot!}
+                        sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                      />
+                      <p className="text-maroon mt-6 text-sm font-semibold">
+                        {programmeLabel(award)} · {levelLabel(award)} level · {award.year}
+                      </p>
+                      <h3 className="mt-2 font-serif text-2xl">{award.recipient}</h3>
+                      <p className="text-ink-muted mt-3 text-base">{award.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {memberList.length > 0 && (
+                <ul className={memberPosters.length > 0 ? "mt-14" : undefined}>
+                  {memberList.map((award) => (
+                    <li
+                      key={award.slug}
+                      data-reveal="up"
+                      className="border-hairline grid gap-2 border-t py-6 last:border-b sm:grid-cols-[1fr_auto] sm:gap-8"
+                    >
+                      <div>
+                        <h3 className="text-xl font-semibold">{award.title}</h3>
+                        <p className="text-ink-muted mt-1">{award.recipient}</p>
+                        <p className="text-ink-muted mt-3 max-w-[56ch] text-base">{award.description}</p>
+                      </div>
+                      <p className="text-ink-muted text-sm sm:text-right">
+                        {levelLabel(award)} level
+                        <br />
+                        {award.year}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </section>
       )}
