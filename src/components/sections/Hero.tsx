@@ -143,6 +143,16 @@ export function Hero() {
             </div>
 
             <div data-intro-ui className="absolute inset-0">
+              {/* Pressing it is enough: any pointer, key or scroll skips (HeroIntro). Out of the tab
+                  order because the overlay is hidden from assistive tech, and any key skips anyway. */}
+              <button
+                type="button"
+                tabIndex={-1}
+                data-intro-skip
+                className="hover:border-gold absolute top-6 right-6 inline-flex min-h-11 items-center rounded-full border border-white/25 px-5 text-sm font-semibold text-white/85 transition-colors duration-(--duration-quick) md:top-8 md:right-10"
+              >
+                Skip intro
+              </button>
               <div className="intro-counter-wrap">
                 <span data-intro-count className="intro-count font-serif tabular-nums">
                   0

@@ -21,6 +21,21 @@ interface HeroIntroProps {
 const SKIP_EVENTS = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
 /** Never hold the iris longer than this waiting for the hero photo. */
 const IMAGE_WAIT_MS = 1200;
+/** The counter's run to 100; everything else is timed from it. Whole intro: ~2.4s. */
+const COUNT_S = 0.8;
+const IRIS_AT_S = COUNT_S + 0.2;
+/** A skip happens on pointerdown; the click that follows lands after the overlay is gone. */
+const SWALLOW_CLICK_MS = 600;
+
+/** Stops the click that ends a skip from also pressing whatever is now under the pointer. */
+function swallowNextClick(): void {
+  const swallow = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  window.addEventListener("click", swallow, { capture: true, once: true });
+  setTimeout(() => window.removeEventListener("click", swallow, { capture: true }), SWALLOW_CLICK_MS);
+}
 
 /**
  * React Strict Mode (development) mounts, unmounts and re-mounts every component.
@@ -57,7 +72,7 @@ function buildReveal(chars: Element[], root: HTMLElement): gsap.core.Timeline {
 }
 
 /**
- * The first-visit intro (adapted from Hero_Animation_2, ~8.5s cut to ~4.3s).
+ * The first-visit intro (adapted from Hero_Animation_2, ~8.5s cut to ~2.4s).
  * 1. Count: the number grows from small to large on the left while it counts to 100.
  * 2. Exit: its digits slide away through a mask.
  * 3. Iris: the hero photo opens from a point into a held square, centred on the photo panel.
@@ -81,12 +96,12 @@ function buildIntro(root: HTMLElement, onComplete: () => void): gsap.core.Timeli
   const tl = gsap.timeline({ onComplete });
 
   // 1. Count to 100 while the number grows and the track draws.
-  tl.from(q("[data-intro-mark]"), { opacity: 0, y: 10, duration: 0.6, ease: ease.deliver }, 0)
+  tl.from(q("[data-intro-mark]"), { opacity: 0, y: 10, duration: 0.4, ease: ease.deliver }, 0)
     .to(
       count,
       {
         value: 100,
-        duration: 1.6,
+        duration: COUNT_S,
         ease: "power3.out",
         onUpdate: () => {
           if (counter) counter.textContent = String(Math.floor(count.value));
@@ -94,32 +109,32 @@ function buildIntro(root: HTMLElement, onComplete: () => void): gsap.core.Timeli
       },
       0,
     )
-    .fromTo(counter ?? [], { scale: 0.25 }, { scale: 1, duration: 1.6, ease: "power3.out" }, 0)
-    .fromTo(q("[data-intro-track]"), { scaleX: 0 }, { scaleX: 1, duration: 1.6, ease: "power3.out" }, 0);
+    .fromTo(counter ?? [], { scale: 0.25 }, { scale: 1, duration: COUNT_S, ease: "power3.out" }, 0)
+    .fromTo(q("[data-intro-track]"), { scaleX: 0 }, { scaleX: 1, duration: COUNT_S, ease: "power3.out" }, 0);
 
   // 2. Digits slide away to the left, one after another.
   tl.add(() => {
     if (!counter) return;
     const digits = SplitText.create(counter, { type: "chars", mask: "chars" });
-    gsap.to(digits.chars, { xPercent: -105, duration: 0.55, ease: "power3.in", stagger: 0.06 });
-  }, 1.75);
+    gsap.to(digits.chars, { xPercent: -105, duration: 0.35, ease: "power3.in", stagger: 0.04 });
+  }, COUNT_S + 0.05);
 
   // 3. Iris: closed point → held square (wait for the photo if it isn't decoded yet).
   if (iris) {
     tl.set(iris, { clipPath: irisPoint(rect, viewport) }, 0)
-      .addPause(2.05, () => {
+      .addPause(IRIS_AT_S, () => {
         void ready.then(() => tl.resume());
       })
-      .to(iris, { clipPath: irisSquare(rect, viewport), duration: 0.9, ease: HOP }, 2.05)
-      .fromTo(q("[data-intro-zoom]"), { scale: 1.7 }, { scale: 1.35, duration: 0.9, ease: HOP }, 2.05)
+      .to(iris, { clipPath: irisSquare(rect, viewport), duration: 0.55, ease: HOP }, IRIS_AT_S)
+      .fromTo(q("[data-intro-zoom]"), { scale: 1.7 }, { scale: 1.35, duration: 0.55, ease: HOP }, IRIS_AT_S)
       // 4. Open to exactly the panel; the progress fills as the stage arrives.
-      .to(iris, { clipPath: irisPanel(rect, viewport), duration: 1.2, ease: HOP }, ">+0.05")
-      .to(q("[data-intro-zoom]"), { scale: 1, duration: 1.2, ease: HOP }, "<")
-      .fromTo(q("[data-intro-fill]"), { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: HOP }, "<")
+      .to(iris, { clipPath: irisPanel(rect, viewport), duration: 0.8, ease: HOP }, ">")
+      .to(q("[data-intro-zoom]"), { scale: 1, duration: 0.8, ease: HOP }, "<")
+      .fromTo(q("[data-intro-fill]"), { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: HOP }, "<")
       // The brand grade arrives with the stage, so the last frame matches the hero exactly.
-      .to(q("[data-intro-grade]"), { opacity: 1, duration: 0.9, ease: "power2.inOut" }, "<0.25")
-      .to(q("[data-intro-ui]"), { opacity: 0, duration: 0.35, ease: "power2.out" }, ">-0.3")
-      .to(q("[data-intro-overlay]"), { opacity: 0, duration: 0.3, ease: "power1.out" }, "<0.1");
+      .to(q("[data-intro-grade]"), { opacity: 1, duration: 0.6, ease: "power2.inOut" }, "<0.15")
+      .to(q("[data-intro-ui]"), { opacity: 0, duration: 0.25, ease: "power2.out" }, ">-0.25")
+      .to(q("[data-intro-overlay]"), { opacity: 0, duration: 0.25, ease: "power1.out" }, "<0.05");
   }
   return tl;
 }
@@ -167,8 +182,9 @@ export function HeroIntro({ children, className = "" }: HeroIntroProps) {
 
         const intro = withIntro ? buildIntro(el, endIntro) : undefined;
 
-        const skip = () => {
+        const skip = (event: Event) => {
           if (!introDone) {
+            if (event.type === "pointerdown") swallowNextClick();
             intro?.progress(1);
             endIntro();
           }

@@ -12,13 +12,11 @@ interface MotionProviderProps {
   children: ReactNode;
 }
 
-const isFormField = (el: Element | null): boolean =>
-  el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement;
-
 /**
  * Owns smooth scrolling (Lenis) and keeps ScrollTrigger in sync with it.
  * Desktop: full smoothing. Touch: lightweight (native momentum, no syncTouch).
- * Reduced motion: Lenis is never created. Paused while someone types in a form.
+ * Reduced motion: Lenis is never created. It keeps running while a form field has focus
+ * (stopping it froze the page); a field that scrolls itself carries data-lenis-prevent.
  */
 export function MotionProvider({ children }: MotionProviderProps) {
   useEffect(() => {
@@ -37,16 +35,12 @@ export function MotionProvider({ children }: MotionProviderProps) {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    const onFocusIn = () => (isFormField(document.activeElement) ? lenis.stop() : lenis.start());
-    document.addEventListener("focusin", onFocusIn);
-
     // Images and fonts change page height; re-measure triggers once they settle.
     const refresh = () => ScrollTrigger.refresh();
     window.addEventListener("load", refresh);
     void document.fonts?.ready.then(refresh);
 
     return () => {
-      document.removeEventListener("focusin", onFocusIn);
       window.removeEventListener("load", refresh);
       gsap.ticker.remove(raf);
       lenis.destroy();

@@ -51,7 +51,7 @@ export interface GuestMessageParts {
   /** May be empty while the visitor is still typing. */
   name: string;
   contactName: string;
-  /** "Saturday 7 November", or null when the guest isn't sure yet. */
+  /** "Sunday 1 November", or null when the guest isn't sure yet. */
   meetingLabel: string | null;
   moment?: Moment;
   note?: string;

@@ -64,3 +64,20 @@ export function agendaClock(progress: number): string {
   const minutes = Math.round(from + (to - from) * (position - index));
   return `${Math.floor(minutes / 60)}:${String(minutes % 60).padStart(2, "0")}`;
 }
+
+/** "am" or "pm" for an agenda time: meetings run on Sunday mornings, into the afternoon. */
+export function meridiem(time: string): "am" | "pm" {
+  return toMinutes(time) < 12 * 60 ? "am" : "pm";
+}
+
+interface ScrollBox {
+  scrollLeft: number;
+  scrollWidth: number;
+  clientWidth: number;
+}
+
+/** Phones swipe the agenda row instead of pinning it: how far along the row they are, 0-1. */
+export function swipeProgress({ scrollLeft, scrollWidth, clientWidth }: ScrollBox): number {
+  const distance = scrollWidth - clientWidth;
+  return distance > 0 ? clamp01(scrollLeft / distance) : 0;
+}

@@ -4,7 +4,7 @@
   "tagline": "A Club with Difference",
   "description": "A public speaking and leadership club for everyone, of every age and background. Find your voice, lead with confidence, inspire the world.",
   "meeting": {
-    "weekday": "saturday",
+    "weekday": "sunday",
     "weeksOfMonth": [1, 3],
     "startTime": "10:30",
     "durationMinutes": 120,

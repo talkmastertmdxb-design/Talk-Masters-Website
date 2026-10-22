@@ -290,7 +290,7 @@ ARCHITECTURE.md stays the base. Amendments:
   - The agenda is a real ordered list.
   - The booth timer announces through `aria-live="polite"` and has pause and reset buttons.
   - The timing light has text labels.
-- Lenis off while focus is inside forms. Skip link. Focus rings: gold on dark, navy on light, 3px with offset.
+- Lenis keeps running inside forms (stopping it on focus froze the page, fixed 2026-10-22); fields that scroll themselves use `data-lenis-prevent`. Skip link. Focus rings: gold on dark, navy on light, 3px with offset.
 - Target size of at least 44px, `prefers-reduced-motion` honoured everywhere, captions for any video, and a "Pause motion" toggle in the footer (WCAG 2.2.2).
 - Contrast checked on the tokens before any components are built.
 
@@ -372,7 +372,7 @@ Each phase ends with a **gate**: tests green, a code review with no CRITICAL or 
 
 - 2026-10-18: Intro replaced with an adaptation of `Hero_Animation_2`: a serif counter grows on the left while counting to 100, its digits slide away, then the hero photo opens as an "iris" (point → held square → exactly the photo panel, with the template's "hop" ease) and the brand grade fades in as it opens. Headline letters slide in from the right. ~8.5s cut to ~4.3s. Fixed: the intro never played in development (React Strict Mode re-mount ended it).
 
-- 2026-10-22: Guest booking is **WhatsApp only** (the club's most active channel). Meetings are the 1st and 3rd Saturday; the site works out the next dates in the browser (`src/lib/content/meeting.ts`), with Google Calendar and `/meetings.ics` links for the recurring series. The header Timing Light (S2) was removed for a "Next meeting" chip. FAQ added to the home page and `/join`.
+- 2026-10-22: Guest booking is **WhatsApp only** (the club's most active channel). Meetings are the 1st and 3rd **Sunday** (corrected from Saturday the same day); the site works out the next dates in the browser (`src/lib/content/meeting.ts`), with Google Calendar and `/meetings.ics` links for the recurring series. The header Timing Light (S2) was removed for a "Next meeting" chip. FAQ added to the home page and `/join`.
 - 2026-10-22: `/join` guest form (`src/components/booking/`): name, meeting date, optional "what's coming up" and note, and which officer to message. It writes the WhatsApp message live (a phone preview over abstract stage art, where the guest's chair lights up with their name) and opens WhatsApp with it ready to send. Nothing is stored, so the Server Action, Turnstile, Resend and Sheet in §5.1 are not needed for now.
 
 Estimated time to launch from here: **about 2-3 weeks for one developer**, once real content arrives.

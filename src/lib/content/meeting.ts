@@ -42,7 +42,7 @@ export function meetingTimeRange({ startTime, durationMinutes }: MeetingTimes): 
 
 const capitalise = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
-/** [1, 3] Saturday → "1st & 3rd Saturday of every month" (long) / "1st & 3rd Sat" (short). */
+/** [1, 3] Sunday → "1st & 3rd Sunday of every month" (long) / "1st & 3rd Sun" (short). */
 export function meetingSchedule(
   { weekday, weeksOfMonth }: Pick<MeetingRule, "weekday" | "weeksOfMonth">,
   style: "long" | "short" = "long",
@@ -168,14 +168,14 @@ function daysUntil(start: Date, timeZone: string, now: Date): number {
   return dayNumber(start) - dayNumber(now);
 }
 
-/** "Saturday 7 November" (long) / "Sat 7 Nov" (short), on the club's calendar. */
+/** "Sunday 1 November" (long) / "Sun 1 Nov" (short), on the club's calendar. */
 export function formatMeetingDate(start: Date, timeZone: string, style: "long" | "short" = "long"): string {
   return new Intl.DateTimeFormat("en-GB", { timeZone, weekday: style, day: "numeric", month: style })
     .format(start)
     .replace(",", "");
 }
 
-/** "Today", "Tomorrow", or the date: "Saturday 7 November" (long) / "Sat 7 Nov" (short). */
+/** "Today", "Tomorrow", or the date: "Sunday 1 November" (long) / "Sun 1 Nov" (short). */
 export function meetingDayLabel(
   start: Date,
   timeZone: string,

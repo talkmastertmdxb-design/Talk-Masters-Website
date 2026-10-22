@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
-import { CountUp } from "@/components/motion/CountUp";
 import { content } from "@/lib/content";
 
 /**
- * Manifesto (Section 2): who we are, and who it's for. Bento grid of stat / photo /
- * stat / stat cards that settle in one after another (Animation 06); the photo
- * drifts with soft parallax (Animation 07).
+ * Manifesto (Section 2): who we are, and who it's for. Bento grid of culture cards around
+ * a photo (content/culture.json), settling in one after another (Animation 06); the photo
+ * drifts with soft parallax (Animation 07). The club's numbers live in the Hero, not here.
  */
 export function About() {
-  const { stats } = content.settings;
-  const [first, ...rest] = stats;
+  const [first, ...rest] = content.culture;
 
   return (
     <section id="about" aria-labelledby="about-title" className="py-section bg-soft-gray">
@@ -42,7 +40,7 @@ export function About() {
           data-reveal="stagger"
           className="mt-16 grid gap-4 sm:grid-cols-2 md:mt-24 lg:grid-cols-4 lg:grid-rows-2"
         >
-          {first && <StatCard {...first} />}
+          {first && <CultureCard number={1} {...first} />}
           <div className="rounded-panel bg-surface relative isolate overflow-hidden sm:row-span-2 lg:col-span-2 lg:row-span-2">
             <div data-parallax="5" className="absolute inset-x-0 -inset-y-[8%]">
               <ImageSlot
@@ -58,8 +56,8 @@ export function About() {
               </p>
             </div>
           </div>
-          {rest.map((stat) => (
-            <StatCard key={stat.label} {...stat} />
+          {rest.map((card, index) => (
+            <CultureCard key={card.title} number={index + 2} {...card} />
           ))}
         </div>
       </div>
@@ -67,19 +65,22 @@ export function About() {
   );
 }
 
-interface StatCardProps {
-  label: string;
-  value: number;
-  suffix: string;
+interface CultureCardProps {
+  number: number;
+  title: string;
+  text: string;
 }
 
-function StatCard({ label, value, suffix }: StatCardProps) {
+function CultureCard({ number, title, text }: CultureCardProps) {
   return (
     <div className="rounded-panel flex min-h-44 flex-col justify-between bg-white p-6 shadow-[0_10px_30px_rgb(0_0_0/0.04)]">
-      <p className="text-ink-muted text-sm">{label}</p>
-      <p className="mt-6 font-serif text-[clamp(2.75rem,2rem+3vw,4.5rem)] leading-none tracking-[-0.02em]">
-        <CountUp value={value} suffix={suffix} />
+      <p aria-hidden="true" className="text-maroon font-serif text-lg tabular-nums">
+        {String(number).padStart(2, "0")}
       </p>
+      <div className="mt-8">
+        <h3 className="font-serif text-2xl leading-tight tracking-[-0.01em]">{title}</h3>
+        <p className="text-ink-muted mt-2">{text}</p>
+      </div>
     </div>
   );
 }

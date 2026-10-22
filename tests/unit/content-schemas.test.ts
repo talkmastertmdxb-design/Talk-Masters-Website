@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  cultureSchema,
   eventSchema,
   imageSlotSchema,
   parseContent,
@@ -131,5 +132,21 @@ describe("parseContent", () => {
     } catch (error) {
       expect((error as Error).message).toContain("content/settings.json");
     }
+  });
+});
+
+describe("cultureSchema", () => {
+  const card = { title: "Guests never have to speak", text: "Come and watch." };
+
+  it("fills the About bento's four card slots, or fewer", () => {
+    expect(cultureSchema.safeParse([card]).success).toBe(true);
+    expect(cultureSchema.safeParse([card, card, card, card]).success).toBe(true);
+    expect(cultureSchema.safeParse([]).success).toBe(false);
+    expect(cultureSchema.safeParse([card, card, card, card, card]).success).toBe(false);
+  });
+
+  it("keeps each card short enough for its tile", () => {
+    expect(cultureSchema.safeParse([{ ...card, title: "x".repeat(41) }]).success).toBe(false);
+    expect(cultureSchema.safeParse([{ ...card, text: "x".repeat(141) }]).success).toBe(false);
   });
 });

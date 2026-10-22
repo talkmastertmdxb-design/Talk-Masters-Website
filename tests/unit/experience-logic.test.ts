@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { agenda, agendaClock, activeAgendaIndex } from "@/lib/motion/agenda";
+import { agenda, agendaClock, activeAgendaIndex, meridiem, swipeProgress } from "@/lib/motion/agenda";
 import { SPEECH, TABLE_TOPIC, timingSignal } from "@/lib/motion/timing";
 import { nextTopicIndex, ringOffset } from "@/lib/booth/booth";
 
@@ -31,6 +31,28 @@ describe("agenda (Inside a meeting)", () => {
     expect(agendaClock(-0.5)).toBe("10:30");
     expect(agendaClock(3)).toBe("12:15");
     expect(activeAgendaIndex(3)).toBe(agenda.length - 1);
+  });
+});
+
+describe("meridiem (a Saturday-morning meeting)", () => {
+  it("is am before noon and pm from noon", () => {
+    expect(meridiem("10:30")).toBe("am");
+    expect(meridiem("11:59")).toBe("am");
+    expect(meridiem("12:15")).toBe("pm");
+  });
+});
+
+describe("swipeProgress (the agenda row on phones)", () => {
+  it("maps the row's scroll position to 0-1", () => {
+    expect(swipeProgress({ scrollLeft: 0, scrollWidth: 1300, clientWidth: 390 })).toBe(0);
+    expect(swipeProgress({ scrollLeft: 455, scrollWidth: 1300, clientWidth: 390 })).toBe(0.5);
+    expect(swipeProgress({ scrollLeft: 910, scrollWidth: 1300, clientWidth: 390 })).toBe(1);
+  });
+
+  it("is 0 when the row doesn't scroll, and clamps overscroll", () => {
+    expect(swipeProgress({ scrollLeft: 0, scrollWidth: 390, clientWidth: 390 })).toBe(0);
+    expect(swipeProgress({ scrollLeft: -20, scrollWidth: 1300, clientWidth: 390 })).toBe(0);
+    expect(swipeProgress({ scrollLeft: 960, scrollWidth: 1300, clientWidth: 390 })).toBe(1);
   });
 });
 

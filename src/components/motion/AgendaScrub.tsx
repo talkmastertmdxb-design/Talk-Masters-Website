@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, type ReactNode } from "react";
-import { activeAgendaIndex, agendaClock } from "@/lib/motion/agenda";
+import { activeAgendaIndex, agendaClock, meridiem, swipeProgress } from "@/lib/motion/agenda";
 import { media } from "@/lib/motion/tokens";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -18,8 +18,9 @@ interface AgendaScrubProps {
  * Signature moment S3. Desktop: the section pins and scroll moves the meeting
  * along: the card track slides (Animation 10), the clock counts (11) and the
  * Voice Line draws through the meeting (12).
- * Expects [data-agenda-track], [data-agenda-clock], [data-agenda-line] and
- * [data-step] cards inside. Mobile / reduced motion: a swipeable row instead.
+ * Expects [data-agenda-track], [data-agenda-clock] (with [data-agenda-meridiem]),
+ * [data-agenda-line] and [data-step] cards inside. Phones / reduced motion: a swipeable
+ * row, and swiping it moves the clock, the current card and the progress bar instead.
  */
 export function AgendaScrub({ children, className = "" }: AgendaScrubProps) {
   const root = useRef<HTMLDivElement>(null);
@@ -28,14 +29,27 @@ export function AgendaScrub({ children, className = "" }: AgendaScrubProps) {
     () => {
       const el = root.current;
       const track = el?.querySelector<HTMLElement>("[data-agenda-track]");
-      const clock = el?.querySelector<HTMLElement>("[data-agenda-clock]");
       const line = el?.querySelector<SVGPathElement>("[data-agenda-line]");
-      if (!el || !track || !clock) return;
+      if (!el || !track) return;
 
+      const clocks = gsap.utils.toArray<HTMLElement>("[data-agenda-clock]", el);
+      const meridiems = gsap.utils.toArray<HTMLElement>("[data-agenda-meridiem]", el);
       const cards = gsap.utils.toArray<HTMLElement>("[data-step]", el);
       const setCurrent = (index: number) =>
         cards.forEach((card, i) => card.toggleAttribute("data-current", i === index));
-      setCurrent(0);
+      /** Moves the whole meeting to `progress` (0-1): clock, am/pm, current card, progress bar. */
+      const show = (progress: number) => {
+        const time = agendaClock(progress);
+        clocks.forEach((clock) => (clock.textContent = time));
+        meridiems.forEach((label) => (label.textContent = meridiem(time)));
+        setCurrent(activeAgendaIndex(progress));
+        el.style.setProperty("--agenda-progress", String(progress));
+      };
+      show(0);
+
+      // Phones and reduced motion: the row scrolls natively; follow it (a no-op while pinned).
+      const onSwipe = () => show(swipeProgress(track));
+      track.addEventListener("scroll", onSwipe, { passive: true });
 
       const mm = gsap.matchMedia();
       mm.add(`${media.desktop} and (prefers-reduced-motion: no-preference)`, () => {
@@ -55,8 +69,7 @@ export function AgendaScrub({ children, className = "" }: AgendaScrubProps) {
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
-              clock.textContent = agendaClock(self.progress);
-              setCurrent(activeAgendaIndex(self.progress));
+              show(self.progress);
               if (line) line.style.strokeDashoffset = String(1 - self.progress);
             },
           },
@@ -64,12 +77,14 @@ export function AgendaScrub({ children, className = "" }: AgendaScrubProps) {
 
         return () => {
           delete el.dataset.pinned;
-          clock.textContent = agendaClock(0);
           if (line) line.style.strokeDashoffset = "";
-          setCurrent(0);
+          show(0);
         };
       });
-      return () => mm.revert();
+      return () => {
+        track.removeEventListener("scroll", onSwipe);
+        mm.revert();
+      };
     },
     { scope: root },
   );

@@ -17,7 +17,7 @@ test.beforeEach(async ({ page, context }) => {
   await page.clock.setFixedTime(THURSDAY);
   await page.goto("/join");
   // The date choices appear once the form has hydrated; before that the button can't hand off yet.
-  await expect(page.locator("input[name='meeting'][value='2026-11-07']")).toBeAttached();
+  await expect(page.locator("input[name='meeting'][value='2026-11-01']")).toBeAttached();
 });
 
 const visiblePreview = (page: Page) => page.locator("[data-chat-message]").filter({ visible: true });
@@ -25,12 +25,12 @@ const visiblePreview = (page: Page) => page.locator("[data-chat-message]").filte
 test("the message is written live and opens in WhatsApp, ready for the chosen officer", async ({ page }) => {
   await page.getByLabel("Your name").fill("Sara Ahmed");
   await page.getByText("A job interview").click();
-  await page.getByText("Sat 21 Nov").click();
+  await page.getByText("Sun 15 Nov").click();
   await page.getByText("Mansoor", { exact: true }).click();
   await page.getByLabel(/Anything we should know/).fill("I'm a little nervous!");
 
   const expected =
-    "Hi Mansoor! I'm Sara Ahmed, and I'd like to visit Talk-Masters as a guest at the meeting on Saturday 21 November. Could you save me a seat?\n\n" +
+    "Hi Mansoor! I'm Sara Ahmed, and I'd like to visit Talk-Masters as a guest at the meeting on Sunday 15 November. Could you save me a seat?\n\n" +
     "I have a job interview coming up.\n\nI'm a little nervous!";
   await expect(visiblePreview(page)).toHaveText(expected, { useInnerText: true });
 
@@ -68,6 +68,26 @@ test("guests who aren't sure of the date can still ask", async ({ page }) => {
   await expect(visiblePreview(page)).toHaveText(
     "Hi Lulu! I'm Omar, and I'd like to visit Talk-Masters as a guest. I'm not sure which date yet.",
   );
+});
+
+test.describe("with smooth scrolling", () => {
+  test("the page still scrolls while a form field has focus", async ({ browser, isMobile }, testInfo) => {
+    test.skip(isMobile, "Smooth scrolling is a desktop feature; phones scroll natively");
+    // A context of its own: the fixed clock from beforeEach would also freeze Lenis's animation frames.
+    const context = await browser.newContext({ ...testInfo.project.use, reducedMotion: "no-preference" });
+    const page = await context.newPage();
+    await page.goto("/join");
+    await expect(page.locator("input[name='meeting']").first()).toBeAttached();
+    for (const field of [page.getByLabel("Your name"), page.locator("input[name='moment']").first()]) {
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await field.focus();
+      const before = await page.evaluate(() => window.scrollY);
+      await page.mouse.move(400, 400);
+      await page.mouse.wheel(0, 600);
+      await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before + 200);
+    }
+    await context.close();
+  });
 });
 
 test("the guest form has no serious accessibility violations", async ({ page }) => {

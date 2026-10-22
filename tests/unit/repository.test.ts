@@ -12,6 +12,7 @@ const base: RawContent = {
   testimonials: [],
   officers: [],
   faqs: [],
+  culture: [],
   tableTopics: [],
   imageSlots: [],
 };

@@ -390,6 +390,11 @@
   .agenda[data-pinned] .agenda-card[data-current] {
     opacity: 1;
   }
+  /* Phones: how far the agenda row has been swiped (set by AgendaScrub). */
+  .agenda-progress {
+    transform: scaleX(max(var(--agenda-progress, 0), 0.06));
+  }
+
   .agenda-track,
   .slider-track {
     scrollbar-width: none;
@@ -561,7 +566,7 @@
   html.intro .intro-overlay {
     display: block;
     /* Failsafe: never block the page if the script doesn't arrive. */
-    animation: intro-failsafe 0.6s ease 6s forwards;
+    animation: intro-failsafe 0.6s ease 4s forwards;
   }
   @keyframes intro-failsafe {
     to {
@@ -624,7 +629,7 @@
   }
   html.intro .site-header {
     transform: translateY(-140%);
-    animation: nav-failsafe 0s linear 6.5s forwards;
+    animation: nav-failsafe 0s linear 4.5s forwards;
   }
   @keyframes nav-failsafe {
     to {

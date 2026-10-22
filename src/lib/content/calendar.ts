@@ -32,7 +32,7 @@ export interface CalendarDetails {
   meeting: MeetingRule & { venue: string; city: string };
 }
 
-/** "FREQ=MONTHLY;BYDAY=1SA,3SA". */
+/** "FREQ=MONTHLY;BYDAY=1SU,3SU". */
 export function meetingRRule({
   weekday,
   weeksOfMonth,

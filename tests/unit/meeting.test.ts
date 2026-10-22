@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { content } from "@/lib/content";
 import {
   meetingDayLabel,
   meetingSchedule,
@@ -7,7 +8,7 @@ import {
   type MeetingRule,
 } from "@/lib/content/meeting";
 
-/** The club's real rule: 1st and 3rd Saturday, 10:30 to 12:30, Dubai time (UTC+4). */
+/** An example rule (the club meets on Sundays; the logic is the same): 1st and 3rd Saturday, 10:30 to 12:30, Dubai time. */
 const club: MeetingRule = {
   weekday: "saturday",
   weeksOfMonth: [1, 3],
@@ -111,5 +112,15 @@ describe("meetingDayLabel", () => {
   it("gives the date further ahead, long or short", () => {
     expect(meetingDayLabel(start, club.timeZone, at("2026-10-22T08:00:00Z"))).toBe("Saturday 7 November");
     expect(meetingDayLabel(start, club.timeZone, at("2026-10-22T08:00:00Z"), "short")).toBe("Sat 7 Nov");
+  });
+});
+
+describe("the club's own schedule (content/settings.json)", () => {
+  it("is the 1st and 3rd Sunday, 10:30 am to 12:30 pm, in Dubai", () => {
+    const { meeting } = content.settings;
+    expect(meetingSchedule(meeting)).toBe("1st & 3rd Sunday of every month");
+    expect(meetingTimeRange(meeting)).toBe("10:30 am – 12:30 pm");
+    expect(meeting.timeZone).toBe("Asia/Dubai");
+    expect(nextMeeting(meeting, at("2026-10-22T08:00:00Z"))?.date).toBe("2026-11-01");
   });
 });

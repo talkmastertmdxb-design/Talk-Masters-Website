@@ -71,7 +71,7 @@ export const settingsSchema = z.object({
   parentOrganisation: z.string().min(1),
   tagline: z.string().min(1),
   description: z.string().min(1),
-  /** When regular meetings happen, e.g. the 1st and 3rd Saturday. The site works out the dates. */
+  /** When regular meetings happen, e.g. the 1st and 3rd Sunday. The site works out the dates. */
   meeting: z.object({
     weekday: z.enum(WEEKDAYS),
     weeksOfMonth: z
@@ -339,6 +339,21 @@ export const faqSchema = z.object({
   placeholder,
 });
 
+/**
+ * The About section's culture cards: what it's like to be in the room (content/culture.json).
+ * The bento grid has four card slots around its photo, so one to four short cards.
+ */
+export const cultureSchema = z
+  .array(
+    z.object({
+      title: z.string().min(1).max(40, "Keep the title under 40 characters so it fits its tile"),
+      text: z.string().min(1).max(140, "Keep the text under 140 characters so it fits its tile"),
+      placeholder,
+    }),
+  )
+  .min(1, "Add at least one card")
+  .max(4, "The About grid has room for 4 cards");
+
 export const tableTopicSchema = z.object({
   prompt: z.string().min(1),
 });
@@ -387,6 +402,7 @@ export type Award = z.infer<typeof awardSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
+export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type TableTopic = z.infer<typeof tableTopicSchema>;
 export type ImageSlot = z.infer<typeof imageSlotSchema>;
 export type Video = z.infer<typeof videoSchema>;

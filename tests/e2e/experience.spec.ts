@@ -18,7 +18,7 @@ test.describe("signature moments", () => {
     const order = [
       "Talk-Masters is where nervous first words become confident speeches.",
       "Nervous about speaking? So was everyone here.",
-      "What actually happens on the night",
+      "What happens on a Sunday morning",
       "Your first Table Topic, right here.",
       "Real People. Real Growth.",
       "The people who run the room",
@@ -47,12 +47,26 @@ test.describe("signature moments", () => {
   test("the pinned agenda clock advances as you scroll", async ({ page, isMobile }, testInfo) => {
     test.skip(isMobile || testInfo.project.name === "reduced-motion", "Pinning needs desktop and motion");
     await page.goto("/");
-    const clock = page.locator("[data-agenda-clock]");
+    const clock = page.locator("[data-agenda-clock]").first();
     const top = await page
       .locator("#inside-a-meeting")
       .evaluate((el) => el.getBoundingClientRect().top + scrollY);
     await page.evaluate((y) => window.scrollTo(0, y + 1200), top);
     await expect.poll(async () => clock.textContent(), { timeout: 5000 }).not.toBe("10:30");
+  });
+
+  test("on phones, swiping the agenda moves the clock and the progress bar", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "Phones swipe the row; desktop pins it");
+    await page.goto("/");
+    const section = page.locator("#inside-a-meeting");
+    const clock = section.locator("[data-agenda-clock]").filter({ visible: true });
+    await section.scrollIntoViewIfNeeded();
+    await expect(clock).toHaveText("10:30");
+    await expect(section.locator("[data-agenda-meridiem]").filter({ visible: true })).toHaveText("am");
+    await section.locator("[data-agenda-track]").evaluate((track) => (track.scrollLeft = track.scrollWidth));
+    await expect(clock).toHaveText("12:15");
+    await expect(section.locator("[data-agenda-meridiem]").filter({ visible: true })).toHaveText("pm");
+    await expect(section.locator(".agenda")).toHaveCSS("--agenda-progress", "1");
   });
 
   test("the Table Topics booth gives a topic and starts the timer", async ({ page }) => {
@@ -127,7 +141,7 @@ test.describe("hero photos", () => {
     await page.clock.setFixedTime(new Date("2026-10-22T08:00:00Z"));
     await page.goto("/");
     const hero = page.locator("section[aria-labelledby='hero-title']");
-    await expect(hero.getByText(/Next meeting: Saturday 7 November/)).toBeVisible();
+    await expect(hero.getByText(/Next meeting: Sunday 1 November/)).toBeVisible();
     await expect(hero.getByText("10:30 am – 12:30 pm")).toBeVisible();
     await expect(hero.getByText(/Hor Al Anz Public Library, Dubai/)).toBeVisible();
   });

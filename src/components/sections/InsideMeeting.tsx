@@ -1,11 +1,12 @@
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { AgendaScrub } from "@/components/motion/AgendaScrub";
-import { agenda } from "@/lib/motion/agenda";
+import { ArrowRight } from "lucide-react";
+import { agenda, meridiem } from "@/lib/motion/agenda";
 import { voicePath } from "@/lib/motion/voice";
 
 const line = voicePath({ width: 1000, height: 60, amplitude: 0.55, phase: 0.6, samples: 160 });
 
-/** Inside a Meeting (Section 4, signature moment S3): one Saturday morning, 10:30 to 12:15. */
+/** Inside a Meeting (Section 4, signature moment S3): one Sunday morning, 10:30 am to 12:15 pm. */
 export function InsideMeeting() {
   return (
     <section
@@ -20,7 +21,7 @@ export function InsideMeeting() {
               Inside a meeting
             </p>
             <h2 id="inside-title" data-reveal="lines" className="text-h2 mt-5 max-w-[18ch]">
-              What actually happens on the night
+              What happens on a Sunday morning
             </h2>
           </div>
           <p
@@ -28,7 +29,9 @@ export function InsideMeeting() {
             className="text-gold hidden font-serif text-[clamp(4rem,3rem+4vw,7.5rem)] leading-none tabular-nums md:block"
           >
             <span data-agenda-clock>{agenda[0]!.time}</span>
-            <span className="text-muted ml-3 align-top font-sans text-base">pm</span>
+            <span data-agenda-meridiem className="text-muted ml-3 align-top font-sans text-base">
+              {meridiem(agenda[0]!.time)}
+            </span>
           </p>
         </div>
 
@@ -76,13 +79,30 @@ export function InsideMeeting() {
               <ImageSlot id={item.imageSlot} sizes="(min-width: 900px) 26rem, 78vw" />
               <p className="text-gold mt-6 font-serif text-3xl tabular-nums">
                 {item.time}
-                <span className="sr-only"> pm</span>
+                <span className="sr-only"> {meridiem(item.time)}</span>
               </p>
               <h3 className="text-h3 mt-2">{item.title}</h3>
               <p className="mt-3 max-w-[36ch] text-white/70">{item.body}</p>
             </li>
           ))}
         </ol>
+
+        {/* Phones: the row is swiped, not pinned. The clock and bar follow the swipe (AgendaScrub). */}
+        <div aria-hidden="true" className="container-site mt-2 flex items-center gap-4 md:hidden">
+          <p className="text-gold font-serif text-2xl tabular-nums">
+            <span data-agenda-clock>{agenda[0]!.time}</span>
+            <span data-agenda-meridiem className="text-muted ml-1.5 font-sans text-sm">
+              {meridiem(agenda[0]!.time)}
+            </span>
+          </p>
+          <span className="h-px flex-1 bg-white/15">
+            <span className="agenda-progress bg-gold block h-full origin-left" />
+          </span>
+          <span className="text-muted inline-flex items-center gap-1.5 text-sm">
+            Swipe
+            <ArrowRight className="size-4" strokeWidth={1.5} />
+          </span>
+        </div>
       </AgendaScrub>
     </section>
   );

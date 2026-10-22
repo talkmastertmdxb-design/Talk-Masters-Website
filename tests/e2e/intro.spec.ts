@@ -13,8 +13,8 @@ test.describe("first-visit hero intro", () => {
     await expect(overlay).toBeVisible();
     await expect(page.locator("html")).toHaveClass(/\bintro\b/);
 
-    // Hands over within a few seconds: overlay gone, nav back, headline readable.
-    await expect(page.locator("html")).not.toHaveClass(/\bintro\b/, { timeout: 7000 });
+    // Hands over in ~2.4s (plus up to 1.2s waiting for the photo): overlay gone, nav back, headline readable.
+    await expect(page.locator("html")).not.toHaveClass(/\bintro\b/, { timeout: 4500 });
     await expect(overlay).toBeHidden();
     await expect(page.getByRole("heading", { level: 1 })).toHaveCSS("opacity", "1", { timeout: 3000 });
     await expect(page.locator(".site-header")).toHaveCSS("transform", "none", { timeout: 2000 });
@@ -28,6 +28,19 @@ test.describe("first-visit hero intro", () => {
     await page.waitForTimeout(300);
     await page.keyboard.press("Space");
     await expect(page.locator("html")).not.toHaveClass(/\bintro\b/, { timeout: 1500 });
+  });
+
+  test("the Skip button skips, and doesn't press what's underneath", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name === "reduced-motion", "No intro under reduced motion");
+    await page.goto("/");
+    const skip = page.locator("[data-intro-skip]");
+    await expect(skip).toBeVisible();
+    await skip.click();
+    await expect(page.locator("html")).not.toHaveClass(/\bintro\b/, { timeout: 1500 });
+    await expect(page.locator("[data-intro-overlay]")).toBeHidden();
+    // The header's booking button sits under the Skip button; the skip click must not follow it.
+    await page.waitForTimeout(400);
+    expect(new URL(page.url()).pathname).toBe("/");
   });
 
   test("plays only once: a second visit goes straight to the hero", async ({ page }, testInfo) => {

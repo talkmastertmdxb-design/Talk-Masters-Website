@@ -1,6 +1,7 @@
 import type {
   Award,
   ClubEvent,
+  CultureCard,
   Faq,
   Founder,
   History,
@@ -30,6 +31,8 @@ export interface ContentRepository {
   readonly testimonials: readonly Testimonial[];
   readonly officers: readonly Officer[];
   readonly faqs: readonly Faq[];
+  /** The About section's culture cards, in display order. */
+  readonly culture: readonly CultureCard[];
   readonly tableTopics: readonly TableTopic[];
   readonly imageSlots: readonly ImageSlot[];
 }
@@ -56,6 +59,7 @@ export function createRepository(raw: RawContent): ContentRepository {
     testimonials: raw.testimonials.filter(hasConsent),
     officers: raw.officers.filter(hasConsent),
     faqs: raw.faqs,
+    culture: raw.culture,
     tableTopics: raw.tableTopics,
     imageSlots: raw.imageSlots,
   });
