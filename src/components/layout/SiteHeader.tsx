@@ -37,7 +37,7 @@ export function SiteHeader({ items, meeting }: SiteHeaderProps) {
   const closeMenu = () => menuRef.current?.close();
 
   return (
-    <header className="site-header fixed inset-x-0 top-0 z-50 px-[max(0.75rem,calc(var(--site-gutter)-1.75rem))] pt-3 md:pt-5">
+    <header style={{ viewTransitionName: "site-header" }} className="site-header fixed inset-x-0 top-0 z-50 px-[max(0.75rem,calc(var(--site-gutter)-1.75rem))] pt-3 md:pt-5">
       <div
         data-frosted={frosted}
         className="theme-dark data-[frosted=true]:bg-ink/85 mx-auto flex h-16 max-w-[calc(var(--site-max)-2*var(--site-gutter)+3.5rem)] items-center justify-between gap-4 rounded-full border border-transparent px-5 text-white transition-[background-color,border-color,backdrop-filter] duration-(--duration-base) ease-(--ease-deliver) data-[frosted=true]:border-white/10 data-[frosted=true]:backdrop-blur-xl md:px-7"

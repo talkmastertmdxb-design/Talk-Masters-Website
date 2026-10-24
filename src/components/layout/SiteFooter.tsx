@@ -25,7 +25,7 @@ export function SiteFooter({ items }: SiteFooterProps) {
           Ready to become a better speaker?
         </h2>
         <p className="text-lead mx-auto mt-6 max-w-[46ch] text-white/75">
-          Come to your first meeting as our guest. It&apos;s free, and you only speak if you want to.
+          Come to your first meeting as our guest. It&apos;s free, and we&apos;ll always ask for your consent before calling on you.
         </p>
         <div className="mx-auto mt-10 flex max-w-xs flex-col items-center gap-3">
           <ButtonLink href="/join">Book a guest visit</ButtonLink>

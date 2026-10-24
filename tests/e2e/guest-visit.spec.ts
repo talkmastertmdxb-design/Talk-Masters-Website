@@ -66,9 +66,9 @@ test("the home page answers guests' questions, one at a time", async ({ page }) 
   await page.goto("/");
   const faq = page.locator("section[aria-labelledby='faq-title']");
   await expect(faq.getByRole("heading", { name: "Questions guests ask" })).toBeVisible();
-  const speak = faq.getByText("Do I have to speak if I visit as a guest?");
+  const speak = faq.getByText("Will I be called on to speak?");
   const cost = faq.getByText("Does it cost anything to visit?");
-  const speakAnswer = faq.getByText(/Guests are welcome to simply watch/);
+  const speakAnswer = faq.getByText(/we always ask before calling on a guest/);
   const costAnswer = faq.getByText(/Visiting as a guest is free/);
 
   await expect(speakAnswer).toBeHidden();

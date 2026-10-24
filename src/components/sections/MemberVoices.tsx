@@ -62,7 +62,6 @@ export function MemberVoices() {
                 className="size-4 transition-transform duration-(--duration-quick) group-hover:translate-x-0.5"
               />
             </ButtonLink>
-            <p className="text-muted text-sm">Guests never have to speak.</p>
           </div>
         </div>
       </div>

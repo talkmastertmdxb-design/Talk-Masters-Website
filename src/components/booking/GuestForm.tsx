@@ -154,7 +154,7 @@ export function GuestForm({ contacts, meeting, calendar, avatars, quote }: Guest
           aria-hidden="true"
           className="via-gold/60 absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent"
         />
-        <p className="text-eyebrow text-gold">Free · You never have to speak</p>
+        <p className="text-eyebrow text-gold">Free to attend</p>
         <h1 className="mt-4 font-serif text-[clamp(2.375rem,1.7rem+2.9vw,4.5rem)] leading-[1.04] tracking-[-0.02em]">
           Join us <span data-invitation>{invitation}</span> as our guest
         </h1>

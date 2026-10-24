@@ -780,3 +780,78 @@
     }
   }
 }
+
+/*
+ * Page transition (from "Page Transitions/", tuned for speed): on in-site link navigations the
+ * old page lifts away and dims while the new one wipes up from the bottom of the screen.
+ * Distances are in viewport units because the snapshots are whole pages. Browser back/forward
+ * (html[data-nav="history"], set by MotionProvider) swaps instantly, so it never fights iOS
+ * swipe-back. The header is anchored.
+ */
+:root {
+  --page-duration: 640ms;
+  --page-lift: -12svh;
+  --page-ease: cubic-bezier(0.76, 0, 0.24, 1);
+}
+@media (max-width: 56.24rem) {
+  :root {
+    --page-duration: 460ms;
+    --page-lift: -6svh;
+  }
+}
+
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-old(.page-out) {
+  animation: var(--page-duration) var(--page-ease) both page-out;
+}
+::view-transition-new(.page-in) {
+  animation: var(--page-duration) var(--page-ease) both page-in;
+}
+::view-transition-group(.page-out),
+::view-transition-group(.page-in),
+::view-transition-group(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-group(site-header) {
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+
+html[data-nav="history"]::view-transition-old(.page-out),
+html[data-nav="history"]::view-transition-new(.page-in) {
+  animation: none;
+}
+
+@keyframes page-out {
+  to {
+    transform: translateY(var(--page-lift));
+    filter: brightness(0.45);
+  }
+}
+@keyframes page-in {
+  from {
+    clip-path: inset(100svh 0 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page-out) {
+    animation: 180ms ease-out both reverse page-fade;
+  }
+  ::view-transition-new(.page-in) {
+    animation: 180ms ease-out both page-fade;
+  }
+}

@@ -176,7 +176,7 @@ export function MemberDirectoryCard({ member }: MemberDirectoryCardProps) {
 
         <div data-profile-item className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-3">
           <ButtonLink href="/join">Book a guest visit</ButtonLink>
-          <p className="text-muted text-sm">Meet {first} at a meeting. Guests never have to speak.</p>
+          <p className="text-muted text-sm">Meet {first} at a meeting.</p>
         </div>
       </MemberProfile>
 

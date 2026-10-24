@@ -17,7 +17,7 @@ const INFO_ICONS: Record<string, LucideIcon> = { parking: Car, food: Coffee, roo
 export const metadata: Metadata = {
   title: "Book a guest visit",
   description:
-    "Visit a Talk-Masters Club meeting as our guest. It's free, and you only speak if you want to.",
+    "Visit a Talk-Masters Club meeting as our guest. It's free, and we'll always ask for your consent before calling on you.",
 };
 
 /**

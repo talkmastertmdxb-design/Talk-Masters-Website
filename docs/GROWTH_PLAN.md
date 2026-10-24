@@ -15,7 +15,7 @@ This plan **builds on** [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), which 
 | Stage      | Visitor's question              | The site's job                                                 | Phase  |
 | ---------- | ------------------------------- | -------------------------------------------------------------- | ------ |
 | **Notice** | "Is this for people like me?"   | Speak to their moment, not to a demographic                    | G2, G5 |
-| **Visit**  | "Will I be embarrassed?"        | Remove every unknown; promise they never have to speak         | G1, G2 |
+| **Visit**  | "Will I be embarrassed?"        | Remove every unknown about the first visit                     | G1, G2 |
 | **Belong** | "Do these people know me?"      | Capture the right data so a human follows up within 24 hours   | G1, G4 |
 | **Become** | "Am I actually changing?"       | Make members' progress public                                  | G3     |
 | **Bring**  | "Who do I know who needs this?" | Give every member a personal invitation and something to share | G4     |
@@ -237,7 +237,7 @@ Starting set: `interview`, `promotion`, `pitch`, `new-to-dubai`, `english-at-wor
 
 - Unit: `momentSchema`, `glossarySchema`, `firstEveningSchema`; `?moment=` pre-selects the chip and an unknown value is ignored.
 - E2E: on 360px, the hero shows the promise, next meeting and button without scrolling; the moment picker is keyboard-operable; every booking button has the guest promise next to it; axe clean.
-- **Gate:** the committee signs off the copy; five people who've never been to a meeting read the home page on a phone and can say when, where and "I don't have to speak".
+- **Gate:** the committee signs off the copy; five people who've never been to a meeting read the home page on a phone and can say when and where.
 
 ---
 

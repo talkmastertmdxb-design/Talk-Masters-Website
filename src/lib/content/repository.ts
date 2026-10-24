@@ -47,17 +47,25 @@ const startYear = (award: Award): number => Number(award.year.slice(0, 4));
 
 /** Applies publishing rules: drafts and people without consent never reach a page. */
 export function createRepository(raw: RawContent): ContentRepository {
+  const members = raw.members.filter(isPublished).filter(hasConsent);
+  const storySlugs = new Set(members.map((member) => member.slug));
+  // A story link to an unpublished profile would open nothing, so it is dropped.
+  const withStoryLink = (officer: Officer): Officer =>
+    officer.memberSlug && !storySlugs.has(officer.memberSlug)
+      ? { ...officer, memberSlug: undefined }
+      : officer;
+
   return Object.freeze({
     settings: raw.settings,
     history: raw.history,
     events: raw.events
       .filter(isPublished)
       .toSorted((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt)),
-    members: raw.members.filter(isPublished).filter(hasConsent),
+    members,
     founders: raw.founders.filter(hasConsent),
     awards: raw.awards.toSorted((a, b) => startYear(b) - startYear(a)),
     testimonials: raw.testimonials.filter(hasConsent),
-    officers: raw.officers.filter(hasConsent),
+    officers: raw.officers.filter(hasConsent).map(withStoryLink),
     faqs: raw.faqs,
     culture: raw.culture,
     tableTopics: raw.tableTopics,

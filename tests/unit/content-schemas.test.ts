@@ -105,7 +105,7 @@ describe("eventSchema", () => {
     startsAt: "2026-11-10T19:00:00+04:00",
     endsAt: "2026-11-10T21:00:00+04:00",
     venue: "Venue to be confirmed",
-    summary: "Watch a real meeting. Guests never have to speak.",
+    summary: "Watch a real meeting.",
     status: "published",
   };
 
@@ -162,13 +162,13 @@ describe("parseContent", () => {
 });
 
 describe("cultureSchema", () => {
-  const card = { title: "Guests never have to speak", text: "Come and watch." };
+  const card = { title: "Feedback that's kind", text: "Every speech gets an evaluation." };
 
-  it("fills the About bento's four card slots, or fewer", () => {
+  it("fills the About bento's three card slots, or fewer", () => {
     expect(cultureSchema.safeParse([card]).success).toBe(true);
-    expect(cultureSchema.safeParse([card, card, card, card]).success).toBe(true);
+    expect(cultureSchema.safeParse([card, card, card]).success).toBe(true);
     expect(cultureSchema.safeParse([]).success).toBe(false);
-    expect(cultureSchema.safeParse([card, card, card, card, card]).success).toBe(false);
+    expect(cultureSchema.safeParse([card, card, card, card]).success).toBe(false);
   });
 
   it("keeps each card short enough for its tile", () => {

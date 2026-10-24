@@ -65,7 +65,7 @@ A thin gold line runs through the whole site and changes as the story moves:
 
 ### 1.4 Experience principles
 
-1. **Reassurance before ambition.** At every age, the main barrier is fear of speaking. "Guests never have to speak" appears early and often.
+1. **Reassurance before ambition.** At every age, the main barrier is fear of speaking. Guests are welcomed warmly, but the site does not use a "Guests never have to speak" line (removed at the club's request, 2026-10-24).
 2. **Open to everyone, visibly.** The club welcomes all ages, genders and backgrounds: students, working professionals, parents, career changers and retirees. Copy, photography and examples must show that range. Never frame it as a student or university club.
 3. **One idea per band.** Big gaps, hairlines, no boxed-in clutter (the Bailey Hart discipline).
 4. **The booking action is never more than one tap away** (F-41).

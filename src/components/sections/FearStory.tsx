@@ -1,4 +1,4 @@
-import { CircleCheck, HeartHandshake, MessageCircle, Mic, Users, Waves, type LucideIcon } from "lucide-react";
+import { HeartHandshake, MessageCircle, Mic, Users, Waves, type LucideIcon } from "lucide-react";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { StickyStory } from "@/components/motion/StickyStory";
 import { ButtonLink } from "@/components/ui/Button";
@@ -99,15 +99,6 @@ export function FearStory() {
                 </div>
               ))}
             </div>
-            <aside className="bg-ink/75 absolute -bottom-6 -left-10 max-w-[19rem] rounded-2xl border border-white/10 p-5 text-white shadow-[0_20px_40px_rgb(11_18_32/0.3)] backdrop-blur-xl">
-              <p className="flex items-center gap-2 font-semibold">
-                <CircleCheck aria-hidden="true" className="text-gold size-5" strokeWidth={1.75} />
-                Guests never have to speak.
-              </p>
-              <p className="mt-2 text-sm text-white/75">
-                Watch your first meeting from the audience. Join in only when you&apos;re ready.
-              </p>
-            </aside>
           </div>
         </div>
       </StickyStory>

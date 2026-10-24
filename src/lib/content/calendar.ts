@@ -70,7 +70,7 @@ const description = ({ meeting, url, tips }: CalendarDetails): string =>
   [
     `${meetingTimeRange(meeting)}.`,
     tips,
-    `Guests are always welcome, and never have to speak. Book your seat: ${url}`,
+    `Guests are always welcome. Book your seat: ${url}`,
   ]
     .filter(Boolean)
     .join(" ");

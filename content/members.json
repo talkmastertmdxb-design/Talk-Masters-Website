@@ -230,5 +230,58 @@
     "spotlight": false,
     "status": "published",
     "placeholder": true
+  },
+  {
+    "slug": "nabeel-bava",
+    "name": "Nabeel Bava",
+    "position": "Treasurer",
+    "occupation": "Job Controller",
+    "organisation": "Al Nabooda Automobiles, Volkswagen Aftersales",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/nabeel-kizhakkeveettil-001651334"
+      }
+    ],
+    "segment": "officer",
+    "challenge": "He lacked confidence when speaking to people in positions of power or authority, such as managers and senior officials.",
+    "transformation": "Today he speaks to audiences, addresses groups of colleagues, and expresses his thoughts with much greater confidence and without fear.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "First joined Talk-Masters in 2021."
+      },
+      {
+        "milestone": "other",
+        "text": "Returned to Toastmasters in 2026, after a pause, to keep working on himself."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Became the club's Treasurer for 2026–27, taking on responsibilities beyond public speaking."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Served as Toastmaster of the Day for Meeting #105, after taking on roles such as Timer and Grammarian."
+      },
+      {
+        "milestone": "other",
+        "text": "Developing his speaking through speeches, including \"Every Car Tells a Story\"."
+      }
+    ],
+    "impact": {
+      "career": "Toastmasters is helping me communicate more effectively, express ideas clearly, and engage confidently with people at all levels of the organisation.",
+      "confidence": "I have moved from feeling intimidated when speaking to senior people to expressing my thoughts more confidently in front of groups, colleagues, and audiences.",
+      "leadership": "Serving as Club Treasurer and taking on meeting roles have helped me develop responsibility, coordination, and leadership skills while contributing to the club’s success."
+    },
+    "advice": "Don’t wait for confidence before you begin. Take the first step, keep showing up, and let confidence grow through experience.",
+    "story": "For Nabeel, Toastmasters is not just about delivering speeches. It is about building confidence, expressing his thoughts freely, and growing as a person and a professional. He first joined in 2021, came back in 2026, and now serves as the club's Treasurer.",
+    "contribution": "A steady hand on the club's finances as Treasurer, and a member who says yes to meeting roles, from Timer and Grammarian to Toastmaster of the Day.",
+    "clubHighlights": ["Executive Committee 2026–27", "Toastmaster of the Day, Meeting #105"],
+    "memberSince": 2021,
+    "imageSlot": "officer-treasurer",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
   }
 ]

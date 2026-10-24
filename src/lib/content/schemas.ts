@@ -354,6 +354,8 @@ export const officerSchema = z.object({
   /** Personal leadership statement. */
   statement: z.string().min(1),
   bio: z.string().min(1).optional(),
+  /** Their story in content/members.json, if they have one: the card links to /members#slug. */
+  memberSlug: slug.optional(),
 });
 
 export const faqSchema = z.object({
@@ -364,7 +366,7 @@ export const faqSchema = z.object({
 
 /**
  * The About section's culture cards: what it's like to be in the room (content/culture.json).
- * The bento grid has four card slots around its photo, so one to four short cards.
+ * The bento grid stacks up to three cards beside its photo, so one to three short cards.
  */
 export const cultureSchema = z
   .array(
@@ -375,7 +377,7 @@ export const cultureSchema = z
     }),
   )
   .min(1, "Add at least one card")
-  .max(4, "The About grid has room for 4 cards");
+  .max(3, "The About grid has room for 3 cards");
 
 export const tableTopicSchema = z.object({
   prompt: z.string().min(1),

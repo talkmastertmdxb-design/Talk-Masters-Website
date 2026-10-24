@@ -41,6 +41,21 @@ describe("createRepository", () => {
     expect(repo.events.map((e) => e.slug)).toEqual(["sooner", "later"]);
   });
 
+  it("keeps an officer's story link only when that member's profile is published", () => {
+    const member = content.members[0]!;
+    const officer = content.officers[0]!;
+    const repo = createRepository({
+      ...base,
+      members: [member, { ...member, slug: "draft-member", status: "draft" as const }],
+      officers: [
+        { ...officer, slug: "linked", memberSlug: member.slug },
+        { ...officer, slug: "draft", memberSlug: "draft-member" },
+        { ...officer, slug: "missing", memberSlug: "nobody" },
+      ],
+    });
+    expect(repo.officers.map((o) => o.memberSlug)).toEqual([member.slug, undefined, undefined]);
+  });
+
   it("does not mutate the raw input", () => {
     const events = [event("b", "2026-12-01T19:00:00+04:00"), event("a", "2026-11-01T19:00:00+04:00")];
     createRepository({ ...base, events });
@@ -52,6 +67,12 @@ describe("content in /content", () => {
   it("passes validation and names the club correctly", () => {
     expect(content.settings.clubName).toBe("Talk-Masters Club");
     expect(content.settings.parentOrganisation).toBe("Toastmasters International");
+  });
+
+  it("links Suhayb and Nabeel's committee cards to their member stories", () => {
+    const linked = Object.fromEntries(content.officers.map((o) => [o.name, o.memberSlug]));
+    expect(linked.Suhayb).toBe("suhayb-shaik");
+    expect(linked.Nabeel).toBe("nabeel-bava");
   });
 
   it("has unique image slot ids, and every referenced slot exists", () => {

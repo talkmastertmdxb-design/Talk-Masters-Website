@@ -2,7 +2,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Source_Serif_4 } from "next/font/google";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { content } from "@/lib/content";
@@ -58,9 +57,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <MotionProvider>
           <SiteHeader items={mainNav} meeting={content.settings.meeting} />
           {children}
-          <div id="contact">
-            <SiteFooter items={mainNav} />
-          </div>
         </MotionProvider>
         {/* Cookieless visit counts and real-visitor Core Web Vitals; both report only on Vercel. */}
         <Analytics />

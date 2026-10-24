@@ -195,6 +195,38 @@ test("Jasim's profile shows his background and work, and leaves out what he hasn
   expect(await seriousViolations(page)).toEqual([]);
 });
 
+test("Nabeel's profile tells his story as Treasurer, in his own words", async ({ page }) => {
+  await page.goto("/members");
+  await page.getByRole("button", { name: "Open Nabeel Bava's profile" }).click();
+  const profile = page.getByRole("dialog", { name: "Nabeel Bava" });
+  await expect(profile).toBeVisible();
+  await expect(profile).toContainText("Job Controller at Al Nabooda Automobiles, Volkswagen Aftersales");
+  await expect(profile.getByRole("list", { name: "At Talk-Masters" })).toContainText("Treasurer");
+  await expect(profile.getByRole("heading", { name: "What changed" })).toBeVisible();
+  await expect(profile).toContainText("Don’t wait for confidence before you begin.");
+  expect(await seriousViolations(page)).toEqual([]);
+});
+
+for (const [path, name, slug] of [
+  ["/team", "Nabeel", "nabeel-bava"],
+  ["/team", "Suhayb", "suhayb-shaik"],
+  ["/", "Nabeel", "nabeel-bava"],
+  ["/", "Suhayb", "suhayb-shaik"],
+] as const) {
+  test(`${name}'s committee card on ${path} opens his member story`, async ({ page }) => {
+    await page.goto(path);
+    const link = page.getByRole("link", { name: `Read ${name}'s story` });
+    await expect(link).toHaveAttribute("href", `/members#${slug}`);
+    await link.click();
+    await expect(page.getByRole("dialog", { name: new RegExp(`^${name} `) })).toBeVisible();
+  });
+}
+
+test("committee members without a story have no story link", async ({ page }) => {
+  await page.goto("/team");
+  await expect(page.getByRole("link", { name: "Read Nasar's story" })).toHaveCount(0);
+});
+
 test("the footer names the club in Toastmasters terms", async ({ page }) => {
   await page.goto("/");
   await expect(
@@ -202,7 +234,7 @@ test("the footer names the club in Toastmasters terms", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("Members shows the five member stories, with LinkedIn and every other profile they shared", async ({
+test("Members shows the member stories, with LinkedIn and every other profile they shared", async ({
   page,
 }) => {
   await page.goto("/members");
@@ -212,6 +244,7 @@ test("Members shows the five member stories, with LinkedIn and every other profi
     "Tarannum Sheikh": "https://www.linkedin.com/in/tarannum-sheikh-381309171/",
     "Suhayb Shaik": "https://www.linkedin.com/in/suhayb-shaik-13985231a",
     "Jasim Eranhole": "https://www.linkedin.com/in/jassim-eranhole-90300b76/",
+    "Nabeel Bava": "https://www.linkedin.com/in/nabeel-kizhakkeveettil-001651334",
   };
   for (const [name, href] of Object.entries(profiles)) {
     // The closed profile holds a hidden copy of each link; check the one on the card.

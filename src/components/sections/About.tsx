@@ -8,7 +8,8 @@ import { content } from "@/lib/content";
  * drifts with soft parallax (Animation 07). The club's numbers live in the Hero, not here.
  */
 export function About() {
-  const [first, ...rest] = content.culture;
+  const cards = content.culture;
+  const isOdd = cards.length % 2 === 1;
 
   return (
     <section id="about" aria-labelledby="about-title" className="py-section bg-soft-gray">
@@ -38,10 +39,9 @@ export function About() {
 
         <div
           data-reveal="stagger"
-          className="mt-16 grid gap-4 sm:grid-cols-2 md:mt-24 lg:grid-cols-4 lg:grid-rows-2"
+          className="mt-16 grid gap-4 sm:grid-cols-2 md:mt-24 lg:grid-cols-3 lg:grid-rows-3"
         >
-          {first && <CultureCard number={1} {...first} />}
-          <div className="rounded-panel bg-surface relative isolate overflow-hidden sm:row-span-2 lg:col-span-2 lg:row-span-2">
+          <div className="rounded-panel bg-surface relative isolate overflow-hidden sm:col-span-2 lg:row-span-3">
             <div data-parallax="5" className="absolute inset-x-0 -inset-y-[8%]">
               <ImageSlot
                 id="manifesto-bento"
@@ -56,8 +56,13 @@ export function About() {
               </p>
             </div>
           </div>
-          {rest.map((card, index) => (
-            <CultureCard key={card.title} number={index + 2} {...card} />
+          {cards.map((card, index) => (
+            <CultureCard
+              key={card.title}
+              number={index + 1}
+              wide={isOdd && index === cards.length - 1}
+              {...card}
+            />
           ))}
         </div>
       </div>
@@ -69,11 +74,14 @@ interface CultureCardProps {
   number: number;
   title: string;
   text: string;
+  wide: boolean;
 }
 
-function CultureCard({ number, title, text }: CultureCardProps) {
+function CultureCard({ number, title, text, wide }: CultureCardProps) {
   return (
-    <div className="rounded-panel flex min-h-44 flex-col justify-between bg-white p-6 shadow-[0_10px_30px_rgb(0_0_0/0.04)]">
+    <div
+      className={`rounded-panel flex min-h-44 flex-col justify-between bg-white p-6 shadow-[0_10px_30px_rgb(0_0_0/0.04)] ${wide ? "sm:col-span-2 lg:col-span-1" : ""}`}
+    >
       <p aria-hidden="true" className="text-maroon font-serif text-lg tabular-nums">
         {String(number).padStart(2, "0")}
       </p>

@@ -1,3 +1,5 @@
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { shortTerm } from "@/lib/content/people";
 import type { Officer } from "@/lib/content/schemas";
@@ -47,6 +49,15 @@ export function OfficerCard({ officer, size = "standard", showBio = false }: Off
       )}
       {showBio && officer.bio && <p className="text-ink-muted mt-3 text-sm">{officer.bio}</p>}
       {showBio && !isFeature && <p className="text-ink-muted mt-3 text-sm">Term {shortTerm(officer.term)}</p>}
+      {officer.memberSlug && (
+        <Link
+          href={`/members#${officer.memberSlug}`}
+          className={`nav-link text-tm-blue inline-flex min-h-11 items-center gap-1 font-semibold ${isCompact ? "mt-1 text-sm" : "mt-2"}`}
+        >
+          Read {officer.name}&apos;s story
+          <ArrowUpRight aria-hidden="true" className="size-4" />
+        </Link>
+      )}
     </article>
   );
 }
