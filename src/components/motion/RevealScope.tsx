@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef, type ReactNode } from "react";
-import { duration, ease, media, parallaxMax, stagger } from "@/lib/motion/tokens";
+import { blockWipe, duration, ease, media, parallaxMax, stagger, textRise } from "@/lib/motion/tokens";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -24,6 +24,9 @@ interface RevealScopeProps {
  *   data-reveal="up"       fade + rise ("Settle")
  *   data-reveal="lines"    headline lines rise through a mask (SplitText). Headings only:
  *                          SplitText adds aria-label, which is not allowed on <p>.
+ *   data-reveal="text"     the same rise for lead paragraphs, split without any aria attributes
+ *   data-reveal="block"    a solid block wipes across each line and uncovers it (big statements
+ *                          only; colour from --reveal-block, gold by default)
  *   data-reveal="stagger"  direct children settle one after another
  *   data-reveal="image"    image unmasks from a soft inset
  *   data-parallax          soft parallax, ±5% (Animation 07)
@@ -82,20 +85,57 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
           );
         });
 
-        all("[data-reveal='lines']").forEach((el) => {
+        const riseLines = (el: HTMLElement, aria: "auto" | "none") =>
           SplitText.create(el, {
             type: "lines",
             mask: "lines",
+            aria,
             autoSplit: true,
             onSplit: (self) =>
               gsap.from(self.lines, {
                 yPercent: 110,
-                duration: duration.slow,
-                ease: ease.deliver,
-                stagger: stagger.line,
+                duration: textRise.duration,
+                ease: textRise.ease,
+                stagger: textRise.stagger,
                 scrollTrigger: { trigger: el, start: "top 88%", once: true },
               }),
           });
+        all("[data-reveal='lines']").forEach((el) => riseLines(el, "auto"));
+        all("[data-reveal='text']").forEach((el) => riseLines(el, "none"));
+
+        all("[data-reveal='block']").forEach((el) => {
+          const split = SplitText.create(el, { type: "lines" });
+          const blocks = split.lines.map((line) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "reveal-block-line";
+            line.before(wrapper);
+            wrapper.append(line);
+            const block = document.createElement("span");
+            block.className = "reveal-block";
+            block.setAttribute("aria-hidden", "true");
+            wrapper.append(block);
+            return block;
+          });
+          gsap.set(split.lines, { opacity: 0 });
+          const tl = gsap.timeline({
+            paused: true,
+            // Back to the server's markup once revealed: no wrappers, and text reflows on resize.
+            onComplete: () => split.revert(),
+          });
+          split.lines.forEach((line, index) => {
+            const block = blocks[index]!;
+            const at = index * blockWipe.stagger;
+            tl.fromTo(
+              block,
+              { scaleX: 0, transformOrigin: "left center" },
+              { scaleX: 1, duration: blockWipe.duration, ease: blockWipe.ease },
+              at,
+            )
+              .set(line, { opacity: 1 }, at + blockWipe.duration)
+              .set(block, { transformOrigin: "right center" }, at + blockWipe.duration)
+              .to(block, { scaleX: 0, duration: blockWipe.duration, ease: blockWipe.ease }, at + blockWipe.duration);
+          });
+          ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: () => tl.play() });
         });
 
         all("[data-reveal='image']").forEach((el) => {

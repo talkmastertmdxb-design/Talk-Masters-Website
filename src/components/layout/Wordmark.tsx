@@ -30,7 +30,7 @@ export function Wordmark({ size = 44, eager = false, compact = false, className 
         fetchPriority={eager ? "high" : "auto"}
         className="shrink-0 drop-shadow-[0_2px_8px_rgb(0_0_0/0.35)]"
       />
-      <span className={`flex flex-col ${compact ? "max-sm:sr-only" : ""}`}>
+      <span className={`wordmark-name flex flex-col ${compact ? "max-sm:sr-only" : ""}`}>
         <span className="font-serif text-[1.375rem] tracking-[-0.01em]">Talk-Masters</span>
         <span className="mt-1 text-xs tracking-[0.03em] opacity-75">A Toastmasters International club</span>
       </span>

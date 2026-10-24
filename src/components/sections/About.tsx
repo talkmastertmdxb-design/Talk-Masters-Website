@@ -19,10 +19,14 @@ export function About() {
             About the club
           </p>
           <div className="md:col-span-9">
-            <h2 id="about-title" data-reveal="lines" className="text-h2 max-w-[22ch]">
+            <h2
+              id="about-title"
+              data-reveal="block"
+              className="text-h2 max-w-[22ch] [--reveal-block:var(--color-tm-blue)]"
+            >
               Talk-Masters is where nervous first words become confident speeches.
             </h2>
-            <p data-reveal="up" className="text-lead text-ink-muted mt-8 max-w-[56ch]">
+            <p data-reveal="text" className="text-lead text-ink-muted mt-8 max-w-[56ch]">
               Students and retirees, engineers and artists, people new to the city and people who&apos;ve
               lived here all their lives. Everyone practises together, and everyone improves at their own
               pace.

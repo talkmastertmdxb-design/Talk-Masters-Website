@@ -105,7 +105,8 @@ export function Hero() {
                       value={stat.value}
                       suffix={stat.suffix}
                       suffixClassName="text-gold"
-                      delay={0.9}
+                      delay={0.9 + index * 0.25}
+                      seconds={3.4}
                       start="top bottom"
                     />
                   </dd>

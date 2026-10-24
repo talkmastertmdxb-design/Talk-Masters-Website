@@ -26,6 +26,8 @@ const textPairs: Array<[foreground: string, background: string]> = [
   ["muted", "surface"],
   ["gold", "ink"],
   ["gold", "surface"],
+  ["ink", "gold"],
+  ["ink", "gold-hover"],
 ];
 
 describe("contrastRatio", () => {

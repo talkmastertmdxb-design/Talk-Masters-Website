@@ -20,6 +20,20 @@ export const stagger = {
   item: 0.14,
 } as const;
 
+/** Text Transition 2: lines rise through a mask, quick then soft. Headings and lead copy. */
+export const textRise = {
+  duration: 1,
+  ease: "power4.out",
+  stagger: 0.1,
+} as const;
+
+/** Text Transition 1: a solid block wipes across each line and uncovers it. Big statements only. */
+export const blockWipe = {
+  duration: 0.75,
+  ease: "power4.inOut",
+  stagger: 0.15,
+} as const;
+
 /** The hold before a key line lands. */
 export const pauseBeat = 0.2;
 

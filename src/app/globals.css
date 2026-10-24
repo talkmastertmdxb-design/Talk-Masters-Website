@@ -12,6 +12,7 @@
   --color-maroon: #772432;
   --color-maroon-hover: #8a2a3b;
   --color-gold: #d6b06a;
+  --color-gold-hover: #e4c68a;
   --color-signal-green: #3c8d5a;
 
   /* Neutrals */
@@ -778,6 +779,80 @@
         linear-gradient(0deg, rgb(11 18 32 / 0.55) 0%, rgb(11 18 32 / 0) 30%),
         linear-gradient(rgb(0 65 101 / 0.14), rgb(0 65 101 / 0.14));
     }
+  }
+}
+
+@layer components {
+  /* Navbar (SiteHeader.tsx): numbered links, gold current page, reading-progress line. */
+  .site-nav__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.375rem;
+    transition:
+      opacity var(--duration-quick) var(--ease-deliver),
+      color var(--duration-quick) var(--ease-deliver),
+      background-size var(--duration-quick) var(--ease-deliver);
+  }
+  .site-nav__num {
+    color: var(--color-gold);
+    font-size: 0.625rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .site-nav__link[aria-current="page"] {
+    color: var(--color-gold);
+    background-size: 100% 1px;
+  }
+  @media (hover: hover) {
+    .site-nav ul:hover .site-nav__link:not(:hover) {
+      opacity: 0.6;
+    }
+  }
+  .site-pill__progress {
+    position: absolute;
+    right: 1.75rem;
+    bottom: -1px;
+    left: 1.75rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-gold);
+    opacity: 0;
+    transform: scaleX(var(--nav-progress, 0));
+    transform-origin: left;
+    transition: opacity var(--duration-quick) var(--ease-deliver);
+  }
+  .site-pill[data-frosted="true"] .site-pill__progress {
+    opacity: 1;
+  }
+  @media (min-width: 64rem) {
+    .site-pill .wordmark-name {
+      max-width: 16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      transition:
+        max-width var(--duration-base) var(--ease-deliver),
+        opacity var(--duration-quick) var(--ease-deliver);
+    }
+    .site-pill[data-frosted="true"] .wordmark-name {
+      max-width: 0;
+      opacity: 0;
+    }
+  }
+  .menu-link[aria-current="page"] .font-serif {
+    color: var(--color-gold);
+    font-style: italic;
+  }
+
+  /* Text Transition 1 (RevealScope, data-reveal="block"): the block that wipes across a line. */
+  .reveal-block-line {
+    position: relative;
+  }
+  .reveal-block {
+    position: absolute;
+    inset: 0.06em -0.04em;
+    background: var(--reveal-block, var(--color-gold));
+    transform: scaleX(0);
+    pointer-events: none;
   }
 }
 

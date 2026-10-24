@@ -54,10 +54,14 @@ export function FearStory() {
             <p data-reveal="up" className="text-eyebrow text-ink-muted">
               Why join
             </p>
-            <h2 id="why-join-title" data-reveal="lines" className="text-h2 mt-5 max-w-[16ch]">
+            <h2
+              id="why-join-title"
+              data-reveal="block"
+              className="text-h2 mt-5 max-w-[16ch] [--reveal-block:var(--color-tm-blue)]"
+            >
               Nervous about speaking? So was everyone here.
             </h2>
-            <p data-reveal="up" className="text-lead text-ink-muted mt-6 max-w-[46ch]">
+            <p data-reveal="text" className="text-lead text-ink-muted mt-6 max-w-[46ch]">
               Every meeting follows the same friendly structure, so you always know what&apos;s coming next.
             </p>
             <div data-reveal="up" className="mt-8 md:hidden">

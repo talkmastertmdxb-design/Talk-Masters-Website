@@ -18,6 +18,8 @@ interface CountUpProps {
   delay?: number;
   /** ScrollTrigger start. Hero stats use "top bottom": count as soon as they are visible at all. */
   start?: string;
+  /** How long the count takes. Longer draws the eye; the hero uses a slow, steady count. */
+  seconds?: number;
   className?: string;
 }
 
@@ -31,6 +33,7 @@ export function CountUp({
   suffixClassName = "text-maroon",
   delay = 0,
   start = "top 85%",
+  seconds = duration.slow * 1.4,
   className = "",
 }: CountUpProps) {
   const number = useRef<HTMLSpanElement>(null);
@@ -47,9 +50,10 @@ export function CountUp({
         context.add(() => {
           gsap.to(state, {
             n: value,
-            duration: duration.slow * 1.4,
+            duration: seconds,
             delay,
-            ease: "power2.out",
+            // A gentler ease for long counts, so the digits keep visibly ticking to the end.
+            ease: seconds > 3 ? "power1.out" : "power2.out",
             scrollTrigger: { trigger: el, start, once: true },
             onUpdate: () => {
               el.textContent = String(Math.round(state.n));
