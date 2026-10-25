@@ -41,12 +41,17 @@ export function Hero() {
         {/* Spotlight measures its parent, so it stays a direct child of the hero (not inside the slideshow). */}
         <Spotlight />
         <HeroSlideshow slides={slides}>
-          <div className="container-site relative flex flex-1 flex-col justify-center pt-20 pb-8 sm:pt-24 sm:pb-20 md:pt-28 lg:pb-4">
+          {/* Phones: the words start below the photo (globals.css), never on top of it. */}
+          <div className="container-site relative flex flex-1 flex-col justify-start pt-[calc(var(--hero-photo-top)+var(--hero-photo-h)+0.875rem)] pb-6 sm:justify-center sm:pt-24 sm:pb-20 md:pt-28 lg:pb-4">
             <p data-hero-item className="text-eyebrow text-white/70">
               Communicate <span className="text-gold">·</span> Lead <span className="text-gold">·</span>{" "}
               Belong
             </p>
-            <h1 id="hero-title" data-hero-reveal className="hero-title mt-4 sm:mt-5 sm:max-w-[18ch]">
+            <h1
+              id="hero-title"
+              data-hero-reveal
+              className="hero-title mt-3 max-sm:text-[1.875rem] sm:mt-5 sm:max-w-[18ch]"
+            >
               Find Your Voice.
               <br />
               Lead With <span className="text-gold">Confidence.</span>
@@ -54,12 +59,16 @@ export function Hero() {
               Inspire The World.
             </h1>
             {/* The Voice Line signs the headline: silence, then the first word. */}
-            <div data-hero-reveal aria-hidden="true" className="text-gold mt-3 w-[min(22rem,70%)] md:mt-4">
-              <VoiceLine variant="hero" introDelay={0.5} className="h-8 w-full md:h-10" />
+            <div
+              data-hero-reveal
+              aria-hidden="true"
+              className="hero-voice text-gold mt-2 w-[min(22rem,62%)] sm:mt-3 md:mt-4"
+            >
+              <VoiceLine variant="hero" introDelay={0.5} className="h-6 w-full sm:h-8 md:h-10" />
             </div>
             <p
               data-hero-item
-              className="text-lead mt-3 max-w-[44ch] text-white/80 max-sm:text-[1rem] max-sm:leading-[1.55] sm:mt-4"
+              className="hero-lead text-lead mt-2 max-w-[44ch] text-white/80 max-sm:text-[0.9375rem] max-sm:leading-[1.5] sm:mt-4"
             >
               Talk-Masters Club helps people of every age and background build the confidence to speak, lead
               and be heard, one friendly meeting at a time.
@@ -67,9 +76,9 @@ export function Hero() {
 
             <div
               data-hero-item
-              className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-6 md:mt-7 md:gap-x-8"
+              className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-6 md:mt-7 md:gap-x-8"
             >
-              <ButtonLink href="/join" className="group">
+              <ButtonLink href="/join" className="group max-sm:w-full">
                 Book a Free Guest Visit
                 <ArrowRight
                   aria-hidden="true"
@@ -87,17 +96,21 @@ export function Hero() {
                 Read Our Story
               </Link>
             </div>
-            <p data-hero-item className="text-muted mt-3 max-w-[52ch] text-sm sm:mt-4">
+            <p
+              data-hero-item
+              className="text-muted mt-3 max-w-[52ch] text-sm max-sm:text-center max-sm:text-[0.8125rem] sm:mt-4"
+            >
               <span className="text-white/85">
                 Next meeting: <NextMeetingDate rule={meeting} />,{" "}
                 <span className="whitespace-nowrap">{meetingTimeRange(meeting)}</span>
               </span>
               <br />
-              {meeting.venue}, {meeting.city}. Guests are always welcome.
+              {meeting.venue}, {meeting.city}.
+              <span className="max-sm:hidden"> Guests are always welcome.</span>
             </p>
 
             {/* Phones: all four numbers in one compact row, so the hero fits one screen. */}
-            <dl data-hero-item className="mt-6 grid max-w-2xl grid-cols-4 gap-x-3 sm:mt-8 sm:gap-x-0">
+            <dl data-hero-item className="mt-4 grid max-w-2xl grid-cols-4 gap-x-3 sm:mt-8 sm:gap-x-0">
               {stats.map((stat, index) => (
                 <div
                   key={stat.label}
@@ -106,7 +119,7 @@ export function Hero() {
                   <dt className="mt-1.5 text-xs leading-snug text-white/70 sm:mt-2 sm:text-sm sm:text-white/65">
                     {stat.label}
                   </dt>
-                  <dd className="font-serif text-[1.5rem] leading-none sm:text-[clamp(1.75rem,1.4rem+1vw,2.25rem)]">
+                  <dd className="font-serif text-[1.375rem] leading-none sm:text-[clamp(1.75rem,1.4rem+1vw,2.25rem)]">
                     <CountUp
                       value={stat.value}
                       suffix={stat.suffix}

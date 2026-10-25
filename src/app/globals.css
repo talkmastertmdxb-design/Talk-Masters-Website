@@ -939,3 +939,36 @@ html[data-nav="history"]::view-transition-new(.page-in) {
     animation: 180ms ease-out both page-fade;
   }
 }
+
+/*
+ * Phone hero (under 640px): the photo sits clear below the bar, full colour, with only a soft
+ * fade at its foot; the words start below it, so nothing covers a face. Unlayered so it beats
+ * the panel's utility classes. Desktop keeps the photo beside the headline.
+ */
+@media (max-width: 39.99rem) {
+  :root {
+    --hero-photo-top: 4rem;
+    --hero-photo-h: clamp(10.5rem, 31svh, 17rem);
+  }
+  .hero-panel {
+    top: var(--hero-photo-top);
+    bottom: auto;
+    height: var(--hero-photo-h);
+  }
+  .hero-panel-fade {
+    background: linear-gradient(180deg, rgb(11 18 32 / 0) 58%, rgb(11 18 32 / 0.65) 88%, var(--color-ink) 100%);
+  }
+}
+/* Short phones (an iPhone with Safari's bars, small Androids): a shorter photo and no decorative
+   voice line, so the headline, button, next meeting and numbers all fit the first screen. */
+@media (max-width: 39.99rem) and (max-height: 720px) {
+  :root {
+    --hero-photo-h: clamp(8.5rem, 21svh, 17rem);
+  }
+  .hero-voice {
+    display: none;
+  }
+  .hero-lead {
+    font-size: 0.875rem;
+  }
+}

@@ -102,12 +102,8 @@ test("arriving on the home page from another page animates cleanly, with no GSAP
 });
 
 test.describe("hero photos", () => {
-  test("rotate through the club photos, with a working pause button", async ({
-    page,
-    isMobile,
-  }, testInfo) => {
+  test("rotate through the club photos, with a working pause button", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name === "reduced-motion", "Covered by the reduced-motion test below");
-    test.skip(isMobile, "Phones show only the pause button: covered below");
     await page.goto("/");
     const slides = page.locator("[data-hero-backdrop] [data-slide]");
     await expect(slides).toHaveCount(4);
@@ -138,22 +134,57 @@ test.describe("hero photos", () => {
     await expect(page.locator("[data-hero-backdrop] [data-slide]").nth(1)).not.toHaveAttribute("aria-hidden");
   });
 
-  test("on phones, only the pause button shows, clear of the hero's numbers", async ({ page, isMobile }) => {
-    test.skip(!isMobile, "Phone layout");
-    await page.setViewportSize({ width: 390, height: 664 });
-    await page.goto("/");
-    const pause = page.getByRole("button", { name: /(Pause|Play) photo slideshow/ });
-    await expect(pause).toBeVisible();
-    await expect(page.getByRole("button", { name: "Show photo 2 of 4" })).toBeHidden();
-    const button = (await pause.boundingBox())!;
-    for (const stat of await page.locator(".hero-stat").all()) {
-      const box = (await stat.boundingBox())!;
-      const overlaps = button.y < box.y + box.height && box.y < button.y + button.height;
-      expect(overlaps && button.x < box.x + box.width && box.x < button.x + button.width).toBe(false);
-    }
-    await pause.press("Enter");
-    await expect(page.getByRole("button", { name: /(Pause|Play) photo slideshow/ })).toBeVisible();
-  });
+  for (const [width, height] of [
+    [360, 640],
+    [390, 664],
+    [412, 839],
+  ] as const) {
+    test(`on a ${width}×${height} phone the photo sits on top, uncovered, and everything fits`, async ({
+      page,
+      isMobile,
+    }) => {
+      test.skip(!isMobile, "Phone layout");
+      await page.setViewportSize({ width, height });
+      await page.goto("/");
+      // Measure the settled layout, after the hero's entrance animations (not the endless ambient ones).
+      await page.evaluate(() =>
+        Promise.all(
+          document
+            .getAnimations()
+            .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+            .map((a) => a.finished.catch(() => undefined)),
+        ),
+      );
+      const m = await page.evaluate(() => {
+        const box = (el: Element | null) => el!.getBoundingClientRect();
+        const photo = box(document.querySelector("[data-hero-backdrop]"));
+        const header = box(document.querySelector("header.site-header"));
+        const controls = box(document.querySelector("[aria-label='Hero photos']"));
+        const firstText = box(document.querySelector("#hero-title")!.previousElementSibling);
+        const stats = [...document.querySelectorAll(".hero-stat")].map((s) => box(s).bottom);
+        return {
+          photoTop: photo.top,
+          photoBottom: photo.bottom,
+          headerBottom: header.bottom,
+          controlsTop: controls.top,
+          controlsBottom: controls.bottom,
+          textTop: firstText.top,
+          statsBottom: Math.max(...stats),
+          vh: window.innerHeight,
+        };
+      });
+      // The bar never covers the photo, and the words start below it.
+      // (A few px of tolerance: the photo's slow drift moves it by sub-pixels.)
+      expect(m.photoTop).toBeGreaterThanOrEqual(m.headerBottom - 4);
+      expect(m.textTop).toBeGreaterThanOrEqual(m.photoBottom);
+      // The slideshow controls live inside the photo, not over the words.
+      expect(m.controlsTop).toBeGreaterThanOrEqual(m.photoTop);
+      expect(m.controlsBottom).toBeLessThanOrEqual(m.photoBottom);
+      // Headline, button, next meeting and all four numbers fit the first screen.
+      expect(m.statsBottom).toBeLessThanOrEqual(m.vh);
+      await expect(page.getByRole("button", { name: "Show photo 2 of 4" })).toBeVisible();
+    });
+  }
 
   test("show when and where we meet", async ({ page }) => {
     await page.clock.setFixedTime(new Date("2026-10-22T08:00:00Z"));
