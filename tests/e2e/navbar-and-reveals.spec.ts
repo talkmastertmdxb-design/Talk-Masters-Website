@@ -15,6 +15,21 @@ test.describe("home", () => {
     expect(next).toBe("about");
   });
 
+  test("on a phone the whole hero, numbers included, fits the first screen", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "Phone layout");
+    // A short phone screen (iPhone 13/14 with Safari's bars) is the hardest case.
+    await page.setViewportSize({ width: 390, height: 664 });
+    await page.goto("/");
+    const stats = page.locator(".hero-stat");
+    await expect(stats).toHaveCount(4);
+    const lastBottom = await stats.last().evaluate((el) => el.getBoundingClientRect().bottom);
+    expect(lastBottom).toBeLessThanOrEqual(await page.evaluate(() => window.innerHeight));
+    const tops = await stats.evaluateAll((els) =>
+      els.map((el) => Math.round(el.getBoundingClientRect().top)),
+    );
+    expect(new Set(tops).size).toBe(1);
+  });
+
   test("a big statement is wiped in by a block, then left as plain text", async ({ page }, testInfo) => {
     await page.goto("/");
     const heading = page.locator("#about-title");
@@ -29,6 +44,44 @@ test.describe("home", () => {
 });
 
 test.describe("navbar", () => {
+  test("is a full-width translucent bar, not a floating pill", async ({ page }) => {
+    await page.goto("/");
+    const bar = page.locator("[data-frosted]");
+    const { width, viewport, radius, background } = await bar.evaluate((el) => ({
+      width: el.getBoundingClientRect().width,
+      viewport: document.documentElement.clientWidth,
+      radius: getComputedStyle(el).borderTopLeftRadius,
+      background: getComputedStyle(el).backgroundColor,
+    }));
+    expect(Math.abs(width - viewport)).toBeLessThan(1);
+    expect(radius).toBe("0px");
+    expect(background).toMatch(/rgba\(11, 18, 32, 0\.\d+\)/);
+  });
+
+  test("on phones it hides while scrolling down and returns on scrolling up", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "Hiding is for phones and tablets");
+    await page.goto("/team");
+    const header = page.locator("header.site-header");
+    const bottom = () => header.evaluate((el) => el.getBoundingClientRect().bottom);
+    // Phones scroll by touch, not wheel: step the page as a reader's thumb would.
+    const scrollTo = async (y: number) => {
+      await page.evaluate((y) => window.scrollTo(0, y), y);
+      await page.waitForTimeout(120);
+    };
+    for (const y of [200, 500, 900]) await scrollTo(y);
+    await expect.poll(bottom).toBeLessThanOrEqual(1);
+    for (const y of [800, 650]) await scrollTo(y);
+    await expect.poll(bottom).toBeGreaterThan(40);
+  });
+
+  test("on desktop it stays in view while scrolling", async ({ page, isMobile }) => {
+    test.skip(isMobile, "Desktop keeps the bar");
+    await page.goto("/team");
+    await page.mouse.wheel(0, 900);
+    await page.waitForTimeout(800);
+    expect(await page.locator("header.site-header").evaluate((el) => el.getBoundingClientRect().top)).toBe(0);
+  });
+
   test("numbers its links and marks the current page", async ({ page, isMobile }) => {
     test.skip(isMobile, "Phones use the menu");
     await page.goto("/team");
@@ -40,7 +93,10 @@ test.describe("navbar", () => {
 
   test("the guest booking button is gold everywhere", async ({ page }) => {
     await page.goto("/");
-    const book = page.locator("header").getByRole("link", { name: /Book a (guest )?visit/ }).first();
+    const book = page
+      .locator("header")
+      .getByRole("link", { name: /Book a (guest )?visit/ })
+      .first();
     expect(await book.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(GOLD);
     const footerBook = page.locator("footer").getByRole("link", { name: "Book a guest visit" }).first();
     expect(await footerBook.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(GOLD);
@@ -84,7 +140,10 @@ test.describe("hero numbers", () => {
     const first = page.locator(".hero-stat dd [aria-hidden='true'] > span").first();
     const final = await page.locator(".hero-stat dd .sr-only").first().innerText();
     // On short screens the numbers sit just below the fold; they count once they are in view.
-    await page.locator(".hero-stat").first().evaluate((el) => el.scrollIntoView({ block: "center" }));
+    await page
+      .locator(".hero-stat")
+      .first()
+      .evaluate((el) => el.scrollIntoView({ block: "center" }));
     const target = final.replace(/\D+$/, "");
     // Mid-count: neither the starting 0 nor the final number.
     await expect

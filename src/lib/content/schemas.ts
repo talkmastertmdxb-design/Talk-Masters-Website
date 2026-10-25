@@ -72,6 +72,8 @@ export const settingsSchema = z.object({
   clubName: z.string().min(1),
   parentOrganisation: z.string().min(1),
   tagline: z.string().min(1),
+  /** The club's mission statement, in the committee's words. */
+  mission: z.string().min(1),
   description: z.string().min(1),
   /** When regular meetings happen, e.g. the 2nd and 4th Sunday. The site works out the dates. */
   meeting: z
@@ -379,6 +381,57 @@ export const cultureSchema = z
   .min(1, "Add at least one card")
   .max(3, "The About grid has room for 3 cards");
 
+const titled = z.object({ name: z.string().min(1), text: z.string().min(1) });
+
+/**
+ * Toastmasters Pathways, who the club is for, and the "Find your path" quiz (content/pathways.json).
+ * Paths come from toastmasters.org (`source`, re-checked on `checkedOn`): only paths still offered
+ * to new members belong in `paths`.
+ */
+export const pathwaysSchema = z
+  .object({
+    intro: z.string().min(1),
+    journeyLine: z.string().min(1),
+    audiences: z
+      .array(z.object({ label: z.string().min(1), reason: z.string().min(1) }))
+      .min(1)
+      .max(8, "Keep the list to eight audiences so it reads at a glance"),
+    stages: z.array(titled).length(4, "The journey has four stages"),
+    levels: z.array(titled).length(5, "Every path has five levels"),
+    facts: z.array(z.object({ title: z.string().min(1), text: z.string().min(1) })).min(1),
+    paths: z
+      .array(
+        z.object({
+          slug,
+          name: z.string().min(1),
+          focus: z.string().min(1),
+          bestFor: z.string().min(1),
+          skills: z.array(z.string().min(1)).min(2).max(4),
+          finalProject: z.string().min(1),
+          imageSlot: imageSlotId,
+        }),
+      )
+      .min(1)
+      .refine(
+        (paths) => new Set(paths.map((p) => p.slug)).size === paths.length,
+        "Give each path its own slug",
+      ),
+    /** Paths no longer offered to new members, for people who have heard of them. */
+    retired: z.string().min(1),
+    quiz: z.object({
+      goals: z
+        .array(z.object({ id: slug, label: z.string().min(1), hint: z.string().min(1), path: slug }))
+        .min(1),
+      places: z.array(z.object({ id: slug, label: z.string().min(1), line: z.string().min(1) })).min(1),
+    }),
+    source: z.url(),
+    checkedOn: z.iso.date(),
+  })
+  .refine(
+    (data) => data.quiz.goals.every((goal) => data.paths.some((p) => p.slug === goal.path)),
+    "Every quiz answer must recommend one of the listed paths",
+  );
+
 export const tableTopicSchema = z.object({
   prompt: z.string().min(1),
 });
@@ -429,6 +482,8 @@ export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
 export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type TableTopic = z.infer<typeof tableTopicSchema>;
+export type Pathways = z.infer<typeof pathwaysSchema>;
+export type Pathway = Pathways["paths"][number];
 export type ImageSlot = z.infer<typeof imageSlotSchema>;
 export type Video = z.infer<typeof videoSchema>;
 

@@ -21,6 +21,10 @@ interface SiteHeaderProps {
 }
 
 const FROST_AFTER_PX = 40;
+/** Below this the bar always shows; past it, scrolling down hides it on phones and tablets. */
+const HIDE_AFTER_PX = 120;
+/** Ignore tiny scroll jitters (and iOS rubber-banding) so the bar never flickers. */
+const SCROLL_TOLERANCE_PX = 6;
 
 const number = (index: number): string => String(index + 1).padStart(2, "0");
 
@@ -29,22 +33,31 @@ const isCurrent = (pathname: string, href: string): boolean =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
 /**
- * Floating glass pill: transparent over the hero; once the page moves it frosts, narrows and
- * folds the club name into its badge, and a gold line along its foot shows reading progress.
- * Links are numbered like a meeting agenda; the current page is gold.
+ * Full-width translucent bar: see-through glass over the hero, a little denser once the page
+ * moves, with a gold line along its foot for reading progress. On phones and tablets it slides
+ * away while you scroll down and returns the moment you scroll up (CSS limits the hiding to
+ * those widths). Links are numbered like a meeting agenda; the current page is gold.
  */
 export function SiteHeader({ items, meeting }: SiteHeaderProps) {
   const [frosted, setFrosted] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const menuRef = useRef<HTMLDialogElement>(null);
-  const pillRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
+    let lastY = window.scrollY;
     const onScroll = () => {
-      setFrosted(window.scrollY > FROST_AFTER_PX);
+      const y = window.scrollY;
+      setFrosted(y > FROST_AFTER_PX);
+      if (y < HIDE_AFTER_PX) setHidden(false);
+      else if (y > lastY + SCROLL_TOLERANCE_PX) setHidden(true);
+      else if (y < lastY - SCROLL_TOLERANCE_PX) setHidden(false);
+      if (Math.abs(y - lastY) > SCROLL_TOLERANCE_PX || y < HIDE_AFTER_PX) lastY = y;
+
       const room = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = room > 0 ? Math.min(1, window.scrollY / room) : 0;
-      pillRef.current?.style.setProperty("--nav-progress", progress.toFixed(3));
+      const progress = room > 0 ? Math.min(1, y / room) : 0;
+      barRef.current?.style.setProperty("--nav-progress", progress.toFixed(3));
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -55,65 +68,73 @@ export function SiteHeader({ items, meeting }: SiteHeaderProps) {
   const closeMenu = () => menuRef.current?.close();
 
   return (
-    <header style={{ viewTransitionName: "site-header" }} className="site-header fixed inset-x-0 top-0 z-50 px-[max(0.75rem,calc(var(--site-gutter)-1.75rem))] pt-3 md:pt-5">
+    <header
+      style={{ viewTransitionName: "site-header" }}
+      data-hidden={hidden}
+      // Keyboard users tabbing into the bar always see it.
+      onFocus={() => setHidden(false)}
+      className="site-header fixed inset-x-0 top-0 z-50"
+    >
       <div
-        ref={pillRef}
+        ref={barRef}
         data-frosted={frosted}
-        className="site-pill theme-dark data-[frosted=true]:bg-ink/85 relative mx-auto flex h-16 max-w-[calc(var(--site-max)-2*var(--site-gutter)+3.5rem)] items-center justify-between gap-4 rounded-full border border-transparent px-5 text-white transition-[background-color,border-color,backdrop-filter,max-width] duration-(--duration-base) ease-(--ease-deliver) data-[frosted=true]:border-white/10 data-[frosted=true]:backdrop-blur-xl md:px-7 lg:data-[frosted=true]:max-w-[68rem]"
+        className="site-bar theme-dark relative border-b border-white/10 text-white"
       >
-        <Wordmark
-          eager
-          compact
-          className="origin-left transition-transform duration-(--duration-base) ease-(--ease-deliver) in-data-[frosted=true]:scale-[0.94]"
-        />
+        <div className="container-site flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+          <Wordmark
+            eager
+            compact
+            className="origin-left transition-transform duration-(--duration-base) ease-(--ease-deliver) in-data-[frosted=true]:scale-[0.94]"
+          />
 
-        <nav aria-label="Main" className="site-nav hidden md:block">
-          <ul className="flex items-center gap-7 text-[0.9375rem] lg:gap-8">
-            {items.map((item, index) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-                  className="nav-link site-nav__link"
-                >
-                  <span aria-hidden="true" className="site-nav__num">
-                    {number(index)}
-                  </span>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav aria-label="Main" className="site-nav hidden md:block">
+            <ul className="flex items-center gap-7 text-[0.9375rem] lg:gap-8">
+              {items.map((item, index) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+                    className="nav-link site-nav__link"
+                  >
+                    <span aria-hidden="true" className="site-nav__num">
+                      {number(index)}
+                    </span>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <div className="flex items-center gap-3">
-          <Link
-            href="/join"
-            className="hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) xl:inline-flex"
-          >
-            <span className="text-white/85">Next meeting</span>
-            <span aria-hidden="true" className="bg-gold size-1 rounded-full" />
-            <span className="font-semibold text-white">
-              <NextMeetingDate rule={meeting} style="short" />
-            </span>
-          </Link>
-          {/* Always visible: on phones it is the one action beside the menu. */}
-          <ButtonLink href="/join" className="min-h-11 px-5 whitespace-nowrap">
-            <span>
-              Book a <span className="hidden sm:inline">guest </span>visit
-            </span>
-          </ButtonLink>
-          <button
-            type="button"
-            onClick={openMenu}
-            aria-label="Open menu"
-            aria-haspopup="dialog"
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 md:hidden"
-          >
-            <Menu aria-hidden="true" className="size-5" />
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/join"
+              className="hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) xl:inline-flex"
+            >
+              <span className="text-white/85">Next meeting</span>
+              <span aria-hidden="true" className="bg-gold size-1 rounded-full" />
+              <span className="font-semibold text-white">
+                <NextMeetingDate rule={meeting} style="short" />
+              </span>
+            </Link>
+            {/* Always visible: on phones it is the one action beside the menu. */}
+            <ButtonLink href="/join" className="min-h-11 px-5 whitespace-nowrap">
+              <span>
+                Book a <span className="hidden sm:inline">guest </span>visit
+              </span>
+            </ButtonLink>
+            <button
+              type="button"
+              onClick={openMenu}
+              aria-label="Open menu"
+              aria-haspopup="dialog"
+              className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 md:hidden"
+            >
+              <Menu aria-hidden="true" className="size-5" />
+            </button>
+          </div>
         </div>
-        <span aria-hidden="true" data-nav-progress className="site-pill__progress" />
+        <span aria-hidden="true" data-nav-progress className="site-bar__progress" />
       </div>
 
       <dialog
@@ -165,7 +186,8 @@ export function SiteHeader({ items, meeting }: SiteHeaderProps) {
               className="flex min-h-16 flex-col justify-center gap-1 rounded-2xl border border-white/10 bg-white/5 px-5 py-3"
             >
               <span className="font-semibold">
-                Next meeting <span aria-hidden="true">·</span> <NextMeetingDate rule={meeting} style="short" />
+                Next meeting <span aria-hidden="true">·</span>{" "}
+                <NextMeetingDate rule={meeting} style="short" />
               </span>
               <span className="text-sm text-white/70">
                 {meetingTimeRange(meeting)} · {meeting.venue}

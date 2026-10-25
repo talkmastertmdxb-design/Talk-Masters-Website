@@ -1,8 +1,51 @@
 [
   {
+    "slug": "anees-mousafi",
+    "name": "Muhamed Anees K Mousafi",
+    "position": "President",
+    "occupation": "Sales Manager – Middle East",
+    "organisation": "Energy Recovery Inc.",
+    "segment": "officer",
+    "challenge": "He was comfortable in technical and business discussions, yet not always sure his words were landing the way he intended.",
+    "transformation": "Today he serves as President of Talk-Masters and leads the club with confidence, speaking to audiences with clarity and purpose.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Joined Talk-Masters in 2024, looking for a space to step out of his comfort zone and find his voice."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Served as Sergeant at Arms in 2025–26: his first taste of club leadership."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Entrusted with the role of Club President for 2026–27."
+      },
+      {
+        "milestone": "other",
+        "text": "Part of the team that helped Talk-Masters win the Smedley Award in two consecutive years and achieve 6 Distinguished Club Program goals."
+      }
+    ],
+    "impact": {
+      "career": "Toastmasters is helping me present my ideas clearly and engage confidently with clients, partners, and senior stakeholders.",
+      "confidence": "I have moved from hesitating to speak in public to leading meetings and addressing audiences with confidence.",
+      "leadership": "I strongly believe in out-of-the-box thinking, strategic planning, and disciplined implementation. Serving as Sergeant at Arms and now as Club President has given me the opportunity to put these beliefs into practice. Contributing to the club’s Smedley Award wins and DCP success showed me what a committed team can achieve when ideas are backed by a clear plan and consistent action."
+    },
+    "advice": "You already have the knowledge. Toastmasters helps you find the confidence to share it.",
+    "story": "Anees joined Talk-Masters in 2024 to step out of his comfort zone. What began as a way to build confidence grew into a passion for leading others, and today, as Club President, he enjoys guiding and supporting fellow members on their own journeys.",
+    "contribution": "Out-of-the-box thinking, strategic planning and disciplined follow-through: ideas backed by a clear plan and consistent action.",
+    "clubHighlights": ["Sergeant at Arms 2025–26", "Two Smedley Awards", "6 DCP goals"],
+    "memberSince": 2024,
+    "imageSlot": "officer-president",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
+  },
+  {
     "slug": "hadi-abdulkader",
     "name": "Hadi Abdulkader",
-    "occupation": "Public speaking and soft-skills coach",
+    "occupation": "Director – Trainings",
     "organisation": "Public Speaking Gym",
     "links": [
       {
@@ -19,40 +62,48 @@
       }
     ],
     "segment": "professional",
-    "challenge": "Trained as an HVAC and building automation engineer, he knew his systems inside out and wanted to explain them with the same confidence.",
-    "transformation": "Today he coaches professionals to speak with confidence through his own Public Speaking Gym, in English and Malayalam.",
+    "challenge": "As a mechanical engineer, he was confident in his technical knowledge but struggled to communicate his ideas with the same confidence. Knowing something and communicating it well, he realised, were two very different skills.",
+    "transformation": "Today communication is his profession: a public speaking and workplace communication trainer who helps professionals build the skills he once struggled to build himself.",
     "journey": [
       {
         "milestone": "first-meeting",
-        "text": "Came to Toastmasters for a friendly, honest room to practise speaking in."
+        "text": "Joined Toastmasters in 2016 with a simple goal: to become a better speaker."
       },
       {
         "milestone": "first-speech",
-        "text": "Turned what he learned about storytelling, pauses and rhetoric into speeches, then into a blog and two YouTube channels."
+        "text": "Kept showing up through hesitant moments, disappointing performances and hard feedback, and found that confidence comes through practice, not before it."
       },
       {
         "milestone": "other",
-        "text": "Moved from engineering into training, coaching people on public speaking, interviews and team building."
+        "text": "Won at Division level in the Humorous Speech, International Speech and Table Topics contests."
+      },
+      {
+        "milestone": "other",
+        "text": "Moved from mechanical engineering into public speaking and workplace communication training, now as Director – Trainings at Public Speaking Gym."
       },
       {
         "milestone": "leadership-role",
-        "text": "Was the featured speaker at Talk-Masters' 100th meeting, the Grand Jubilee \"Century of Voice\"."
+        "text": "Invited as the Featured Speaker for Talk-Masters' 100th meeting, \"Century of Voice\"."
       }
     ],
     "impact": {
-      "career": "Changed careers, from engineering to training and executive coaching.",
-      "confidence": "Speaks on stage and on camera, sharing public speaking lessons in English and Malayalam.",
-      "leadership": "Coaches individuals and teams on speaking, interviews and team building."
+      "career": "My Toastmasters journey helped me discover my passion for training and gradually transition from mechanical engineering into public speaking and workplace communication training.",
+      "confidence": "From hesitating to express my ideas, I have grown into someone who can address audiences, facilitate workshops, and share lessons through videos in English and Malayalam.",
+      "leadership": "Taking on club responsibilities, supporting fellow members, and facilitating learning experiences have helped me develop the ability to guide, encourage, and bring out the best in others."
     },
-    "advice": "Treat speaking like a gym: small, regular reps beat waiting until you feel ready.",
-    "story": "For Hadi, the club is where coaching comes full circle: the room where he still practises what he teaches. Every meeting is another rep, and every evaluation another chance to sharpen the craft he passes on.",
-    "contribution": "A coach's eye for structure. He helps members tighten their openings, use the pause, and land their message.",
-    "clubHighlights": ["Featured speaker, 100th meeting"],
+    "advice": "Don't wait to become confident before you start speaking. Start speaking, and confidence will follow. Just like a gym, every small practice makes you stronger.",
+    "story": "“I joined Toastmasters to find my voice. Along the way, I discovered my purpose: helping others find theirs.” For Hadi, the club is still his practice ground: every speech he gives and every evaluation he receives is a reminder that there is always room to improve.",
+    "contribution": "A trainer's eye for turning ideas into messages that connect: structuring a speech, strengthening an opening, using a purposeful pause, making a message memorable. And still a learner, taking something new from every meeting.",
+    "clubHighlights": [
+      "In Toastmasters since 2016",
+      "Division winner in 3 contests",
+      "Featured Speaker, 100th meeting"
+    ],
     "imageSlot": "member-hadi",
     "consent": true,
     "spotlight": true,
     "status": "published",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "prathiba-leo",

@@ -34,6 +34,6 @@ describe("isIndexable", () => {
 describe("sitemap", () => {
   it("lists every public page and leaves internal ones out", () => {
     const paths = sitemap().map((entry) => new URL(entry.url).pathname);
-    expect(paths).toEqual(["/", "/join", "/members", "/team", "/our-story", "/achievements"]);
+    expect(paths).toEqual(["/", "/join", "/members", "/team", "/our-story", "/pathways", "/achievements"]);
   });
 });

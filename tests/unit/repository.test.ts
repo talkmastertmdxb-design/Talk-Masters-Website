@@ -13,6 +13,7 @@ const base: RawContent = {
   officers: [],
   faqs: [],
   culture: [],
+  pathways: content.pathways,
   tableTopics: [],
   imageSlots: [],
 };
@@ -75,6 +76,27 @@ describe("content in /content", () => {
     expect(linked.Nabeel).toBe("nabeel-bava");
   });
 
+  it("lists the six Pathways offered to new members, not the retired ones", () => {
+    expect(content.pathways.paths.map((p) => p.name).sort()).toEqual([
+      "Dynamic Leadership",
+      "Engaging Humor",
+      "Motivational Strategies",
+      "Persuasive Influence",
+      "Presentation Mastery",
+      "Visionary Communication",
+    ]);
+  });
+
+  it("states the club's tagline and mission", () => {
+    expect(content.settings.tagline).toBe("A Club with Difference");
+    expect(content.settings.mission).toMatch(/^We provide a supportive and positive learning experience/);
+  });
+
+  it("links the President's committee card to his member story", () => {
+    const president = content.officers.find((o) => o.role === "President");
+    expect(president?.memberSlug).toBe("anees-mousafi");
+  });
+
   it("has unique image slot ids, and every referenced slot exists", () => {
     const ids = content.imageSlots.map((slot) => slot.id);
     expect(new Set(ids).size).toBe(ids.length);
@@ -85,6 +107,7 @@ describe("content in /content", () => {
       ...content.awards,
       ...content.testimonials,
       ...content.officers,
+      ...content.pathways.paths,
     ]
       .map((item) => item.imageSlot)
       .filter((id): id is string => Boolean(id));

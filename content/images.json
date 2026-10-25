@@ -50,6 +50,126 @@
     "focalPoint": "60% 35%"
   },
   {
+    "id": "audience-meeting-room",
+    "alt": "Members of every age, including a young member in the front row, at a Talk-Masters meeting",
+    "aspectRatio": "4/3",
+    "brief": "Who it's for: the whole room at a meeting, every age and background",
+    "src": "/images/club-meeting-room.webp",
+    "focalPoint": "50% 62%"
+  },
+  {
+    "id": "pathways-hero",
+    "alt": "Members listening closely during a Talk-Masters meeting",
+    "aspectRatio": "4/3",
+    "brief": "Pathways page header: members engaged in a meeting",
+    "src": "/images/club-meeting-audience.webp",
+    "focalPoint": "50% 55%"
+  },
+  {
+    "id": "pathways-leader",
+    "alt": "A member leading a meeting as Toastmaster of the Day, arms wide in welcome",
+    "aspectRatio": "4/3",
+    "brief": "A member leading a meeting in a meeting role",
+    "src": "/images/toastmaster-of-the-day.webp",
+    "focalPoint": "52% 60%"
+  },
+  {
+    "id": "path-presentation-mastery",
+    "alt": "A speaker presenting confidently to an audience from a stage",
+    "aspectRatio": "3/2",
+    "brief": "Presentation Mastery: a confident speaker presenting on stage",
+    "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8c3BlYWtlciUyMHByZXNlbnRpbmclMjBvbiUyMHN0YWdlJTIwY29uZmVyZW5jZXxlbnwxfDB8fHwxNzkyOTQ4OTgzfDA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "query": "speaker presenting on stage conference",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Headway",
+      "profileUrl": "https://unsplash.com/@headwayio?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/crowd-of-people-sitting-on-chairs-inside-room-F2KRf_QfCqw?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "path-dynamic-leadership",
+    "alt": "A team leader guiding a discussion around a table",
+    "aspectRatio": "3/2",
+    "brief": "Dynamic Leadership: a leader guiding a team discussion",
+    "src": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bGVhZGVyJTIwbGVhZGluZyUyMHRlYW0lMjBtZWV0aW5nJTIwZGlzY3Vzc2lvbnxlbnwxfDB8fHwxNzkyOTQ4OTg0fDA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "query": "leader leading team meeting discussion",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Dylan Gillis",
+      "profileUrl": "https://unsplash.com/@mainermedia?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/people-sitting-on-chair-in-front-of-table-while-holding-pens-during-daytime-KdeqA3aTnBY?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "path-persuasive-influence",
+    "alt": "Two professionals shaking hands after a negotiation",
+    "aspectRatio": "3/2",
+    "brief": "Persuasive Influence: a negotiation that ends in agreement",
+    "src": "https://images.unsplash.com/photo-1672380135241-c024f7fbfa13?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YnVzaW5lc3MlMjBuZWdvdGlhdGlvbiUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5Mjk0ODk4NXww&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "query": "business negotiation handshake meeting",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Radission US",
+      "profileUrl": "https://unsplash.com/@radission?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/two-people-shaking-hands-in-front-of-a-laptop-_XeQ8XEWb4Q?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "path-motivational-strategies",
+    "alt": "A mentor encouraging a colleague in a one-to-one conversation",
+    "aspectRatio": "3/2",
+    "brief": "Motivational Strategies: coaching and encouraging people",
+    "src": "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWVudG9yJTIwY29hY2hpbmclMjBjb2xsZWFndWUlMjBjb252ZXJzYXRpb258ZW58MXwwfHx8MTc5Mjk0ODk4Nnww&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "query": "mentor coaching colleague conversation",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Christina @ wocintechchat.com M",
+      "profileUrl": "https://unsplash.com/@wocintechchat?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/two-women-sitting-on-chair-eF7HN40WbAQ?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "path-visionary-communication",
+    "alt": "A team planning a strategy together on a whiteboard",
+    "aspectRatio": "3/2",
+    "brief": "Visionary Communication: planning a long-term vision",
+    "src": "https://images.unsplash.com/photo-1529119368496-2dfda6ec2804?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8dGVhbSUyMHN0cmF0ZWd5JTIwcGxhbm5pbmclMjB3aGl0ZWJvYXJkfGVufDF8MHx8fDE3OTI5NDg5ODd8MA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "query": "team strategy planning whiteboard",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Startaê Team",
+      "profileUrl": "https://unsplash.com/@startaeteam?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/person-pointing-white-paper-on-wall-7tXA8xwe4W4?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
+    "id": "path-engaging-humor",
+    "alt": "An audience laughing during a talk",
+    "aspectRatio": "3/2",
+    "brief": "Engaging Humor: an audience laughing with the speaker",
+    "src": "https://images.unsplash.com/photo-1544531585-9847b68c8c86?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXVkaWVuY2UlMjBsYXVnaGluZyUyMHByZXNlbnRhdGlvbnxlbnwxfDB8fHwxNzkyOTQ4OTg4fDA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "query": "audience laughing presentation",
+      "orientation": "landscape"
+    },
+    "credit": {
+      "name": "Miguel Henriques",
+      "profileUrl": "https://unsplash.com/@miguel_photo?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/man-sitting-on-stage-E0bIdzi8zoQ?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
     "id": "manifesto-bento",
     "alt": "Club members of different backgrounds sharing dinner",
     "aspectRatio": "1/1",

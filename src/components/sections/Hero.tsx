@@ -41,12 +41,12 @@ export function Hero() {
         {/* Spotlight measures its parent, so it stays a direct child of the hero (not inside the slideshow). */}
         <Spotlight />
         <HeroSlideshow slides={slides}>
-          <div className="container-site relative flex flex-1 flex-col justify-center pt-24 pb-20 md:pt-28 lg:pb-4">
+          <div className="container-site relative flex flex-1 flex-col justify-center pt-20 pb-8 sm:pt-24 sm:pb-20 md:pt-28 lg:pb-4">
             <p data-hero-item className="text-eyebrow text-white/70">
               Communicate <span className="text-gold">·</span> Lead <span className="text-gold">·</span>{" "}
               Belong
             </p>
-            <h1 id="hero-title" data-hero-reveal className="hero-title mt-5 sm:max-w-[18ch]">
+            <h1 id="hero-title" data-hero-reveal className="hero-title mt-4 sm:mt-5 sm:max-w-[18ch]">
               Find Your Voice.
               <br />
               Lead With <span className="text-gold">Confidence.</span>
@@ -57,14 +57,17 @@ export function Hero() {
             <div data-hero-reveal aria-hidden="true" className="text-gold mt-3 w-[min(22rem,70%)] md:mt-4">
               <VoiceLine variant="hero" introDelay={0.5} className="h-8 w-full md:h-10" />
             </div>
-            <p data-hero-item className="text-lead mt-4 max-w-[44ch] text-white/80">
+            <p
+              data-hero-item
+              className="text-lead mt-3 max-w-[44ch] text-white/80 max-sm:text-[1rem] max-sm:leading-[1.55] sm:mt-4"
+            >
               Talk-Masters Club helps people of every age and background build the confidence to speak, lead
               and be heard, one friendly meeting at a time.
             </p>
 
             <div
               data-hero-item
-              className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 md:mt-7 md:gap-x-8"
+              className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-6 md:mt-7 md:gap-x-8"
             >
               <ButtonLink href="/join" className="group">
                 Book a Free Guest Visit
@@ -84,7 +87,7 @@ export function Hero() {
                 Read Our Story
               </Link>
             </div>
-            <p data-hero-item className="text-muted mt-4 max-w-[52ch] text-sm">
+            <p data-hero-item className="text-muted mt-3 max-w-[52ch] text-sm sm:mt-4">
               <span className="text-white/85">
                 Next meeting: <NextMeetingDate rule={meeting} />,{" "}
                 <span className="whitespace-nowrap">{meetingTimeRange(meeting)}</span>
@@ -93,14 +96,17 @@ export function Hero() {
               {meeting.venue}, {meeting.city}. Guests are always welcome.
             </p>
 
-            <dl data-hero-item className="mt-8 grid max-w-2xl grid-cols-2 gap-y-6 sm:grid-cols-4">
+            {/* Phones: all four numbers in one compact row, so the hero fits one screen. */}
+            <dl data-hero-item className="mt-6 grid max-w-2xl grid-cols-4 gap-x-3 sm:mt-8 sm:gap-x-0">
               {stats.map((stat, index) => (
                 <div
                   key={stat.label}
-                  className={`hero-stat flex flex-col-reverse justify-end border-t border-white/15 pt-4 pr-4 ${index > 0 ? "sm:border-l sm:border-l-white/10 sm:pl-5" : ""}`}
+                  className={`hero-stat flex flex-col-reverse justify-end border-t border-white/15 pt-3 sm:pt-4 sm:pr-4 ${index > 0 ? "sm:border-l sm:border-l-white/10 sm:pl-5" : ""}`}
                 >
-                  <dt className="mt-2 text-sm text-white/65">{stat.label}</dt>
-                  <dd className="font-serif text-[clamp(1.75rem,1.4rem+1vw,2.25rem)] leading-none">
+                  <dt className="mt-1.5 text-xs leading-snug text-white/70 sm:mt-2 sm:text-sm sm:text-white/65">
+                    {stat.label}
+                  </dt>
+                  <dd className="font-serif text-[1.5rem] leading-none sm:text-[clamp(1.75rem,1.4rem+1vw,2.25rem)]">
                     <CountUp
                       value={stat.value}
                       suffix={stat.suffix}

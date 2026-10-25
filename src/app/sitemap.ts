@@ -8,6 +8,7 @@ const pages: ReadonlyArray<{ path: string; priority: number }> = [
   { path: "/members", priority: 0.8 },
   { path: "/team", priority: 0.7 },
   { path: "/our-story", priority: 0.7 },
+  { path: "/pathways", priority: 0.7 },
   { path: "/achievements", priority: 0.6 },
 ];
 

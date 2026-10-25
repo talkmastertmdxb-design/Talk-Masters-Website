@@ -8,6 +8,7 @@ import type {
   ImageSlot,
   Member,
   Officer,
+  Pathways,
   Settings,
   TableTopic,
   Testimonial,
@@ -33,6 +34,8 @@ export interface ContentRepository {
   readonly faqs: readonly Faq[];
   /** The About section's culture cards, in display order. */
   readonly culture: readonly CultureCard[];
+  /** Toastmasters Pathways, who the club is for, and the path quiz. */
+  readonly pathways: Pathways;
   readonly tableTopics: readonly TableTopic[];
   readonly imageSlots: readonly ImageSlot[];
 }
@@ -68,6 +71,7 @@ export function createRepository(raw: RawContent): ContentRepository {
     officers: raw.officers.filter(hasConsent).map(withStoryLink),
     faqs: raw.faqs,
     culture: raw.culture,
+    pathways: raw.pathways,
     tableTopics: raw.tableTopics,
     imageSlots: raw.imageSlots,
   });

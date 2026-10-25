@@ -1,0 +1,175 @@
+{
+  "intro": "Toastmasters Pathways offers learning experiences tailored to different goals, interests and stages of life. Whether you're building confidence, developing leadership skills or becoming a more influential communicator, there's a path designed for you.",
+  "journeyLine": "Your Toastmasters journey evolves as your goals evolve.",
+  "audiences": [
+    { "label": "Students", "reason": "Presentations, interviews, debates" },
+    { "label": "Working professionals", "reason": "Meetings, updates, promotions" },
+    { "label": "Entrepreneurs", "reason": "Pitches, sales, investors" },
+    { "label": "Managers", "reason": "Feedback, team talks, leading change" },
+    { "label": "Educators", "reason": "Classrooms, workshops, training" },
+    { "label": "Retirees", "reason": "Stories, community, a new chapter" }
+  ],
+  "stages": [
+    { "name": "First-timer", "text": "Your first speech, your first Table Topic, your first applause." },
+    { "name": "Confident speaker", "text": "Clear, calm and persuasive, at work and beyond." },
+    { "name": "Leader", "text": "Run meetings, lead projects, serve on the committee." },
+    { "name": "Mentor", "text": "Help the next nervous first-timer find their voice." }
+  ],
+  "levels": [
+    {
+      "name": "Mastering Fundamentals",
+      "text": "Your Ice Breaker, writing a speech with purpose, voice and body language, and learning to give feedback."
+    },
+    {
+      "name": "Learning Your Style",
+      "text": "Find your own speaking style, and take your first steps as a mentor."
+    },
+    { "name": "Increasing Knowledge", "text": "Your path's core skill, plus two electives you choose." },
+    { "name": "Building Skills", "text": "Use those skills in harder situations, plus one elective." },
+    {
+      "name": "Demonstrating Expertise",
+      "text": "A capstone project that shows what you've learned, and a reflection on your path."
+    }
+  ],
+  "facts": [
+    {
+      "title": "Your first path is included",
+      "text": "Every new member gets their first path free with membership."
+    },
+    { "title": "15 projects, 5 levels", "text": "Eleven required projects and four you choose yourself." },
+    {
+      "title": "Practised at real meetings",
+      "text": "Each project is a speech or a role you deliver at the club, with a fellow member's evaluation."
+    },
+    {
+      "title": "Online in Base Camp",
+      "text": "Projects, videos and evaluations live in Base Camp, Toastmasters' online learning platform."
+    },
+    { "title": "Six languages", "text": "Arabic, English, French, German, Simplified Chinese and Spanish." },
+    {
+      "title": "Not sure? Take the assessment",
+      "text": "Toastmasters' online assessment suggests three paths from your goals and interests."
+    }
+  ],
+  "paths": [
+    {
+      "slug": "presentation-mastery",
+      "name": "Presentation Mastery",
+      "focus": "Write and deliver speeches that connect, from your first story to a talk you could give professionally.",
+      "bestFor": "Public speaking, storytelling, confidence",
+      "skills": ["Speech writing", "Delivery", "Handling a difficult audience"],
+      "finalProject": "Prepare to Speak Professionally",
+      "imageSlot": "path-presentation-mastery"
+    },
+    {
+      "slug": "dynamic-leadership",
+      "name": "Dynamic Leadership",
+      "focus": "Lead through conflict and change, and put your leadership into practice with a real project.",
+      "bestFor": "Leaders who inspire through communication",
+      "skills": ["Leadership style", "Negotiation", "Managing change"],
+      "finalProject": "Lead in Any Situation",
+      "imageSlot": "path-dynamic-leadership"
+    },
+    {
+      "slug": "persuasive-influence",
+      "name": "Persuasive Influence",
+      "focus": "Negotiate good outcomes, resolve conflict and lead well when situations get difficult.",
+      "bestFor": "Negotiation, sales, influence",
+      "skills": ["Conflict resolution", "Leading in difficult situations", "Innovative solutions"],
+      "finalProject": "High Performance Leadership",
+      "imageSlot": "path-persuasive-influence"
+    },
+    {
+      "slug": "motivational-strategies",
+      "name": "Motivational Strategies",
+      "focus": "Understand what motivates people, connect with them, and build a stronger team.",
+      "bestFor": "Inspiring and leading people",
+      "skills": ["Emotional intelligence", "Active listening", "Team building"],
+      "finalProject": "Team Building",
+      "imageSlot": "path-motivational-strategies"
+    },
+    {
+      "slug": "visionary-communication",
+      "name": "Visionary Communication",
+      "focus": "Plan how you communicate, share ideas with a group, and develop a long-term vision.",
+      "bestFor": "Strategic thinkers, founders and planners",
+      "skills": ["Communication planning", "Communicating change", "Vision building"],
+      "finalProject": "Develop Your Vision",
+      "imageSlot": "path-visionary-communication"
+    },
+    {
+      "slug": "engaging-humor",
+      "name": "Engaging Humor",
+      "focus": "Find your own sense of humour and use it to hold a room, even when you speak off the cuff.",
+      "bestFor": "Lighter, more engaging speaking",
+      "skills": ["Using humour", "Impromptu speaking", "Audience connection"],
+      "finalProject": "Deliver Your Message With Humor",
+      "imageSlot": "path-engaging-humor"
+    }
+  ],
+  "retired": "Effective Coaching, Innovative Planning, Leadership Development, Strategic Relationships and Team Collaboration were withdrawn for new members on 23 October 2024. Members who started one can still finish it.",
+  "quiz": {
+    "goals": [
+      {
+        "id": "speak",
+        "label": "Speaking with confidence",
+        "hint": "Presentations, nerves, storytelling",
+        "path": "presentation-mastery"
+      },
+      {
+        "id": "lead",
+        "label": "Leading a team",
+        "hint": "Meetings, feedback, change",
+        "path": "dynamic-leadership"
+      },
+      {
+        "id": "persuade",
+        "label": "Persuading people",
+        "hint": "Sales, pitches, negotiation",
+        "path": "persuasive-influence"
+      },
+      {
+        "id": "inspire",
+        "label": "Inspiring others",
+        "hint": "Coaching, motivating, team spirit",
+        "path": "motivational-strategies"
+      },
+      {
+        "id": "vision",
+        "label": "Sharing a vision",
+        "hint": "Planning, strategy, big ideas",
+        "path": "visionary-communication"
+      },
+      {
+        "id": "humour",
+        "label": "Being more engaging",
+        "hint": "Humour, impromptu, energy",
+        "path": "engaging-humor"
+      }
+    ],
+    "places": [
+      {
+        "id": "work",
+        "label": "At work",
+        "line": "Members use it straight away in meetings and presentations."
+      },
+      {
+        "id": "study",
+        "label": "In my studies",
+        "line": "Members use it for presentations, interviews and debates."
+      },
+      {
+        "id": "business",
+        "label": "In my own business",
+        "line": "Members use it for pitches and client conversations."
+      },
+      {
+        "id": "community",
+        "label": "In my community",
+        "line": "Members use it to speak up at events and in their community."
+      }
+    ]
+  },
+  "source": "https://www.toastmasters.org/pathways-overview",
+  "checkedOn": "2026-10-25"
+}

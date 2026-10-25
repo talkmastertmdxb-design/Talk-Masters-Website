@@ -8,6 +8,7 @@ import type { NavItem } from "@/components/layout/SiteHeader";
 export const mainNav: readonly NavItem[] = [
   { href: "/team", label: "Team" },
   { href: "/members", label: "Members" },
+  { href: "/pathways", label: "Pathways" },
   { href: "/our-story", label: "Our Story" },
   { href: "/achievements", label: "Achievements" },
 ];

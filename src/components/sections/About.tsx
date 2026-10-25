@@ -9,6 +9,7 @@ import { content } from "@/lib/content";
  */
 export function About() {
   const cards = content.culture;
+  const { mission, tagline } = content.settings;
   const isOdd = cards.length % 2 === 1;
 
   return (
@@ -69,6 +70,27 @@ export function About() {
             />
           ))}
         </div>
+
+        {/* The club's mission, signed with its tagline. */}
+        <figure className="border-hairline mt-20 grid gap-y-6 border-t pt-12 md:mt-28 md:grid-cols-12 md:gap-x-6 md:pt-16">
+          <p data-reveal="up" className="text-eyebrow text-ink-muted md:col-span-3 md:pt-3">
+            Our mission
+          </p>
+          <div className="md:col-span-9">
+            <blockquote>
+              <p
+                data-reveal="text"
+                className="max-w-[34ch] font-serif text-[clamp(1.6rem,1.2rem+1.6vw,2.75rem)] leading-[1.2] tracking-[-0.01em]"
+              >
+                {mission}
+              </p>
+            </blockquote>
+            <figcaption data-reveal="up" className="mt-8 flex items-center gap-4">
+              <span aria-hidden="true" className="bg-tm-blue h-px w-12" />
+              <span className="text-eyebrow text-tm-blue">{tagline}</span>
+            </figcaption>
+          </div>
+        </figure>
       </div>
     </section>
   );

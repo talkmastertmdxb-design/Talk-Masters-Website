@@ -4,6 +4,7 @@ import {
   eventSchema,
   imageSlotSchema,
   parseContent,
+  pathwaysSchema,
   settingsSchema,
   ContentError,
 } from "@/lib/content/schemas";
@@ -12,6 +13,7 @@ const validSettings = {
   clubName: "Talk-Masters Club",
   parentOrganisation: "Toastmasters International",
   tagline: "A Club with Difference",
+  mission: "We provide a supportive and positive learning experience.",
   description: "A public speaking and leadership club open to everyone.",
   meeting: {
     weekday: "tuesday",
@@ -174,5 +176,52 @@ describe("cultureSchema", () => {
   it("keeps each card short enough for its tile", () => {
     expect(cultureSchema.safeParse([{ ...card, title: "x".repeat(41) }]).success).toBe(false);
     expect(cultureSchema.safeParse([{ ...card, text: "x".repeat(141) }]).success).toBe(false);
+  });
+});
+
+describe("pathwaysSchema", () => {
+  const path = (slug: string) => ({
+    slug,
+    name: slug,
+    focus: "What it focuses on.",
+    bestFor: "Who it suits",
+    skills: ["One", "Two", "Three"],
+    finalProject: "Capstone",
+    imageSlot: `path-${slug}`,
+  });
+  const valid = {
+    intro: "Intro.",
+    journeyLine: "Your journey evolves as your goals evolve.",
+    audiences: [{ label: "Students", reason: "Presentations" }],
+    stages: ["First-timer", "Confident speaker", "Leader", "Mentor"].map((name) => ({ name, text: "x" })),
+    levels: ["L1", "L2", "L3", "L4", "L5"].map((name) => ({ name, text: "x" })),
+    facts: [{ title: "First path included", text: "x" }],
+    paths: [path("presentation-mastery"), path("dynamic-leadership")],
+    retired: "Some paths were retired.",
+    quiz: {
+      goals: [{ id: "speak", label: "Speaking", hint: "x", path: "presentation-mastery" }],
+      places: [{ id: "work", label: "At work", line: "x" }],
+    },
+    source: "https://www.toastmasters.org/pathways-overview",
+    checkedOn: "2026-10-25",
+  };
+
+  it("accepts a complete Pathways description", () => {
+    expect(pathwaysSchema.safeParse(valid).success).toBe(true);
+  });
+
+  it("has four journey stages and five levels, as the design shows", () => {
+    expect(pathwaysSchema.safeParse({ ...valid, stages: valid.stages.slice(0, 3) }).success).toBe(false);
+    expect(pathwaysSchema.safeParse({ ...valid, levels: valid.levels.slice(0, 4) }).success).toBe(false);
+  });
+
+  it("gives every path a unique slug, so its #anchor is unique", () => {
+    const paths = [path("same"), path("same")];
+    expect(pathwaysSchema.safeParse({ ...valid, paths }).success).toBe(false);
+  });
+
+  it("only recommends paths that exist", () => {
+    const quiz = { ...valid.quiz, goals: [{ id: "x", label: "x", hint: "x", path: "retired-path" }] };
+    expect(pathwaysSchema.safeParse({ ...valid, quiz }).success).toBe(false);
   });
 });

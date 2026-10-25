@@ -205,7 +205,8 @@ export function HeroSlideshow({ slides, children }: HeroSlideshowProps) {
       {children}
 
       {count > 1 && (
-        <div className="container-site pointer-events-none absolute inset-x-0 bottom-4 z-10 flex justify-end md:bottom-6">
+        // Phones: just the pause button, top right beside the eyebrow, clear of the numbers.
+        <div className="container-site pointer-events-none absolute inset-x-0 top-[4.25rem] z-10 flex justify-end sm:top-auto sm:bottom-4 md:bottom-6">
           <div
             data-hero-item
             role="group"
@@ -223,7 +224,7 @@ export function HeroSlideshow({ slides, children }: HeroSlideshowProps) {
                 aria-label={`Show photo ${index + 1} of ${count}`}
                 aria-current={index === active ? "true" : undefined}
                 onClick={() => controls.current?.show(index)}
-                className="group flex h-11 w-11 items-center"
+                className="group hidden h-11 w-11 items-center sm:flex"
               >
                 <span
                   className={`relative block h-0.5 w-full overflow-hidden rounded-full transition-colors duration-(--duration-quick) ${

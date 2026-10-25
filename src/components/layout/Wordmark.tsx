@@ -7,7 +7,7 @@ interface WordmarkProps {
   size?: number;
   /** Load immediately: the header badge is above the fold on every page. */
   eager?: boolean;
-  /** Phones: badge only, so the header has room for the booking button. The name stays for screen readers. */
+  /** Below 1024px: badge only, so the header has room for its links and booking button. The name stays for screen readers. */
   compact?: boolean;
   className?: string;
 }
@@ -30,7 +30,7 @@ export function Wordmark({ size = 44, eager = false, compact = false, className 
         fetchPriority={eager ? "high" : "auto"}
         className="shrink-0 drop-shadow-[0_2px_8px_rgb(0_0_0/0.35)]"
       />
-      <span className={`wordmark-name flex flex-col ${compact ? "max-sm:sr-only" : ""}`}>
+      <span className={`flex flex-col ${compact ? "max-lg:sr-only" : ""}`}>
         <span className="font-serif text-[1.375rem] tracking-[-0.01em]">Talk-Masters</span>
         <span className="mt-1 text-xs tracking-[0.03em] opacity-75">A Toastmasters International club</span>
       </span>

@@ -102,8 +102,12 @@ test("arriving on the home page from another page animates cleanly, with no GSAP
 });
 
 test.describe("hero photos", () => {
-  test("rotate through the club photos, with a working pause button", async ({ page }, testInfo) => {
+  test("rotate through the club photos, with a working pause button", async ({
+    page,
+    isMobile,
+  }, testInfo) => {
     test.skip(testInfo.project.name === "reduced-motion", "Covered by the reduced-motion test below");
+    test.skip(isMobile, "Phones show only the pause button: covered below");
     await page.goto("/");
     const slides = page.locator("[data-hero-backdrop] [data-slide]");
     await expect(slides).toHaveCount(4);
@@ -131,10 +135,24 @@ test.describe("hero photos", () => {
     await page.goto("/");
     await page.mouse.move(5, 5);
     await page.clock.runFor(13_000);
-    await expect(page.getByRole("button", { name: "Show photo 2 of 4" })).toHaveAttribute(
-      "aria-current",
-      "true",
-    );
+    await expect(page.locator("[data-hero-backdrop] [data-slide]").nth(1)).not.toHaveAttribute("aria-hidden");
+  });
+
+  test("on phones, only the pause button shows, clear of the hero's numbers", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "Phone layout");
+    await page.setViewportSize({ width: 390, height: 664 });
+    await page.goto("/");
+    const pause = page.getByRole("button", { name: /(Pause|Play) photo slideshow/ });
+    await expect(pause).toBeVisible();
+    await expect(page.getByRole("button", { name: "Show photo 2 of 4" })).toBeHidden();
+    const button = (await pause.boundingBox())!;
+    for (const stat of await page.locator(".hero-stat").all()) {
+      const box = (await stat.boundingBox())!;
+      const overlaps = button.y < box.y + box.height && box.y < button.y + button.height;
+      expect(overlaps && button.x < box.x + box.width && box.x < button.x + button.width).toBe(false);
+    }
+    await pause.press("Enter");
+    await expect(page.getByRole("button", { name: /(Pause|Play) photo slideshow/ })).toBeVisible();
   });
 
   test("show when and where we meet", async ({ page }) => {
@@ -187,7 +205,8 @@ test.describe("reduced motion", () => {
     expect(await section.locator("video").evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
   });
 
-  test("the hero photos start paused and change only when asked", async ({ page }) => {
+  test("the hero photos start paused and change only when asked", async ({ page, isMobile }) => {
+    test.skip(isMobile, "Phones have no slide buttons; the pause button is covered above");
     await page.goto("/");
     await expect(page.getByRole("button", { name: "Play photo slideshow" })).toBeVisible();
     await page.getByRole("button", { name: "Show photo 2 of 4" }).press("Enter");

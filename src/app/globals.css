@@ -633,7 +633,14 @@
 
   /* The nav waits off-screen during the intro and glides in when it ends. */
   .site-header {
-    transition: transform 0.9s var(--ease-deliver);
+    transition:
+      transform 0.9s var(--ease-deliver),
+      translate var(--duration-quick) var(--ease-deliver);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
+    }
   }
   html.intro .site-header {
     transform: translateY(-140%);
@@ -786,6 +793,7 @@
   /* Navbar (SiteHeader.tsx): numbered links, gold current page, reading-progress line. */
   .site-nav__link {
     display: inline-flex;
+    white-space: nowrap;
     align-items: baseline;
     gap: 0.375rem;
     transition:
@@ -808,34 +816,35 @@
       opacity: 0.6;
     }
   }
-  .site-pill__progress {
+  /* Full-width translucent glass: see-through over the hero, a touch denser once scrolled. */
+  .site-bar {
+    background: rgb(11 18 32 / 0.42);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.4);
+    transition: background-color var(--duration-base) var(--ease-deliver);
+  }
+  .site-bar[data-frosted="true"] {
+    background: rgb(11 18 32 / 0.72);
+  }
+  .site-bar__progress {
     position: absolute;
-    right: 1.75rem;
+    right: 0;
     bottom: -1px;
-    left: 1.75rem;
+    left: 0;
     height: 2px;
-    border-radius: 2px;
     background: var(--color-gold);
     opacity: 0;
     transform: scaleX(var(--nav-progress, 0));
     transform-origin: left;
     transition: opacity var(--duration-quick) var(--ease-deliver);
   }
-  .site-pill[data-frosted="true"] .site-pill__progress {
+  .site-bar[data-frosted="true"] .site-bar__progress {
     opacity: 1;
   }
-  @media (min-width: 64rem) {
-    .site-pill .wordmark-name {
-      max-width: 16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      transition:
-        max-width var(--duration-base) var(--ease-deliver),
-        opacity var(--duration-quick) var(--ease-deliver);
-    }
-    .site-pill[data-frosted="true"] .wordmark-name {
-      max-width: 0;
-      opacity: 0;
+  /* Phones and tablets: the bar slides away while reading down and returns on the way up. */
+  @media (max-width: 63.99rem) {
+    .site-header[data-hidden="true"] {
+      translate: 0 -100%;
     }
   }
   .menu-link[aria-current="page"] .font-serif {
