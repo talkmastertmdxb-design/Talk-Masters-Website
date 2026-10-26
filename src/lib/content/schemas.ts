@@ -68,6 +68,33 @@ export const statSchema = z.object({
   placeholder,
 });
 
+export const PROFILE_NETWORKS = ["linkedin", "youtube", "x", "instagram", "website"] as const;
+
+/** Each network's link must point at that network, so a typo can't send people somewhere else. */
+const profileHosts: Record<(typeof PROFILE_NETWORKS)[number], RegExp> = {
+  linkedin: /^https:\/\/([a-z]{2,3}\.)?linkedin\.com\//,
+  youtube: /^https:\/\/(www\.)?youtube\.com\//,
+  x: /^https:\/\/(www\.)?(x|twitter)\.com\//,
+  instagram: /^https:\/\/(www\.)?instagram\.com\//,
+  website: /^https:\/\//,
+};
+
+export const profileLinkSchema = z
+  .object({ network: z.enum(PROFILE_NETWORKS), url: z.url() })
+  .refine((link) => profileHosts[link.network].test(link.url), {
+    message: "The link doesn't match its network (e.g. a linkedin.com address for LinkedIn)",
+    path: ["url"],
+  });
+
+/** Profiles shown in this order, one per network. */
+const profileLinks = z
+  .array(profileLinkSchema)
+  .refine(
+    (links) => new Set(links.map((link) => link.network)).size === links.length,
+    "List each network once",
+  )
+  .default([]);
+
 export const settingsSchema = z.object({
   clubName: z.string().min(1),
   parentOrganisation: z.string().min(1),
@@ -124,14 +151,8 @@ export const settingsSchema = z.object({
       }),
     )
     .min(1, "Add at least one contact"),
-  socials: z
-    .array(
-      z.object({
-        network: z.enum(["instagram", "linkedin", "facebook", "youtube", "whatsapp", "x"]),
-        url: z.url(),
-      }),
-    )
-    .default([]),
+  /** The club's own profiles (footer and phone menu), checked like members' links. */
+  socials: profileLinks,
   stats: z.array(statSchema),
   /** Image slot ids the hero rotates through, first one first (it is also the intro photo). */
   heroSlides: z
@@ -171,24 +192,6 @@ const person = {
 
 const consentedPerson = { ...person, role: z.string().min(1) };
 
-export const PROFILE_NETWORKS = ["linkedin", "youtube", "x", "instagram", "website"] as const;
-
-/** Each network's link must point at that network, so a typo can't send people somewhere else. */
-const profileHosts: Record<(typeof PROFILE_NETWORKS)[number], RegExp> = {
-  linkedin: /^https:\/\/([a-z]{2,3}\.)?linkedin\.com\//,
-  youtube: /^https:\/\/(www\.)?youtube\.com\//,
-  x: /^https:\/\/(www\.)?(x|twitter)\.com\//,
-  instagram: /^https:\/\/(www\.)?instagram\.com\//,
-  website: /^https:\/\//,
-};
-
-export const profileLinkSchema = z
-  .object({ network: z.enum(PROFILE_NETWORKS), url: z.url() })
-  .refine((link) => profileHosts[link.network].test(link.url), {
-    message: "The link doesn't match its network (e.g. a linkedin.com address for LinkedIn)",
-    path: ["url"],
-  });
-
 /** Plan.md member journey milestones. */
 export const JOURNEY_MILESTONES = [
   "first-meeting",
@@ -212,13 +215,7 @@ export const memberSchema = z.object({
   /** Company or organisation. */
   organisation: z.string().min(1).optional(),
   /** Public profiles the member chose to share, shown in this order. One per network. */
-  links: z
-    .array(profileLinkSchema)
-    .refine(
-      (links) => new Set(links.map((link) => link.network)).size === links.length,
-      "List each network once",
-    )
-    .default([]),
+  links: profileLinks,
   /** For the future directory filter. */
   segment: z.enum(["student", "professional", "executive", "alumni", "officer"]).optional(),
   /** Before Toastmasters: the challenge they faced, in one sentence. */
@@ -279,6 +276,8 @@ export const FOUNDING_STAGES = [
 /** The club's founding story for /our-story (content/history.json). */
 export const historySchema = z.object({
   foundedYear: z.number().int().min(1924).max(thisYear),
+  /** How the club began, in a sentence (e.g. as an independent club before joining Toastmasters). */
+  origin: z.string().min(1).optional(),
   charterDate: z.iso.date().optional(),
   clubNumber: z.string().min(1).optional(),
   district: z.string().min(1).optional(),

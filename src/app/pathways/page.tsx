@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { RevealScope } from "@/components/motion/RevealScope";
+import { StageLight } from "@/components/motion/StageLight";
 import { PathQuiz } from "@/components/pathways/PathQuiz";
 import { content } from "@/lib/content";
 
@@ -128,8 +129,9 @@ export default function PathwaysPage() {
       <section
         id="find-your-path"
         aria-labelledby="quiz-title"
-        className="theme-dark bg-surface py-section scroll-mt-20 text-white"
+        className="theme-dark bg-surface py-section relative isolate scroll-mt-20 overflow-hidden text-white"
       >
+        <StageLight preset="quiz" />
         <div className="container-site grid gap-y-10 md:grid-cols-12 md:gap-x-6">
           <div className="md:col-span-4">
             <p data-reveal="up" className="text-eyebrow text-gold">

@@ -1,5 +1,6 @@
 import { ArrowRight, Flag, Mic, Sprout, Star, type LucideIcon } from "lucide-react";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { StageLight } from "@/components/motion/StageLight";
 import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 
@@ -16,8 +17,9 @@ export function PathwaysTeaser() {
     <section
       id="pathways"
       aria-labelledby="pathways-title"
-      className="theme-dark bg-ink py-section text-white"
+      className="theme-dark bg-ink py-section relative isolate overflow-hidden text-white"
     >
+      <StageLight preset="teaser" />
       <div className="container-site">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12">
           <div>
@@ -39,7 +41,7 @@ export function PathwaysTeaser() {
             <ol aria-label="How members grow" data-reveal="stagger" className="relative flex flex-col gap-7">
               <span
                 aria-hidden="true"
-                className="from-gold to-gold/20 absolute top-6 bottom-6 left-[1.375rem] w-px bg-gradient-to-b"
+                className="from-gold/30 to-gold absolute top-6 bottom-6 left-[1.375rem] w-px bg-gradient-to-b"
               />
               {stages.map((stage, index) => {
                 const Icon = stageIcons[index] ?? Star;
@@ -48,7 +50,7 @@ export function PathwaysTeaser() {
                   <li key={stage.name} className="relative flex gap-5">
                     <span
                       aria-hidden="true"
-                      className={`inline-flex size-11 shrink-0 items-center justify-center rounded-full border ${last ? "bg-gold text-ink border-gold" : "border-gold text-gold bg-ink"}`}
+                      className={`inline-flex size-11 shrink-0 items-center justify-center rounded-full border ${last ? "bg-gold text-ink border-gold shadow-[0_0_32px_rgb(214_176_106/0.6)]" : "border-gold text-gold bg-ink"}`}
                     >
                       <Icon className="size-5" strokeWidth={1.6} />
                     </span>
@@ -68,7 +70,11 @@ export function PathwaysTeaser() {
             </p>
           </div>
           <figure data-reveal="image" className="md:col-span-5 md:col-start-8">
-            <ImageSlot id="pathways-leader" sizes="(min-width: 900px) 38vw, 100vw" />
+            <ImageSlot
+              id="pathways-leader"
+              sizes="(min-width: 900px) 38vw, 100vw"
+              className="shadow-[0_30px_80px_rgb(0_0_0/0.45)]"
+            />
             <figcaption className="mt-3 text-sm text-white/65">
               Leading a meeting as Toastmaster of the Day: one of the roles you practise.
             </figcaption>

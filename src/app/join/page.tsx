@@ -5,6 +5,7 @@ import { WalkIntoStrip } from "@/components/booking/WalkIntoStrip";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { AddToCalendar } from "@/components/meeting/AddToCalendar";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
+import { StageLight } from "@/components/motion/StageLight";
 import { UpcomingEvents } from "@/components/meeting/UpcomingEvents";
 import { Faq } from "@/components/sections/Faq";
 import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
@@ -51,7 +52,8 @@ export default function JoinPage() {
     .join(" ");
 
   return (
-    <main id="main" className="theme-dark footer-glow grain bg-ink relative isolate min-h-dvh text-white">
+    <main id="main" className="theme-dark bg-ink relative isolate min-h-dvh overflow-clip text-white">
+      <StageLight preset="join" />
       <div className="container-site pt-24 pb-8 md:pt-28">
         <GuestForm
           contacts={contacts}

@@ -3,6 +3,7 @@ import { Award as AwardIcon, Trophy } from "lucide-react";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { StageLight } from "@/components/motion/StageLight";
 import { content } from "@/lib/content";
 import { buildYear } from "@/lib/site";
 import {
@@ -153,7 +154,7 @@ export default function AchievementsPage() {
 
       <section
         aria-labelledby="timeline-title"
-        className="py-section theme-dark grain bg-ink relative isolate text-white"
+        className="py-section theme-dark grain bg-ink relative isolate overflow-hidden text-white"
       >
         <div className="container-site grid gap-12 md:grid-cols-12">
           <h2 id="timeline-title" data-reveal="lines" className="text-h2 max-w-[10ch] md:col-span-4">
@@ -164,7 +165,7 @@ export default function AchievementsPage() {
               <section key={year} aria-label={String(year)} className="mb-16 last:mb-0">
                 <h3
                   data-reveal="up"
-                  className="text-gold font-serif text-[clamp(3rem,2rem+3vw,5rem)] leading-none"
+                  className="text-gold year-glow font-serif text-[clamp(3rem,2rem+3vw,5rem)] leading-none"
                 >
                   {year}
                 </h3>
@@ -195,8 +196,15 @@ export default function AchievementsPage() {
         </div>
       </section>
 
-      <section aria-label="Impact" className="py-section bg-soft-gray">
+      <section aria-label="Impact" className="py-section bg-soft-gray relative isolate overflow-hidden">
+        <StageLight preset="impact" />
         <div className="container-site">
+          <Trophy
+            aria-hidden="true"
+            data-reveal="up"
+            className="text-gold mx-auto mb-8 size-10"
+            strokeWidth={1.25}
+          />
           <blockquote data-reveal="up" className="text-h2 mx-auto max-w-[26ch] text-center">
             “This recognition reflects the commitment, consistency and growth of our members.”
           </blockquote>

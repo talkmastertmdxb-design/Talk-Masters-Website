@@ -1,5 +1,6 @@
 {
-  "foundedYear": 2019,
+  "foundedYear": 2016,
+  "origin": "Talk-Masters began in 2016 as an independent speaking club, and later joined Toastmasters International.",
   "clubNumber": "07956953",
   "district": "127",
   "division": "C",
@@ -17,11 +18,15 @@
       "date": "Date",
       "text": "Placeholder: finding founding members, a venue and a meeting night."
     },
-    { "stage": "club-formation", "date": "Date", "text": "Placeholder: the first group comes together." },
+    {
+      "stage": "club-formation",
+      "date": "2016",
+      "text": "Talk-Masters begins as an independent speaking club, before it is part of Toastmasters."
+    },
     {
       "stage": "chartering",
       "date": "Date",
-      "text": "Placeholder: officially chartered by Toastmasters International."
+      "text": "The club joins Toastmasters International and is chartered as club 07956953. (Placeholder: confirm the year.)"
     },
     { "stage": "first-meeting", "date": "Date", "text": "Placeholder: who came, and what it felt like." },
     { "stage": "first-achievement", "date": "Date", "text": "Placeholder: the first award or recognition." },

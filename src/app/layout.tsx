@@ -55,7 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <MotionProvider>
-          <SiteHeader items={mainNav} meeting={content.settings.meeting} />
+          <SiteHeader items={mainNav} meeting={content.settings.meeting} socials={content.settings.socials} />
           {children}
         </MotionProvider>
         {/* Cookieless visit counts and real-visitor Core Web Vitals; both report only on Vercel. */}

@@ -67,7 +67,7 @@ export function ChatPreview({ contact, message, time, variant, avatar }: ChatPre
           <Bubble message={message} time={time} />
         </div>
         <div aria-hidden="true" className="flex items-center gap-2 px-3 pb-4">
-          <span className="flex-1 rounded-full bg-white/5 px-4 py-2 text-xs text-white/40">Message</span>
+          <span className="flex-1 rounded-full bg-white/5 px-4 py-2 text-xs text-white/60">Message</span>
           <span className="bg-gold text-ink inline-flex size-9 items-center justify-center rounded-full">
             <SendHorizontal className="size-4" strokeWidth={1.5} />
           </span>

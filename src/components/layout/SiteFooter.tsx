@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
 import { VoiceLine } from "@/components/signature/VoiceLine";
 import { content } from "@/lib/content";
@@ -15,21 +16,27 @@ interface SiteFooterProps {
 
 /** The Close: the last call to action, then everything a guest needs to find us. */
 export function SiteFooter({ items }: SiteFooterProps) {
-  const { meeting, contacts, clubName, parentOrganisation, tagline } = content.settings;
+  const { meeting, contacts, clubName, parentOrganisation, tagline, socials } = content.settings;
   const facts = clubFacts(content.history);
 
   return (
     <footer className="theme-dark footer-glow grain bg-ink relative isolate overflow-hidden text-white">
-      <section aria-labelledby="guest-band" className="container-site pt-32 pb-24 text-center md:pt-40">
-        <h2 id="guest-band" className="text-h1 mx-auto max-w-[14ch]">
-          Ready to become a better speaker?
-        </h2>
-        <p className="text-lead mx-auto mt-6 max-w-[46ch] text-white/75">
-          Come to your first meeting as our guest. It&apos;s free, and we&apos;ll always ask for your consent before calling on you.
-        </p>
-        <div className="mx-auto mt-10 flex max-w-xs flex-col items-center gap-3">
-          <ButtonLink href="/join">Book a guest visit</ButtonLink>
-          <VoiceLine variant="underline" className="text-gold h-6 w-56" />
+      <section aria-labelledby="guest-band" className="cta-band relative isolate overflow-hidden">
+        {/* Stage light: navy, maroon and a gold glow drifting slowly under a film grain. */}
+        <div aria-hidden="true" className="cta-band__flow" />
+        <div aria-hidden="true" className="cta-band__grain" />
+        <div className="container-site relative pt-32 pb-24 text-center md:pt-40">
+          <h2 id="guest-band" className="text-h1 mx-auto max-w-[14ch]">
+            Ready to become a better speaker?
+          </h2>
+          <p className="text-lead mx-auto mt-6 max-w-[46ch] text-white/75">
+            Come to your first meeting as our guest. It&apos;s free, and we&apos;ll always ask for your
+            consent before calling on you.
+          </p>
+          <div className="mx-auto mt-10 flex max-w-xs flex-col items-center gap-3">
+            <ButtonLink href="/join">Book a guest visit</ButtonLink>
+            <VoiceLine variant="underline" className="text-gold h-6 w-56" />
+          </div>
         </div>
       </section>
 
@@ -37,9 +44,16 @@ export function SiteFooter({ items }: SiteFooterProps) {
         <div className="md:col-span-5">
           <Wordmark size={64} />
           <p className="mt-6 max-w-[34ch] text-white/70">
-            {tagline}. Open to everyone, of every age and background.
+            {tagline}. Speaking together since {content.history.foundedYear}, and open to everyone, of every
+            age and background.
           </p>
           {facts.length > 0 && <p className="text-muted mt-4 text-sm">{facts.join(" · ")}</p>}
+          {socials.length > 0 && (
+            <div className="mt-8">
+              <h3 className="font-semibold">Follow the club</h3>
+              <SocialLinks links={socials} name={clubName} className="mt-3 text-white/85" />
+            </div>
+          )}
         </div>
 
         <div className="md:col-span-4">

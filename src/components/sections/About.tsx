@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { StageLight } from "@/components/motion/StageLight";
 import { content } from "@/lib/content";
 
 /**
@@ -13,7 +14,7 @@ export function About() {
   const isOdd = cards.length % 2 === 1;
 
   return (
-    <section id="about" aria-labelledby="about-title" className="py-section bg-soft-gray">
+    <section id="about" aria-labelledby="about-title" className="py-section bg-soft-gray overflow-hidden">
       <div className="container-site">
         <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-6">
           <p data-reveal="up" className="text-eyebrow text-ink-muted md:col-span-3 md:pt-3">
@@ -72,7 +73,8 @@ export function About() {
         </div>
 
         {/* The club's mission, signed with its tagline. */}
-        <figure className="border-hairline mt-20 grid gap-y-6 border-t pt-12 md:mt-28 md:grid-cols-12 md:gap-x-6 md:pt-16">
+        <figure className="border-hairline relative isolate mt-20 grid gap-y-6 border-t pt-12 md:mt-28 md:grid-cols-12 md:gap-x-6 md:pt-16">
+          <StageLight preset="mission" className="stage-light--bleed" />
           <p data-reveal="up" className="text-eyebrow text-ink-muted md:col-span-3 md:pt-3">
             Our mission
           </p>

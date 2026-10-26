@@ -49,7 +49,10 @@
       "imageSlot": "officer-vp-education"
     }
   ],
-  "socials": [],
+  "socials": [
+    { "network": "instagram", "url": "https://www.instagram.com/talkmastersuae/" },
+    { "network": "linkedin", "url": "https://www.linkedin.com/in/talk-masters-tm-22071837a/" }
+  ],
   "stats": [
     {
       "label": "Meetings held",

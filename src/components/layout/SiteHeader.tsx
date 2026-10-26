@@ -5,8 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
+import { StageLight } from "@/components/motion/StageLight";
 import { ButtonLink } from "@/components/ui/Button";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { meetingTimeRange, type MeetingRule } from "@/lib/content/meeting";
+import type { ProfileLink } from "@/lib/content/schemas";
 import { Wordmark } from "./Wordmark";
 
 export interface NavItem {
@@ -18,6 +21,8 @@ interface SiteHeaderProps {
   items: readonly NavItem[];
   /** For the "Next meeting" chip on wide screens and the card in the phone menu. */
   meeting: MeetingRule & { venue: string };
+  /** The club's own profiles, shown at the foot of the phone menu. */
+  socials: readonly ProfileLink[];
 }
 
 const FROST_AFTER_PX = 40;
@@ -38,7 +43,7 @@ const isCurrent = (pathname: string, href: string): boolean =>
  * away while you scroll down and returns the moment you scroll up (CSS limits the hiding to
  * those widths). Links are numbered like a meeting agenda; the current page is gold.
  */
-export function SiteHeader({ items, meeting }: SiteHeaderProps) {
+export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
   const [frosted, setFrosted] = useState(false);
   const [hidden, setHidden] = useState(false);
   const menuRef = useRef<HTMLDialogElement>(null);
@@ -140,9 +145,10 @@ export function SiteHeader({ items, meeting }: SiteHeaderProps) {
       <dialog
         ref={menuRef}
         aria-label="Menu"
-        className="theme-dark mobile-menu bg-ink backdrop:bg-ink/80 m-0 h-dvh max-h-none w-full max-w-none p-0 text-white"
+        className="theme-dark mobile-menu bg-ink backdrop:bg-ink/80 isolate m-0 h-dvh max-h-none w-full max-w-none overflow-hidden p-0 text-white"
       >
-        <div className="container-site flex h-full flex-col py-6">
+        <StageLight preset="menu" />
+        <div className="container-site relative flex h-full flex-col py-6">
           <div className="flex items-center justify-between">
             <Wordmark />
             <button
@@ -180,6 +186,12 @@ export function SiteHeader({ items, meeting }: SiteHeaderProps) {
             </ul>
           </nav>
           <div className="flex flex-col gap-3">
+            {socials.length > 0 && (
+              <div className="mb-2 flex items-center justify-between gap-4">
+                <span className="text-sm text-white/70">Follow the club</span>
+                <SocialLinks links={socials} name="Talk-Masters Club" className="text-white/85" />
+              </div>
+            )}
             <Link
               href="/join"
               onClick={closeMenu}

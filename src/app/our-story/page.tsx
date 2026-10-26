@@ -2,6 +2,7 @@ import { RevealScope } from "@/components/motion/RevealScope";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { StageLight } from "@/components/motion/StageLight";
 import { FoundersTimeline } from "@/components/sections/FoundersTimeline";
 import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
@@ -32,6 +33,11 @@ export default function OurStoryPage() {
               <p data-reveal="up" className="text-display mt-4">
                 {history.foundedYear}
               </p>
+              {history.origin && (
+                <p data-reveal="up" className="text-ink-muted mt-6 max-w-[30ch] text-lg">
+                  {history.origin}
+                </p>
+              )}
             </div>
           </div>
           <div className="md:col-span-7 md:col-start-6">
@@ -91,7 +97,11 @@ export default function OurStoryPage() {
         </section>
       )}
 
-      <section aria-labelledby="legacy-title" className="py-section bg-soft-gray">
+      <section
+        aria-labelledby="legacy-title"
+        className="py-section bg-soft-gray relative isolate overflow-hidden"
+      >
+        <StageLight preset="legacy" />
         <div className="container-site text-center">
           <h2 id="legacy-title" className="text-eyebrow text-ink-muted">
             Legacy

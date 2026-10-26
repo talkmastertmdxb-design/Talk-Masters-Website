@@ -45,6 +45,18 @@ describe("settingsSchema", () => {
     expect(withSlides(["hero-speaker"]).success).toBe(true);
   });
 
+  it("checks each club social link points at its own network", () => {
+    const withSocials = (socials: unknown[]) => settingsSchema.safeParse({ ...validSettings, socials });
+    expect(
+      withSocials([{ network: "instagram", url: "https://www.instagram.com/talkmastersuae/" }]).success,
+    ).toBe(true);
+    expect(withSocials([{ network: "instagram", url: "https://www.linkedin.com/in/someone/" }]).success).toBe(
+      false,
+    );
+    const twice = { network: "linkedin", url: "https://www.linkedin.com/in/a/" };
+    expect(withSocials([twice, twice]).success).toBe(false);
+  });
+
   it("rejects a malformed meeting time", () => {
     const bad = { ...validSettings, meeting: { ...validSettings.meeting, startTime: "7pm" } };
     expect(settingsSchema.safeParse(bad).success).toBe(false);

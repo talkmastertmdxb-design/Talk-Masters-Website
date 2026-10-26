@@ -127,7 +127,7 @@ export function GuestForm({ contacts, meeting, calendar, avatars, quote }: Guest
   return (
     // overflow-clip, not overflow-hidden: hidden would stop the stage and the phone button from sticking.
     // minmax(0, 1fr): the sideways-scrolling chip row must not widen the column past the screen.
-    <div className="rounded-panel border-hairline-dark bg-ink grid grid-cols-[minmax(0,1fr)] overflow-clip border lg:grid-cols-12">
+    <div className="rounded-panel bg-ink/55 grid grid-cols-[minmax(0,1fr)] overflow-clip border border-white/14 shadow-[0_40px_100px_rgb(0_0_0/0.35)] backdrop-blur-xl lg:grid-cols-12">
       <div className="lg:col-span-6">
         {/* Wide screens: the stage stays in view while the form scrolls, so the preview is always beside it. */}
         <div className="relative h-36 overflow-clip sm:h-56 lg:sticky lg:top-0 lg:h-[min(100dvh,52rem)]">

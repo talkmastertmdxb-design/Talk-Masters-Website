@@ -109,7 +109,11 @@ export function PathQuiz({ goals, places, paths }: PathQuizProps) {
     "mt-3 font-serif text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-[1.12] text-white outline-none";
 
   return (
-    <div className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-5 sm:p-8 md:p-10">
+    // data-quiz-done warms the section's stage light to gold (globals.css).
+    <div
+      data-quiz-done={step === "result" ? "" : undefined}
+      className="rounded-[2rem] border border-white/14 bg-white/5 p-5 shadow-[0_40px_100px_rgb(0_0_0/0.35)] backdrop-blur-xl sm:p-8 md:p-10"
+    >
       {step !== "result" && (
         <div className="flex items-center gap-4">
           <span className="text-sm font-semibold tracking-[0.12em] text-white/70 tabular-nums">

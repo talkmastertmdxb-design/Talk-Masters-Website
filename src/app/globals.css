@@ -258,6 +258,248 @@
     );
   }
 
+  /*
+   * Stage light (StageLight.tsx): the club's colours as light, in three moods. Ember (navy,
+   * maroon, gold) where someone acts; Aurora (navy, club blue, gold ribbons) for growth and
+   * choices; Mist (pale blue and gold haze) behind quiet quotes on light sections. Soft radial
+   * gradients drift on the compositor (transform only, no filters); paused off screen, still
+   * with reduced motion. Each preset reproduces its board in the Stage Light design canvas.
+   */
+  .stage-light {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .stage-light__flow {
+    position: absolute;
+    inset: -20%;
+    will-change: transform;
+  }
+  .stage-light__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .stage-light[data-paused] .stage-light__flow {
+    animation-play-state: paused;
+  }
+
+  /* Aurora: home Pathways teaser, gold rising from the lower left behind the four stages. */
+  .stage-light--teaser .stage-light__flow {
+    background:
+      radial-gradient(55% 22% at 18% 92%, rgb(214 176 106 / 0.62) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(60% 26% at 30% 78%, rgb(10 90 133 / 0.85) 0%, rgb(10 90 133 / 0) 70%),
+      radial-gradient(45% 30% at 42% 58%, rgb(0 65 101 / 0.7) 0%, rgb(0 65 101 / 0) 70%),
+      radial-gradient(35% 22% at 85% 18%, rgb(119 36 50 / 0.35) 0%, rgb(119 36 50 / 0) 70%), var(--color-ink);
+  }
+  /* Aurora: /join, light pooling behind the glass booking form. */
+  .stage-light--join .stage-light__flow {
+    background:
+      radial-gradient(40% 45% at 72% 45%, rgb(10 90 133 / 0.9) 0%, rgb(10 90 133 / 0) 70%),
+      radial-gradient(35% 30% at 62% 78%, rgb(214 176 106 / 0.55) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(30% 35% at 88% 22%, rgb(119 36 50 / 0.55) 0%, rgb(119 36 50 / 0) 70%),
+      radial-gradient(40% 40% at 10% 90%, rgb(0 65 101 / 0.5) 0%, rgb(0 65 101 / 0) 70%), var(--color-ink);
+  }
+  /* Aurora: /pathways quiz; a gold layer fades in when the result appears. */
+  .stage-light--quiz .stage-light__flow {
+    background:
+      radial-gradient(45% 40% at 70% 40%, rgb(10 90 133 / 0.85) 0%, rgb(10 90 133 / 0) 70%),
+      radial-gradient(40% 35% at 85% 85%, rgb(0 65 101 / 0.8) 0%, rgb(0 65 101 / 0) 70%),
+      radial-gradient(30% 30% at 20% 20%, rgb(119 36 50 / 0.4) 0%, rgb(119 36 50 / 0) 70%),
+      var(--color-surface);
+  }
+  .stage-light--quiz .stage-light__warm {
+    background:
+      radial-gradient(45% 40% at 68% 55%, rgb(214 176 106 / 0.7) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(35% 30% at 85% 20%, rgb(119 36 50 / 0.6) 0%, rgb(119 36 50 / 0) 70%);
+    opacity: 0;
+    transition: opacity 1.2s var(--ease-breath);
+  }
+  #find-your-path:has([data-quiz-done]) .stage-light__warm {
+    opacity: 1;
+  }
+  /* Aurora: phone menu, filling the space between the links and the meeting card. */
+  .stage-light--menu .stage-light__flow {
+    background:
+      radial-gradient(70% 22% at 30% 72%, rgb(214 176 106 / 0.45) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(80% 28% at 65% 62%, rgb(10 90 133 / 0.85) 0%, rgb(10 90 133 / 0) 70%),
+      radial-gradient(50% 20% at 20% 55%, rgb(119 36 50 / 0.45) 0%, rgb(119 36 50 / 0) 70%), var(--color-ink);
+  }
+  /* Ember, the boldest: the 404 page. */
+  .stage-light--not-found .stage-light__flow {
+    background:
+      radial-gradient(40% 50% at 70% 60%, #8a2a3b 0%, rgb(138 42 59 / 0) 70%),
+      radial-gradient(30% 35% at 82% 82%, rgb(214 176 106 / 0.8) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(35% 40% at 20% 20%, #5a1a27 0%, rgb(90 26 39 / 0) 70%),
+      radial-gradient(40% 40% at 45% 100%, rgb(0 65 101 / 0.6) 0%, rgb(0 65 101 / 0) 70%), var(--color-ink);
+  }
+  .stage-light--not-found .stage-light__grain {
+    opacity: 0.2;
+  }
+  /* Mist: still haze on light sections. */
+  .stage-light--mission .stage-light__flow,
+  .stage-light--impact .stage-light__flow,
+  .stage-light--legacy .stage-light__flow {
+    inset: -10%;
+    will-change: auto;
+  }
+  .stage-light--mission .stage-light__flow {
+    background:
+      radial-gradient(40% 55% at 70% 40%, rgb(0 65 101 / 0.2) 0%, rgb(0 65 101 / 0) 70%),
+      radial-gradient(35% 45% at 88% 80%, rgb(214 176 106 / 0.42) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(30% 35% at 40% 15%, rgb(119 36 50 / 0.1) 0%, rgb(119 36 50 / 0) 70%);
+  }
+  .stage-light--impact .stage-light__flow {
+    background:
+      radial-gradient(
+        38% 50% at 50% 55%,
+        rgb(214 176 106 / 0.5) 0%,
+        rgb(214 176 106 / 0.18) 45%,
+        rgb(214 176 106 / 0) 72%
+      ),
+      radial-gradient(30% 40% at 18% 25%, rgb(0 65 101 / 0.14) 0%, rgb(0 65 101 / 0) 70%),
+      radial-gradient(30% 40% at 85% 80%, rgb(119 36 50 / 0.1) 0%, rgb(119 36 50 / 0) 70%);
+  }
+  .stage-light--legacy .stage-light__flow {
+    background:
+      radial-gradient(70% 35% at 50% 100%, rgb(214 176 106 / 0.5) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(45% 30% at 22% 95%, rgb(119 36 50 / 0.2) 0%, rgb(119 36 50 / 0) 70%),
+      radial-gradient(45% 30% at 80% 92%, rgb(0 65 101 / 0.18) 0%, rgb(0 65 101 / 0) 70%);
+  }
+  .stage-light--mission .stage-light__grain,
+  .stage-light--impact .stage-light__grain,
+  .stage-light--legacy .stage-light__grain {
+    opacity: 0.08;
+    mix-blend-mode: multiply;
+  }
+  /* Escapes its container to light the whole width (the section clips it). */
+  .stage-light--bleed {
+    inset: -4rem auto -6rem 50%;
+    width: 100vw;
+    translate: -50% 0;
+    /* Feather top and bottom so the haze never shows its box. */
+    mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+  }
+  /* Achievements timeline: a still gold spotlight behind each year. */
+  .year-glow {
+    position: relative;
+    isolation: isolate;
+    text-shadow: 0 0 60px rgb(214 176 106 / 0.45);
+  }
+  .year-glow::before {
+    content: "";
+    position: absolute;
+    left: -6rem;
+    top: -7rem;
+    z-index: -1;
+    width: 30rem;
+    height: 22rem;
+    max-width: 100vw;
+    background: radial-gradient(
+      closest-side,
+      rgb(214 176 106 / 0.32),
+      rgb(214 176 106 / 0.12) 45%,
+      rgb(214 176 106 / 0) 75%
+    );
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .stage-light--teaser .stage-light__flow {
+      animation: stage-rise 26s ease-in-out infinite alternate;
+    }
+    .stage-light--join .stage-light__flow,
+    .stage-light--quiz .stage-light__flow {
+      animation: stage-sway 24s ease-in-out infinite alternate;
+    }
+    .stage-light--menu .stage-light__flow {
+      animation: stage-sway 22s ease-in-out infinite alternate;
+    }
+    .stage-light--not-found .stage-light__flow {
+      animation: stage-pulse 16s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes stage-rise {
+    0% {
+      transform: translate3d(-3%, 4%, 0) rotate(-2deg);
+    }
+    100% {
+      transform: translate3d(3%, -3%, 0) rotate(4deg) scale(1.05);
+    }
+  }
+  @keyframes stage-sway {
+    0% {
+      transform: translate3d(-3%, 2%, 0) rotate(-3deg);
+    }
+    100% {
+      transform: translate3d(3%, -3%, 0) rotate(4deg) scale(1.05);
+    }
+  }
+  @keyframes stage-pulse {
+    0% {
+      transform: translate3d(-4%, -2%, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(3%, 3%, 0) scale(1.08) rotate(5deg);
+    }
+    100% {
+      transform: translate3d(-2%, 4%, 0) scale(1) rotate(-3deg);
+    }
+  }
+
+  /*
+   * Footer call to action: an animated grain gradient in the club's colours (navy, maroon, a
+   * gold glow under the button). Soft radial gradients drift slowly on the compositor (transform
+   * only, no blur filter), so it stays cheap on phones; reduced motion holds it still.
+   */
+  .cta-band__flow {
+    position: absolute;
+    inset: -20%;
+    z-index: -2;
+    background:
+      radial-gradient(40% 55% at 22% 70%, var(--color-maroon) 0%, rgb(119 36 50 / 0) 70%),
+      radial-gradient(35% 45% at 78% 30%, #5a1a27 0%, rgb(90 26 39 / 0) 70%),
+      radial-gradient(30% 35% at 55% 82%, rgb(214 176 106 / 0.45) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(45% 60% at 60% 10%, #0f2236 0%, rgb(15 34 54 / 0) 70%), var(--color-ink);
+    will-change: transform;
+  }
+  .cta-band::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(60% 70% at 50% 50%, rgb(11 18 32 / 0) 40%, rgb(11 18 32 / 0.55) 100%);
+    pointer-events: none;
+  }
+  .cta-band__grain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.14;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-band__flow {
+      animation: cta-drift 22s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes cta-drift {
+    0% {
+      transform: translate3d(-4%, -2%, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate3d(3%, 2%, 0) rotate(6deg);
+    }
+    100% {
+      transform: translate3d(-2%, 4%, 0) rotate(-4deg);
+    }
+  }
+
   .footer-glow {
     background:
       radial-gradient(60% 50% at 20% 0%, rgb(0 65 101 / 0.6), transparent 70%),
@@ -956,7 +1198,12 @@ html[data-nav="history"]::view-transition-new(.page-in) {
     height: var(--hero-photo-h);
   }
   .hero-panel-fade {
-    background: linear-gradient(180deg, rgb(11 18 32 / 0) 58%, rgb(11 18 32 / 0.65) 88%, var(--color-ink) 100%);
+    background: linear-gradient(
+      180deg,
+      rgb(11 18 32 / 0) 58%,
+      rgb(11 18 32 / 0.65) 88%,
+      var(--color-ink) 100%
+    );
   }
 }
 /* Short phones (an iPhone with Safari's bars, small Androids): a shorter photo and no decorative

@@ -87,6 +87,19 @@ describe("content in /content", () => {
     ]);
   });
 
+  it("links the club's Instagram and LinkedIn, without tracking parameters", () => {
+    expect(content.settings.socials).toEqual([
+      { network: "instagram", url: "https://www.instagram.com/talkmastersuae/" },
+      { network: "linkedin", url: "https://www.linkedin.com/in/talk-masters-tm-22071837a/" },
+    ]);
+  });
+
+  it("dates the club from 2016, when it began as an independent club", () => {
+    expect(content.history.foundedYear).toBe(2016);
+    expect(content.history.origin).toMatch(/independent/);
+    expect(content.history.origin).toMatch(/Toastmasters International/);
+  });
+
   it("states the club's tagline and mission", () => {
     expect(content.settings.tagline).toBe("A Club with Difference");
     expect(content.settings.mission).toMatch(/^We provide a supportive and positive learning experience/);
