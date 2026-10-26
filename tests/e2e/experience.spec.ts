@@ -20,8 +20,8 @@ test.describe("signature moments", () => {
       "Nervous about speaking? So was everyone here.",
       "What happens on a Sunday morning",
       "Your first Table Topic, right here.",
-      "Real People. Real Growth.",
-      "The people who run the room",
+      "Engineers, educators, founders, first-timers.",
+      "The people who run the room, 2026–27",
       "Ready to become a better speaker?",
     ];
     const positions = order.map((text) => headings.indexOf(text));
@@ -102,7 +102,7 @@ test("arriving on the home page from another page animates cleanly, with no GSAP
 });
 
 test.describe("hero photos", () => {
-  test("rotate through the club photos, with a working pause button", async ({ page }, testInfo) => {
+  test("rotate through the club photos, with no play or pause button", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name === "reduced-motion", "Covered by the reduced-motion test below");
     await page.goto("/");
     const slides = page.locator("[data-hero-backdrop] [data-slide]");
@@ -121,8 +121,8 @@ test.describe("hero photos", () => {
       "true",
     );
 
-    await page.getByRole("button", { name: "Pause photo slideshow" }).press("Enter");
-    await expect(page.getByRole("button", { name: "Play photo slideshow" })).toBeVisible();
+    // The club asked for the hero without play and pause buttons (2026-10-26).
+    await expect(page.getByRole("button", { name: /photo slideshow/ })).toHaveCount(0);
   });
 
   test("advance on their own after the hold", async ({ page }, testInfo) => {
@@ -236,10 +236,15 @@ test.describe("reduced motion", () => {
     expect(await section.locator("video").evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
   });
 
-  test("the hero photos start paused and change only when asked", async ({ page, isMobile }) => {
-    test.skip(isMobile, "Phones have no slide buttons; the pause button is covered above");
+  test("the hero photos stay still and change only when asked", async ({ page, isMobile }) => {
+    test.skip(isMobile, "Covered on desktop");
+    await page.clock.install();
     await page.goto("/");
-    await expect(page.getByRole("button", { name: "Play photo slideshow" })).toBeVisible();
+    await page.clock.runFor(13_000);
+    await expect(page.locator("[data-hero-backdrop] [data-slide]").nth(1)).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
     await page.getByRole("button", { name: "Show photo 2 of 4" }).press("Enter");
     await expect(page.locator("[data-hero-backdrop] [data-slide]").nth(1)).toHaveCSS("opacity", "1", {
       timeout: 300,
@@ -292,7 +297,8 @@ test("every 'Book a guest visit' link goes to /join, which loads", async ({ page
   const response = await page.goto("/join");
   expect(response?.status()).toBe(200);
   await expect(page.getByRole("heading", { level: 1, name: /^Join us .+ as our guest$/ })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Get directions/ })).toHaveAttribute(
+  // The page's own link (the footer repeats it).
+  await expect(page.locator("#main").getByRole("link", { name: /Get directions/ })).toHaveAttribute(
     "href",
     /google\.com\/maps.*Hor%20Al%20Anz%20Public%20Library/,
   );

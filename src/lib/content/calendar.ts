@@ -67,11 +67,7 @@ function localStamp(instant: Date, timeZone: string): string {
 const title = (clubName: string): string => `${clubName} meeting`;
 const location = ({ venue, city }: CalendarDetails["meeting"]): string => `${venue}, ${city}`;
 const description = ({ meeting, url, tips }: CalendarDetails): string =>
-  [
-    `${meetingTimeRange(meeting)}.`,
-    tips,
-    `Guests are always welcome. Book your seat: ${url}`,
-  ]
+  [`${meetingTimeRange(meeting)}.`, tips, `Guests are always welcome. Book your seat: ${url}`]
     .filter(Boolean)
     .join(" ");
 

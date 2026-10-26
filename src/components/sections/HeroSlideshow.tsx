@@ -2,8 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Pause, Play } from "lucide-react";
-import { useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { afterIntro, isIntroPlaying } from "@/lib/motion/intro";
 import { wrapSlide } from "@/lib/motion/slideshow";
 import { ease, heroSlideshow, media } from "@/lib/motion/tokens";
@@ -22,30 +21,17 @@ interface SlideshowControls {
   sync: () => void;
 }
 
-const subscribeReducedMotion = (onChange: () => void): (() => void) => {
-  const query = window.matchMedia(media.reducedMotion);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
-};
-const prefersReducedMotion = (): boolean => window.matchMedia(media.reducedMotion).matches;
-
 /**
  * The hero photo panel, rotating through club photos: each holds, then crossfades
  * slowly while it drifts in scale. Rotation waits for the intro, and pauses while the
- * hero is off screen, the tab is hidden, or the controls are hovered or focused.
- * Under reduced motion it starts paused and photos swap without fading or drifting.
- * The pause button meets WCAG 2.2.2 (Pause, Stop, Hide).
+ * hero is off screen, the tab is hidden, or the indicators are hovered or focused.
+ * Under reduced motion it stays still; the indicators still swap photos, without fading.
  */
 export function HeroSlideshow({ slides, children }: HeroSlideshowProps) {
   const root = useRef<HTMLDivElement>(null);
   const controls = useRef<SlideshowControls | null>(null);
-  /** The visitor's choice (true = paused); null until they press the button. */
-  const choice = useRef<boolean | null>(null);
   const hovering = useRef(false);
   const [active, setActive] = useState(0);
-  const [userPaused, setUserPaused] = useState<boolean | null>(null);
-  const reducedMotion = useSyncExternalStore(subscribeReducedMotion, prefersReducedMotion, () => false);
-  const paused = userPaused ?? reducedMotion;
   const count = slides.length;
 
   useGSAP(
@@ -72,7 +58,7 @@ export function HeroSlideshow({ slides, children }: HeroSlideshowProps) {
       let drift: gsap.core.Tween | undefined;
 
       const shouldRun = (): boolean =>
-        introDone && onScreen && !document.hidden && !hovering.current && !(choice.current ?? reduce());
+        introDone && onScreen && !document.hidden && !hovering.current && !reduce();
 
       const sync = (): void => {
         const run = shouldRun();
@@ -169,13 +155,6 @@ export function HeroSlideshow({ slides, children }: HeroSlideshowProps) {
     { scope: root, dependencies: [count] },
   );
 
-  const togglePause = (): void => {
-    const next = !paused;
-    choice.current = next;
-    setUserPaused(next);
-    controls.current?.sync();
-  };
-
   const setHovering = (value: boolean): void => {
     hovering.current = value;
     controls.current?.sync();
@@ -235,18 +214,6 @@ export function HeroSlideshow({ slides, children }: HeroSlideshowProps) {
                 </span>
               </button>
             ))}
-            <button
-              type="button"
-              onClick={togglePause}
-              aria-label={paused ? "Play photo slideshow" : "Pause photo slideshow"}
-              className="hover:border-gold ml-2 inline-flex size-11 items-center justify-center rounded-full border border-white/30 text-white transition-colors duration-(--duration-quick)"
-            >
-              {paused ? (
-                <Play aria-hidden="true" className="size-3.5" />
-              ) : (
-                <Pause aria-hidden="true" className="size-3.5" />
-              )}
-            </button>
           </div>
         </div>
       )}

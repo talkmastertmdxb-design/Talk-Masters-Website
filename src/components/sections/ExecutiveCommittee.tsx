@@ -1,50 +1,68 @@
-import { OfficerCard } from "@/components/people/OfficerCard";
-import { ButtonLink } from "@/components/ui/Button";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ImageSlot } from "@/components/media/ImageSlot";
 import { content } from "@/lib/content";
-import { splitCommittee } from "@/lib/content/people";
+import { shortTerm, splitCommittee } from "@/lib/content/people";
+
+/** "Vice President Education" → "VP Education", so seven roles fit one row. */
+const shortRole = (role: string): string => role.replace(/^Vice President\b/, "VP");
 
 /**
- * Plan.md: Executive Committee, immediately before the final CTA. Leadership, humanised:
- * the President leads with their photo and words; the rest of the committee sits beside them.
+ * The people who run the room (home page): one row of faces, the President first, each with a
+ * link to their member story where they have one. The full committee lives on /team.
  */
 export function ExecutiveCommittee() {
   const { president, others } = splitCommittee(content.officers);
-  if (!president && others.length === 0) return null;
+  const committee = president ? [president, ...others] : others;
+  if (committee.length === 0) return null;
+  const term = shortTerm(committee[0]!.term);
 
   return (
     <section aria-labelledby="committee-title" className="py-section bg-white">
       <div className="container-site">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p data-reveal="up" className="text-eyebrow text-ink-muted">
-              Leadership
-            </p>
-            <h2 id="committee-title" data-reveal="lines" className="text-h2 mt-5 max-w-[16ch]">
-              The people who run the room
-            </h2>
-          </div>
-          <div data-reveal="up">
-            <ButtonLink href="/team" variant="dark">
-              Meet the Executive Committee
-            </ButtonLink>
-          </div>
+        <div className="border-hairline flex flex-col gap-4 border-t pt-10 sm:flex-row sm:items-baseline sm:justify-between">
+          <h2 id="committee-title" data-reveal="lines" className="text-h3">
+            The people who run the room, {term}
+          </h2>
+          <Link
+            href="/team"
+            data-reveal="up"
+            className="nav-link text-tm-blue inline-flex min-h-11 items-center font-semibold"
+          >
+            Meet the Executive Committee
+          </Link>
         </div>
 
-        <div className="mt-16 grid gap-x-10 gap-y-14 lg:grid-cols-12">
-          {president && (
-            <div data-reveal="up" className="sm:max-w-md lg:col-span-5 lg:max-w-none">
-              <OfficerCard officer={president} size="feature" />
-            </div>
-          )}
-          <div
-            data-reveal="stagger"
-            className="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:col-span-7 lg:self-end"
-          >
-            {others.map((officer) => (
-              <OfficerCard key={officer.slug} officer={officer} size="compact" />
-            ))}
-          </div>
-        </div>
+        <ul
+          data-reveal="stagger"
+          className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-4 lg:grid-cols-7"
+        >
+          {committee.map((officer) => (
+            <li key={officer.slug} className="flex flex-col gap-2">
+              {officer.imageSlot && (
+                <div className="relative isolate aspect-[4/5] overflow-hidden rounded-lg">
+                  <ImageSlot
+                    id={officer.imageSlot}
+                    variant="backdrop"
+                    tone="full"
+                    sizes="(min-width: 1280px) 13vw, (min-width: 640px) 23vw, 45vw"
+                  />
+                </div>
+              )}
+              <h3 className="font-semibold">{officer.name}</h3>
+              <p className="text-ink-muted -mt-2 text-sm">{shortRole(officer.role)}</p>
+              {officer.memberSlug && (
+                <Link
+                  href={`/members#${officer.memberSlug}`}
+                  className="nav-link text-tm-blue inline-flex min-h-11 w-fit items-center gap-1 text-sm font-semibold"
+                >
+                  Read {officer.name}&apos;s story
+                  <ArrowUpRight aria-hidden="true" className="size-3.5" />
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

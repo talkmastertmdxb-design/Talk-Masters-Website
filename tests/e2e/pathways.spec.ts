@@ -58,14 +58,16 @@ test.describe("home page", () => {
     );
   });
 
-  test("the Pathways teaser shows the journey and one clear way on, not a partial list", async ({ page }) => {
+  test("the Pathways section climbs the five levels, names the six paths and offers one clear way on", async ({
+    page,
+  }) => {
     await page.goto("/");
     const teaser = page.locator("#pathways");
-    for (const stage of ["First-timer", "Confident speaker", "Leader", "Mentor"]) {
-      await expect(teaser.getByRole("heading", { name: stage })).toBeVisible();
-    }
-    await expect(teaser).toContainText("Your Toastmasters journey evolves as your goals evolve.");
-    await expect(teaser.getByText("Presentation Mastery")).toHaveCount(0);
+    await expect(teaser.getByRole("heading", { name: "Five levels. Six paths. Your pace." })).toBeVisible();
+    await expect(
+      teaser.getByRole("list", { name: "The five Pathways levels" }).getByRole("listitem"),
+    ).toHaveCount(5);
+    await expect(teaser.getByRole("list", { name: "The six paths" }).getByRole("listitem")).toHaveCount(6);
     await expect(teaser.getByRole("link", { name: /Explore all 6 pathways/ })).toHaveAttribute(
       "href",
       "/pathways",

@@ -1,9 +1,9 @@
 import { RevealScope } from "@/components/motion/RevealScope";
 import { Download } from "lucide-react";
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { OfficerCard } from "@/components/people/OfficerCard";
+import { TeamOpening } from "@/components/people/TeamOpening";
 import { content } from "@/lib/content";
 import { clubFacts, shortTerm, splitCommittee } from "@/lib/content/people";
 import { resolveImageSlot } from "@/lib/images/slots";
@@ -24,34 +24,7 @@ export default function TeamPage() {
 
   return (
     <RevealScope as="main" id="main">
-      <PageHeader
-        title="The Executive Committee"
-        lead="Volunteer members who run the club this year, and who were once nervous first-time guests too."
-        imageSlot="team-hero"
-      />
-
-      {president && (
-        <section aria-label="Club President" className="py-section bg-white">
-          <div className="container-site grid items-end gap-10 md:grid-cols-12">
-            <div data-reveal="up" className="md:col-span-5">
-              <OfficerCard officer={president} size="feature" />
-            </div>
-            <div className="md:col-span-6 md:col-start-7 md:pb-4">
-              <p data-reveal="up" className="text-eyebrow text-ink-muted">
-                Executive Committee {term}
-              </p>
-              <h2 data-reveal="lines" className="text-h2 mt-5 max-w-[16ch]">
-                Seven volunteers, one job: a better room every meeting
-              </h2>
-              <p data-reveal="up" className="text-ink-muted mt-6 max-w-[48ch] text-lg">
-                The committee plans every meeting, welcomes every guest and looks after every member&apos;s
-                progress. Each of them started where you might be now: in the audience, deciding whether to
-                speak.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
+      <TeamOpening president={president} others={others} facts={facts} />
 
       <section aria-label="Committee members" className="pb-section bg-white">
         <div

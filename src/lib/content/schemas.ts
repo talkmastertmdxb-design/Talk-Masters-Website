@@ -153,6 +153,18 @@ export const settingsSchema = z.object({
     .min(1, "Add at least one contact"),
   /** The club's own profiles (footer and phone menu), checked like members' links. */
   socials: profileLinks,
+  /**
+   * "Where our members work" (home page strip): company names set as type, never logo files.
+   * Only employers named in members' own profiles.
+   */
+  workplaces: z
+    .array(z.string().trim().min(1).max(40))
+    .max(16)
+    .refine(
+      (names) => new Set(names.map((n) => n.toLowerCase())).size === names.length,
+      "List each workplace once",
+    )
+    .default([]),
   stats: z.array(statSchema),
   /** Image slot ids the hero rotates through, first one first (it is also the intro photo). */
   heroSlides: z
@@ -214,6 +226,11 @@ export const memberSchema = z.object({
   occupation: z.string().min(1).optional(),
   /** Company or organisation. */
   organisation: z.string().min(1).optional(),
+  /**
+   * One line for the home page's "who it's for" faces: who they were and who they are now,
+   * e.g. "Mechanical engineer, now a public speaking trainer". Members without one aren't shown there.
+   */
+  headline: z.string().min(1).max(70).optional(),
   /** Public profiles the member chose to share, shown in this order. One per network. */
   links: profileLinks,
   /** For the future directory filter. */

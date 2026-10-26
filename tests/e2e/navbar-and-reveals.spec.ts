@@ -3,16 +3,17 @@ import { expect, test } from "@playwright/test";
 const GOLD = "rgb(214, 176, 106)";
 
 test.describe("home", () => {
-  test("the hero keeps its headline and numbers, with About straight after it", async ({ page }) => {
+  test("the hero keeps its headline and numbers, then where members work, then About", async ({ page }) => {
     await page.goto("/");
     const hero = page.locator("section[aria-labelledby='hero-title']");
     await expect(hero.getByRole("heading", { level: 1 })).toContainText("Find Your Voice.");
     await expect(hero.locator(".hero-stat")).toHaveCount(4);
     await expect(page.locator("#acts")).toHaveCount(0);
-    const next = await page.evaluate(
-      () => document.querySelector("section[aria-labelledby='hero-title']")?.nextElementSibling?.id,
-    );
-    expect(next).toBe("about");
+    const next = await page.evaluate(() => {
+      const strip = document.querySelector("section[aria-labelledby='hero-title']")?.nextElementSibling;
+      return [strip?.id, strip?.nextElementSibling?.id];
+    });
+    expect(next).toEqual(["workplaces", "about"]);
   });
 
   test("on a phone the whole hero, numbers included, fits the first screen", async ({ page, isMobile }) => {
@@ -98,7 +99,7 @@ test.describe("navbar", () => {
       .getByRole("link", { name: /Book a (guest )?visit/ })
       .first();
     expect(await book.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(GOLD);
-    const footerBook = page.locator("footer").getByRole("link", { name: "Book a guest visit" }).first();
+    const footerBook = page.locator("footer").getByRole("button", { name: "Book on WhatsApp" });
     expect(await footerBook.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(GOLD);
   });
 

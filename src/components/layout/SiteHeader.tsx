@@ -46,14 +46,26 @@ const isCurrent = (pathname: string, href: string): boolean =>
 export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
   const [frosted, setFrosted] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [tone, setTone] = useState<"dark" | "light">("dark");
   const menuRef = useRef<HTMLDialogElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     let lastY = window.scrollY;
+    // Read-only: light openings mark themselves; the bar turns light while one sits beneath it.
+    const lightSections = Array.from(document.querySelectorAll<HTMLElement>("[data-header='light']"));
     const onScroll = () => {
       const y = window.scrollY;
+      const barMiddle = (barRef.current?.offsetHeight ?? 64) / 2;
+      setTone(
+        lightSections.some((section) => {
+          const box = section.getBoundingClientRect();
+          return box.top <= barMiddle && box.bottom > barMiddle;
+        })
+          ? "light"
+          : "dark",
+      );
       setFrosted(y > FROST_AFTER_PX);
       if (y < HIDE_AFTER_PX) setHidden(false);
       else if (y > lastY + SCROLL_TOLERANCE_PX) setHidden(true);
@@ -83,6 +95,7 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
       <div
         ref={barRef}
         data-frosted={frosted}
+        data-tone={tone}
         className="site-bar theme-dark relative border-b border-white/10 text-white"
       >
         <div className="container-site flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
@@ -114,7 +127,7 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
           <div className="flex items-center gap-3">
             <Link
               href="/join"
-              className="hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) xl:inline-flex"
+              className="site-bar__chip hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) xl:inline-flex"
             >
               <span className="text-white/85">Next meeting</span>
               <span aria-hidden="true" className="bg-gold size-1 rounded-full" />
@@ -133,7 +146,7 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
               onClick={openMenu}
               aria-label="Open menu"
               aria-haspopup="dialog"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 md:hidden"
+              className="site-bar__menu inline-flex size-11 items-center justify-center rounded-full border border-white/20 md:hidden"
             >
               <Menu aria-hidden="true" className="size-5" />
             </button>

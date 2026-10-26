@@ -118,7 +118,9 @@ test("the members page downloads card photos only, not every profile portrait", 
 
 test("Team lists the Executive Committee with leadership statements", async ({ page }) => {
   await page.goto("/team");
-  await expect(page.getByRole("heading", { level: 1, name: "The Executive Committee" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Seven volunteers. One job: a better room every meeting." }),
+  ).toBeVisible();
   await expect(page.getByText("Vice President Education")).toBeVisible();
   expect(await seriousViolations(page)).toEqual([]);
 });
@@ -127,8 +129,12 @@ test("Team shows the 2026-27 committee, the President first, and the poster to d
   page,
 }) => {
   await page.goto("/team");
+  // The opening: the President's tall tile, with their story one tap away.
   await expect(page.getByText("Club President, 2026–27")).toBeVisible();
-  await expect(page.getByRole("heading", { level: 3, name: "Anees" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Read Anees's story" })).toHaveAttribute(
+    "href",
+    "/members#anees-mousafi",
+  );
   for (const name of ["Mansoor", "Lulu", "Suhayb", "Nabeel", "Nasar", "Noufal"]) {
     await expect(page.getByRole("heading", { level: 3, name })).toBeVisible();
   }

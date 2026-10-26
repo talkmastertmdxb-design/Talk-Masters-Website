@@ -7,6 +7,7 @@ import {
   INTRO_REPEAT_MS,
   INTRO_STORAGE_KEY,
   introScript,
+  PHONE_INTRO_CLASS,
 } from "@/lib/motion/intro";
 
 afterEach(() => {
@@ -81,6 +82,24 @@ describe("introScript (runs in <head> before paint)", () => {
 
   it("never plays on phones, where it would hold most visitors back for four seconds", () => {
     expect(run("/", false, false).contains(INTRO_CLASS)).toBe(false);
+  });
+
+  it("gives phones the short three-word moment instead, remembers it, then clears it", () => {
+    vi.useFakeTimers();
+    const classes = run("/", false, false);
+    expect(classes.contains(PHONE_INTRO_CLASS)).toBe(true);
+    expect(localStorage.getItem(INTRO_STORAGE_KEY)).not.toBeNull();
+    vi.advanceTimersByTime(2200);
+    expect(classes.contains(PHONE_INTRO_CLASS)).toBe(false);
+    vi.useRealTimers();
+  });
+
+  it("skips the phone moment on repeat visits, other pages and under reduced motion", () => {
+    localStorage.setItem(INTRO_STORAGE_KEY, String(Date.now()));
+    expect(run("/", false, false).contains(PHONE_INTRO_CLASS)).toBe(false);
+    localStorage.clear();
+    expect(run("/team", false, false).contains(PHONE_INTRO_CLASS)).toBe(false);
+    expect(run("/", true, false).contains(PHONE_INTRO_CLASS)).toBe(false);
   });
 
   it("plays again once the repeat window has passed", () => {

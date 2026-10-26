@@ -43,7 +43,7 @@ export function Hero() {
         <HeroSlideshow slides={slides}>
           {/* Phones: the words start below the photo (globals.css), never on top of it. */}
           <div className="container-site relative flex flex-1 flex-col justify-start pt-[calc(var(--hero-photo-top)+var(--hero-photo-h)+0.875rem)] pb-6 sm:justify-center sm:pt-24 sm:pb-20 md:pt-28 lg:pb-4">
-            <p data-hero-item className="text-eyebrow text-white/70">
+            <p data-hero-item className="text-eyebrow tracking-[0.24em] text-white/70">
               Communicate <span className="text-gold">·</span> Lead <span className="text-gold">·</span>{" "}
               Belong
             </p>
@@ -78,7 +78,7 @@ export function Hero() {
               data-hero-item
               className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-6 md:mt-7 md:gap-x-8"
             >
-              <ButtonLink href="/join" className="group max-sm:w-full">
+              <ButtonLink href="/join" className="group min-h-12! max-sm:w-full">
                 Book a Free Guest Visit
                 <ArrowRight
                   aria-hidden="true"
@@ -184,10 +184,10 @@ export function Hero() {
                 </span>
               </div>
               <div className="absolute inset-x-6 bottom-7 flex justify-between md:inset-x-10 md:bottom-9">
-                <p data-intro-mark className="text-eyebrow text-white/60">
+                <p data-intro-mark className="text-eyebrow tracking-[0.24em] text-white/60">
                   Talk-Masters Club
                 </p>
-                <p data-intro-mark className="text-eyebrow hidden text-white/60 sm:block">
+                <p data-intro-mark className="text-eyebrow hidden tracking-[0.24em] text-white/60 sm:block">
                   Communicate <span className="text-gold">·</span> Lead <span className="text-gold">·</span>{" "}
                   Belong
                 </p>
@@ -196,6 +196,21 @@ export function Hero() {
           </div>
         </HeroSlideshow>
       </HeroIntro>
+
+      {/* Phones, first visit (html.intro-phone): three words, then the hero. CSS only, about 1.3s,
+          and taps pass straight through. */}
+      <div
+        aria-hidden="true"
+        className="phone-intro bg-ink fixed inset-0 z-[70] flex-col justify-center px-6"
+      >
+        <p className="phone-intro__word font-serif text-[3.5rem] leading-[1.02] tracking-[-0.035em]">
+          Speak.
+        </p>
+        <p className="phone-intro__word font-serif text-[3.5rem] leading-[1.02] tracking-[-0.035em]">Lead.</p>
+        <p className="phone-intro__word text-gold font-serif text-[3.5rem] leading-[1.02] tracking-[-0.035em] italic">
+          Belong.
+        </p>
+      </div>
     </section>
   );
 }

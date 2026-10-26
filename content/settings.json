@@ -53,6 +53,16 @@
     { "network": "instagram", "url": "https://www.instagram.com/talkmastersuae/" },
     { "network": "linkedin", "url": "https://www.linkedin.com/in/talk-masters-tm-22071837a/" }
   ],
+  "workplaces": [
+    "IKEA",
+    "Amazon",
+    "University of Wollongong in Dubai",
+    "Walmart",
+    "Energy Recovery",
+    "Al Nabooda Automobiles",
+    "Public Speaking Gym",
+    "Active Kids"
+  ],
   "stats": [
     {
       "label": "Meetings held",

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { StageLight } from "@/components/motion/StageLight";
+import { Ladder } from "@/components/pathways/Ladder";
 import { PathQuiz } from "@/components/pathways/PathQuiz";
+import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -26,21 +27,60 @@ export default function PathwaysPage() {
 
   return (
     <RevealScope as="main" id="main">
-      <PageHeader title="Grow at your own pace" lead={intro} imageSlot="pathways-hero" />
+      {/* Redesign opening: the words and three plain facts beside the ladder. Light, so the header goes light. */}
+      <section
+        data-header="light"
+        aria-labelledby="pathways-title"
+        className="bg-white pt-28 pb-16 md:pt-32 md:pb-24"
+      >
+        <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="flex flex-col gap-6 lg:col-span-5">
+            <p data-reveal="up" className="text-eyebrow text-ink-muted">
+              Toastmasters Pathways
+            </p>
+            <h1 id="pathways-title" data-reveal="lines" className="text-h1">
+              Grow at your own pace.
+            </h1>
+            <p data-reveal="text" className="text-ink-muted max-w-[46ch] text-lg leading-relaxed">
+              {intro}
+            </p>
+            <dl data-reveal="up" className="mt-2">
+              {facts.slice(0, 3).map((fact) => (
+                <div
+                  key={fact.title}
+                  className="border-hairline grid gap-1 border-t py-3 last:border-b sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-4"
+                >
+                  <dt className="font-semibold">{fact.title}</dt>
+                  <dd className="text-ink-muted">{fact.text}</dd>
+                </div>
+              ))}
+            </dl>
+            <div data-reveal="up" className="flex flex-wrap gap-3">
+              <ButtonLink href="#find-your-path" variant="dark">
+                Find your path in two questions
+              </ButtonLink>
+            </div>
+          </div>
 
-      <section aria-labelledby="facts-title" className="py-section bg-white">
-        <div className="container-site">
-          <h2 id="facts-title" data-reveal="lines" className="text-h2 max-w-[20ch]">
-            Pathways, <em className="text-tm-blue">in a minute.</em>
-          </h2>
-          <ul data-reveal="stagger" className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {facts.map((fact) => (
-              <li key={fact.title} className="bg-soft-gray rounded-3xl p-6 md:p-7">
-                <h3 className="font-serif text-[1.5rem] leading-tight">{fact.title}</h3>
-                <p className="text-ink-muted mt-2">{fact.text}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col gap-5 lg:col-span-7">
+            <Ladder tone="light" detailed heightClass="md:h-[32rem]" />
+            <ul
+              aria-label="The six paths"
+              data-reveal="stagger"
+              className="grid grid-cols-2 gap-2 sm:grid-cols-3"
+            >
+              {paths.map((path) => (
+                <li key={path.slug}>
+                  <a
+                    href={`#${path.slug}`}
+                    className="bg-soft-gray hover:bg-stone flex min-h-12 items-center rounded-lg px-4 py-3 font-serif text-[1.0625rem] leading-tight transition-colors duration-(--duration-quick)"
+                  >
+                    {path.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -88,35 +128,41 @@ export default function PathwaysPage() {
           <h2 id="paths-title" data-reveal="lines" className="text-h2 mt-5 max-w-[18ch]">
             Pick the one that fits <em className="text-gold">your goal.</em>
           </h2>
-          <ul data-reveal="stagger" className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {/* Compact cards: a short photo band, then name, focus, skills and the final project. */}
+          <ul data-reveal="stagger" className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {paths.map((path, index) => (
               <li
                 key={path.slug}
                 id={path.slug}
-                className="flex scroll-mt-28 flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-3"
+                className="flex scroll-mt-28 flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] transition-colors duration-(--duration-quick) hover:border-white/20"
               >
-                <ImageSlot
-                  id={path.imageSlot}
-                  sizes="(min-width: 1280px) 30vw, (min-width: 900px) 45vw, 100vw"
-                  className="rounded-2xl"
-                />
-                <div className="flex flex-1 flex-col px-3 pt-6 pb-4 md:px-5 md:pb-5">
-                  <span aria-hidden="true" className="text-gold text-sm tabular-nums">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-3 font-serif text-[1.875rem] leading-tight">{path.name}</h3>
-                  <p className="mt-3 text-white/78">{path.focus}</p>
-                  <p className="mt-5 text-sm text-white/65">
+                <div className="relative isolate aspect-[16/7] overflow-hidden">
+                  <ImageSlot
+                    id={path.imageSlot}
+                    variant="backdrop"
+                    tone="full"
+                    sizes="(min-width: 1280px) 30vw, (min-width: 640px) 45vw, 100vw"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="flex items-baseline gap-3">
+                    <span aria-hidden="true" className="text-gold text-xs font-semibold tabular-nums">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-serif text-[1.375rem] leading-tight">{path.name}</h3>
+                  </div>
+                  <p className="mt-2 text-[0.9375rem] leading-snug text-white/78">{path.focus}</p>
+                  <p className="mt-3 text-[0.8125rem] text-white/70">
                     <span className="font-semibold text-white">Best for:</span> {path.bestFor}
                   </p>
-                  <ul aria-label={`Skills in ${path.name}`} className="mt-5 flex flex-wrap gap-2">
+                  <ul aria-label={`Skills in ${path.name}`} className="mt-4 flex flex-wrap gap-1.5">
                     {path.skills.map((skill) => (
-                      <li key={skill} className="rounded-full border border-white/18 px-3.5 py-1 text-sm">
+                      <li key={skill} className="rounded-full border border-white/18 px-2.5 py-0.5 text-xs">
                         {skill}
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-auto pt-6 text-sm text-white/65">
+                  <p className="mt-auto pt-4 text-[0.8125rem] text-white/70">
                     Final project: <span className="text-gold">{path.finalProject}</span>
                   </p>
                 </div>

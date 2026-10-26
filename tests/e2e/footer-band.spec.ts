@@ -6,7 +6,8 @@ test("every page ends with the stage-light call to action", async ({ page }, tes
     await page.goto(path);
     const band = page.locator("footer section[aria-labelledby='guest-band']");
     await expect(band.getByRole("heading", { name: "Ready to become a better speaker?" })).toBeVisible();
-    const flow = band.locator(".cta-band__flow");
+    // The stage light now runs behind the whole footer, not just the band (Bailey Hart layout).
+    const flow = page.locator("footer > .cta-band__flow");
     await expect(flow).toBeAttached();
     const animation = await flow.evaluate((el) => getComputedStyle(el).animationName);
     // Drifts slowly for most visitors; holds still for anyone who asks for less motion.

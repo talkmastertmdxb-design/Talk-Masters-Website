@@ -13,17 +13,20 @@ async function recordTransitions(page: Page): Promise<void> {
     const start = document.startViewTransition.bind(document);
     document.startViewTransition = ((arg: StartViewTransitionOptions) => {
       const transition = start(arg);
-      transition.ready.then(() => {
-        const played = document.documentElement
-          .getAnimations({ subtree: true })
-          .filter((a) => (a.effect as KeyframeEffect).pseudoElement?.startsWith("::view-transition"))
-          .map((a) => ({
-            name: (a as CSSAnimation).animationName,
-            duration: Number(a.effect?.getTiming().duration),
-          }))
-          .filter((a) => ["page-in", "page-out", "page-fade"].includes(a.name));
-        w.__played!.push(played);
-      }, () => w.__played!.push([]));
+      transition.ready.then(
+        () => {
+          const played = document.documentElement
+            .getAnimations({ subtree: true })
+            .filter((a) => (a.effect as KeyframeEffect).pseudoElement?.startsWith("::view-transition"))
+            .map((a) => ({
+              name: (a as CSSAnimation).animationName,
+              duration: Number(a.effect?.getTiming().duration),
+            }))
+            .filter((a) => ["page-in", "page-out", "page-fade"].includes(a.name));
+          w.__played!.push(played);
+        },
+        () => w.__played!.push([]),
+      );
       return transition;
     }) as typeof document.startViewTransition;
   });
@@ -45,9 +48,9 @@ test("following a link plays the page transition: old page lifts away, new page 
 
   const reduced = testInfo.project.name === "reduced-motion";
   const expected = reduced ? ["page-fade", "page-fade"] : ["page-in", "page-out"];
-  await expect.poll(async () => (await played(page)).map((t) => t.map((a) => a.name).sort())).toContainEqual(
-    expected,
-  );
+  await expect
+    .poll(async () => (await played(page)).map((t) => t.map((a) => a.name).sort()))
+    .toContainEqual(expected);
   // Fast enough to feel instant on phones, never longer than ~0.65s anywhere.
   const limit = reduced ? 200 : testInfo.project.name === "mobile" ? 460 : 650;
   for (const { duration } of (await played(page)).flat()) expect(duration).toBeLessThanOrEqual(limit);

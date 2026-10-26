@@ -22,6 +22,8 @@
   --color-ink-muted: #4b5563; /* text on light */
   --color-soft-gray: #f5f7f8; /* light bands */
   --color-card: #e8ecee;
+  --color-stone: #eceff2; /* secondary buttons on light */
+  --color-stone-hover: #e1e6ea;
   --color-cool-gray: #a9b2b1;
   --color-white: #ffffff;
   --color-hairline: rgb(0 65 101 / 0.12);
@@ -51,33 +53,34 @@
 }
 
 /* Fluid type scale (docs/IMPLEMENTATION_PLAN.md §3.2) */
+/* Redesign scale (2026-10-26): display 92, H1 64, H2 56, H3 28, tracked tight like an editorial serif. */
 @utility text-display {
   font-family: var(--font-serif);
-  font-size: clamp(3.5rem, 1.5rem + 9vw, 11.25rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(3.25rem, 1.6rem + 4.6vw, 5.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
   font-weight: 400;
 }
 @utility text-h1 {
   font-family: var(--font-serif);
-  font-size: clamp(2.75rem, 1.6rem + 4.6vw, 7rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 1.7rem + 2.9vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
   font-weight: 400;
 }
 @utility text-h2 {
   font-family: var(--font-serif);
-  font-size: clamp(2.125rem, 1.5rem + 2.6vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.125rem, 1.5rem + 1.75vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   font-weight: 400;
 }
 @utility text-h3 {
   font-family: var(--font-serif);
-  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.5rem);
+  font-size: clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  font-weight: 500;
+  font-weight: 400;
 }
 @utility text-lead {
   font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
@@ -87,7 +90,7 @@
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -226,6 +229,56 @@
   @keyframes hero-settle {
     from {
       transform: translateY(18px);
+    }
+  }
+  /* Phones, first visit: "Speak. Lead. Belong." for about 1.3s (intro.ts), then the hero settles. */
+  .phone-intro {
+    display: none;
+    pointer-events: none;
+  }
+  @media (max-width: 56.24rem) and (prefers-reduced-motion: no-preference) {
+    html.intro-phone .phone-intro {
+      display: flex;
+      animation: phone-intro-out 0.35s ease 1.05s forwards;
+    }
+    html.intro-phone [data-hero-reveal],
+    html.intro-phone [data-hero-item] {
+      animation-delay: 1.15s;
+    }
+    /* The overlay lives inside the hero's stacking context, so the bar waits for the words. */
+    html.intro-phone .site-header {
+      animation: phone-header-in 0.4s ease 1.15s both;
+    }
+    .phone-intro__word {
+      opacity: 0;
+      animation: phone-word 0.5s var(--ease-deliver) forwards;
+    }
+    .phone-intro__word:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+    .phone-intro__word:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+  }
+  @keyframes phone-word {
+    from {
+      opacity: 0;
+      transform: translateY(0.35em);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes phone-header-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes phone-intro-out {
+    to {
+      opacity: 0;
+      visibility: hidden;
     }
   }
   @keyframes hero-failsafe {
@@ -504,6 +557,67 @@
     background:
       radial-gradient(60% 50% at 20% 0%, rgb(0 65 101 / 0.6), transparent 70%),
       radial-gradient(45% 40% at 85% 10%, rgb(214 176 106 / 0.14), transparent 70%), var(--color-ink);
+  }
+
+  /* Footer booking: a pill with the name field and the gold button inside (Bailey Hart's newsletter shape). */
+  .footer-pill {
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition: border-color var(--duration-quick) var(--ease-deliver);
+  }
+  .footer-pill:focus-within {
+    border-color: var(--color-gold);
+  }
+
+  /* "Where our members work": names drift sideways; two identical halves loop seamlessly. */
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+  }
+  .marquee__half {
+    display: flex;
+    align-items: center;
+    gap: clamp(3rem, 6vw, 5.5rem);
+    padding-right: clamp(3rem, 6vw, 5.5rem);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .marquee__track {
+      animation: marquee 42s linear infinite;
+    }
+    .marquee:hover .marquee__track {
+      animation-play-state: paused;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .marquee__track {
+      width: auto;
+      justify-content: center;
+    }
+    .marquee__half {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 1.5rem;
+      padding-right: 0;
+    }
+    .marquee__half[aria-hidden="true"] {
+      display: none;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   /* Underline that draws in from the left */
@@ -1218,4 +1332,25 @@ html[data-nav="history"]::view-transition-new(.page-in) {
   .hero-lead {
     font-size: 0.875rem;
   }
+}
+
+/* Header over a light opening (a section with data-header="light", e.g. /team and /pathways):
+   white glass and ink text. Unlayered, so it beats the bar's theme-dark and text-white utilities. */
+.site-bar[data-tone="light"] {
+  background: rgb(255 255 255 / 0.86);
+  border-bottom-color: rgb(11 18 32 / 0.08);
+  color: var(--color-ink);
+}
+.site-bar[data-tone="light"][data-frosted="true"] {
+  background: rgb(255 255 255 / 0.94);
+}
+.site-bar[data-tone="light"] .site-nav__num,
+.site-bar[data-tone="light"] .site-nav__link[aria-current="page"] {
+  color: var(--color-tm-blue);
+}
+.site-bar[data-tone="light"] .site-bar__menu {
+  border-color: rgb(11 18 32 / 0.2);
+}
+.site-bar[data-tone="light"] .site-bar__chip {
+  background: var(--color-ink);
 }

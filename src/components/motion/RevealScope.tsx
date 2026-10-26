@@ -29,6 +29,8 @@ interface RevealScopeProps {
  *                          only; colour from --reveal-block, gold by default)
  *   data-reveal="stagger"  direct children settle one after another
  *   data-reveal="image"    image unmasks from a soft inset
+ *   data-reveal="rise"     direct children grow up from their baseline, one after another
+ *                          (the Pathways ladder: bars rise like steps)
  *   data-parallax          soft parallax, ±5% (Animation 07)
  *   data-draw              SVG path draws with scroll (needs pathLength="1")
  *
@@ -133,7 +135,11 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
             )
               .set(line, { opacity: 1 }, at + blockWipe.duration)
               .set(block, { transformOrigin: "right center" }, at + blockWipe.duration)
-              .to(block, { scaleX: 0, duration: blockWipe.duration, ease: blockWipe.ease }, at + blockWipe.duration);
+              .to(
+                block,
+                { scaleX: 0, duration: blockWipe.duration, ease: blockWipe.ease },
+                at + blockWipe.duration,
+              );
           });
           ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: () => tl.play() });
         });
@@ -146,6 +152,22 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
             ease: ease.deliver,
             scrollTrigger: { trigger: el, start: "top 85%", once: true },
           });
+        });
+
+        all("[data-reveal='rise']").forEach((group) => {
+          gsap.fromTo(
+            group.children,
+            // A clip, not a scale: the bar grows from its baseline without squashing its label.
+            { clipPath: "inset(100% 0% 0% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: duration.slow,
+              ease: ease.deliver,
+              stagger: stagger.item,
+              clearProps: "clipPath",
+              scrollTrigger: { trigger: group, start: "top 80%", once: true },
+            },
+          );
         });
 
         all("[data-parallax]").forEach((el) => {
