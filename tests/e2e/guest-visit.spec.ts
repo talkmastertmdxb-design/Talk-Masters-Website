@@ -82,7 +82,7 @@ test("the home page answers guests' questions, one at a time", async ({ page }) 
 test.describe("header", () => {
   test("wide screens show the next meeting instead of a speech timer", async ({ page, isMobile }) => {
     test.skip(isMobile, "The chip is for wide screens");
-    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.setViewportSize({ width: 1600, height: 900 });
     await page.clock.setFixedTime(THURSDAY);
     await page.goto("/");
     const chip = page.locator("header").getByRole("link", { name: /Next meeting/ });

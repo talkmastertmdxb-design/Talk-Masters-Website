@@ -9,7 +9,13 @@ import {
   officerSchema,
   FOUNDING_STAGES,
 } from "@/lib/content/schemas";
-import { achievementYear, achievementsByYear, firstName, isMemberAchievement } from "@/lib/content/people";
+import {
+  achievementYear,
+  achievementsByYear,
+  cardEyebrow,
+  firstName,
+  isMemberAchievement,
+} from "@/lib/content/people";
 
 const member = {
   slug: "aisha-rahman",
@@ -233,5 +239,19 @@ describe("achievement helpers", () => {
   it("finds a first name for 'Read Aisha's journey' links", () => {
     expect(firstName("Aisha Rahman")).toBe("Aisha");
     expect(firstName("  Mary-Jane  O'Neil ")).toBe("Mary-Jane");
+  });
+});
+
+describe("cardEyebrow (member directory card)", () => {
+  it("leads with a shortened club role, then the year they joined", () => {
+    expect(cardEyebrow({ position: "Vice President Public Relations", memberSince: 2024 })).toEqual({
+      lead: "VP Public Relations",
+      since: "Member since 2024",
+    });
+  });
+
+  it("falls back to the join year, then to plain 'Member'", () => {
+    expect(cardEyebrow({ memberSince: 2021 })).toEqual({ lead: "Member since 2021" });
+    expect(cardEyebrow({})).toEqual({ lead: "Member" });
   });
 });

@@ -95,6 +95,26 @@ const profileLinks = z
   )
   .default([]);
 
+const workplaceSchema = z.union([
+  z.string().trim().min(1).max(40),
+  z.object({
+    name: z.string().trim().min(1).max(40),
+    logo: z.object({
+      src: z.string().regex(/^\/images\/logos\/[\w-]+\.(png|svg|webp)$/, "Put logos in public/images/logos/"),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
+      /** Optical correction for a heavy mark (a solid box reads larger than a wordmark). */
+      scale: z.number().min(0.5).max(1.5).optional(),
+    }),
+  }),
+]);
+
+export type Workplace = z.infer<typeof workplaceSchema>;
+
+export function workplaceName(place: Workplace): string {
+  return typeof place === "string" ? place : place.name;
+}
+
 export const settingsSchema = z.object({
   clubName: z.string().min(1),
   parentOrganisation: z.string().min(1),
@@ -154,14 +174,15 @@ export const settingsSchema = z.object({
   /** The club's own profiles (footer and phone menu), checked like members' links. */
   socials: profileLinks,
   /**
-   * "Where our members work" (home page strip): company names set as type, never logo files.
+   * "Where our members work" (home page strip): company names set as type, or a logo the
+   * company's member supplied (a one-colour mark in public/images/logos/, tinted to ink).
    * Only employers named in members' own profiles.
    */
   workplaces: z
-    .array(z.string().trim().min(1).max(40))
+    .array(workplaceSchema)
     .max(16)
     .refine(
-      (names) => new Set(names.map((n) => n.toLowerCase())).size === names.length,
+      (places) => new Set(places.map((p) => workplaceName(p).toLowerCase())).size === places.length,
       "List each workplace once",
     )
     .default([]),
@@ -231,6 +252,8 @@ export const memberSchema = z.object({
    * e.g. "Mechanical engineer, now a public speaking trainer". Members without one aren't shown there.
    */
   headline: z.string().min(1).max(70).optional(),
+  /** One line on their directory card, over the photo. Falls back to `headline`. */
+  hook: z.string().min(1).max(70).optional(),
   /** Public profiles the member chose to share, shown in this order. One per network. */
   links: profileLinks,
   /** For the future directory filter. */
@@ -448,6 +471,86 @@ export const pathwaysSchema = z
     "Every quiz answer must recommend one of the listed paths",
   );
 
+export const ROLE_GROUPS = ["lead", "functionary", "officer", "support"] as const;
+
+/**
+ * /meetings: a real meeting's running order, the roles in it, and the timing lights.
+ * Every role an agenda item names must be described in `roles`.
+ */
+export const meetingGuideSchema = z
+  .object({
+    /** The meeting the running order comes from. */
+    example: z.object({
+      number: z.number().int().positive(),
+      theme: z.string().min(1),
+      date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD"),
+    }),
+    sessions: z
+      .array(
+        z.object({
+          name: z.string().min(1),
+          summary: z.string().min(1),
+          items: z
+            .array(
+              z.object({
+                start: clockTime,
+                minutes: z.number().int().positive(),
+                title: z.string().min(1),
+                role: slug.optional(),
+                kind: z.enum(["break"]).optional(),
+              }),
+            )
+            .min(1),
+        }),
+      )
+      .min(1),
+    roles: z
+      .array(
+        z.object({
+          slug,
+          name: z.string().min(1),
+          /** The abbreviation members use, e.g. TMOD. */
+          short: z.string().min(1).optional(),
+          group: z.enum(ROLE_GROUPS),
+          text: z.string().min(1),
+          /** How long they're in front of the room, e.g. "5–7 minutes". */
+          onStage: z.string().min(1).optional(),
+          /** A role members suggest for someone's first meeting as a member. */
+          firstRole: z.boolean().default(false),
+          imageSlot: imageSlotId.optional(),
+        }),
+      )
+      .min(1),
+    /** Seconds at which the green, amber and red lights come on. */
+    timing: z
+      .array(
+        z
+          .object({
+            label: z.string().min(1),
+            detail: z.string().min(1),
+            green: z.number().int().positive(),
+            amber: z.number().int().positive(),
+            red: z.number().int().positive(),
+          })
+          .refine((t) => t.green < t.amber && t.amber < t.red, "Lights go green, then amber, then red"),
+      )
+      .min(1),
+  })
+  .superRefine((guide, ctx) => {
+    const described = new Set(guide.roles.map((role) => role.slug));
+    guide.sessions.forEach((session, s) =>
+      session.items.forEach((item, i) => {
+        if (item.role && !described.has(item.role)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["sessions", s, "items", i, "role"],
+            message: `Describe the role "${item.role}" in roles`,
+          });
+        }
+      }),
+    );
+  });
+
 export const tableTopicSchema = z.object({
   prompt: z.string().min(1),
 });
@@ -498,6 +601,10 @@ export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
 export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type TableTopic = z.infer<typeof tableTopicSchema>;
+export type MeetingGuide = z.infer<typeof meetingGuideSchema>;
+export type MeetingSession = MeetingGuide["sessions"][number];
+export type MeetingRole = MeetingGuide["roles"][number];
+export type SpeechTiming = MeetingGuide["timing"][number];
 export type Pathways = z.infer<typeof pathwaysSchema>;
 export type Pathway = Pathways["paths"][number];
 export type ImageSlot = z.infer<typeof imageSlotSchema>;

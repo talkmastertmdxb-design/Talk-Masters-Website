@@ -19,10 +19,11 @@ test.describe("home", () => {
     await page.goto("/");
     const strip = page.locator("#workplaces");
     await expect(strip.getByRole("heading", { name: "Where our members work" })).toBeVisible();
-    const names = strip.getByRole("listitem");
     // Two copies make the loop seamless; the second is hidden from assistive tech.
-    await expect(strip.locator("ul:not([aria-hidden])").getByRole("listitem")).toHaveCount(8);
-    await expect(names.filter({ hasText: "IKEA" })).toHaveCount(1);
+    await expect(strip.locator("ul:not([aria-hidden])").getByRole("listitem")).toHaveCount(11);
+    // Each company shows its own logo, named for screen readers.
+    await expect(strip.getByRole("img", { name: "IKEA" })).toHaveCount(1);
+    await expect(strip.getByRole("img", { name: "Bahri & Mazroei Group" })).toBeVisible();
     const animation = await strip
       .locator(".marquee__track")
       .evaluate((el) => getComputedStyle(el).animationName);

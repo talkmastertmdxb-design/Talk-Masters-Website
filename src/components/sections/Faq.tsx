@@ -34,7 +34,7 @@ export function Faq({ tone = "light", showContactLink = true }: FaqProps) {
   const style = tones[tone];
 
   return (
-    <section aria-labelledby="faq-title" className="py-section">
+    <section id="faq" aria-labelledby="faq-title" className="py-section scroll-mt-24">
       <div className="container-site grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <p data-reveal="up" className={`text-eyebrow ${style.eyebrow}`}>

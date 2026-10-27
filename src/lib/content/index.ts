@@ -12,6 +12,7 @@ import cultureJson from "@content/culture.json";
 import pathwaysJson from "@content/pathways.json";
 import tableTopicsJson from "@content/table-topics.json";
 import imagesJson from "@content/images.json";
+import meetingGuideJson from "@content/meeting-guide.json";
 import { createRepository, type ContentRepository } from "./repository";
 import {
   awardSchema,
@@ -21,6 +22,7 @@ import {
   founderSchema,
   historySchema,
   imageSlotSchema,
+  meetingGuideSchema,
   memberSchema,
   officerSchema,
   parseContent,
@@ -45,6 +47,7 @@ export const content: ContentRepository = createRepository({
   pathways: parseContent(pathwaysSchema, pathwaysJson, "content/pathways.json"),
   tableTopics: parseContent(z.array(tableTopicSchema), tableTopicsJson, "content/table-topics.json"),
   imageSlots: parseContent(z.array(imageSlotSchema), imagesJson, "content/images.json"),
+  meetingGuide: parseContent(meetingGuideSchema, meetingGuideJson, "content/meeting-guide.json"),
 });
 
 export type { ContentRepository } from "./repository";

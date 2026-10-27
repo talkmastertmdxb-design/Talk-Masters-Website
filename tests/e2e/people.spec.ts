@@ -240,7 +240,7 @@ test("the footer names the club in Toastmasters terms", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("Members shows the member stories, with LinkedIn and every other profile they shared", async ({
+test("Members shows each member's LinkedIn on their card, with every other profile they shared", async ({
   page,
 }) => {
   await page.goto("/members");
@@ -251,9 +251,10 @@ test("Members shows the member stories, with LinkedIn and every other profile th
     "Suhayb Shaik": "https://www.linkedin.com/in/suhayb-shaik-13985231a",
     "Jasim Eranhole": "https://www.linkedin.com/in/jassim-eranhole-90300b76/",
     "Nabeel Bava": "https://www.linkedin.com/in/nabeel-kizhakkeveettil-001651334",
+    "Noufal Aboobacker": "https://www.linkedin.com/in/noufal-aboobacker/",
   };
   for (const [name, href] of Object.entries(profiles)) {
-    // The closed profile holds a hidden copy of each link; check the one on the card.
+    // LinkedIn sits on the card's photo (the closed profile holds a hidden copy too).
     const link = page
       .getByRole("link", { name: `${name} on LinkedIn (opens in a new tab)` })
       .filter({ visible: true });
@@ -262,16 +263,16 @@ test("Members shows the member stories, with LinkedIn and every other profile th
   }
   await expect(
     page
-      .getByRole("link", { name: "Hadi Abdulkader on YouTube (opens in a new tab)" })
-      .filter({ visible: true }),
+      .getByRole("link", { name: "Hadi Abdulkader on YouTube (opens in a new tab)", includeHidden: true })
+      .first(),
   ).toHaveAttribute("href", "https://www.youtube.com/c/hadiabdulkader");
   await expect(
-    page.getByRole("link", { name: "Prathiba Leo on X (opens in a new tab)" }).filter({ visible: true }),
+    page.getByRole("link", { name: "Prathiba Leo on X (opens in a new tab)", includeHidden: true }).first(),
   ).toHaveAttribute("href", "https://x.com/prathibal");
   await expect(
     page
-      .getByRole("link", { name: "Tarannum Sheikh's website (opens in a new tab)" })
-      .filter({ visible: true }),
+      .getByRole("link", { name: "Tarannum Sheikh's website (opens in a new tab)", includeHidden: true })
+      .first(),
   ).toHaveAttribute("href", "https://activekidsonline.com/");
   expect(await seriousViolations(page)).toEqual([]);
 });

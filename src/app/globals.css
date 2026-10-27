@@ -14,6 +14,7 @@
   --color-gold: #d6b06a;
   --color-gold-hover: #e4c68a;
   --color-signal-green: #3c8d5a;
+  --color-signal-red: #c2414f; /* the timer's red lamp, brighter than maroon so it glows */
 
   /* Neutrals */
   --color-ink: #0b1220;
@@ -382,6 +383,21 @@
       radial-gradient(80% 28% at 65% 62%, rgb(10 90 133 / 0.85) 0%, rgb(10 90 133 / 0) 70%),
       radial-gradient(50% 20% at 20% 55%, rgb(119 36 50 / 0.45) 0%, rgb(119 36 50 / 0) 70%), var(--color-ink);
   }
+  /* Aurora: /meetings hero. Club blue pooling behind the words, gold and maroon ribbons
+     crossing the timing light; a second layer drifts the other way for depth. */
+  .stage-light--meetings .stage-light__flow {
+    background:
+      radial-gradient(55% 40% at 22% 70%, rgb(10 90 133 / 0.85) 0%, rgb(10 90 133 / 0) 70%),
+      radial-gradient(40% 30% at 70% 30%, rgb(0 65 101 / 0.9) 0%, rgb(0 65 101 / 0) 70%),
+      radial-gradient(30% 45% at 92% 75%, rgb(119 36 50 / 0.55) 0%, rgb(119 36 50 / 0) 70%), var(--color-ink);
+  }
+  .stage-light--meetings .stage-light__ribbon {
+    background:
+      radial-gradient(60% 9% at 55% 58%, rgb(214 176 106 / 0.5) 0%, rgb(214 176 106 / 0) 70%),
+      radial-gradient(45% 7% at 35% 40%, rgb(60 141 90 / 0.35) 0%, rgb(60 141 90 / 0) 70%),
+      radial-gradient(50% 8% at 75% 82%, rgb(138 42 59 / 0.45) 0%, rgb(138 42 59 / 0) 70%);
+    rotate: -12deg;
+  }
   /* Ember, the boldest: the 404 page. */
   .stage-light--not-found .stage-light__flow {
     background:
@@ -470,6 +486,12 @@
     }
     .stage-light--menu .stage-light__flow {
       animation: stage-sway 22s ease-in-out infinite alternate;
+    }
+    .stage-light--meetings .stage-light__flow {
+      animation: stage-rise 24s ease-in-out infinite alternate;
+    }
+    .stage-light--meetings .stage-light__ribbon {
+      animation: stage-sway 17s ease-in-out infinite alternate-reverse;
     }
     .stage-light--not-found .stage-light__flow {
       animation: stage-pulse 16s ease-in-out infinite alternate;
@@ -587,6 +609,15 @@
     gap: clamp(3rem, 6vw, 5.5rem);
     padding-right: clamp(3rem, 6vw, 5.5rem);
   }
+  /* Company logos, in their own brand colours. */
+  #workplaces {
+    --logo-scale: 0.78;
+  }
+  @media (min-width: 48rem) {
+    #workplaces {
+      --logo-scale: 1;
+    }
+  }
   @media (prefers-reduced-motion: no-preference) {
     .marquee__track {
       animation: marquee 42s linear infinite;
@@ -599,6 +630,7 @@
     .marquee {
       -webkit-mask-image: none;
       mask-image: none;
+      padding-inline: clamp(1rem, 5vw, 4rem);
     }
     .marquee__track {
       width: auto;
@@ -694,6 +726,301 @@
 
 @layer components {
   /* Slow, small image zoom on card hover (docs/DESIGN.md §6) */
+  /*
+   * /meetings Timing Light: three lamps on a glass column. Each lights in turn, like the
+   * timer's lights through a 5-7 minute speech; under reduced motion green stays lit.
+   */
+  .timing-lamp {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.75rem 2rem 1.75rem 1.75rem;
+    border-radius: 2.5rem;
+    background: rgb(255 255 255 / 0.04);
+    box-shadow: inset 0 0 0 1px var(--color-hairline-dark);
+    backdrop-filter: blur(10px);
+  }
+  .timing-lamp__row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  /* Phones: the column lies down, three lamps side by side under the words. */
+  @media (max-width: 39.99rem) {
+    .timing-lamp {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+      gap: 0.75rem;
+      padding: 1.5rem 1rem;
+      border-radius: 1.75rem;
+    }
+    .timing-lamp__row {
+      flex-direction: column;
+      gap: 0.875rem;
+      text-align: center;
+    }
+  }
+  /* Role photos carry more copy than member cards, so the fade starts higher and goes deeper. */
+  .cast-card__scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(11 18 32 / 0) 12%,
+      rgb(11 18 32 / 0.72) 45%,
+      rgb(11 18 32 / 0.96) 100%
+    );
+  }
+  .cast-row {
+    scrollbar-width: none;
+  }
+  .cast-row:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 4px;
+  }
+  .timing-lamp__bulb {
+    --lamp: var(--color-signal-green);
+    flex: none;
+    width: clamp(3.5rem, 2.5rem + 3vw, 5.25rem);
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--lamp) 16%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lamp) 40%, transparent);
+  }
+  .timing-lamp__bulb--amber {
+    --lamp: var(--color-gold);
+  }
+  .timing-lamp__bulb--red {
+    --lamp: var(--color-signal-red);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .timing-lamp__bulb {
+      animation: lamp-on 14s var(--ease-breath) infinite both;
+    }
+    .timing-lamp__bulb--green {
+      animation-delay: 0.8s;
+    }
+    .timing-lamp__bulb--amber {
+      animation-delay: 4.8s;
+    }
+    .timing-lamp__bulb--red {
+      animation-delay: 8.8s;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .timing-lamp__bulb--green {
+      background: var(--lamp);
+      box-shadow: 0 0 36px 6px color-mix(in srgb, var(--lamp) 55%, transparent);
+    }
+  }
+  @keyframes lamp-on {
+    0%,
+    100% {
+      background: color-mix(in srgb, var(--lamp) 16%, transparent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lamp) 40%, transparent);
+    }
+    3%,
+    27% {
+      background: var(--lamp);
+      box-shadow:
+        0 0 40px 8px color-mix(in srgb, var(--lamp) 60%, transparent),
+        0 0 140px 40px color-mix(in srgb, var(--lamp) 28%, transparent);
+    }
+    31% {
+      background: color-mix(in srgb, var(--lamp) 16%, transparent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lamp) 40%, transparent);
+    }
+  }
+
+  /* /meetings cast: a real checkbox styled as a switch; when on, roles that aren't a good
+     first role step back and the first roles light up in gold. */
+  .cast-toggle {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.875rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .cast-toggle__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .cast-toggle__switch {
+    position: relative;
+    width: 3.25rem;
+    height: 1.875rem;
+    flex: none;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.14);
+    box-shadow: inset 0 0 0 1px var(--color-hairline-dark);
+    transition: background-color 300ms ease;
+  }
+  .cast-toggle__switch::after {
+    content: "";
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1.375rem;
+    height: 1.375rem;
+    border-radius: 9999px;
+    background: #fff;
+    transition: translate 300ms var(--ease-deliver);
+  }
+  .cast-toggle__input:checked + .cast-toggle__switch {
+    background: var(--color-gold);
+  }
+  .cast-toggle__input:checked + .cast-toggle__switch::after {
+    translate: 1.375rem 0;
+  }
+  .cast-toggle__input:focus-visible + .cast-toggle__switch {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  .cast-card {
+    transition:
+      opacity 400ms ease,
+      box-shadow 400ms ease,
+      filter 400ms ease;
+  }
+  .cast:has(.cast-toggle__input:checked) .cast-card[data-first-role="false"] {
+    opacity: 0.28;
+    filter: saturate(0.3);
+  }
+  .cast:has(.cast-toggle__input:checked) .cast-card[data-first-role="true"] {
+    box-shadow:
+      inset 0 0 0 1px var(--color-gold),
+      0 0 48px -8px rgb(214 176 106 / 0.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cast-card,
+    .cast-toggle__switch,
+    .cast-toggle__switch::after {
+      transition: none;
+    }
+  }
+
+  /* /meetings timing lab: the lamp and the panel's glow follow the current light. */
+  .timing-lab {
+    --signal: rgb(255 255 255 / 0.18);
+  }
+  .timing-lab[data-signal="green"] {
+    --signal: var(--color-signal-green);
+  }
+  .timing-lab[data-signal="amber"] {
+    --signal: var(--color-gold);
+  }
+  .timing-lab[data-signal="red"] {
+    --signal: var(--color-signal-red);
+  }
+  .timing-lab__lamp {
+    width: clamp(5rem, 3.5rem + 5vw, 8rem);
+    aspect-ratio: 1;
+    flex: none;
+    border-radius: 9999px;
+    background: var(--signal);
+    box-shadow:
+      0 0 50px 10px color-mix(in srgb, var(--signal) 55%, transparent),
+      0 0 160px 50px color-mix(in srgb, var(--signal) 25%, transparent);
+    transition:
+      background-color 500ms ease,
+      box-shadow 500ms ease;
+  }
+  .timing-lab[data-signal="off"] .timing-lab__lamp {
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2);
+  }
+  .timing-lab__choice {
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.15rem;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    box-shadow: inset 0 0 0 1px var(--color-hairline-dark);
+    cursor: pointer;
+    transition:
+      background-color 300ms ease,
+      box-shadow 300ms ease;
+  }
+  .timing-lab__choice:hover {
+    background: rgb(255 255 255 / 0.05);
+  }
+  .timing-lab__choice:has(input:checked) {
+    background: rgb(214 176 106 / 0.12);
+    box-shadow: inset 0 0 0 1.5px var(--color-gold);
+  }
+  .timing-lab__choice:has(input:focus-visible) {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  .timing-lab__zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    opacity: 0.85;
+  }
+  .timing-lab__zone:last-child {
+    border-radius: 0 9999px 9999px 0;
+  }
+  .timing-lab__range {
+    position: relative;
+    height: 2.75rem;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .timing-lab__range::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    background: #fff;
+    box-shadow: 0 0 0 4px var(--signal);
+  }
+  .timing-lab__range::-moz-range-thumb {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0;
+    border-radius: 9999px;
+    background: #fff;
+    box-shadow: 0 0 0 4px var(--signal);
+  }
+  .timing-lab__range:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 9999px;
+  }
+  .timing-lab__button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .timing-lab__lamp,
+    .timing-lab__choice {
+      transition: none;
+    }
+  }
+
+  /* Member directory card: a dark fade up from the bottom, so the name reads on any photo. */
+  .member-card__scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(11 18 32 / 0) 36%,
+      rgb(11 18 32 / 0.56) 62%,
+      rgb(11 18 32 / 0.94) 100%
+    );
+  }
   .media-zoom img,
   .media-zoom.stage-placeholder {
     transition: scale 1.4s var(--ease-deliver);
@@ -1049,6 +1376,19 @@
     background: var(--social-bg);
     color: #fff;
     box-shadow: none;
+  }
+  /* Over a photo (member cards): a dark glass disc so the outline reads on bright shots. */
+  .social-links--glass .social-btn {
+    background: rgb(11 18 32 / 0.5);
+    backdrop-filter: blur(6px);
+  }
+  .social-links--glass .social-btn:focus-visible {
+    background: var(--social-bg);
+  }
+  @media (max-width: 39.99rem) {
+    .social-links--glass li:not(:first-child) {
+      display: none;
+    }
   }
   .social-btn__icon {
     width: 1.05rem;

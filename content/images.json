@@ -526,7 +526,7 @@
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
     "src": "/images/officer-sergeant-at-arms.webp",
-    "focalPoint": "50% 25%"
+    "focalPoint": "53% 14%"
   },
   {
     "id": "excom-poster",
@@ -562,5 +562,21 @@
     "aspectRatio": "527/746",
     "brief": "The award announcement graphic",
     "src": "/images/award-dcp-points-2025-26.webp"
+  },
+  {
+    "id": "meeting-awards",
+    "alt": "A member holds the Best Speaker trophy and certificate, beside the officers who presented them",
+    "aspectRatio": "4/3",
+    "brief": "Awards at the close of a meeting",
+    "src": "/images/meeting-awards.webp",
+    "focalPoint": "55% 45%"
+  },
+  {
+    "id": "meeting-appreciation",
+    "alt": "A guest speaker receives a Talk-Masters certificate of appreciation beside the club banner",
+    "aspectRatio": "16/9",
+    "brief": "A certificate of appreciation for a guest",
+    "src": "/images/meeting-appreciation.webp",
+    "focalPoint": "50% 40%"
   }
 ]

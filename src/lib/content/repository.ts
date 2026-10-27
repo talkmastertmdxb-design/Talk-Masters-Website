@@ -6,6 +6,7 @@ import type {
   Founder,
   History,
   ImageSlot,
+  MeetingGuide,
   Member,
   Officer,
   Pathways,
@@ -38,6 +39,8 @@ export interface ContentRepository {
   readonly pathways: Pathways;
   readonly tableTopics: readonly TableTopic[];
   readonly imageSlots: readonly ImageSlot[];
+  /** /meetings: a real running order, its roles and the timing lights. */
+  readonly meetingGuide: MeetingGuide;
 }
 
 export type RawContent = {
@@ -74,5 +77,6 @@ export function createRepository(raw: RawContent): ContentRepository {
     pathways: raw.pathways,
     tableTopics: raw.tableTopics,
     imageSlots: raw.imageSlots,
+    meetingGuide: raw.meetingGuide,
   });
 }

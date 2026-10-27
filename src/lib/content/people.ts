@@ -47,6 +47,20 @@ export function clubLine(member: Pick<Member, "memberSince" | "position" | "club
   ].filter((item): item is string => Boolean(item));
 }
 
+/**
+ * The gold line on a directory card: their club role (shortened, "VP Public Relations"), else
+ * the year they joined, else "Member". `since` follows the role where there is room for both.
+ */
+export function cardEyebrow(member: Pick<Member, "position" | "memberSince">): {
+  lead: string;
+  since?: string;
+} {
+  const since = member.memberSince ? `Member since ${member.memberSince}` : undefined;
+  if (!member.position) return { lead: since ?? "Member" };
+  const lead = member.position.replace(/^Vice President\b/, "VP");
+  return since ? { lead, since } : { lead };
+}
+
 /** Club awards have no recipient; member achievements name the member. */
 export function isMemberAchievement(award: Award): boolean {
   return Boolean(award.recipient);

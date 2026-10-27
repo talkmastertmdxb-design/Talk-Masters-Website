@@ -13,9 +13,18 @@
     "cancelled": [],
     "arriveTime": "10:15",
     "guestInfo": [
-      { "kind": "room", "text": "In a room inside the library" },
-      { "kind": "parking", "text": "Free parking on Sundays" },
-      { "kind": "food", "text": "Breakfast included, with a 15-minute break" }
+      {
+        "kind": "room",
+        "text": "In a room inside the library"
+      },
+      {
+        "kind": "parking",
+        "text": "Free parking on Sundays"
+      },
+      {
+        "kind": "food",
+        "text": "Breakfast included, with a 15-minute break"
+      }
     ],
     "venue": "Hor Al Anz Public Library",
     "city": "Dubai",
@@ -50,18 +59,105 @@
     }
   ],
   "socials": [
-    { "network": "instagram", "url": "https://www.instagram.com/talkmastersuae/" },
-    { "network": "linkedin", "url": "https://www.linkedin.com/in/talk-masters-tm-22071837a/" }
+    {
+      "network": "instagram",
+      "url": "https://www.instagram.com/talkmastersuae/"
+    },
+    {
+      "network": "linkedin",
+      "url": "https://www.linkedin.com/in/talk-masters-tm-22071837a/"
+    }
   ],
   "workplaces": [
-    "IKEA",
-    "Amazon",
-    "University of Wollongong in Dubai",
-    "Walmart",
-    "Energy Recovery",
-    "Al Nabooda Automobiles",
-    "Public Speaking Gym",
-    "Active Kids"
+    {
+      "name": "IKEA",
+      "logo": {
+        "src": "/images/logos/ikea.svg",
+        "width": 96,
+        "height": 36,
+        "scale": 0.8
+      }
+    },
+    {
+      "name": "Amazon",
+      "logo": {
+        "src": "/images/logos/amazon.svg",
+        "width": 602,
+        "height": 182
+      }
+    },
+    {
+      "name": "University of Wollongong in Dubai",
+      "logo": {
+        "src": "/images/logos/uowd.svg",
+        "width": 188,
+        "height": 60
+      }
+    },
+    {
+      "name": "Walmart",
+      "logo": {
+        "src": "/images/logos/walmart.svg",
+        "width": 253,
+        "height": 60
+      }
+    },
+    {
+      "name": "Energy Recovery",
+      "logo": {
+        "src": "/images/logos/energy-recovery.svg",
+        "width": 285,
+        "height": 45
+      }
+    },
+    {
+      "name": "Al Nabooda Automobiles",
+      "logo": {
+        "src": "/images/logos/al-nabooda-automobiles.png",
+        "width": 869,
+        "height": 123
+      }
+    },
+    {
+      "name": "Public Speaking Gym",
+      "logo": {
+        "src": "/images/logos/public-speaking-gym.png",
+        "width": 763,
+        "height": 113
+      }
+    },
+    {
+      "name": "Active Kids",
+      "logo": {
+        "src": "/images/logos/active-kids.png",
+        "width": 600,
+        "height": 312
+      }
+    },
+    {
+      "name": "Bahri & Mazroei Group",
+      "logo": {
+        "src": "/images/logos/bahri-mazroei.png",
+        "width": 175,
+        "height": 55
+      }
+    },
+    {
+      "name": "H2O Hospitality",
+      "logo": {
+        "src": "/images/logos/h2o-hospitality.png",
+        "width": 784,
+        "height": 160
+      }
+    },
+    {
+      "name": "The British University in Dubai",
+      "logo": {
+        "src": "/images/logos/british-university-in-dubai.png",
+        "width": 1200,
+        "height": 217
+      }
+    }
   ],
   "stats": [
     {

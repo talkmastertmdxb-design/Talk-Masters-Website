@@ -37,6 +37,15 @@ describe("settingsSchema", () => {
     expect(parsed.stats[0]?.placeholder).toBe(false);
   });
 
+  it("accepts workplaces as names or logos, each listed once", () => {
+    const logo = { src: "/images/logos/acme.png", width: 175, height: 55 };
+    const parse = (workplaces: unknown[]) =>
+      settingsSchema.safeParse({ ...validSettings, workplaces }).success;
+    expect(parse(["IKEA", { name: "Acme", logo }])).toBe(true);
+    expect(parse(["Acme", { name: "acme", logo }])).toBe(false);
+    expect(parse([{ name: "Acme", logo: { ...logo, src: "https://example.com/acme.png" } }])).toBe(false);
+  });
+
   it("needs one to five hero photos, by slot id", () => {
     const withSlides = (heroSlides: string[]) => settingsSchema.safeParse({ ...validSettings, heroSlides });
     expect(withSlides([]).success).toBe(false);

@@ -106,7 +106,7 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
           />
 
           <nav aria-label="Main" className="site-nav hidden md:block">
-            <ul className="flex items-center gap-7 text-[0.9375rem] lg:gap-8">
+            <ul className="flex items-center gap-4 text-[0.875rem] lg:gap-6 lg:text-[0.9375rem] xl:gap-7">
               {items.map((item, index) => (
                 <li key={item.href}>
                   <Link
@@ -127,7 +127,7 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
           <div className="flex items-center gap-3">
             <Link
               href="/join"
-              className="site-bar__chip hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) xl:inline-flex"
+              className="site-bar__chip hover:border-gold bg-ink/45 hidden items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur-md transition-colors duration-(--duration-quick) 2xl:inline-flex"
             >
               <span className="text-white/85">Next meeting</span>
               <span aria-hidden="true" className="bg-gold size-1 rounded-full" />

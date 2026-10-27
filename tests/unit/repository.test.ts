@@ -16,6 +16,7 @@ const base: RawContent = {
   pathways: content.pathways,
   tableTopics: [],
   imageSlots: [],
+  meetingGuide: content.meetingGuide,
 };
 
 const event = (slug: string, startsAt: string, status: "draft" | "published" = "published") => ({

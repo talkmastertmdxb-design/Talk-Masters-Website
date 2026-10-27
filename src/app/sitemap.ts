@@ -5,6 +5,7 @@ import { siteUrl } from "@/lib/site";
 const pages: ReadonlyArray<{ path: string; priority: number }> = [
   { path: "/", priority: 1 },
   { path: "/join", priority: 0.9 },
+  { path: "/meetings", priority: 0.85 },
   { path: "/members", priority: 0.8 },
   { path: "/team", priority: 0.7 },
   { path: "/our-story", priority: 0.7 },

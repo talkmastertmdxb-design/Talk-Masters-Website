@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 /** Each preset is one placement's lighting, defined in globals.css (Stage light). */
 export type StageLightPreset =
-  "teaser" | "join" | "quiz" | "menu" | "not-found" | "mission" | "impact" | "legacy";
+  "teaser" | "join" | "quiz" | "menu" | "not-found" | "mission" | "impact" | "legacy" | "meetings";
 
 interface StageLightProps {
   preset: StageLightPreset;
@@ -39,6 +39,7 @@ export function StageLight({ preset, className = "" }: StageLightProps) {
     >
       <div className="stage-light__flow" />
       {preset === "quiz" && <div className="stage-light__flow stage-light__warm" />}
+      {preset === "meetings" && <div className="stage-light__flow stage-light__ribbon" />}
       <div className="stage-light__grain" />
     </div>
   );

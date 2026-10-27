@@ -2,7 +2,14 @@ import { ArrowUpRight } from "lucide-react";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { ButtonLink } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/ui/SocialLinks";
-import { clubLine, firstName, impactLabels, milestoneLabels, workLine } from "@/lib/content/people";
+import {
+  cardEyebrow,
+  clubLine,
+  firstName,
+  impactLabels,
+  milestoneLabels,
+  workLine,
+} from "@/lib/content/people";
 import type { Member } from "@/lib/content/schemas";
 import { MemberProfile } from "./MemberProfile";
 
@@ -11,8 +18,8 @@ interface MemberDirectoryCardProps {
 }
 
 /**
- * Plan.md member directory card: a compact portrait card that opens into a full-screen
- * profile. One target per card (the photo and name); social links sit below it.
+ * Plan.md member directory card: a portrait card that opens into a full-screen profile.
+ * One target per card; social links live in the profile.
  */
 export function MemberDirectoryCard({ member }: MemberDirectoryCardProps) {
   const work = workLine(member);
@@ -23,36 +30,45 @@ export function MemberDirectoryCard({ member }: MemberDirectoryCardProps) {
     return text ? [{ label, text }] : [];
   });
 
+  const eyebrow = cardEyebrow(member);
+  const hook = member.hook ?? member.headline;
+
+  /**
+   * The photo is the card: name and hook sit on a dark fade over it. Phones show the gold line
+   * and name only (the hook needs width).
+   */
   const card = (
-    <>
+    <span className="rounded-card bg-surface relative block overflow-hidden text-white [--slot-ratio:4/5]">
       {member.imageSlot && (
-        <span className="rounded-card relative block overflow-hidden">
-          <ImageSlot
-            id={member.imageSlot}
-            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 46vw"
-            className="media-zoom"
-          />
-          <span
-            aria-hidden="true"
-            className="text-ink absolute bottom-3 left-3 inline-flex translate-y-2 items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold opacity-0 backdrop-blur-sm transition duration-(--duration-quick) group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100"
-          >
-            View profile
-            <ArrowUpRight className="size-3.5" />
-          </span>
+        <ImageSlot id={member.imageSlot} sizes="(min-width: 900px) 32vw, 46vw" className="media-zoom" />
+      )}
+      <span aria-hidden="true" className="member-card__scrim absolute inset-0" />
+      <span className="absolute inset-x-3.5 bottom-3.5 flex flex-col gap-1 sm:inset-x-6 sm:bottom-6 sm:gap-2 lg:inset-x-7 lg:bottom-7">
+        <span className="text-gold text-[0.6875rem] font-bold tracking-[0.1em] uppercase sm:text-xs sm:tracking-[0.14em]">
+          {eyebrow.lead}
+          {eyebrow.since && <span className="hidden md:inline"> · {eyebrow.since}</span>}
         </span>
-      )}
-      <span id={`${member.slug}-name`} className="mt-4 block font-serif text-xl leading-tight sm:text-2xl">
-        {member.name}
+        <span
+          id={`${member.slug}-name`}
+          className="font-serif text-[1.2rem] leading-[1.12] sm:text-[1.6rem] lg:text-[1.875rem]"
+        >
+          {member.name}
+        </span>
+        {hook && (
+          <span className="hidden text-[0.9375rem] leading-relaxed text-white/80 sm:line-clamp-2">
+            {hook}
+          </span>
+        )}
+        <span className="mt-1 hidden items-center gap-2 text-sm font-semibold opacity-0 transition duration-(--duration-quick) group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none sm:inline-flex [@media(hover:none)]:opacity-100">
+          Read story
+          <ArrowUpRight aria-hidden="true" className="size-4" />
+        </span>
       </span>
-      {member.position && (
-        <span className="text-maroon mt-1 block text-xs font-semibold">{member.position}</span>
-      )}
-      {work && <span className="text-ink-muted mt-1 line-clamp-2 block text-sm">{work}</span>}
-    </>
+    </span>
   );
 
   return (
-    <article id={member.slug} aria-labelledby={`${member.slug}-name`} data-reveal="up">
+    <article id={member.slug} aria-labelledby={`${member.slug}-name`} data-reveal="up" className="relative">
       <MemberProfile
         slug={member.slug}
         name={member.name}
@@ -180,7 +196,12 @@ export function MemberDirectoryCard({ member }: MemberDirectoryCardProps) {
         </div>
       </MemberProfile>
 
-      <SocialLinks links={member.links} name={member.name} className="text-ink/70 mt-4" />
+      {/* Over the photo's corner, beside the card's button (a link can't sit inside it). */}
+      <SocialLinks
+        links={member.links}
+        name={member.name}
+        className="social-links--glass absolute top-3 right-3 z-10 flex-row-reverse text-white sm:top-4 sm:right-4"
+      />
     </article>
   );
 }

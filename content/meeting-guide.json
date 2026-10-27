@@ -1,0 +1,220 @@
+{
+  "example": {
+    "number": 112,
+    "theme": "How to talk to a caveman",
+    "date": "2026-10-25"
+  },
+  "sessions": [
+    {
+      "name": "Before we start",
+      "summary": "Guests are welcomed at the door, signed in and given a seat. Members catch up over coffee.",
+      "items": [
+        {
+          "start": "10:30",
+          "minutes": 15,
+          "title": "Registration, guest welcome and assembly",
+          "role": "greet-master"
+        }
+      ]
+    },
+    {
+      "name": "Opening",
+      "summary": "The gavel comes down at 10:45 sharp. The President welcomes everyone and hands over to the host.",
+      "items": [
+        { "start": "10:45", "minutes": 2, "title": "Call to order", "role": "sergeant-at-arms" },
+        { "start": "10:47", "minutes": 4, "title": "Presidential address", "role": "president" },
+        {
+          "start": "10:51",
+          "minutes": 5,
+          "title": "The host introduces the meeting and its theme",
+          "role": "toastmaster"
+        },
+        { "start": "10:56", "minutes": 1, "title": "Word of the Day", "role": "wordmaster" }
+      ]
+    },
+    {
+      "name": "Prepared speeches",
+      "summary": "Three members give speeches they've planned for weeks, each one a project on their learning path.",
+      "items": [
+        { "start": "10:57", "minutes": 1, "title": "Session introduction", "role": "toastmaster" },
+        {
+          "start": "10:58",
+          "minutes": 7,
+          "title": "Speaker 1: an Ice Breaker, their very first speech",
+          "role": "speaker"
+        },
+        { "start": "11:05", "minutes": 8, "title": "Speaker 2: Level 1, Project 2", "role": "speaker" },
+        { "start": "11:13", "minutes": 8, "title": "Speaker 3: Level 1, Project 2", "role": "speaker" },
+        { "start": "11:21", "minutes": 1, "title": "Timer's report", "role": "timer" },
+        { "start": "11:22", "minutes": 1, "title": "Vote for the best speaker" },
+        { "start": "11:23", "minutes": 3, "title": "Elevator pitch", "role": "elevator-pitch" },
+        { "start": "11:26", "minutes": 10, "title": "Networking break and group photo", "kind": "break" }
+      ]
+    },
+    {
+      "name": "Table Topics",
+      "summary": "Surprise questions, answered on the spot in one to two minutes. Volunteers only, guests welcome.",
+      "items": [
+        { "start": "11:36", "minutes": 4, "title": "Session introduction", "role": "toastmaster" },
+        { "start": "11:40", "minutes": 10, "title": "Table Topics", "role": "table-topics-master" },
+        { "start": "11:50", "minutes": 1, "title": "Timer's report", "role": "timer" },
+        { "start": "11:51", "minutes": 1, "title": "Vote for the best Table Topics speaker" }
+      ]
+    },
+    {
+      "name": "Evaluations",
+      "summary": "Every speaker hears what worked and one thing to try next time, from a member who listened closely.",
+      "items": [
+        { "start": "11:53", "minutes": 1, "title": "Session introduction", "role": "toastmaster" },
+        { "start": "11:54", "minutes": 4, "title": "Evaluator 1 on Speaker 1", "role": "evaluator" },
+        { "start": "11:58", "minutes": 4, "title": "Evaluator 2 on Speaker 2", "role": "evaluator" },
+        { "start": "12:02", "minutes": 4, "title": "Evaluator 3 on Speaker 3", "role": "evaluator" },
+        { "start": "12:06", "minutes": 1, "title": "Timer's report", "role": "timer" },
+        { "start": "12:07", "minutes": 1, "title": "Vote for the best evaluator" },
+        { "start": "12:08", "minutes": 1, "title": "Wordmaster's report", "role": "wordmaster" },
+        { "start": "12:09", "minutes": 3, "title": "Trivia quiz", "role": "trivia-master" },
+        { "start": "12:12", "minutes": 3, "title": "Grammarian's report", "role": "grammarian" }
+      ]
+    },
+    {
+      "name": "Closing",
+      "summary": "A look back at the whole meeting, then trophies, applause and a word from our guests.",
+      "items": [
+        { "start": "12:15", "minutes": 2, "title": "The host's closing words", "role": "toastmaster" },
+        {
+          "start": "12:17",
+          "minutes": 7,
+          "title": "General Evaluator's report",
+          "role": "general-evaluator"
+        },
+        { "start": "12:25", "minutes": 5, "title": "Awards and closing ceremony", "role": "president" },
+        { "start": "12:30", "minutes": 3, "title": "Guest feedback and vote of thanks" }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "slug": "toastmaster",
+      "name": "Toastmaster of the Day",
+      "short": "TMOD",
+      "group": "lead",
+      "text": "The host. Picks the theme, introduces every session and speaker, and keeps the morning flowing from one moment to the next.",
+      "onStage": "On stage all morning",
+      "imageSlot": "pathways-leader"
+    },
+    {
+      "slug": "speaker",
+      "name": "Speaker",
+      "group": "lead",
+      "text": "Delivers a prepared speech, five to seven minutes, that is one project on their Pathways learning path. A first speech, the Ice Breaker, runs four to six.",
+      "onStage": "5–7 minutes",
+      "imageSlot": "agenda-prepared-speeches"
+    },
+    {
+      "slug": "evaluator",
+      "name": "Evaluator",
+      "group": "lead",
+      "text": "Listens to one speaker, then gives two to three minutes of kind, specific feedback: what worked, and one thing to try next time.",
+      "onStage": "2–3 minutes",
+      "imageSlot": "agenda-evaluations"
+    },
+    {
+      "slug": "table-topics-master",
+      "name": "Table Topics Master",
+      "group": "lead",
+      "text": "Prepares surprise questions on the theme and invites volunteers to answer them on the spot, in one to two minutes each.",
+      "onStage": "10 minutes",
+      "imageSlot": "agenda-table-topics"
+    },
+    {
+      "slug": "general-evaluator",
+      "name": "General Evaluator",
+      "group": "lead",
+      "text": "Evaluates the meeting itself: the evaluators, the roles, the timing and the energy in the room. Leads the evaluation team.",
+      "onStage": "7 minutes"
+    },
+    {
+      "slug": "timer",
+      "name": "Timer",
+      "group": "functionary",
+      "text": "Times every speech and shows green, amber and red lights, so speakers know where they are without looking at a clock. Then reports the times.",
+      "onStage": "1 minute per report",
+      "firstRole": true
+    },
+    {
+      "slug": "grammarian",
+      "name": "Grammarian",
+      "group": "functionary",
+      "text": "Listens for the best phrases of the day, and for the ums and ahs. Reports both, kindly, near the end.",
+      "onStage": "3 minutes"
+    },
+    {
+      "slug": "wordmaster",
+      "name": "Wordmaster",
+      "group": "functionary",
+      "text": "Opens with a Word of the Day for everyone to try in their speeches, then reports who used it, and how well.",
+      "onStage": "1 minute, twice",
+      "firstRole": true
+    },
+    {
+      "slug": "trivia-master",
+      "name": "Trivia Master",
+      "group": "functionary",
+      "text": "Asks the room quick questions about what was said that morning. It keeps everyone listening, and it's fun.",
+      "onStage": "3 minutes",
+      "firstRole": true
+    },
+    {
+      "slug": "elevator-pitch",
+      "name": "Elevator Pitch",
+      "group": "functionary",
+      "text": "Two minutes on who you are and what you do. The best practice there is for networking, interviews and introductions.",
+      "onStage": "2 minutes",
+      "firstRole": true
+    },
+    {
+      "slug": "sergeant-at-arms",
+      "name": "Sergeant at Arms",
+      "short": "SAA",
+      "group": "officer",
+      "text": "Sets up the room, calls the meeting to order at 10:45, and makes sure everything is where it should be."
+    },
+    {
+      "slug": "president",
+      "name": "President",
+      "group": "officer",
+      "text": "Welcomes everyone with a short address, and presents the awards at the close."
+    },
+    {
+      "slug": "greet-master",
+      "name": "Greet Master",
+      "group": "support",
+      "text": "Meets guests at the door, signs them in and finds them a seat.",
+      "firstRole": true
+    },
+    {
+      "slug": "shoot-master",
+      "name": "Shoot Master",
+      "group": "support",
+      "text": "Takes the photos, from the first speech to the group photo."
+    },
+    {
+      "slug": "reel-master",
+      "name": "Reel Master",
+      "group": "support",
+      "text": "Films the moments that become the club's reels and stories."
+    }
+  ],
+  "timing": [
+    { "label": "Ice Breaker", "detail": "A member's first speech", "green": 240, "amber": 300, "red": 360 },
+    {
+      "label": "Prepared speech",
+      "detail": "Every speech after that",
+      "green": 300,
+      "amber": 360,
+      "red": 420
+    },
+    { "label": "Evaluation", "detail": "Feedback on one speech", "green": 120, "amber": 150, "red": 180 },
+    { "label": "Table Topic", "detail": "An answer on the spot", "green": 60, "amber": 90, "red": 120 }
+  ]
+}

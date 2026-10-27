@@ -5,6 +5,7 @@
     "position": "President",
     "occupation": "Sales Manager – Middle East",
     "organisation": "Energy Recovery Inc.",
+    "hook": "From technical talks to leading the whole club",
     "segment": "officer",
     "challenge": "He was comfortable in technical and business discussions, yet not always sure his words were landing the way he intended.",
     "transformation": "Today he serves as President of Talk-Masters and leads the club with confidence, speaking to audiences with clarity and purpose.",
@@ -293,6 +294,7 @@
     "position": "Treasurer",
     "occupation": "Job Controller",
     "organisation": "Al Nabooda Automobiles, Volkswagen Aftersales",
+    "hook": "From nervous around senior leaders to speaking up in any room",
     "links": [
       {
         "network": "linkedin",
@@ -335,6 +337,64 @@
     "clubHighlights": ["Executive Committee 2026–27", "Toastmaster of the Day, Meeting #105"],
     "memberSince": 2021,
     "imageSlot": "officer-treasurer",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
+  },
+  {
+    "slug": "noufal-aboobacker",
+    "name": "Noufal Aboobacker",
+    "position": "Sergeant at Arms",
+    "occupation": "IT Engineer",
+    "organisation": "Bahri & Mazroei Group",
+    "hook": "Guest in 2020, member in 2025, now running meetings",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/noufal-aboobacker/"
+      }
+    ],
+    "segment": "officer",
+    "challenge": "Fear and a lack of confidence held Noufal back when speaking in front of people, and turning thoughts from Malayalam into English quickly made it harder still.",
+    "transformation": "Today Noufal conducts meetings, coordinates role players, and serves as the club's Sergeant at Arms.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "First attended Talk-Masters as a guest in 2020."
+      },
+      {
+        "milestone": "other",
+        "text": "Joined the club in August 2025, with a simple goal: to improve English and become more confident."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Took on Table Topics Master, Zoom Master of the Day and Sergeant at Arms, and served as Toastmaster of the Day for Meeting #106."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Now serving as the club's Sergeant at Arms for 2026–27."
+      },
+      {
+        "milestone": "first-speech",
+        "text": "Working through Level 2 speeches in the Dynamic Leadership path."
+      }
+    ],
+    "impact": {
+      "career": "As an IT professional, I have technical knowledge and experience, but I realised that technical skills alone are not enough to grow in a career. We also need to communicate our ideas clearly, share our opinions confidently, and explain technical problems to different people.",
+      "confidence": "Today, I may still feel nervous, and I may still make mistakes, but I no longer see them as reasons to stop speaking.",
+      "leadership": "By taking on roles such as Table Topics Master, Toastmaster of the Day, Zoom Master of the Day, and Sergeant at Arms, I am getting opportunities to take responsibility, coordinate with people, listen to different opinions, and help meetings run smoothly."
+    },
+    "advice": "Please don't make the same mistake I made by waiting for years before joining Talk-Masters. Don't wait for the perfect moment. Take the first step today. Come, join us, participate in the activities, take up roles, and experience the energy, positivity, and encouragement this club offers.",
+    "story": "Noufal first came to Talk-Masters as a guest in 2020, but only joined in 2025. \"Instead of focusing on the five years I missed, I am grateful that I finally took that first step.\" The energy, encouragement and support of fellow members are helping Noufal grow more confident at work and at home, and discover that the club is not just a place to improve speaking skills, but a place to find one's potential.",
+    "contribution": "A steady presence who sets the room for every meeting as Sergeant at Arms, and says yes to roles, from Zoom Master to Toastmaster of the Day.",
+    "clubHighlights": [
+      "Executive Committee 2026–27",
+      "Toastmaster of the Day, Meeting #106",
+      "Level 2, Dynamic Leadership"
+    ],
+    "memberSince": 2025,
+    "imageSlot": "officer-sergeant-at-arms",
     "consent": true,
     "spotlight": false,
     "status": "published",
