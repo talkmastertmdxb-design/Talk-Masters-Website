@@ -252,8 +252,8 @@ export const memberSchema = z.object({
    * e.g. "Mechanical engineer, now a public speaking trainer". Members without one aren't shown there.
    */
   headline: z.string().min(1).max(70).optional(),
-  /** One line on their directory card, over the photo. Falls back to `headline`. */
-  hook: z.string().min(1).max(70).optional(),
+  /** One line on their directory card, over the photo (three lines at most). Falls back to `headline`. */
+  hook: z.string().min(1).max(80).optional(),
   /** Public profiles the member chose to share, shown in this order. One per network. */
   links: profileLinks,
   /** For the future directory filter. */

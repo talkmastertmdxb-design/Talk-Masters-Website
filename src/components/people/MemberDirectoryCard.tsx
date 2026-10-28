@@ -55,7 +55,7 @@ export function MemberDirectoryCard({ member }: MemberDirectoryCardProps) {
           {member.name}
         </span>
         {hook && (
-          <span className="hidden text-[0.9375rem] leading-relaxed text-white/80 sm:line-clamp-2">
+          <span className="hidden text-[0.9375rem] leading-relaxed text-white/80 sm:line-clamp-3">
             {hook}
           </span>
         )}
