@@ -16,7 +16,7 @@ const treatments = [
  * visual weight: a 4:1 logo is 40px tall, and the clamp keeps the extremes in proportion.
  */
 const LOGO_AREA = 40 * 160;
-const LOGO_HEIGHT = { min: 26, max: 52 } as const;
+const LOGO_HEIGHT = { min: 26, max: 60 } as const;
 
 function logoHeight(width: number, height: number, scale = 1): number {
   const ideal = Math.sqrt(LOGO_AREA / (width / height)) * scale;

@@ -20,7 +20,7 @@ test.describe("home", () => {
     const strip = page.locator("#workplaces");
     await expect(strip.getByRole("heading", { name: "Where our members work" })).toBeVisible();
     // Two copies make the loop seamless; the second is hidden from assistive tech.
-    await expect(strip.locator("ul:not([aria-hidden])").getByRole("listitem")).toHaveCount(11);
+    await expect(strip.locator("ul:not([aria-hidden])").getByRole("listitem")).toHaveCount(10);
     // Each company shows its own logo, named for screen readers.
     await expect(strip.getByRole("img", { name: "IKEA" })).toHaveCount(1);
     await expect(strip.getByRole("img", { name: "Bahri & Mazroei Group" })).toBeVisible();

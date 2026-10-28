@@ -79,26 +79,10 @@
       }
     },
     {
-      "name": "Amazon",
-      "logo": {
-        "src": "/images/logos/amazon.svg",
-        "width": 602,
-        "height": 182
-      }
-    },
-    {
       "name": "University of Wollongong in Dubai",
       "logo": {
         "src": "/images/logos/uowd.svg",
         "width": 188,
-        "height": 60
-      }
-    },
-    {
-      "name": "Walmart",
-      "logo": {
-        "src": "/images/logos/walmart.svg",
-        "width": 253,
         "height": 60
       }
     },
@@ -156,6 +140,14 @@
         "src": "/images/logos/british-university-in-dubai.png",
         "width": 1200,
         "height": 217
+      }
+    },
+    {
+      "name": "TiE Dubai",
+      "logo": {
+        "src": "/images/logos/tie-dubai.png",
+        "width": 254,
+        "height": 258
       }
     }
   ],
