@@ -36,13 +36,13 @@ test.describe("home", () => {
     await expect(
       faces.getByRole("heading", { name: "Engineers, educators, founders, first-timers." }),
     ).toBeVisible();
-    await expect(faces.getByRole("listitem")).toHaveCount(5);
+    await expect(faces.getByRole("listitem")).toHaveCount(6);
     await expect(faces).toContainText("Mechanical engineer, now a public speaking trainer");
     await expect(faces.getByRole("link", { name: "Hadi Abdulkader" })).toHaveAttribute(
       "href",
       "/members#hadi-abdulkader",
     );
-    await expect(faces.locator("[data-image-slot] img")).toHaveCount(5);
+    await expect(faces.locator("[data-image-slot] img")).toHaveCount(6);
     await expect(page.getByText("Real People. Real Growth.")).toHaveCount(0);
   });
 

@@ -250,6 +250,12 @@ describe("cardEyebrow (member directory card)", () => {
     });
   });
 
+  it("drops the join year after a long role, so the line fits on one row", () => {
+    expect(cardEyebrow({ position: "Immediate Past President", memberSince: 2018 })).toEqual({
+      lead: "Immediate Past President",
+    });
+  });
+
   it("falls back to the join year, then to plain 'Member'", () => {
     expect(cardEyebrow({ memberSince: 2021 })).toEqual({ lead: "Member since 2021" });
     expect(cardEyebrow({})).toEqual({ lead: "Member" });

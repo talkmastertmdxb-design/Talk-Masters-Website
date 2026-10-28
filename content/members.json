@@ -423,5 +423,59 @@
     "spotlight": false,
     "status": "published",
     "placeholder": false
+  },
+  {
+    "slug": "edwin-sunny",
+    "name": "Edwin Sunny",
+    "position": "Immediate Past President",
+    "occupation": "Sales Director",
+    "organisation": "H2O Hospitality",
+    "headline": "Sales engineer, now Sales Director at H2O Hospitality",
+    "hook": "From backbencher to Sales Director, one meeting at a time",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/edwin-m-sunny-aa9a7053/"
+      }
+    ],
+    "segment": "officer",
+    "challenge": "A self-described backbencher at school and college, Edwin started out in Dubai as a Sales Engineer, caught between demanding clients and sales targets, while colleagues who spoke up in meetings took the credit for his hard work.",
+    "transformation": "Today he is Sales Director at H2O Hospitality, closing deals and leading meetings with the voice he once kept to himself.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Came to his first Talk-Masters meeting in 2018 at a friend's invitation, and paid his membership fee on the spot."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Took on his first club role as Vice President Membership."
+      },
+      {
+        "milestone": "other",
+        "text": "Rose from Sales Engineer to Assistant Manager, Manager and Senior Manager over 13 years at Samsotech, earning a promotion every two years."
+      },
+      {
+        "milestone": "other",
+        "text": "Became Sales Director at H2O Hospitality, leading the delivery of hospitality software such as online check-in and CRM systems."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Serves the club today as its Immediate Past President."
+      }
+    ],
+    "impact": {
+      "career": "The professional results were immediate. I began closing deals with confidence, leading internal management meetings and changing how people in the company saw me. Over 13 years at Samsotech, I earned a promotion every two years, rising from Sales Engineer to Senior Manager and, in the end, overtaking my own seniors.",
+      "confidence": "Talk-Masters gave me a warm, empowering environment that taught me to think on my feet, organise my thoughts and speak with impact. For someone who grew up on the back bench, it was a true transformation."
+    },
+    "advice": "Public speaking training is a powerful catalyst for professional growth, so visit our club at least once. You'll find an inclusive, high-energy room that welcomes everyone, whatever your current skill level. Join us, sharpen your speaking skills and test your mettle in front of a larger audience.",
+    "story": "Edwin landed in Dubai with great hopes and high ambitions, in a city of glittering skyscrapers. In 2018 a friend invited him to Talk-Masters. Inspired by Richard Branson's advice to say yes to great opportunities and work out the details later, he paid his membership fee that same day. “It was a journey of true human transformation.”",
+    "contribution": "Eight years of club experience, from his first role as Vice President Membership to Immediate Past President, and living proof of what one “yes” can change.",
+    "clubHighlights": ["First role: VP Membership"],
+    "memberSince": 2018,
+    "imageSlot": "member-edwin",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
   }
 ]

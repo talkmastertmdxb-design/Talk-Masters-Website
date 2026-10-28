@@ -578,5 +578,13 @@
     "brief": "A certificate of appreciation for a guest",
     "src": "/images/meeting-appreciation.webp",
     "focalPoint": "50% 40%"
+  },
+  {
+    "id": "member-edwin",
+    "alt": "Edwin Sunny, smiling, in a navy blazer",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/member-edwin.webp",
+    "focalPoint": "50% 35%"
   }
 ]

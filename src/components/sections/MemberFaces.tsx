@@ -24,7 +24,7 @@ export function MemberFaces() {
 
         <ul
           data-reveal="stagger"
-          className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 md:mt-16 lg:grid-cols-5"
+          className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 md:mt-16 lg:grid-cols-6"
         >
           {members.map((member) => (
             <li key={member.slug} className="group relative flex flex-col gap-3">
@@ -33,7 +33,7 @@ export function MemberFaces() {
                   id={member.imageSlot!}
                   variant="backdrop"
                   tone="full"
-                  sizes="(min-width: 1280px) 18vw, (min-width: 640px) 30vw, 45vw"
+                  sizes="(min-width: 1280px) 15vw, (min-width: 640px) 30vw, 45vw"
                   className="media-zoom"
                 />
               </div>

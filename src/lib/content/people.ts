@@ -49,8 +49,11 @@ export function clubLine(member: Pick<Member, "memberSince" | "position" | "club
 
 /**
  * The gold line on a directory card: their club role (shortened, "VP Public Relations"), else
- * the year they joined, else "Member". `since` follows the role where there is room for both.
+ * the year they joined, else "Member". `since` follows the role where there is room for both:
+ * a long role ("Immediate Past President") stands alone so the line never wraps.
  */
+const EYEBROW_ROOM = 20;
+
 export function cardEyebrow(member: Pick<Member, "position" | "memberSince">): {
   lead: string;
   since?: string;
@@ -58,7 +61,7 @@ export function cardEyebrow(member: Pick<Member, "position" | "memberSince">): {
   const since = member.memberSince ? `Member since ${member.memberSince}` : undefined;
   if (!member.position) return { lead: since ?? "Member" };
   const lead = member.position.replace(/^Vice President\b/, "VP");
-  return since ? { lead, since } : { lead };
+  return since && lead.length <= EYEBROW_ROOM ? { lead, since } : { lead };
 }
 
 /** Club awards have no recipient; member achievements name the member. */
