@@ -107,7 +107,7 @@ test("a Spotlight 'Read more' link opens that member's profile, with its portrai
   await expect(portrait).toHaveAttribute("loading", "eager");
   await expect(portrait).toHaveAttribute("fetchpriority", "high");
   await expect(profile.getByRole("list", { name: "At Talk-Masters" })).toContainText(
-    "Panel moderator, 100th meeting",
+    "Moderator, She Leads panel, 2025",
   );
 });
 

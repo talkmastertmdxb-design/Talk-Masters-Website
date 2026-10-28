@@ -110,8 +110,10 @@
   {
     "slug": "prathiba-leo",
     "name": "Prathiba Leo",
-    "occupation": "TEDx speaker and business communication coach",
-    "headline": "Writer, now a TEDx speaker and communication coach",
+    "occupation": "Head of Programs & Impact",
+    "organisation": "TiE Dubai",
+    "headline": "TEDx speaker and communication coach at TiE Dubai",
+    "hook": "A TEDx speaker who decided to join within two minutes",
     "links": [
       {
         "network": "linkedin",
@@ -127,36 +129,58 @@
       }
     ],
     "segment": "professional",
-    "challenge": "Before the stage, her voice lived on the page: a writer with an MBA from the University of Madras and corporate roles at Amazon and Walmart.",
-    "transformation": "Today she is a TEDx speaker and business communication coach in Dubai, helping professionals and teams speak with clarity.",
+    "challenge": "Already a TEDx speaker and an active public speaker, Prathiba was looking for a place to keep sharpening the craft, try different formats and learn among people who enjoy communication.",
+    "transformation": "Today Talk-Masters is where Prathiba practises what a communication coach preaches: speaking, evaluating, moderating and hosting, within a network that keeps growing.",
     "journey": [
       {
         "milestone": "first-meeting",
-        "text": "Began her Toastmasters journey at another club, before making Talk-Masters her home in Dubai."
+        "text": "Began a Toastmasters journey in India in 2020, then took a pause after moving to Dubai."
       },
       {
         "milestone": "other",
         "text": "Spoke at TEDxChennaiInstituteOfTechnology, invited under the theme of empowered women."
       },
       {
+        "milestone": "other",
+        "text": "Came to Talk-Masters in 2025 as a guest speaker for CareerNova, delivering a masterclass on “Selling Yourself”, and decided to join within two minutes."
+      },
+      {
         "milestone": "leadership-role",
-        "text": "Moderated the \"Real Transformers\" panel at Talk-Masters' 100th meeting."
+        "text": "Served as Club Treasurer, and took up roles such as Evaluator and Toastmaster of the Day."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Moderated the panel discussion at She Leads – Where Every Woman Is a Leader, in September 2025: a conversation people still talk about."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Moderated the “Real Transformers” panel at Talk-Masters' 100th meeting."
+      },
+      {
+        "milestone": "other",
+        "text": "Conducts masterclasses, visits other clubs across Dubai, and is working towards completing a first path, Visionary Communication."
       }
     ],
     "impact": {
-      "career": "Built a coaching practice in business communication, offering one-to-one coaching and team training.",
-      "confidence": "Went from writing about ideas to delivering them on a TEDx stage.",
-      "leadership": "Leads panels and trains teams to communicate with clarity."
+      "career": "Toastmasters gives me a consistent space to practise the skills at the centre of my professional life: public speaking, moderation, facilitation, storytelling and leadership communication. It has also strengthened my visibility and credibility as a communication coach and public speaker.",
+      "confidence": "For me, confidence was never simply about being able to stand on a stage. Toastmasters has helped me become a more versatile and intentional communicator. Whether I am delivering a prepared speech, evaluating someone, moderating a panel, taking up an impromptu role or addressing a completely new audience, every experience stretches a slightly different communication muscle.",
+      "leadership": "Serving as Treasurer and taking up different club responsibilities has let me experience leadership beyond my professional role. It has taught me to contribute to a community, support other speakers, give constructive feedback, coordinate with people and, sometimes, simply step up when something needs to be done.",
+      "networking": "I have found an incredible network of people from completely different professions, industries and walks of life. It keeps widening every time I attend a meeting, visit another club or take part in an event, and it has exposed me to perspectives and conversations I might otherwise never have encountered."
     },
-    "advice": "Write it down first. Clear writing is the fastest way to clear speaking.",
-    "story": "Toastmasters has travelled with Prathiba, from another club to her home at Talk-Masters. Here she gives back what those rooms gave her, encouraging first-time speakers to trust their own voice.",
-    "contribution": "Experience from the TEDx stage, and a moderator's gift for drawing people out.",
-    "clubHighlights": ["Panel moderator, 100th meeting"],
+    "advice": "Just come in and immerse yourself in the experience. You don't need to know exactly what Toastmasters is, or wonder whether you are “good enough” to be there. Observe, participate, speak to people and experience the room. Sometimes, as it did for me, it might take just two minutes to realise you have found your people.",
+    "story": "Prathiba first walked into Talk-Masters in 2025 as a guest speaker, delivering a masterclass on “Selling Yourself” at CareerNova. It took two minutes to decide to join. “There was something almost enigmatic about the vibe of Talk-Masters: the energy, the warmth and, most importantly, the people.” Since then, the club has become family, and a reminder that no matter how much you speak professionally, there is always something new to learn, practise and improve.",
+    "contribution": "A TEDx speaker's craft and a professional moderator's gift for drawing people out, shared through masterclasses, panels and meeting roles.",
+    "clubHighlights": [
+      "Former Club Treasurer",
+      "Moderator, She Leads panel, 2025",
+      "Visionary Communication path"
+    ],
+    "memberSince": 2025,
     "imageSlot": "member-prathiba",
     "consent": true,
     "spotlight": true,
     "status": "published",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "tarannum-sheikh",
