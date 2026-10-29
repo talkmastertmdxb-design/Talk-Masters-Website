@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { agenda, agendaClock, activeAgendaIndex, meridiem, swipeProgress } from "@/lib/motion/agenda";
 import { SPEECH, TABLE_TOPIC, timingSignal } from "@/lib/motion/timing";
-import { nextTopicIndex, ringOffset } from "@/lib/booth/booth";
 
 describe("agenda (Inside a meeting)", () => {
   it("follows the meeting order from the plan", () => {
@@ -56,7 +55,7 @@ describe("swipeProgress (the agenda row on phones)", () => {
   });
 });
 
-describe("Table Topics booth", () => {
+describe("Table Topics timing", () => {
   it("uses Table Topics timing: green at 1:00, amber at 1:30, red at 2:00", () => {
     expect(TABLE_TOPIC).toEqual({ green: 60, amber: 90, red: 120 });
     expect(timingSignal(59, TABLE_TOPIC)).toBe("off");
@@ -67,27 +66,5 @@ describe("Table Topics booth", () => {
 
   it("still defaults to speech timing", () => {
     expect(timingSignal(SPEECH.green)).toBe("green");
-  });
-
-  it("never gives the same topic twice in a row", () => {
-    expect(nextTopicIndex(3, 10, () => 0.35)).not.toBe(3);
-    for (let r = 0; r < 1; r += 0.05) {
-      const next = nextTopicIndex(4, 10, () => r);
-      expect(next).not.toBe(4);
-      expect(next).toBeGreaterThanOrEqual(0);
-      expect(next).toBeLessThan(10);
-    }
-  });
-
-  it("handles the first pick and a single-topic list", () => {
-    expect(nextTopicIndex(null, 5, () => 0.99)).toBe(4);
-    expect(nextTopicIndex(0, 1, () => 0.5)).toBe(0);
-  });
-
-  it("fills the countdown ring as time passes", () => {
-    const circumference = 100;
-    expect(ringOffset(0, 120, circumference)).toBe(100);
-    expect(ringOffset(60, 120, circumference)).toBe(50);
-    expect(ringOffset(200, 120, circumference)).toBe(0);
   });
 });

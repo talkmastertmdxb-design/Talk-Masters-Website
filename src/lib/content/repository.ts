@@ -11,7 +11,6 @@ import type {
   Officer,
   Pathways,
   Settings,
-  TableTopic,
   Testimonial,
 } from "./schemas";
 
@@ -37,7 +36,6 @@ export interface ContentRepository {
   readonly culture: readonly CultureCard[];
   /** Toastmasters Pathways, who the club is for, and the path quiz. */
   readonly pathways: Pathways;
-  readonly tableTopics: readonly TableTopic[];
   readonly imageSlots: readonly ImageSlot[];
   /** /meetings: a real running order, its roles and the timing lights. */
   readonly meetingGuide: MeetingGuide;
@@ -75,7 +73,6 @@ export function createRepository(raw: RawContent): ContentRepository {
     faqs: raw.faqs,
     culture: raw.culture,
     pathways: raw.pathways,
-    tableTopics: raw.tableTopics,
     imageSlots: raw.imageSlots,
     meetingGuide: raw.meetingGuide,
   });

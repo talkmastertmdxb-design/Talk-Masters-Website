@@ -9,13 +9,13 @@ import { MemberFaces } from "@/components/sections/MemberFaces";
 import { MemberVoices } from "@/components/sections/MemberVoices";
 import { PathwaysTeaser } from "@/components/sections/PathwaysTeaser";
 import { WhoItsFor } from "@/components/sections/WhoItsFor";
-import { TableTopicsBooth } from "@/components/sections/TableTopicsBooth";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Workplaces } from "@/components/sections/Workplaces";
 
 /**
  * The home page is a speech (docs/IMPLEMENTATION_PLAN.md §1.1, SCROLL_ANIMATION_SYSTEM.md).
  * Opening: Hero, Manifesto (with the mission), Who it's for, Member Voices (video).
- * How you'll grow: Pathways teaser after Inside a Meeting. Body: Overcome the Fear, Inside a Meeting, Table Topics Booth,
+ * How you'll grow: Pathways teaser after Inside a Meeting. Body: Overcome the Fear, Inside a Meeting,
  * Member Faces. Close: Executive Committee, the guests' questions, then the final CTA in the footer.
  * Where our members work sits right under the hero, as proof before the story begins.
  * Still to come (Phase 6): stacked statement, impact metrics, journey, events.
@@ -31,8 +31,8 @@ export default function Home() {
       <FearStory />
       <InsideMeeting />
       <PathwaysTeaser />
-      <TableTopicsBooth />
       <MemberFaces />
+      <Testimonials />
       <ExecutiveCommittee />
       <Faq />
     </RevealScope>

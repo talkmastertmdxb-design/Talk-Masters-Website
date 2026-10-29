@@ -14,7 +14,6 @@ const base: RawContent = {
   faqs: [],
   culture: [],
   pathways: content.pathways,
-  tableTopics: [],
   imageSlots: [],
   meetingGuide: content.meetingGuide,
 };

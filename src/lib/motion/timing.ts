@@ -1,6 +1,6 @@
 /**
  * Toastmasters timing lights: green at the minimum time, amber halfway, red at the
- * maximum. Used by the Table Topics booth's stopwatch.
+ * maximum.
  */
 
 export type TimingSignal = "off" | "green" | "amber" | "red";

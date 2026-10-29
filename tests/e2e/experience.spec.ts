@@ -19,8 +19,8 @@ test.describe("signature moments", () => {
       "Talk-Masters is where nervous first words become confident speeches.",
       "Nervous about speaking? So was everyone here.",
       "What happens on a Sunday morning",
-      "Your first Table Topic, right here.",
       "Engineers, educators, founders, first-timers.",
+      "In our members’ words",
       "The people who run the room, 2026–27",
       "Ready to become a better speaker?",
     ];
@@ -67,19 +67,6 @@ test.describe("signature moments", () => {
     await expect(clock).toHaveText("12:15");
     await expect(section.locator("[data-agenda-meridiem]").filter({ visible: true })).toHaveText("pm");
     await expect(section.locator(".agenda")).toHaveCSS("--agenda-progress", "1");
-  });
-
-  test("the Table Topics booth gives a topic and starts the timer", async ({ page }) => {
-    await page.goto("/");
-    const booth = page.locator(".booth");
-    await booth.scrollIntoViewIfNeeded();
-    const start = booth.getByRole("button", { name: "Start speaking" });
-    await expect(start).toBeDisabled();
-    await booth.getByRole("button", { name: "Give me a topic" }).click();
-    await expect(booth.getByText("Press “Give me a topic”")).toHaveCount(0);
-    await start.click();
-    await expect(booth.getByRole("button", { name: "Pause" })).toBeVisible();
-    await expect(booth.getByRole("timer")).not.toHaveText("0:00", { timeout: 3000 });
   });
 });
 

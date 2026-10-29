@@ -551,10 +551,6 @@ export const meetingGuideSchema = z
     );
   });
 
-export const tableTopicSchema = z.object({
-  prompt: z.string().min(1),
-});
-
 const unsplashImage = /^https:\/\/images\.unsplash\.com\/photo-[\w-]+(\?[\w=&.%-]*)?$/;
 
 export const imageSlotSchema = z.object({
@@ -600,7 +596,6 @@ export type Testimonial = z.infer<typeof testimonialSchema>;
 export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
 export type CultureCard = z.infer<typeof cultureSchema>[number];
-export type TableTopic = z.infer<typeof tableTopicSchema>;
 export type MeetingGuide = z.infer<typeof meetingGuideSchema>;
 export type MeetingSession = MeetingGuide["sessions"][number];
 export type MeetingRole = MeetingGuide["roles"][number];

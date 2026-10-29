@@ -652,6 +652,45 @@
     }
   }
 
+  /* Testimonials: quote columns drifting vertically, faded at the top and bottom edges. */
+  .voices {
+    display: grid;
+    gap: 1rem;
+    height: clamp(32rem, 70vh, 42rem);
+  }
+  @media (min-width: 48rem) {
+    .voices {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .voices__window {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+  }
+  .voices__half {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .voices__track {
+      animation: voices var(--voices-duration, 40s) linear infinite;
+    }
+    .voices__track--reverse {
+      animation-direction: reverse;
+    }
+    .voices:hover .voices__track {
+      animation-play-state: paused;
+    }
+  }
+  @keyframes voices {
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
   /* Underline that draws in from the left */
   .nav-link {
     background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
@@ -1113,58 +1152,6 @@
   }
   .slider-btn:disabled {
     opacity: 0.35;
-  }
-
-  /* Table Topics booth (Animations 13-14): the light drives every colour */
-  .booth {
-    --signal: rgb(255 255 255 / 0.25);
-  }
-  .booth[data-signal="green"] {
-    --signal: var(--color-signal-green);
-  }
-  .booth[data-signal="amber"] {
-    --signal: var(--color-gold);
-  }
-  .booth[data-signal="red"] {
-    --signal: var(--color-maroon-hover);
-  }
-  .booth-ring {
-    stroke: var(--signal);
-    transition:
-      stroke var(--duration-quick) var(--ease-deliver),
-      stroke-dashoffset 200ms linear;
-  }
-  .booth-lamp {
-    background: var(--signal);
-    box-shadow: 0 0 18px 4px var(--signal);
-    transition:
-      background-color var(--duration-quick),
-      box-shadow var(--duration-quick);
-  }
-  .booth-btn {
-    display: inline-flex;
-    min-height: 2.75rem;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 999px;
-    border: 1px solid rgb(255 255 255 / 0.2);
-    padding-inline: 1.25rem;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    transition: border-color var(--duration-quick);
-  }
-  .booth-btn:hover:not(:disabled) {
-    border-color: var(--color-gold);
-  }
-  .booth-btn:disabled {
-    opacity: 0.4;
-  }
-  .booth-btn-primary {
-    border-color: transparent;
-    background: var(--color-maroon);
-  }
-  .booth-btn-primary:hover:not(:disabled) {
-    background: var(--color-maroon-hover);
   }
 }
 
