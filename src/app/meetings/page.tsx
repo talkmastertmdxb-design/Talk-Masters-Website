@@ -94,11 +94,11 @@ export default function MeetingsPage() {
             </figure>
             <figure data-reveal="image" className="[--slot-ratio:4/3]">
               <ImageSlot
-                id="agenda-table-topics"
+                id="meeting-celebration"
                 sizes="(min-width: 1280px) 28vw, (min-width: 640px) 50vw, 100vw"
               />
               <figcaption className="text-ink-muted mt-3 text-sm">
-                Table Topics: one question, one to two minutes, no preparation.
+                Birthdays and milestones are celebrated together, cake included.
               </figcaption>
             </figure>
           </div>

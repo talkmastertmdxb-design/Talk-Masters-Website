@@ -248,7 +248,7 @@ test("Members shows each member's LinkedIn on their card, with every other profi
     "Hadi Abdulkader": "https://www.linkedin.com/in/hadiabdulkader/",
     "Prathiba Leo": "https://www.linkedin.com/in/prathibaleo12/",
     "Tarannum Sheikh": "https://www.linkedin.com/in/tarannum-sheikh-381309171/",
-    "Suhayb Shaik": "https://www.linkedin.com/in/suhayb-shaik-13985231a",
+    "Suhayb Muzammil Shaik": "https://www.linkedin.com/in/suhayb-shaik-13985231a",
     "Jasim Eranhole": "https://www.linkedin.com/in/jassim-eranhole-90300b76/",
     "Nabeel Bava": "https://www.linkedin.com/in/nabeel-kizhakkeveettil-001651334",
     "Noufal Aboobacker": "https://www.linkedin.com/in/noufal-aboobacker/",

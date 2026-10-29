@@ -22,7 +22,7 @@ const steps: readonly Step[] = [
     icon: Mic,
     title: "Prepared Speeches",
     body: "Plan a talk and give it to a friendly room, starting with a short speech about yourself.",
-    imageSlot: "agenda-prepared-speeches",
+    imageSlot: "why-speaking",
   },
   {
     icon: MessageCircle,

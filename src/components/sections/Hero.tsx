@@ -79,7 +79,7 @@ export function Hero() {
               className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-6 md:mt-7 md:gap-x-8"
             >
               <ButtonLink href="/join" className="group min-h-12! max-sm:w-full">
-                Book a Free Guest Visit
+                Book a guest visit
                 <ArrowRight
                   aria-hidden="true"
                   className="size-4 transition-transform duration-(--duration-quick) group-hover:translate-x-0.5"

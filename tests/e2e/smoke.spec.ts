@@ -20,18 +20,20 @@ test.describe("home", () => {
 
   test("shows hero photography without placeholder labels in production", async ({ page }) => {
     await page.goto("/");
-    const slot = page.locator('[data-hero-backdrop] [data-image-slot="hero-microphone"]');
+    const slot = page.locator('[data-hero-backdrop] [data-image-slot="hero-banner-speaker"]');
     await expect(slot).toBeVisible();
     await expect(slot.getByText("Photo needed")).toHaveCount(0);
   });
 
-  test("rotates the hero photos in order: microphone first, the banner speaker last", async ({ page }) => {
+  test("rotates the hero photos in order: the banner speaker first, the microphone last", async ({
+    page,
+  }) => {
     await page.goto("/");
     const slides = page.locator("[data-hero-backdrop] [data-image-slot]");
     const ids = await slides.evaluateAll((nodes) =>
       nodes.map((node) => node.getAttribute("data-image-slot")),
     );
-    expect(ids).toEqual(["hero-microphone", "hero-stage", "hero-audience", "hero-banner-speaker"]);
+    expect(ids).toEqual(["hero-banner-speaker", "hero-stage", "hero-audience", "hero-microphone"]);
   });
 
   test("has no serious accessibility violations", async ({ page }) => {

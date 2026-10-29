@@ -94,7 +94,7 @@ test.describe("header", () => {
   test("phones keep the booking button beside the menu", async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 780 });
     await page.goto("/");
-    const book = page.locator("header").getByRole("link", { name: "Book a visit" });
+    const book = page.locator("header").getByRole("link", { name: "Book a guest visit" });
     await expect(book).toBeVisible();
     await expect(book).toHaveAttribute("href", "/join");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);

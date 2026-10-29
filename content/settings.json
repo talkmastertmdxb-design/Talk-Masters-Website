@@ -1,7 +1,7 @@
 {
   "clubName": "Talk-Masters Club",
   "parentOrganisation": "Toastmasters International",
-  "tagline": "A Club with Difference",
+  "tagline": "A Club with a Difference",
   "mission": "We provide a supportive and positive learning experience in which members are empowered to develop their communication and leadership skills, which results in greater self-confidence and personal growth.",
   "description": "A public speaking and leadership club for everyone, of every age and background. Find your voice, lead with confidence, inspire the world.",
   "meeting": {
@@ -31,7 +31,7 @@
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Hor%20Al%20Anz%20Public%20Library%20Dubai",
     "placeholder": false
   },
-  "heroSlides": ["hero-microphone", "hero-stage", "hero-audience", "hero-banner-speaker"],
+  "heroSlides": ["hero-banner-speaker", "hero-stage", "hero-audience", "hero-microphone"],
   "highlightVideo": {
     "src": "/videos/member-voices.mp4",
     "poster": "/images/member-voices-poster.webp",
@@ -39,7 +39,6 @@
     "durationSeconds": 68,
     "captionsBurnedIn": true,
     "quotes": [
-      "Joining Toastmasters has completely renovated my life.",
       "For me, Toastmasters is a gym for communication.",
       "It gave me not only the confidence, but also the leadership skills."
     ]
@@ -168,13 +167,13 @@
       "label": "Speeches delivered",
       "value": 500,
       "suffix": "+",
-      "placeholder": true
+      "placeholder": false
     },
     {
       "label": "Leadership roles",
       "value": 100,
       "suffix": "+",
-      "placeholder": true
+      "placeholder": false
     }
   ],
   "placeholder": true

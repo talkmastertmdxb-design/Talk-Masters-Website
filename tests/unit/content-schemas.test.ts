@@ -12,7 +12,7 @@ import {
 const validSettings = {
   clubName: "Talk-Masters Club",
   parentOrganisation: "Toastmasters International",
-  tagline: "A Club with Difference",
+  tagline: "A Club with a Difference",
   mission: "We provide a supportive and positive learning experience.",
   description: "A public speaking and leadership club open to everyone.",
   meeting: {

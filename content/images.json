@@ -183,20 +183,11 @@
   },
   {
     "id": "fear-split",
-    "alt": "A first-time speaker smiling as the audience applauds",
+    "alt": "Members listening at a Talk-Masters meeting: the room a speaker faces",
     "aspectRatio": "4/5",
-    "brief": "Nervous-then-smiling moment, applause in the background",
-    "src": "https://images.unsplash.com/photo-1453090927415-5f45085b65c0?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjI2OTgyfA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "photoId": "ojVMh1QTVGY",
-      "query": "microphone foggy stage",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Oscar Keys",
-      "profileUrl": "https://unsplash.com/@oscartothekeys?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/photo-of-microphone-on-foggy-stage-ojVMh1QTVGY?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    "brief": "The audience as a speaker sees it, at a real club meeting",
+    "src": "/images/club-meeting-audience.webp",
+    "focalPoint": "62% 55%"
   },
   {
     "id": "agenda-welcome",
@@ -586,5 +577,21 @@
     "brief": "Member portrait, head and shoulders",
     "src": "/images/member-edwin.webp",
     "focalPoint": "50% 35%"
+  },
+  {
+    "id": "why-speaking",
+    "alt": "A member speaking to the room during a meeting, smiling, with the meeting slides behind him",
+    "aspectRatio": "4/5",
+    "brief": "A member speaking to a friendly room",
+    "src": "/images/why-speaking.webp",
+    "focalPoint": "50% 45%"
+  },
+  {
+    "id": "meeting-celebration",
+    "alt": "Members celebrating a birthday with a cake at the front of the meeting room",
+    "aspectRatio": "4/3",
+    "brief": "Members celebrating together at a meeting",
+    "src": "/images/meeting-celebration.webp",
+    "focalPoint": "50% 37%"
   }
 ]

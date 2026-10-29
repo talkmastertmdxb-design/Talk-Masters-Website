@@ -101,7 +101,7 @@ describe("content in /content", () => {
   });
 
   it("states the club's tagline and mission", () => {
-    expect(content.settings.tagline).toBe("A Club with Difference");
+    expect(content.settings.tagline).toBe("A Club with a Difference");
     expect(content.settings.mission).toMatch(/^We provide a supportive and positive learning experience/);
   });
 

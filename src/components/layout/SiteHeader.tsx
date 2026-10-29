@@ -137,9 +137,7 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
             </Link>
             {/* Always visible: on phones it is the one action beside the menu. */}
             <ButtonLink href="/join" className="min-h-11 px-5 whitespace-nowrap">
-              <span>
-                Book a <span className="hidden sm:inline">guest </span>visit
-              </span>
+              <span>Book a guest visit</span>
             </ButtonLink>
             <button
               type="button"

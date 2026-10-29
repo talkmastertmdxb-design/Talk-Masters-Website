@@ -34,7 +34,7 @@ test.describe("home page", () => {
     await page.goto("/");
     const about = page.locator("#about");
     await expect(about.getByText(/^We provide a supportive and positive learning experience/)).toBeVisible();
-    await expect(about.getByText("A Club with Difference")).toBeVisible();
+    await expect(about.getByText("A Club with a Difference")).toBeVisible();
   });
 
   test("Who it's for names every audience, with the club's own photo", async ({ page }) => {

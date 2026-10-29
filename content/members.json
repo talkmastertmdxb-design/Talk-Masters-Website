@@ -232,15 +232,15 @@
     "consent": true,
     "spotlight": true,
     "status": "published",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "suhayb-shaik",
-    "name": "Suhayb Shaik",
+    "name": "Suhayb Muzammil Shaik",
     "position": "Vice President Public Relations",
-    "occupation": "Head of the Cyber Team",
+    "occupation": "Final-year cybersecurity student and Head of the Cyber Team",
     "organisation": "University of Wollongong in Dubai",
-    "headline": "Head of the Cyber Team, University of Wollongong in Dubai",
+    "headline": "Never on a stage before 2024, now a club contest winner",
     "links": [
       {
         "network": "linkedin",
@@ -248,36 +248,42 @@
       }
     ],
     "segment": "officer",
-    "challenge": "He started out more at home with code and networks than with a microphone and a room full of faces.",
-    "transformation": "Today he leads the cyber team at UOWD and the club's public relations, and designed and built this website.",
+    "challenge": "Before joining Talk-Masters in 2024, Suhayb had never spoken on stage. He was comfortable behind a screen with complex technical detail, but speaking to an audience with clarity felt intimidating. What changed everything was the people: from his earliest meetings, members encouraged him and gave him honest feedback.",
+    "transformation": "Today he steps onto the stage to deliver speeches, evaluate fellow members and take on meeting roles with confidence.",
     "journey": [
       {
         "milestone": "first-meeting",
-        "text": "Came to Talk-Masters to practise speaking to people, not just screens."
+        "text": "Joined Talk-Masters in 2024."
       },
       {
         "milestone": "leadership-role",
-        "text": "Took on Vice President Public Relations for 2026–27, telling the club's story to Dubai."
+        "text": "Has taken on nearly every meeting role except Toastmaster of the Day, including Speaker, Evaluator and Timer."
       },
       {
         "milestone": "other",
-        "text": "Designed and built the club's website, so anyone can see what a meeting is like before they visit."
+        "text": "Won first place in the club’s Humorous Speech contest with “Recalculating”, then represented Talk-Masters at the Area-level contest."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Joined the Executive Committee for 2026–27."
       }
     ],
     "impact": {
-      "career": "Leads a university cyber team, where explaining a risk clearly matters as much as fixing it.",
-      "leadership": "Runs the club's public relations as part of the Executive Committee.",
-      "confidence": "Speaks up in rooms where he once would have stayed quiet."
+      "confidence": "Toastmasters helped me turn nervousness into structure, hesitation into storytelling, and fear into a genuine enjoyment of public speaking.",
+      "leadership": "Each role taught me a different side of communication: how to speak with purpose, listen actively, give constructive feedback, and support the flow of a meeting.",
+      "career": "My bigger ambition is to become a tech founder. I am working on INTAKE, an AI-powered platform that makes university admissions easier for students. A strong idea only creates impact when you can pitch it clearly, inspire others, and lead with confidence."
     },
-    "advice": "You don't need to feel ready. Come and watch once, and let the room do the rest.",
-    "story": "Suhayb joined to practise speaking to people, not just screens, and stayed for the community. As Vice President Public Relations, he now helps tell the club's story to Dubai.",
-    "contribution": "A technologist's knack for explaining things clearly, and the club's public face online.",
-    "clubHighlights": ["Executive Committee 2026–27"],
+    "advice": "Don’t wait to become confident. Show up, speak, and become it.",
+    "story": "His humorous speech “Recalculating” won first place at the club contest and took Suhayb to the Area-level contest. He didn’t win there, but it taught him something more valuable than a trophy: every stage is practice, and every setback is part of recalculating your path forward.",
+    "contribution": "Posters, campaigns and creative ideas that put the club in front of new people, including leading the creation of this website so guests can find Talk-Masters more easily.",
+    "clubHighlights": ["1st place, club Humorous Speech contest", "Area-level contestant"],
     "imageSlot": "member-suhayb",
     "consent": true,
     "spotlight": true,
     "status": "published",
-    "placeholder": true
+    "placeholder": false,
+    "hook": "From never on a stage to first place with “Recalculating”",
+    "memberSince": 2024
   },
   {
     "slug": "jasim-eranhole",
@@ -310,7 +316,7 @@
     "consent": true,
     "spotlight": false,
     "status": "published",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "nabeel-bava",
