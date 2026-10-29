@@ -15,7 +15,7 @@ export function MemberFaces() {
       <div className="container-site">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <h2 id="faces-title" data-reveal="lines" className="text-h2 max-w-[16ch]">
-            Engineers, educators, founders, first-timers.
+            Meet our members
           </h2>
           <p data-reveal="up" className="text-ink-muted max-w-[38ch]">
             Everyone here started as a guest. Some of them now train speakers for a living.

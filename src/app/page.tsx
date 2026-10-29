@@ -9,7 +9,6 @@ import { MemberFaces } from "@/components/sections/MemberFaces";
 import { MemberVoices } from "@/components/sections/MemberVoices";
 import { PathwaysTeaser } from "@/components/sections/PathwaysTeaser";
 import { WhoItsFor } from "@/components/sections/WhoItsFor";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { Workplaces } from "@/components/sections/Workplaces";
 
 /**
@@ -32,7 +31,6 @@ export default function Home() {
       <InsideMeeting />
       <PathwaysTeaser />
       <MemberFaces />
-      <Testimonials />
       <ExecutiveCommittee />
       <Faq />
     </RevealScope>

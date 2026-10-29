@@ -78,17 +78,18 @@ export function FearStory() {
                   data-step={index}
                   className="story-row border-hairline border-t py-5 last:border-b"
                 >
-                  <div className="flex gap-5">
-                    <span className="story-icon bg-soft-gray text-tm-blue inline-flex size-11 shrink-0 items-center justify-center rounded-full">
+                  {/* Phones: a small photo beside each step; from md the photos fill the pinned stage. */}
+                  <div className="flex items-center gap-4 md:items-start md:gap-5">
+                    <div className="w-24 shrink-0 [--slot-ratio:4/5] md:hidden">
+                      <ImageSlot id={imageSlot} sizes="96px" />
+                    </div>
+                    <span className="story-icon bg-soft-gray text-tm-blue hidden size-11 shrink-0 items-center justify-center rounded-full md:inline-flex">
                       <Icon aria-hidden="true" className="size-5" strokeWidth={1.5} />
                     </span>
                     <div>
                       <h3 className="font-semibold">{title}</h3>
                       <p className="story-body text-ink-muted mt-1 text-base">{body}</p>
                     </div>
-                  </div>
-                  <div className="mt-5 md:hidden">
-                    <ImageSlot id={imageSlot} sizes="100vw" />
                   </div>
                 </li>
               ))}

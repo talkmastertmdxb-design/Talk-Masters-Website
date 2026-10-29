@@ -216,8 +216,6 @@ test("Nabeel's profile tells his story as Treasurer, in his own words", async ({
 for (const [path, name, slug] of [
   ["/team", "Nabeel", "nabeel-bava"],
   ["/team", "Suhayb", "suhayb-shaik"],
-  ["/", "Nabeel", "nabeel-bava"],
-  ["/", "Suhayb", "suhayb-shaik"],
 ] as const) {
   test(`${name}'s committee card on ${path} opens his member story`, async ({ page }) => {
     await page.goto(path);

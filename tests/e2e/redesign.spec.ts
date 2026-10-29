@@ -33,9 +33,7 @@ test.describe("home", () => {
   test("shows real members with who they were and who they are now", async ({ page }) => {
     await page.goto("/");
     const faces = page.locator("section[aria-labelledby='faces-title']");
-    await expect(
-      faces.getByRole("heading", { name: "Engineers, educators, founders, first-timers." }),
-    ).toBeVisible();
+    await expect(faces.getByRole("heading", { name: "Meet our members" })).toBeVisible();
     await expect(faces.getByRole("listitem")).toHaveCount(6);
     await expect(faces).toContainText("Mechanical engineer, now a public speaking trainer");
     await expect(faces.getByRole("link", { name: "Hadi Abdulkader" })).toHaveAttribute(

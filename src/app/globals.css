@@ -652,21 +652,12 @@
     }
   }
 
-  /* Testimonials: quote columns drifting vertically, faded at the top and bottom edges. */
+  /* Members' quotes in the video section: one column drifting upwards, faded top and bottom. */
   .voices {
-    display: grid;
-    gap: 1rem;
-    height: clamp(32rem, 70vh, 42rem);
-  }
-  @media (min-width: 48rem) {
-    .voices {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .voices__window {
+    height: clamp(20rem, 46svh, 26rem);
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
   }
   .voices__half {
     display: flex;
@@ -677,9 +668,6 @@
   @media (prefers-reduced-motion: no-preference) {
     .voices__track {
       animation: voices var(--voices-duration, 40s) linear infinite;
-    }
-    .voices__track--reverse {
-      animation-direction: reverse;
     }
     .voices:hover .voices__track {
       animation-play-state: paused;

@@ -44,7 +44,7 @@ export function WhoItsFor() {
             One room, every stage of life. Members join to ace an interview, lead a team, pitch an idea or
             simply speak up with confidence.
           </p>
-          <div data-reveal="image" className="mt-10 md:mt-auto md:pt-10">
+          <div data-reveal="image" className="mt-10 hidden md:mt-auto md:block md:pt-10">
             <ImageSlot id="audience-meeting-room" sizes="(min-width: 900px) 38vw, 100vw" />
           </div>
         </div>

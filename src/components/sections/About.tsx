@@ -58,7 +58,7 @@ export function About() {
             </div>
             <div className="from-ink/80 via-ink/10 relative flex h-full min-h-80 items-end bg-gradient-to-t to-transparent p-6 text-white">
               <p className="max-w-[28ch] font-serif text-2xl leading-snug">
-                Every age. Every background. One room where everyone gets to speak.
+                The conversation carries on over dinner.
               </p>
             </div>
           </div>

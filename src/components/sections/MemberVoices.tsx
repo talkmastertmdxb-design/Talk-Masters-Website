@@ -1,11 +1,13 @@
 import { ArrowRight } from "lucide-react";
 import { HighlightVideo } from "@/components/media/HighlightVideo";
+import { QuoteDrift } from "@/components/people/QuoteDrift";
 import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 
 /**
  * Opening, proof: members on camera, in their own words, straight after the manifesto.
- * The video previews silently with burned-in captions; the quotes beside it are lifted from it.
+ * The video previews silently with burned-in captions; beside it, members' own words drift past
+ * (content/testimonials.json).
  */
 export function MemberVoices() {
   const video = content.settings.highlightVideo;
@@ -41,18 +43,9 @@ export function MemberVoices() {
         </div>
 
         <div className="md:col-start-1 md:self-start">
-          {video.quotes.length > 0 && (
-            <ul data-reveal="stagger" className="max-w-[40ch] md:mt-10">
-              {video.quotes.map((quote) => (
-                <li
-                  key={quote}
-                  className="border-hairline-dark border-t py-5 font-serif text-xl leading-snug"
-                >
-                  “{quote}”
-                </li>
-              ))}
-            </ul>
-          )}
+          <div data-reveal="up" className="max-w-[32rem] md:mt-10">
+            <QuoteDrift />
+          </div>
 
           <div data-reveal="up" className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <ButtonLink href="/join" className="group">
