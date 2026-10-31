@@ -4,7 +4,7 @@
     "alt": "A Talk-Masters member speaking in front of the club banner",
     "aspectRatio": "16/9",
     "brief": "Hero: a member speaking on stage, three-quarter view, audience softly out of focus in the foreground, warm stage light",
-    "src": "/images/speaker-club-banner.webp",
+    "src": "/images/club/speaker-club-banner.webp",
     "unsplash": {
       "photoId": "9zutjaUEN3Q",
       "query": "woman speaking on stage audience",
@@ -17,7 +17,7 @@
     "alt": "A member walking the stage mid-speech, notes in hand",
     "aspectRatio": "4/5",
     "brief": "Speaker at the lectern, three-quarter angle, warm dramatic light",
-    "src": "/images/speaker-on-stage.webp",
+    "src": "/images/club/speaker-on-stage.webp",
     "unsplash": {
       "photoId": "edroxDz_ngM",
       "query": "microphone dark stage spotlight",
@@ -30,7 +30,7 @@
     "alt": "A member speaking into a microphone during a session on job guidance",
     "aspectRatio": "16/9",
     "brief": "Hero rotation: a member mid-speech with a microphone",
-    "src": "/images/speaker-microphone.webp",
+    "src": "/images/club/speaker-microphone.webp",
     "focalPoint": "50% 30%"
   },
   {
@@ -38,7 +38,7 @@
     "alt": "Members of all backgrounds listening during a meeting",
     "aspectRatio": "16/9",
     "brief": "Hero rotation: a mixed audience listening",
-    "src": "/images/audience-listening.webp",
+    "src": "/images/club/audience-listening.webp",
     "focalPoint": "45% 60%"
   },
   {
@@ -46,7 +46,7 @@
     "alt": "A Talk-Masters member in a navy suit speaking beside the club banner, members listening in the foreground",
     "aspectRatio": "4/5",
     "brief": "A speaker at the lectern beside the club banner, seen over the audience",
-    "src": "/images/club-speaker-banner.webp",
+    "src": "/images/club/club-speaker-banner.webp",
     "focalPoint": "60% 35%"
   },
   {
@@ -54,7 +54,7 @@
     "alt": "Members of every age, including a young member in the front row, at a Talk-Masters meeting",
     "aspectRatio": "4/3",
     "brief": "Who it's for: the whole room at a meeting, every age and background",
-    "src": "/images/club-meeting-room.webp",
+    "src": "/images/club/club-meeting-room.webp",
     "focalPoint": "50% 62%"
   },
   {
@@ -62,7 +62,7 @@
     "alt": "Members listening closely during a Talk-Masters meeting",
     "aspectRatio": "4/3",
     "brief": "Pathways page header: members engaged in a meeting",
-    "src": "/images/club-meeting-audience.webp",
+    "src": "/images/club/club-meeting-audience.webp",
     "focalPoint": "50% 55%"
   },
   {
@@ -70,7 +70,7 @@
     "alt": "A member leading a meeting as Toastmaster of the Day, arms wide in welcome",
     "aspectRatio": "4/3",
     "brief": "A member leading a meeting in a meeting role",
-    "src": "/images/toastmaster-of-the-day.webp",
+    "src": "/images/club/toastmaster-of-the-day.webp",
     "focalPoint": "52% 60%"
   },
   {
@@ -174,7 +174,7 @@
     "alt": "Club members of different backgrounds sharing dinner",
     "aspectRatio": "1/1",
     "brief": "Mixed-age group laughing together after a meeting",
-    "src": "/images/club-dinner.webp",
+    "src": "/images/club/club-dinner.webp",
     "unsplash": {
       "query": "diverse people listening workshop",
       "orientation": "squarish"
@@ -186,7 +186,7 @@
     "alt": "Members listening at a Talk-Masters meeting: the room a speaker faces",
     "aspectRatio": "4/5",
     "brief": "The audience as a speaker sees it, at a real club meeting",
-    "src": "/images/club-meeting-audience.webp",
+    "src": "/images/club/club-meeting-audience.webp",
     "focalPoint": "62% 55%"
   },
   {
@@ -194,7 +194,7 @@
     "alt": "Members beside the club banner at the venue entrance, ready to welcome guests",
     "aspectRatio": "3/4",
     "brief": "Guests welcomed at the entrance, name badges",
-    "src": "/images/welcome-entrance.webp",
+    "src": "/images/club/welcome-entrance.webp",
     "unsplash": {
       "query": "conference name badge welcome",
       "orientation": "portrait"
@@ -206,7 +206,7 @@
     "alt": "A member delivering a prepared speech",
     "aspectRatio": "3/4",
     "brief": "Prepared speech in progress, gesture mid-sentence",
-    "src": "/images/member-prepared-speech.webp",
+    "src": "/images/club/member-prepared-speech.webp",
     "unsplash": {
       "query": "speaker presenting to audience",
       "orientation": "portrait"
@@ -218,7 +218,7 @@
     "alt": "A member answering a Table Topics question",
     "aspectRatio": "3/4",
     "brief": "Table Topics moment, speaker thinking on their feet",
-    "src": "/images/member-table-topics.webp",
+    "src": "/images/club/member-table-topics.webp",
     "unsplash": {
       "query": "person speaking microphone audience",
       "orientation": "portrait"
@@ -230,7 +230,7 @@
     "alt": "Members giving feedback as an evaluation panel",
     "aspectRatio": "3/4",
     "brief": "Evaluator giving feedback, speaker listening",
-    "src": "/images/panel-evaluation.webp",
+    "src": "/images/club/panel-evaluation.webp",
     "unsplash": {
       "query": "people discussion feedback meeting",
       "orientation": "portrait"
@@ -258,7 +258,7 @@
     "alt": "A member receiving a certificate beside the club banner",
     "aspectRatio": "3/4",
     "brief": "Best Speaker ribbons and applause",
-    "src": "/images/award-presentation.webp",
+    "src": "/images/awards/presentation.webp",
     "unsplash": {
       "query": "audience applause clapping",
       "orientation": "portrait"
@@ -287,7 +287,7 @@
     "alt": "An experienced member presenting a certificate to a newer member",
     "aspectRatio": "4/5",
     "brief": "Mentor and mentee, one-to-one",
-    "src": "/images/mentor-certificate.webp",
+    "src": "/images/awards/mentor-certificate.webp",
     "unsplash": {
       "photoId": "3gAiajAfjXI",
       "query": "two people coffee conversation",
@@ -300,7 +300,7 @@
     "alt": "A Talk-Masters meeting in progress, members seated around the room",
     "aspectRatio": "16/9",
     "brief": "Featured event banner: the room mid-meeting",
-    "src": "/images/meeting-in-progress.webp",
+    "src": "/images/club/meeting-in-progress.webp",
     "unsplash": {
       "query": "audience listening to presentation",
       "orientation": "landscape"
@@ -328,7 +328,7 @@
     "alt": "Members cutting a cake together at a club celebration",
     "aspectRatio": "3/2",
     "brief": "An early or founding-era club photo, if one exists",
-    "src": "/images/club-celebration.webp",
+    "src": "/images/club/club-celebration.webp",
     "unsplash": {
       "query": "vintage microphone",
       "orientation": "landscape"
@@ -340,7 +340,7 @@
     "alt": "Portrait of a Talk-Masters founder",
     "aspectRatio": "4/5",
     "brief": "Founder portrait, natural light, plain background",
-    "src": "/images/founder-one-portrait.webp",
+    "src": "/images/team/founder-one-portrait.webp",
     "focalPoint": "50% 28%"
   },
   {
@@ -364,7 +364,7 @@
     "alt": "Hadi Abdulkader, smiling, in a beige blazer",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
-    "src": "/images/member-hadi.webp",
+    "src": "/images/members/hadi.webp",
     "focalPoint": "50% 30%"
   },
   {
@@ -372,7 +372,7 @@
     "alt": "Prathiba Leo, smiling, arms folded",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
-    "src": "/images/member-prathiba.webp",
+    "src": "/images/members/prathiba.webp",
     "focalPoint": "50% 30%"
   },
   {
@@ -380,7 +380,7 @@
     "alt": "Tarannum Sheikh, smiling, arms folded",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
-    "src": "/images/member-tarannum.webp",
+    "src": "/images/members/tarannum.webp",
     "focalPoint": "50% 30%"
   },
   {
@@ -388,7 +388,7 @@
     "alt": "Suhayb Shaik, holding an award",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
-    "src": "/images/member-suhayb.webp",
+    "src": "/images/members/suhayb.webp",
     "focalPoint": "50% 25%"
   },
   {
@@ -396,7 +396,7 @@
     "alt": "Jasim Eranhole, smiling, in a blue blazer",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
-    "src": "/images/member-jassim.webp",
+    "src": "/images/members/jassim.webp",
     "focalPoint": "50% 25%"
   },
   {
@@ -420,7 +420,7 @@
     "alt": "Talk-Masters members and their families together after a meeting",
     "aspectRatio": "16/9",
     "brief": "Atmospheric stage shot for the Our Story header",
-    "src": "/images/club-community.webp",
+    "src": "/images/club/club-community.webp",
     "unsplash": {
       "query": "empty stage spotlight theatre",
       "orientation": "landscape"
@@ -432,7 +432,7 @@
     "alt": "Talk-Masters members with the Smedley Award",
     "aspectRatio": "16/9",
     "brief": "Club trophies or certificates for the Achievements header",
-    "src": "/images/smedley-award.webp",
+    "src": "/images/awards/smedley-award.webp",
     "unsplash": {
       "query": "award ceremony stage lights",
       "orientation": "landscape"
@@ -444,7 +444,7 @@
     "alt": "Talk-Masters members together after a meeting",
     "aspectRatio": "16/9",
     "brief": "Wide shot of members in the audience",
-    "src": "/images/club-group.webp",
+    "src": "/images/club/club-group.webp",
     "unsplash": {
       "query": "audience listening speaker",
       "orientation": "landscape"
@@ -452,11 +452,29 @@
     "focalPoint": "50% 35%"
   },
   {
+    "id": "members-next-story",
+    "alt": "A vintage microphone under a soft spotlight on a dark stage",
+    "aspectRatio": "3/2",
+    "brief": "Members page \"Your story\" card: an empty stage, waiting for the next speaker",
+    "src": "https://images.unsplash.com/photo-1507676385008-e7fb562d11f8?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkzNDMwNjY0fA&ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "dtqlaz4HyHw",
+      "query": "empty stage microphone spotlight",
+      "orientation": "landscape"
+    },
+    "focalPoint": "50% 50%",
+    "credit": {
+      "name": "Brunxs",
+      "profileUrl": "https://unsplash.com/@brunxs?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/low-light-stage-microphone-photography-dtqlaz4HyHw?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
     "id": "team-hero",
     "alt": "Club leaders holding certificates in front of the Talk-Masters banner",
     "aspectRatio": "16/9",
     "brief": "The committee at work, or the meeting room",
-    "src": "/images/officers-certificates.webp",
+    "src": "/images/awards/officers-certificates.webp",
     "unsplash": {
       "query": "meeting room chairs evening",
       "orientation": "landscape"
@@ -468,7 +486,7 @@
     "alt": "Anees, Club President, speaking at a meeting",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-president.webp",
+    "src": "/images/team/president.webp",
     "focalPoint": "50% 22%"
   },
   {
@@ -476,7 +494,7 @@
     "alt": "Mansoor, Vice President Education",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-vp-education.webp",
+    "src": "/images/team/vp-education.webp",
     "focalPoint": "50% 25%"
   },
   {
@@ -484,7 +502,7 @@
     "alt": "Suhayb, Vice President Public Relations, speaking at a meeting",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-vp-public-relations.webp",
+    "src": "/images/team/vp-public-relations.webp",
     "focalPoint": "50% 25%"
   },
   {
@@ -492,7 +510,7 @@
     "alt": "Nasar, Secretary",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-secretary.webp",
+    "src": "/images/team/secretary.webp",
     "focalPoint": "50% 25%"
   },
   {
@@ -500,7 +518,7 @@
     "alt": "Nabeel, Treasurer, speaking at a meeting",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-treasurer.webp",
+    "src": "/images/team/treasurer.webp",
     "focalPoint": "50% 25%"
   },
   {
@@ -508,7 +526,7 @@
     "alt": "Lulu, Vice President Membership, speaking at the lectern",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-vp-membership.webp",
+    "src": "/images/team/vp-membership.webp",
     "focalPoint": "50% 30%"
   },
   {
@@ -516,7 +534,7 @@
     "alt": "Noufal, Sergeant at Arms, speaking at a meeting",
     "aspectRatio": "4/5",
     "brief": "Committee portrait",
-    "src": "/images/officer-sergeant-at-arms.webp",
+    "src": "/images/team/sergeant-at-arms.webp",
     "focalPoint": "53% 14%"
   },
   {
@@ -524,42 +542,42 @@
     "alt": "EXCOM 2026-27 poster for Talk-Masters Club (Club 07956953, Area 11, Division C, District 127): Anees, President; Mansoor, VP Education; Lulu, VP Membership; Suhayb, VP Public Relations; Nabeel, Treasurer; Nasar, Secretary; Noufal, Sergeant at Arms",
     "aspectRatio": "859/1280",
     "brief": "The committee announcement poster",
-    "src": "/images/excom-2026-27-poster.webp"
+    "src": "/images/team/excom-2026-27-poster.webp"
   },
   {
     "id": "award-smedley-2026",
     "alt": "District 127 Club Growth Awards 2026-27 graphic: Smedley Award, Bronze, presented to Talk-Masters Toastmasters, Area 11, Division C",
     "aspectRatio": "1/1",
     "brief": "The award announcement graphic",
-    "src": "/images/smedley-award-bronze-2026-27.webp"
+    "src": "/images/awards/smedley-award-bronze-2026-27.webp"
   },
   {
     "id": "award-triple-crown-ganesan",
     "alt": "District 127 Program Quality graphic congratulating Ganesan Venkatachalam, DTM, of Talk-Masters Toastmasters Club, Area 11, Division C, on the Triple Crown Award",
     "aspectRatio": "2/3",
     "brief": "The award announcement graphic",
-    "src": "/images/award-triple-crown-ganesan.webp"
+    "src": "/images/awards/triple-crown-ganesan.webp"
   },
   {
     "id": "award-triple-crown-jabir",
     "alt": "Talk-Masters poster congratulating TM Mohammed Jabir on achieving the Triple Crown Award",
     "aspectRatio": "2/3",
     "brief": "The award announcement graphic",
-    "src": "/images/award-triple-crown-jabir.webp"
+    "src": "/images/awards/triple-crown-jabir.webp"
   },
   {
     "id": "award-dcp-points-2025-26",
     "alt": "District 127 Program Quality graphic: 6 Distinguished Club Program points, presented to Talk-Masters Toastmasters Club, Division C, Area 11",
     "aspectRatio": "527/746",
     "brief": "The award announcement graphic",
-    "src": "/images/award-dcp-points-2025-26.webp"
+    "src": "/images/awards/dcp-points-2025-26.webp"
   },
   {
     "id": "meeting-awards",
     "alt": "A member holds the Best Speaker trophy and certificate, beside the officers who presented them",
     "aspectRatio": "4/3",
     "brief": "Awards at the close of a meeting",
-    "src": "/images/meeting-awards.webp",
+    "src": "/images/club/meeting-awards.webp",
     "focalPoint": "55% 45%"
   },
   {
@@ -567,7 +585,7 @@
     "alt": "A guest speaker receives a Talk-Masters certificate of appreciation beside the club banner",
     "aspectRatio": "16/9",
     "brief": "A certificate of appreciation for a guest",
-    "src": "/images/meeting-appreciation.webp",
+    "src": "/images/club/meeting-appreciation.webp",
     "focalPoint": "50% 40%"
   },
   {
@@ -575,15 +593,31 @@
     "alt": "Edwin Sunny, smiling, in a navy blazer",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
-    "src": "/images/member-edwin.webp",
+    "src": "/images/members/edwin.webp",
     "focalPoint": "50% 35%"
+  },
+  {
+    "id": "member-afnas",
+    "alt": "Afnas Pareed, smiling, in a navy blazer and striped shirt",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/members/afnas.webp",
+    "focalPoint": "50% 25%"
+  },
+  {
+    "id": "member-rilwan",
+    "alt": "Mohamed Rilwan, smiling, in a grey suit and white shirt",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/members/rilwan.webp",
+    "focalPoint": "50% 25%"
   },
   {
     "id": "why-speaking",
     "alt": "A member speaking to the room during a meeting, smiling, with the meeting slides behind him",
     "aspectRatio": "4/5",
     "brief": "A member speaking to a friendly room",
-    "src": "/images/why-speaking.webp",
+    "src": "/images/club/why-speaking.webp",
     "focalPoint": "50% 45%"
   },
   {
@@ -591,7 +625,7 @@
     "alt": "Members celebrating a birthday with a cake at the front of the meeting room",
     "aspectRatio": "4/3",
     "brief": "Members celebrating together at a meeting",
-    "src": "/images/meeting-celebration.webp",
+    "src": "/images/club/meeting-celebration.webp",
     "focalPoint": "50% 37%"
   }
 ]

@@ -52,15 +52,13 @@ next-env.d.ts
 # locally installed agent skills: symlinks hold absolute paths; reinstall from skills-lock.json
 /.claude/skills/
 
-# Reference animation template (third-party photos, unknown licence; not used by the site)
-/Hero_animation/
+# Design references: animation templates and demos (third-party, unknown licence; not used by the site)
+/design-references/
 .DS_Store
 
 # Original photo uploads (copied into public/images with clean names)
 /src/*.jpeg
-/Founder_1_Photo.jpeg
-/Smedley Award Photo.jpeg
-/Hero_Animation_2/
 
 # Raw, uncompressed video. Compressed cuts live in public/videos (see docs/IMAGES.md).
 /assets/source/video/
+

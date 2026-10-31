@@ -483,5 +483,94 @@
     "spotlight": false,
     "status": "published",
     "placeholder": false
+  },
+  {
+    "slug": "afnas-pareed",
+    "name": "Afnas Pareed",
+    "occupation": "Co-Founder and Business Development Manager",
+    "organisation": "Upscale Water Solutions",
+    "hook": "From nervous before a crowd to sharing his ideas with confidence",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/afnas-pareed-1273171b0/"
+      }
+    ],
+    "segment": "professional",
+    "challenge": "Afnas lacked confidence speaking in front of a crowd and found it difficult to express his thoughts clearly.",
+    "transformation": "Today he is more comfortable speaking to an audience and shares his ideas with confidence.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Began his Toastmasters journey at CareerNova on 29 June 2025, and joined Talk-Masters."
+      },
+      {
+        "milestone": "first-speech",
+        "text": "Started speaking in front of a crowd: a meaningful milestone in itself."
+      },
+      {
+        "milestone": "other",
+        "text": "Continues to develop his communication skills at Talk-Masters, alongside his work as a co-founder."
+      }
+    ],
+    "impact": {
+      "career": "Toastmasters is helping me communicate my ideas more clearly with clients, colleagues and business partners.",
+      "confidence": "I’m becoming more comfortable speaking in front of a crowd and expressing my thoughts.",
+      "leadership": "Toastmasters is helping me take the initiative and communicate with greater confidence in my role as a co-founder."
+    },
+    "advice": "Don’t wait until you feel confident. Take the first step, keep practising and let your confidence grow with experience.",
+    "story": "Afnas’s Toastmasters journey began at CareerNova on 29 June 2025, where he found his way to Talk-Masters. He has made meaningful progress in a short time: the club has given him a supportive place to practise, learn from feedback and grow as a speaker.",
+    "clubHighlights": ["Joined at CareerNova, June 2025"],
+    "memberSince": 2025,
+    "imageSlot": "member-afnas",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
+  },
+  {
+    "slug": "mohamed-rilwan",
+    "name": "Mohamed Rilwan",
+    "occupation": "Procurement and Supply Chain Professional",
+    "organisation": "Jereh Oil Field Services Middle East FZE",
+    "hook": "Small steps, stronger habits: growing one speech at a time",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/mohd-rilwan/"
+      }
+    ],
+    "segment": "professional",
+    "challenge": "Rilwan wanted to improve his public speaking and express his ideas with greater confidence. His challenge was turning that intention into consistent practice.",
+    "transformation": "Today he sees improvement as the result of small, repeated actions: preparing a speech, practising aloud, accepting feedback and trying again.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Joined Talk-Masters in 2022 to strengthen his communication skills, and it gradually became a hobby."
+      },
+      {
+        "milestone": "other",
+        "text": "Served on an evaluation panel, a reminder that listening carefully and giving thoughtful feedback are habits worth building alongside speaking."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Took on the role of Toastmaster of the Day for the “Atomic Habits” meeting, celebrating how small, consistent actions lead to meaningful growth."
+      }
+    ],
+    "impact": {
+      "career": "Practising clear communication supports the conversations that matter in my profession: supplier negotiations, team discussions and presentations.",
+      "confidence": "My focus is shifting from delivering a perfect speech to making steady progress, one speaking opportunity at a time.",
+      "leadership": "Leadership grows through daily habits: listening before responding, preparing well and following through on commitments."
+    },
+    "advice": "Start small. Introduce yourself, volunteer for a short role or try a Table Topic. You don’t need confidence before you begin; you can build it through practice.",
+    "story": "Rilwan joined Toastmasters to strengthen his communication skills, and it gradually became a hobby. The theme “Atomic Habits” matches his approach to learning: every chance to speak is another chance to improve. As Toastmaster of the Day, he set out to help members recognise the small habits that shape their progress.",
+    "contribution": "Careful listening and thoughtful feedback, from the evaluation panel to leading a meeting as Toastmaster of the Day.",
+    "clubHighlights": ["Evaluation panel member", "Toastmaster of the Day, “Atomic Habits”"],
+    "memberSince": 2022,
+    "imageSlot": "member-rilwan",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
   }
 ]

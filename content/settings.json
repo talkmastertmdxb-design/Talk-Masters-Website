@@ -34,7 +34,7 @@
   "heroSlides": ["hero-banner-speaker", "hero-stage", "hero-audience", "hero-microphone"],
   "highlightVideo": {
     "src": "/videos/member-voices.mp4",
-    "poster": "/images/member-voices-poster.webp",
+    "poster": "/images/club/member-voices-poster.webp",
     "title": "Talk-Masters members describe what changed after they joined the club",
     "durationSeconds": 68,
     "captionsBurnedIn": true,
@@ -147,6 +147,22 @@
         "src": "/images/logos/tie-dubai.png",
         "width": 254,
         "height": 258
+      }
+    },
+    {
+      "name": "Upscale Water Solutions",
+      "logo": {
+        "src": "/images/logos/upscale-water-solutions.png",
+        "width": 800,
+        "height": 311
+      }
+    },
+    {
+      "name": "Jereh Oil Field Services",
+      "logo": {
+        "src": "/images/logos/jereh.svg",
+        "width": 700,
+        "height": 174
       }
     }
   ],

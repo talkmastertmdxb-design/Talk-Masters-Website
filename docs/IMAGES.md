@@ -5,18 +5,18 @@ Every photo on the site has a named **slot** in [`content/images.json`](../conte
 ## To add a photo
 
 1. **Check consent.** Everyone recognisable in the photo has given written permission (docs/PRD.md §8).
-2. **Prepare the file.** Convert it to **WebP** (the content check rejects JPG and PNG), at least 1600px on the long edge where the original allows, roughly the slot's `aspectRatio`. Name it after the slot, e.g. `hero-stage.webp`. Keep the original in `assets/source/`, not in `public/`.
-3. **Put it in** `public/images/`.
+2. **Prepare the file.** Convert it to **WebP** (the content check rejects JPG and PNG), at least 1600px on the long edge where the original allows, roughly the slot's `aspectRatio`. Name it after what it shows, e.g. `hero-stage.webp`. Keep the original in the matching folder of `assets/source/` (members, committee, awards, club photos by date…), not in `public/`.
+3. **Put it in the right folder** of `public/images/`: `members/` (member portraits), `team/` (committee and founders), `awards/`, `club/` (meetings and scenes). Logos go in `logos/`, Echo's art in `mascot/`.
 4. **Point the slot at it** in `content/images.json`:
    ```json
-   { "id": "hero-stage", "src": "/images/hero-stage.webp", ... }
+   { "id": "hero-stage", "src": "/images/club/hero-stage.webp", ... }
    ```
    Update `alt` so it describes the real photo. Optionally add `"focalPoint": "50% 30%"` to keep a face in frame when cropped.
 5. **Check** with `npm run check:content`. The slot disappears from the "still to replace" list.
 
 Next.js produces AVIF/WebP at every size automatically. Don't resize by hand.
 
-**Replacing a photo? Give the new file a new name** (e.g. `member-hadi-2.webp`) and update `src`. Browsers and Vercel keep images for up to 31 days, so a file replaced under the same name keeps showing the old picture.
+**Replacing a photo? Give the new file a new name** (e.g. `members/hadi-2.webp`) and update `src`. Browsers and Vercel keep images for up to 31 days, so a file replaced under the same name keeps showing the old picture.
 
 ## To add a new slot
 

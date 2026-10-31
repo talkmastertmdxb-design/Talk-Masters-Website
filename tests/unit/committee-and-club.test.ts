@@ -75,7 +75,7 @@ describe("featuredAward", () => {
 describe("highlight video", () => {
   const video = {
     src: "/videos/member-voices.mp4",
-    poster: "/images/member-voices-poster.webp",
+    poster: "/images/club/member-voices-poster.webp",
     title: "Members on what changed",
     durationSeconds: 71,
     captionsBurnedIn: true,
