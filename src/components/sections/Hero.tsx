@@ -28,8 +28,17 @@ function IntroPhoto({ id }: { id: string }) {
 export function Hero() {
   const { meeting, stats, heroSlides } = content.settings;
   // Right side on desktop, full-bleed atmosphere on phones; rotates through the club's photos.
+  // Later slides load eagerly too: each becomes the largest image on screen when it rotates in.
   const slides = heroSlides.map((id, index) => (
-    <ImageSlot key={id} id={id} variant="backdrop" tone="full" sizes={PHOTO_SIZES} priority={index === 0} />
+    <ImageSlot
+      key={id}
+      id={id}
+      variant="backdrop"
+      tone="full"
+      sizes={PHOTO_SIZES}
+      priority={index === 0}
+      eager={index > 0}
+    />
   ));
 
   return (

@@ -12,6 +12,8 @@ interface ImageSlotProps {
   sizes: string;
   /** Set only for the LCP image above the fold. */
   priority?: boolean;
+  /** Load straight away at normal priority: for images that will be on screen soon, like later hero slides. */
+  eager?: boolean;
   variant?: ImageVariant;
   /** Backdrops only: "dim" (default) sits behind text; "full" shows the photo at full strength. */
   tone?: "dim" | "full";
@@ -27,6 +29,7 @@ export function ImageSlot({
   id,
   sizes,
   priority = false,
+  eager = false,
   variant = "frame",
   tone = "dim",
   className = "",
@@ -63,7 +66,7 @@ export function ImageSlot({
         alt={slot.alt}
         fill
         sizes={sizes}
-        loading={priority ? "eager" : "lazy"}
+        loading={priority || eager ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
         className="object-cover"
         style={slot.focalPoint ? { objectPosition: slot.focalPoint } : undefined}
