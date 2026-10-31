@@ -24,6 +24,15 @@ import { EchoReply } from "./EchoReply";
 
 /** How long Echo's three lights show before an answer: long enough to feel like a reply. */
 const THINKING_MS = 650;
+/** Echo says "Want help?" once the page has settled, and only until the guest opens or dismisses it. */
+const BUBBLE_DELAY_MS = 2200;
+/** It then steps aside on its own, so it never sits over the page for long. */
+const BUBBLE_SHOWN_MS = 9000;
+/** Matches the bubble's exit in globals.css. */
+const BUBBLE_EXIT_MS = 300;
+const BUBBLE_SEEN_KEY = "tm-echo-bubble-seen";
+
+type BubbleState = "hidden" | "shown" | "leaving";
 
 const sessionStore = (): Storage | undefined => {
   try {
@@ -33,7 +42,7 @@ const sessionStore = (): Storage | undefined => {
   }
 };
 
-/** Echo's face, cut from the waving pose, for the launcher and the chat. */
+/** Echo's face, cut from the 3D figure, for the chat's header. */
 function EchoFace({ size }: { size: number }) {
   return (
     <span
@@ -41,7 +50,7 @@ function EchoFace({ size }: { size: number }) {
       className="bg-tm-blue ring-gold/60 inline-flex shrink-0 overflow-hidden rounded-full ring-1"
       style={{ width: size, height: size }}
     >
-      <Image src="/images/mascot/echo-head.png" alt="" width={size} height={size} sizes={`${size}px`} />
+      <Image src="/images/mascot/echo-3d-head.png" alt="" width={size} height={size} sizes={`${size}px`} />
     </span>
   );
 }
@@ -63,6 +72,7 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
   const [chat, setChat] = useState<ChatState>(INITIAL_CHAT);
   const [draft, setDraft] = useState("");
   const [thinking, setThinking] = useState(false);
+  const [bubble, setBubble] = useState<BubbleState>("hidden");
   const loaded = useRef(false);
   const timer = useRef<number | undefined>(undefined);
   const launcher = useRef<HTMLButtonElement>(null);
@@ -97,18 +107,51 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
     reply(question.question, () => answerQuestion(question, echoFacts(meeting, new Date())));
   };
 
+  /** The bubble has done its job once the guest opens Echo or waves it away: not again this visit. */
+  const retireBubble = useCallback(() => {
+    setBubble((current) => (current === "shown" ? "leaving" : current));
+    try {
+      sessionStore()?.setItem(BUBBLE_SEEN_KEY, "1");
+    } catch {
+      // Storage blocked: the bubble may simply come back on the next page.
+    }
+  }, []);
+
   const show = useCallback(() => {
+    retireBubble();
     if (!loaded.current) {
       loaded.current = true;
       setChat(loadChat(sessionStore()));
     }
     setOpen(true);
-  }, []);
+  }, [retireBubble]);
 
   const hide = useCallback(() => {
     setOpen(false);
     launcher.current?.focus({ preventScroll: true });
   }, []);
+
+  useEffect(() => {
+    let seen = false;
+    try {
+      seen = sessionStore()?.getItem(BUBBLE_SEEN_KEY) === "1";
+    } catch {
+      seen = false;
+    }
+    if (seen) return;
+    const appear = window.setTimeout(() => setBubble("shown"), BUBBLE_DELAY_MS);
+    const leave = window.setTimeout(retireBubble, BUBBLE_DELAY_MS + BUBBLE_SHOWN_MS);
+    return () => {
+      window.clearTimeout(appear);
+      window.clearTimeout(leave);
+    };
+  }, [retireBubble]);
+
+  useEffect(() => {
+    if (bubble !== "leaving") return;
+    const gone = window.setTimeout(() => setBubble("hidden"), BUBBLE_EXIT_MS);
+    return () => window.clearTimeout(gone);
+  }, [bubble]);
 
   useEffect(() => {
     window.addEventListener(ECHO_OPEN_EVENT, show);
@@ -196,18 +239,46 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
 
   return (
     <div className="echo" data-open={open}>
-      <button
-        ref={launcher}
-        type="button"
-        onClick={() => (open ? hide() : show())}
-        aria-label="Ask Echo"
-        aria-expanded={open}
-        aria-controls={panelId}
-        className="echo-launcher bg-ink border-gold/40 text-white"
-      >
-        <EchoFace size={44} />
-        <span className="echo-launcher__label">Ask Echo</span>
-      </button>
+      <div className="echo-launch">
+        {bubble !== "hidden" && (
+          <div className="echo-bubble" data-leaving={bubble === "leaving" || undefined}>
+            <button type="button" onClick={show} className="echo-bubble__say">
+              Want help?
+            </button>
+            <button
+              type="button"
+              onClick={retireBubble}
+              className="echo-bubble__close"
+              aria-label="Hide Echo's message"
+            >
+              <X aria-hidden="true" className="size-3" strokeWidth={3} />
+            </button>
+          </div>
+        )}
+        <button
+          ref={launcher}
+          type="button"
+          onClick={() => (open ? hide() : show())}
+          aria-label="Ask Echo"
+          aria-expanded={open}
+          aria-controls={panelId}
+          className="echo-launcher"
+        >
+          {/* Echo stands on a round stage, his head breaking out over its rim. */}
+          <span className="echo-stage" aria-hidden="true">
+            <span className="echo-stage__echo">
+              <Image
+                src="/images/mascot/echo-3d-v2.png"
+                alt=""
+                width={614}
+                height={800}
+                sizes="64px"
+                priority={false}
+              />
+            </span>
+          </span>
+        </button>
+      </div>
 
       <section
         id={panelId}

@@ -10,7 +10,7 @@ test("Echo greets guests beside their questions, in its own spotlight on dark pa
   ] as const) {
     await page.goto(path);
     const faq = page.locator("section[aria-labelledby='faq-title']");
-    const echo = faq.getByRole("img", { name: "Echo, the Talk-Masters mascot, waving hello" });
+    const echo = faq.getByRole("img", { name: "Echo, the Talk-Masters mascot, a friendly 3D microphone" });
     // Scroll by the heading: Echo never stops floating, so it never counts as "stable" to Playwright.
     await faq.getByRole("heading", { name: "Questions guests ask" }).scrollIntoViewIfNeeded();
     await expect(echo).toBeVisible();

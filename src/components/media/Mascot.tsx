@@ -1,10 +1,8 @@
 import Image from "next/image";
 
-/** Echo's poses (public/images/mascot/), with each file's size. */
+/** Echo's poses (public/images/mascot/), with each file's size. Add new 3D renders here. */
 const POSES = {
-  wave: { src: "/images/mascot/echo-wave.png", width: 509, height: 640, alt: "waving hello" },
-  cheer: { src: "/images/mascot/echo-cheer.png", width: 560, height: 640, alt: "cheering" },
-  think: { src: "/images/mascot/echo-think.png", width: 417, height: 640, alt: "thinking" },
+  stand: { src: "/images/mascot/echo-3d-v2.png", width: 614, height: 800, alt: "a friendly 3D microphone" },
 } as const;
 
 export type MascotPose = keyof typeof POSES;
@@ -23,7 +21,7 @@ interface MascotProps {
  * (globals.css, `.mascot`), transform only so it stays on the compositor, and holds still
  * under reduced motion. The ground shadow stays put and tightens as Echo rises.
  */
-export function Mascot({ pose = "wave", tone = "light", sizes = "136px", className = "" }: MascotProps) {
+export function Mascot({ pose = "stand", tone = "light", sizes = "136px", className = "" }: MascotProps) {
   const art = POSES[pose];
   return (
     <div className={`mascot ${tone === "dark" ? "mascot--on-dark" : ""} ${className}`}>

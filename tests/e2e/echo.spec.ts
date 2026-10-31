@@ -101,3 +101,36 @@ test("the shut panel is hidden from screen readers, and the open one passes an a
   const serious = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
   expect(serious.map((v) => v.id)).toEqual([]);
 });
+
+test("Echo says 'Want help?' once the page settles, and the bubble opens the chat", async ({ page }) => {
+  await page.goto("/pathways");
+  const bubble = page.getByRole("button", { name: "Want help?" });
+  await expect(bubble).toBeVisible({ timeout: 6_000 });
+  await bubble.click();
+  await expect(page.getByRole("dialog", { name: "Echo" })).toBeVisible();
+  await expect(bubble).toHaveCount(0);
+
+  // Once Echo has been opened, the bubble doesn't come back this visit.
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Ask Echo", exact: true })).toBeVisible();
+  await page.waitForTimeout(3_500);
+  await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
+});
+
+test("the bubble can be waved away, and steps aside on its own", async ({ page }) => {
+  await page.clock.install();
+  await page.goto("/");
+  await page.clock.runFor(2_500);
+  await expect(page.getByRole("button", { name: "Want help?" })).toBeVisible();
+  await page.getByRole("button", { name: "Hide Echo's message" }).click();
+  await page.clock.runFor(500);
+  await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
+  await expect(page.getByRole("dialog", { name: "Echo" })).toHaveCount(0);
+
+  await page.evaluate(() => sessionStorage.clear());
+  await page.reload();
+  await page.clock.runFor(2_500);
+  await expect(page.getByRole("button", { name: "Want help?" })).toBeVisible();
+  await page.clock.runFor(10_000);
+  await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
+});
