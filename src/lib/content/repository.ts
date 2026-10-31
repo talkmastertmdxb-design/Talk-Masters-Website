@@ -2,6 +2,7 @@ import type {
   Award,
   ClubEvent,
   CultureCard,
+  EchoScript,
   Faq,
   Founder,
   History,
@@ -39,6 +40,8 @@ export interface ContentRepository {
   readonly imageSlots: readonly ImageSlot[];
   /** /meetings: a real running order, its roles and the timing lights. */
   readonly meetingGuide: MeetingGuide;
+  /** Echo, the guest guide's questions and answers. */
+  readonly echo: EchoScript;
 }
 
 export type RawContent = {
@@ -75,5 +78,6 @@ export function createRepository(raw: RawContent): ContentRepository {
     pathways: raw.pathways,
     imageSlots: raw.imageSlots,
     meetingGuide: raw.meetingGuide,
+    echo: raw.echo,
   });
 }

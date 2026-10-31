@@ -1,5 +1,7 @@
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { AskEchoButton } from "@/components/echo/AskEchoButton";
+import { Mascot } from "@/components/media/Mascot";
 import { content } from "@/lib/content";
 
 interface FaqProps {
@@ -36,22 +38,31 @@ export function Faq({ tone = "light", showContactLink = true }: FaqProps) {
   return (
     <section id="faq" aria-labelledby="faq-title" className="py-section scroll-mt-24">
       <div className="container-site grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <p data-reveal="up" className={`text-eyebrow ${style.eyebrow}`}>
-            Before your first visit
-          </p>
-          <h2 id="faq-title" data-reveal="lines" className="text-h2 mt-5 max-w-[14ch]">
-            Questions guests ask
-          </h2>
-          {showContactLink && (
-            <p data-reveal="up" className={`mt-6 max-w-[34ch] ${style.answer}`}>
-              Something else on your mind?{" "}
-              <Link href="/join" className="nav-link font-semibold">
-                Message us on WhatsApp
-              </Link>
-              .
+        {/* Echo sits beside the heading on phones, so the page grows no taller, and below it on desktop. */}
+        <div className="flex items-end justify-between gap-6 lg:col-span-4 lg:flex-col lg:items-start lg:justify-start">
+          <div>
+            <p data-reveal="up" className={`text-eyebrow ${style.eyebrow}`}>
+              Before your first visit
             </p>
-          )}
+            <h2 id="faq-title" data-reveal="lines" className="text-h2 mt-5 max-w-[14ch]">
+              Questions guests ask
+            </h2>
+            {showContactLink && (
+              <p data-reveal="up" className={`mt-6 max-w-[34ch] ${style.answer}`}>
+                Something else on your mind?{" "}
+                <Link href="/join" className="nav-link font-semibold">
+                  Message us on WhatsApp
+                </Link>
+                .
+              </p>
+            )}
+            <div data-reveal="up" className="mt-3">
+              <AskEchoButton tone={tone} />
+            </div>
+          </div>
+          <div data-reveal="up" className="w-24 shrink-0 sm:w-28 lg:mt-8 lg:w-34">
+            <Mascot tone={tone} sizes="(min-width: 80rem) 136px, 112px" />
+          </div>
         </div>
 
         <div data-reveal="up" className={`divide-y border-y lg:col-span-8 ${style.rule}`}>

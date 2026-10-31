@@ -405,6 +405,68 @@ export const faqSchema = z.object({
   placeholder,
 });
 
+/** Live facts an Echo answer may name as {token}; filled from settings when shown (lib/echo/answers.ts). */
+export const ECHO_TOKENS = ["schedule", "time", "start", "arrive", "venue", "nextMeeting", "mapUrl"] as const;
+
+const echoQuestionSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/, "Use lowercase-and-dashes ids"),
+  /** Shown as a tappable chip, so keep it short. */
+  question: z.string().min(1).max(80),
+  /** Plain text; links as [label](/page). {tokens} must be one of ECHO_TOKENS. */
+  answer: z
+    .string()
+    .min(1)
+    .max(600)
+    .refine(
+      (text) =>
+        [...text.matchAll(/\{(\w+)\}/g)].every(([, token]) =>
+          (ECHO_TOKENS as readonly string[]).includes(token!),
+        ),
+      `Unknown {token}: use one of ${ECHO_TOKENS.join(", ")}`,
+    ),
+  /** Words and phrases a guest might type for this question. */
+  keywords: z.array(z.string().min(1)).min(1),
+  /** Ids of questions offered next. */
+  related: z.array(z.string()).default([]),
+  placeholder,
+});
+
+/** Echo, the guest guide's question bank (content/echo.json). */
+export const echoSchema = z
+  .object({
+    greeting: z.string().min(1),
+    /** Said when a typed question could be one of a few. */
+    suggest: z.string().min(1),
+    /** Said when nothing matches. */
+    fallback: z.string().min(1),
+    /** Ids of the questions shown first, above the topics. */
+    featured: z.array(z.string()).max(4).default([]),
+    topics: z
+      .array(
+        z.object({
+          id: z.string().regex(/^[a-z0-9-]+$/),
+          label: z.string().min(1).max(32),
+          questions: z.array(echoQuestionSchema).min(1),
+        }),
+      )
+      .min(1),
+  })
+  .superRefine((echo, ctx) => {
+    const ids = echo.topics.flatMap((topic) => topic.questions.map((question) => question.id));
+    const known = new Set(ids);
+    if (known.size !== ids.length) ctx.addIssue({ code: "custom", message: "Question ids must be unique" });
+    for (const question of echo.topics.flatMap((topic) => topic.questions)) {
+      for (const id of question.related) {
+        if (!known.has(id))
+          ctx.addIssue({ code: "custom", message: `"${question.id}" relates to unknown "${id}"` });
+      }
+    }
+    for (const id of echo.featured) {
+      if (!known.has(id))
+        ctx.addIssue({ code: "custom", message: `Featured question "${id}" doesn't exist` });
+    }
+  });
+
 /**
  * The About section's culture cards: what it's like to be in the room (content/culture.json).
  * The bento grid stacks up to three cards beside its photo, so one to three short cards.
@@ -595,6 +657,10 @@ export type Award = z.infer<typeof awardSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type Officer = z.infer<typeof officerSchema>;
 export type Faq = z.infer<typeof faqSchema>;
+export type EchoScript = z.infer<typeof echoSchema>;
+export type EchoTopic = EchoScript["topics"][number];
+export type EchoQuestion = EchoTopic["questions"][number];
+export type EchoToken = (typeof ECHO_TOKENS)[number];
 export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type MeetingGuide = z.infer<typeof meetingGuideSchema>;
 export type MeetingSession = MeetingGuide["sessions"][number];

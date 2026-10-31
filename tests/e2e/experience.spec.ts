@@ -47,6 +47,8 @@ test.describe("signature moments", () => {
   test("the pinned agenda clock advances as you scroll", async ({ page, isMobile }, testInfo) => {
     test.skip(isMobile || testInfo.project.name === "reduced-motion", "Pinning needs desktop and motion");
     await page.goto("/");
+    // Scroll once the pin exists: a scroll before hydration can be lost under a busy test run.
+    await expect(page.locator(".agenda[data-pinned]")).toBeAttached();
     const clock = page.locator("[data-agenda-clock]").first();
     const top = await page
       .locator("#inside-a-meeting")

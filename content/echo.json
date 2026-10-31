@@ -1,0 +1,620 @@
+{
+  "greeting": "Hi, I'm Echo! Pick a topic, or type a question, and I'll help you get ready for your first visit.",
+  "suggest": "I'm not completely sure what you mean. Is it one of these?",
+  "fallback": "I don't have an answer for that one yet. Try a topic below, or message the club on WhatsApp from [the guest page](/join): a member will be happy to help.",
+  "featured": ["what-talkmasters", "what-happens", "book"],
+  "topics": [
+    {
+      "id": "first-visit",
+      "label": "Your first visit",
+      "questions": [
+        {
+          "id": "book",
+          "question": "How do I book a guest visit?",
+          "answer": "Send us a WhatsApp message: the buttons on [the guest page](/join) open a chat with a message already written for you. Visiting is free.",
+          "keywords": [
+            "book",
+            "booking",
+            "rsvp",
+            "register",
+            "reserve",
+            "sign up",
+            "signup",
+            "attend",
+            "come along",
+            "join a meeting",
+            "whatsapp"
+          ],
+          "related": ["when-where", "cost-visit", "arrive"]
+        },
+        {
+          "id": "when-where",
+          "question": "When and where do you meet?",
+          "answer": "We meet on the {schedule}, {time}, at {venue}. The next meeting is {nextMeeting}. [Open the map]({mapUrl})",
+          "keywords": [
+            "when",
+            "where",
+            "location",
+            "venue",
+            "address",
+            "place",
+            "day",
+            "date",
+            "next meeting",
+            "library",
+            "sunday",
+            "map"
+          ],
+          "related": ["arrive", "parking", "book"]
+        },
+        {
+          "id": "arrive",
+          "question": "What time should I arrive?",
+          "answer": "Come from {arrive}. We start at {start}, so arriving a little early gives you time to sign in, find a seat and say hello.",
+          "keywords": ["arrive", "arrival", "what time", "early", "late", "start time", "starts"],
+          "related": ["how-long", "parking", "food"]
+        },
+        {
+          "id": "how-long",
+          "question": "How long is a meeting?",
+          "answer": "About two hours: {time}, with a 15-minute break for breakfast.",
+          "keywords": ["how long", "duration", "length", "hours", "finish", "end", "ends"],
+          "related": ["what-happens", "food"]
+        },
+        {
+          "id": "cost-visit",
+          "question": "Does it cost anything to visit?",
+          "answer": "No. Visiting as a guest is free.",
+          "keywords": ["cost", "free", "price", "pay", "fee", "charge", "money", "visit free"],
+          "related": ["fees", "book"]
+        },
+        {
+          "id": "parking",
+          "question": "Is there parking?",
+          "answer": "Yes, parking is free on Sundays.",
+          "keywords": ["parking", "park", "car", "drive", "driving"],
+          "related": ["when-where", "food"]
+        },
+        {
+          "id": "food",
+          "question": "Is food included?",
+          "answer": "Yes, breakfast is included, with a 15-minute break to eat and meet everyone.",
+          "keywords": ["food", "breakfast", "eat", "coffee", "drink", "snack", "lunch"],
+          "related": ["how-long", "parking"]
+        },
+        {
+          "id": "wear",
+          "question": "What should I wear?",
+          "answer": "Come as you are. Smart casual is common, but there's no dress code.",
+          "keywords": ["wear", "dress", "dress code", "clothes", "outfit", "formal", "casual"],
+          "related": ["prepare", "arrive"],
+          "placeholder": true
+        },
+        {
+          "id": "prepare",
+          "question": "Do I need to prepare anything?",
+          "answer": "Nothing at all. Just bring yourself, and a notebook if you like jotting down ideas.",
+          "keywords": ["prepare", "preparation", "bring", "need to bring", "ready", "laptop", "notebook"],
+          "related": ["will-speak", "wear"],
+          "placeholder": true
+        },
+        {
+          "id": "bring-friend",
+          "question": "Can I bring a friend?",
+          "answer": "Of course. Let us know on WhatsApp how many of you are coming, so we have seats ready.",
+          "keywords": [
+            "friend",
+            "friends",
+            "bring someone",
+            "partner",
+            "colleague",
+            "spouse",
+            "family",
+            "together"
+          ],
+          "related": ["book", "children"],
+          "placeholder": true
+        },
+        {
+          "id": "online",
+          "question": "Can I join online?",
+          "answer": "Not at the moment: all our meetings are in person, at {venue}.",
+          "keywords": ["online", "zoom", "virtual", "remote", "video call", "from home", "hybrid"],
+          "related": ["when-where", "book"],
+          "placeholder": false
+        },
+        {
+          "id": "language",
+          "question": "What language are meetings in?",
+          "answer": "English.",
+          "keywords": ["language", "english", "arabic", "hindi", "malayalam", "urdu"],
+          "related": ["english-level"],
+          "placeholder": true
+        },
+        {
+          "id": "children",
+          "question": "Can children or teenagers come?",
+          "answer": "Yes, children and teenagers are welcome too. A friendly room is a great place for young people to build confidence early.",
+          "keywords": [
+            "children",
+            "child",
+            "kids",
+            "kid",
+            "teen",
+            "teenager",
+            "teenagers",
+            "son",
+            "daughter",
+            "age",
+            "young",
+            "student",
+            "school"
+          ],
+          "related": ["who-can-join", "bring-friend"],
+          "placeholder": false
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "label": "Nerves & speaking",
+      "questions": [
+        {
+          "id": "will-speak",
+          "question": "Will I have to speak?",
+          "answer": "Only if you want to. We always ask before calling on a guest, and \"not today\" is a perfectly good answer. Many guests simply watch on their first visit.",
+          "keywords": [
+            "have to speak",
+            "must i speak",
+            "forced",
+            "called on",
+            "put on the spot",
+            "speak",
+            "talk",
+            "stage"
+          ],
+          "related": ["nervous", "table-topics"],
+          "placeholder": true
+        },
+        {
+          "id": "nervous",
+          "question": "I get nervous speaking in public",
+          "answer": "That's completely normal, and it's exactly why people join. Every member here started with the same nerves. You'll be in a friendly room where everyone is practising, and you'll speak only when you're ready.",
+          "keywords": [
+            "nervous",
+            "nerves",
+            "scared",
+            "afraid",
+            "fear",
+            "anxious",
+            "anxiety",
+            "shy",
+            "stage fright",
+            "panic",
+            "confidence",
+            "confident"
+          ],
+          "related": ["will-speak", "mistakes", "beginner"]
+        },
+        {
+          "id": "beginner",
+          "question": "I'm a complete beginner. Is that okay?",
+          "answer": "That's exactly who Toastmasters is for. Everyone starts somewhere, and you'll progress at your own pace with a mentor.",
+          "keywords": [
+            "beginner",
+            "never spoken",
+            "first time",
+            "no experience",
+            "new to",
+            "novice",
+            "start"
+          ],
+          "related": ["mentor", "nervous"]
+        },
+        {
+          "id": "mistakes",
+          "question": "What if I make a mistake?",
+          "answer": "Then you're in good company. Mistakes are how everyone learns here, and the feedback is kind: what worked well, and one thing to try next time.",
+          "keywords": [
+            "mistake",
+            "mistakes",
+            "mess up",
+            "forget",
+            "blank",
+            "embarrass",
+            "embarrassed",
+            "wrong",
+            "fail"
+          ],
+          "related": ["evaluations", "nervous"]
+        },
+        {
+          "id": "english-level",
+          "question": "English isn't my first language. Is that okay?",
+          "answer": "Absolutely. Many of our members speak English as a second or third language, and the club is a safe place to build fluency and confidence together.",
+          "keywords": [
+            "english",
+            "accent",
+            "first language",
+            "second language",
+            "fluent",
+            "fluency",
+            "grammar",
+            "vocabulary",
+            "not native"
+          ],
+          "related": ["language", "nervous"]
+        },
+        {
+          "id": "table-topics",
+          "question": "What are Table Topics?",
+          "answer": "Short, unprepared speeches of one to two minutes on a surprise topic. It's great practice for thinking on your feet, and guests are welcome to try one if they'd like.",
+          "keywords": [
+            "table topics",
+            "table topic",
+            "impromptu",
+            "unprepared",
+            "surprise",
+            "think on my feet"
+          ],
+          "related": ["will-speak", "what-happens"]
+        }
+      ]
+    },
+    {
+      "id": "meetings",
+      "label": "Inside a meeting",
+      "questions": [
+        {
+          "id": "what-happens",
+          "question": "What happens at Talk-Masters?",
+          "answer": "Twice a month we meet for two structured hours: prepared speeches, impromptu Table Topics and supportive evaluations, kept on time by a timer with green, amber and red lights. Between meetings, members work through Pathways, take on club roles, compete in speech contests and join events like She Leads. See a full running order on [the meetings page](/meetings).",
+          "keywords": [
+            "what happens",
+            "agenda",
+            "programme",
+            "program",
+            "schedule",
+            "format",
+            "structure",
+            "running order",
+            "expect",
+            "what do you do",
+            "happens at talk-masters",
+            "activities"
+          ],
+          "related": ["roles", "evaluations", "lights"]
+        },
+        {
+          "id": "lights",
+          "question": "What do the green, amber and red lights mean?",
+          "answer": "They're the timer's signals. Green means you've reached the minimum time, amber means you're close to the limit, and red means it's time to wrap up. Try them on [the meetings page](/meetings).",
+          "keywords": ["lights", "light", "green", "amber", "yellow", "red", "timer", "timing", "time limit"],
+          "related": ["what-happens", "roles"]
+        },
+        {
+          "id": "evaluations",
+          "question": "What is an evaluation?",
+          "answer": "After each prepared speech, an experienced member gives short, kind feedback: what worked well, and one or two things to try next time. It's how everyone improves.",
+          "keywords": ["evaluation", "evaluations", "evaluator", "feedback", "critique", "review", "judge"],
+          "related": ["mistakes", "roles"]
+        },
+        {
+          "id": "roles",
+          "question": "What roles are there at a meeting?",
+          "answer": "Members take turns as the Toastmaster of the Day (the host), speakers, evaluators, the Table Topics Master, the timer and the grammarian, among others. Each role practises a different skill. See them all on [the meetings page](/meetings).",
+          "keywords": [
+            "role",
+            "roles",
+            "toastmaster of the day",
+            "grammarian",
+            "ah counter",
+            "timer",
+            "host",
+            "jobs"
+          ],
+          "related": ["what-happens", "benefits"]
+        },
+        {
+          "id": "how-often",
+          "question": "How often do you meet?",
+          "answer": "Twice a month, on the {schedule}.",
+          "keywords": ["how often", "frequency", "every week", "weekly", "monthly", "twice"],
+          "related": ["when-where", "book"]
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "label": "Joining the club",
+      "questions": [
+        {
+          "id": "become-member",
+          "question": "How do I become a member?",
+          "answer": "After a visit or two, tell any member you'd like to join and we'll walk you through it. You can also ask on WhatsApp from [the guest page](/join).",
+          "keywords": [
+            "become a member",
+            "membership",
+            "join the club",
+            "joining",
+            "member",
+            "enrol",
+            "enroll",
+            "apply"
+          ],
+          "related": ["fees", "benefits", "visits-before"],
+          "placeholder": true
+        },
+        {
+          "id": "fees",
+          "question": "How much does membership cost?",
+          "answer": "Membership dues are confirmed by the club. Ask us on WhatsApp from [the guest page](/join), or at any meeting.",
+          "keywords": [
+            "membership fee",
+            "membership cost",
+            "cost to join",
+            "cost to become",
+            "fees",
+            "dues",
+            "cost",
+            "price",
+            "how much",
+            "expensive",
+            "subscription",
+            "aed",
+            "dirham"
+          ],
+          "related": ["benefits", "become-member"],
+          "placeholder": true
+        },
+        {
+          "id": "visits-before",
+          "question": "How many times can I visit before joining?",
+          "answer": "Come as often as you need to feel sure. There's no pressure to join on your first visit.",
+          "keywords": [
+            "how many times",
+            "visits",
+            "visit again",
+            "before joining",
+            "try",
+            "trial",
+            "more than once"
+          ],
+          "related": ["become-member", "book"],
+          "placeholder": true
+        },
+        {
+          "id": "who-can-join",
+          "question": "Who can join?",
+          "answer": "Everyone. Our members come from every age group, gender and background: students, professionals, parents, career changers and retirees.",
+          "keywords": [
+            "who can join",
+            "eligible",
+            "anyone",
+            "everyone",
+            "women",
+            "men",
+            "retired",
+            "professional",
+            "nationality"
+          ],
+          "related": ["become-member", "children"]
+        },
+        {
+          "id": "benefits",
+          "question": "What do I get as a member?",
+          "answer": "Your first Pathways learning path, a mentor, regular chances to speak and lead, kind feedback on every speech, and a network of people from every background.",
+          "keywords": [
+            "benefit",
+            "benefits",
+            "what do i get",
+            "why join",
+            "worth it",
+            "advantages",
+            "gain",
+            "career",
+            "networking",
+            "leadership"
+          ],
+          "related": ["what-pathways", "mentor", "fees"]
+        }
+      ]
+    },
+    {
+      "id": "pathways",
+      "label": "Learning & growth",
+      "questions": [
+        {
+          "id": "what-pathways",
+          "question": "What is Pathways?",
+          "answer": "Pathways is the Toastmasters learning programme. You choose a path that fits your goals, from storytelling to leadership, and work through it with speeches and roles at real meetings. Your first path is included with membership. [Explore Pathways](/pathways)",
+          "keywords": [
+            "pathways",
+            "pathway",
+            "path",
+            "programme",
+            "program",
+            "curriculum",
+            "course",
+            "learning",
+            "base camp"
+          ],
+          "related": ["paths", "path-length", "mentor"]
+        },
+        {
+          "id": "paths",
+          "question": "Which paths can I choose?",
+          "answer": "Six: Presentation Mastery, Dynamic Leadership, Persuasive Influence, Motivational Strategies, Visionary Communication and Engaging Humor. Not sure which suits you? Take the quiz on [the Pathways page](/pathways).",
+          "keywords": [
+            "which path",
+            "paths",
+            "choose",
+            "options",
+            "presentation mastery",
+            "dynamic leadership",
+            "persuasive",
+            "humor",
+            "humour",
+            "quiz"
+          ],
+          "related": ["what-pathways", "path-length"]
+        },
+        {
+          "id": "path-length",
+          "question": "How long does a path take?",
+          "answer": "Each path has 5 levels and 15 projects. You go at your own pace, so how long it takes depends on how often you speak.",
+          "keywords": ["how long", "levels", "projects", "complete", "finish a path", "duration", "time"],
+          "related": ["paths", "mentor"]
+        },
+        {
+          "id": "mentor",
+          "question": "Will I get a mentor?",
+          "answer": "Yes. New members are paired with an experienced member who helps with your first speeches and roles.",
+          "keywords": ["mentor", "mentoring", "help", "support", "guide", "coach"],
+          "related": ["beginner", "what-pathways"]
+        },
+        {
+          "id": "contests",
+          "question": "Are there speech contests?",
+          "answer": "Yes. Toastmasters runs speech contests every year, from club level all the way to the World Championship of Public Speaking. Our members have competed at Area level and beyond.",
+          "keywords": [
+            "contest",
+            "contests",
+            "competition",
+            "compete",
+            "championship",
+            "humorous speech",
+            "international speech",
+            "win"
+          ],
+          "related": ["awards", "what-pathways"]
+        }
+      ]
+    },
+    {
+      "id": "club",
+      "label": "About Talk-Masters",
+      "questions": [
+        {
+          "id": "what-talkmasters",
+          "question": "What is Talk-Masters?",
+          "answer": "Talk-Masters Club is a public speaking and leadership club in Dubai, part of Toastmasters International. It began in 2016 and is open to everyone, of every age and background: a friendly room to practise speaking, get kind feedback and grow as a leader.",
+          "keywords": [
+            "talk-masters",
+            "talkmasters",
+            "talk masters",
+            "this club",
+            "your club",
+            "about the club",
+            "what is this",
+            "who are you"
+          ],
+          "related": ["what-happens", "book", "who-can-join"]
+        },
+        {
+          "id": "what-toastmasters",
+          "question": "What is Toastmasters International?",
+          "answer": "A non-profit that has helped people become better speakers and leaders for over a century, through clubs like ours all over the world.",
+          "keywords": [
+            "toastmasters",
+            "international",
+            "organisation",
+            "organization",
+            "what is",
+            "non-profit",
+            "global"
+          ],
+          "related": ["history", "what-pathways"]
+        },
+        {
+          "id": "history",
+          "question": "How long has Talk-Masters been running?",
+          "answer": "Since 2016. Talk-Masters began as an independent speaking club and later joined Toastmasters International. [Read our story](/our-story)",
+          "keywords": [
+            "history",
+            "since",
+            "founded",
+            "started",
+            "how old",
+            "how long",
+            "established",
+            "story"
+          ],
+          "related": ["who-runs", "awards"]
+        },
+        {
+          "id": "who-runs",
+          "question": "Who runs the club?",
+          "answer": "A committee of members elected each year, led by our President. Meet them on [the team page](/team).",
+          "keywords": [
+            "who runs",
+            "committee",
+            "president",
+            "officers",
+            "leaders",
+            "team",
+            "excom",
+            "executive"
+          ],
+          "related": ["contact", "history"]
+        },
+        {
+          "id": "awards",
+          "question": "Has the club won any awards?",
+          "answer": "Yes, including the Smedley Award and the Triple Crown Award, and points in the Distinguished Club Program. See them all on [our achievements page](/achievements).",
+          "keywords": [
+            "award",
+            "awards",
+            "achievement",
+            "achievements",
+            "smedley",
+            "triple crown",
+            "distinguished",
+            "won"
+          ],
+          "related": ["contests", "history"]
+        },
+        {
+          "id": "contact",
+          "question": "How can I contact the club?",
+          "answer": "On WhatsApp: [the guest page](/join) has buttons to message our membership and education leads directly.",
+          "keywords": [
+            "contact",
+            "phone",
+            "call",
+            "message",
+            "email",
+            "reach",
+            "talk to someone",
+            "number",
+            "instagram",
+            "linkedin"
+          ],
+          "related": ["book", "who-runs"]
+        },
+        {
+          "id": "events",
+          "question": "Do you hold special events?",
+          "answer": "Yes. Alongside speech contests and special meetings like our 100th, \"Century of Voice\", we host She Leads – Where Every Woman Is a Leader, a networking event for women. Ask us on WhatsApp what's coming up next.",
+          "keywords": [
+            "event",
+            "events",
+            "special",
+            "workshop",
+            "masterclass",
+            "social",
+            "party",
+            "celebration",
+            "open house",
+            "she leads",
+            "networking event",
+            "women's event",
+            "ladies"
+          ],
+          "related": ["contests", "contact"],
+          "placeholder": false
+        }
+      ]
+    }
+  ]
+}
