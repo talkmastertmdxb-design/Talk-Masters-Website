@@ -749,12 +749,6 @@
     isolation: isolate;
     padding-bottom: 14px;
   }
-  .mascot__img {
-    display: block;
-    width: 100%;
-    height: auto;
-    user-select: none;
-  }
   .mascot__breathe {
     transform-origin: 50% 100%;
   }
@@ -799,7 +793,114 @@
     }
   }
 
-  /* On dark sections: a gold spotlight behind, a rim of light on the outline, a warm pool below. */
+  /*
+   * Echo's figure (components/media/EchoFigure.tsx): every pose stacked on one canvas, one showing.
+   * A change of pose is a quick pop: the new one springs up from the feet as the old one fades.
+   */
+  .echo-figure {
+    position: relative;
+    display: block;
+  }
+  .echo-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+  }
+  .echo-figure__pose {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    scale: 0.92;
+    transform-origin: 50% 100%;
+    transition:
+      opacity 0.18s var(--ease-deliver),
+      scale 0.36s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  /* The first pose sizes the stack; the rest sit over it. */
+  .echo-figure__pose:first-child {
+    position: relative;
+    display: block;
+  }
+  .echo-figure[data-pose="wave"] > [data-pose="wave"],
+  .echo-figure[data-pose="think"] > [data-pose="think"],
+  .echo-figure[data-pose="point"] > [data-pose="point"],
+  .echo-figure[data-pose="cheer"] > [data-pose="cheer"] {
+    opacity: 1;
+    scale: 1;
+  }
+  /* The raised arm turns at the shoulder: the join is at 31.6% across, 41.3% down the canvas. */
+  .echo-figure__arm {
+    position: absolute;
+    inset: 0;
+    transform-origin: 31.6% 41.3%;
+  }
+  /* Hover or keyboard focus: Echo jumps for joy. Hover only where it can't stick after a tap. */
+  .echo-launcher:focus-visible .echo-figure > .echo-figure__pose {
+    opacity: 0;
+    scale: 0.92;
+  }
+  .echo-launcher:focus-visible .echo-figure > [data-pose="cheer"] {
+    opacity: 1;
+    scale: 1;
+  }
+  @media (hover: hover) {
+    :is(.echo-launcher, .mascot):hover .echo-figure > .echo-figure__pose {
+      opacity: 0;
+      scale: 0.92;
+    }
+    :is(.echo-launcher, .mascot):hover .echo-figure > [data-pose="cheer"] {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    /* A wave of four beats every 7 seconds, then a rest, so it greets without nagging. */
+    .echo-figure__arm {
+      animation: echo-wave 7s ease-in-out 0.8s infinite;
+    }
+    .echo-launcher:focus-visible .echo-figure > [data-pose="cheer"] {
+      animation: echo-hop 0.9s var(--ease-deliver) infinite;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    :is(.echo-launcher, .mascot):hover .echo-figure > [data-pose="cheer"] {
+      animation: echo-hop 0.9s var(--ease-deliver) infinite;
+    }
+  }
+  @keyframes echo-wave {
+    0%,
+    22%,
+    100% {
+      rotate: 0deg;
+    }
+    4%,
+    12% {
+      rotate: -16deg;
+    }
+    8%,
+    16% {
+      rotate: 4deg;
+    }
+    19% {
+      rotate: -6deg;
+    }
+  }
+  @keyframes echo-hop {
+    0%,
+    60%,
+    100% {
+      translate: 0 0;
+    }
+    28% {
+      translate: 0 -9%;
+    }
+  }
+
+  /*
+   * On dark sections: a white sticker outline so his dark arms and legs never sink into the
+   * background, a gold spotlight behind and a warm pool below.
+   */
   .mascot--on-dark::before {
     content: "";
     position: absolute;
@@ -813,8 +914,10 @@
     );
     pointer-events: none;
   }
-  .mascot--on-dark .mascot__img {
-    filter: drop-shadow(0 0 1px rgb(255 255 255 / 0.7)) drop-shadow(0 0 10px rgb(214 176 106 / 0.35));
+  .mascot--on-dark .echo-figure {
+    filter: drop-shadow(1.5px 0 0 var(--color-white)) drop-shadow(-1.5px 0 0 var(--color-white))
+      drop-shadow(0 1.5px 0 var(--color-white)) drop-shadow(0 -1.5px 0 var(--color-white))
+      drop-shadow(0 0 10px rgb(214 176 106 / 0.35));
   }
   .mascot--on-dark .mascot__shadow {
     width: 78%;
@@ -854,23 +957,24 @@
   }
 
   /*
-   * The launcher: Echo on a round navy stage with a gold rim, his head breaking out over the top.
-   * He floats gently; the stage stays put. Hover lifts the stage a touch.
+   * The launcher: Echo himself, standing in the corner over a soft pool of shadow. A thin white
+   * sticker outline keeps his dark arms and legs clear over any section, light or dark. He floats
+   * gently; hover lifts him a touch.
    */
   .echo-launch {
-    --echo-size: 4rem;
+    --echo-size: 4.75rem;
     position: relative;
   }
   @media (min-width: 40rem) {
     .echo-launch {
-      --echo-size: 4.75rem;
+      --echo-size: 5.75rem;
     }
   }
   .echo-launcher {
+    position: relative;
     display: block;
     width: var(--echo-size);
-    height: var(--echo-size);
-    border-radius: 50%;
+    border-radius: 1rem;
     transition:
       transform var(--duration-quick) var(--ease-deliver),
       opacity var(--duration-quick) var(--ease-deliver);
@@ -882,52 +986,51 @@
     outline: 3px solid var(--color-gold);
     outline-offset: 4px;
   }
-  .echo-stage {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at 34% 28%,
-      #0d5c88 0%,
-      var(--color-tm-blue) 42%,
-      var(--color-ink) 100%
-    );
-    box-shadow:
-      inset 0 0 0 2px rgb(214 176 106 / 0.75),
-      0 14px 32px rgb(11 18 32 / 0.34);
-  }
-  /* Where Echo stands: a soft pool of shadow on the stage floor. */
-  .echo-stage::after {
+  .echo-launcher::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 12%;
-    width: 56%;
-    height: 10%;
+    bottom: -0.25rem;
+    width: 60%;
+    height: 0.625rem;
     border-radius: 50%;
-    background: radial-gradient(closest-side, rgb(0 0 0 / 0.45), transparent);
+    background: radial-gradient(closest-side, rgb(11 18 32 / 0.3), transparent);
     translate: -50% 0;
   }
-  .echo-stage__echo {
-    --mascot-rise: -4px;
-    position: absolute;
-    left: 52%;
-    bottom: 13%;
+  .echo-launcher__echo {
+    --mascot-rise: -5px;
+    position: relative;
     z-index: 1;
-    width: 84%;
-    translate: -50% 0;
-  }
-  .echo-stage__echo img {
     display: block;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 4px 6px rgb(11 18 32 / 0.25));
+  }
+  /* The sticker outline, shared with Echo in the chat's dark header. */
+  :is(.echo-launcher__echo, .echo-header-echo) .echo-figure {
+    filter: drop-shadow(1.5px 0 0 var(--color-white)) drop-shadow(-1.5px 0 0 var(--color-white))
+      drop-shadow(0 1.5px 0 var(--color-white)) drop-shadow(0 -1.5px 0 var(--color-white))
+      drop-shadow(0 6px 8px rgb(11 18 32 / 0.22));
+  }
+  /* In the corner the bubble and the chat sit up and to his left, so he points that way. */
+  .echo-launcher [data-pose="point"] img {
+    scale: -1 1;
   }
   @media (prefers-reduced-motion: no-preference) {
     .echo-launcher {
       animation: echo-arrive 0.9s var(--ease-deliver) 1.2s both;
     }
-    .echo-stage__echo {
+    .echo-launcher__echo {
+      animation: mascot-float 5s var(--ease-breath) infinite;
+    }
+  }
+
+  /* In the chat: Echo beside his name, reaching into the header's padding but never past it. */
+  .echo-header-echo {
+    --mascot-rise: -3px;
+    flex-shrink: 0;
+    width: 4rem;
+    margin: -0.375rem 0 -0.875rem -0.5rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .echo-header-echo {
       animation: mascot-float 5s var(--ease-breath) infinite;
     }
   }
@@ -953,7 +1056,7 @@
   .echo-bubble {
     position: absolute;
     right: calc(var(--echo-size) * 0.3);
-    bottom: calc(var(--echo-size) + 1.5rem);
+    bottom: calc(var(--echo-size) * 0.9 + 1rem);
     rotate: -4deg;
     transform-origin: 82% 130%;
     transition: rotate var(--duration-quick) var(--ease-deliver);

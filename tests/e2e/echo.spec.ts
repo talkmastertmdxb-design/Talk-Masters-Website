@@ -120,12 +120,17 @@ test("Echo says 'Want help?' once the page settles, and the bubble opens the cha
 test("the bubble can be waved away, and steps aside on its own", async ({ page }) => {
   await page.clock.install();
   await page.goto("/");
+  // Echo waves while the page settles, then points up at his bubble while it's there.
+  const figure = page.locator(".echo-launcher .echo-figure");
+  await expect(figure).toHaveAttribute("data-pose", "wave");
   await page.clock.runFor(2_500);
   await expect(page.getByRole("button", { name: "Want help?" })).toBeVisible();
+  await expect(figure).toHaveAttribute("data-pose", "point");
   await page.getByRole("button", { name: "Hide Echo's message" }).click();
   await page.clock.runFor(500);
   await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
   await expect(page.getByRole("dialog", { name: "Echo" })).toHaveCount(0);
+  await expect(figure).toHaveAttribute("data-pose", "wave");
 
   await page.evaluate(() => sessionStorage.clear());
   await page.reload();

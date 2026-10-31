@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowLeft, ArrowUp, RotateCcw, X } from "lucide-react";
-import Image from "next/image";
 import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import type { EchoQuestion, EchoScript, Settings } from "@/lib/content/schemas";
 import { echoFacts } from "@/lib/echo/answers";
@@ -19,6 +18,7 @@ import {
   type ChatState,
   type EchoReply as Reply,
 } from "@/lib/echo/conversation";
+import { EchoFigure, type EchoPose } from "@/components/media/EchoFigure";
 import { media } from "@/lib/motion/tokens";
 import { EchoReply } from "./EchoReply";
 
@@ -41,19 +41,6 @@ const sessionStore = (): Storage | undefined => {
     return undefined;
   }
 };
-
-/** Echo's face, cut from the 3D figure, for the chat's header. */
-function EchoFace({ size }: { size: number }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="bg-tm-blue ring-gold/60 inline-flex shrink-0 overflow-hidden rounded-full ring-1"
-      style={{ width: size, height: size }}
-    >
-      <Image src="/images/mascot/echo-3d-head.png" alt="" width={size} height={size} sizes={`${size}px`} />
-    </span>
-  );
-}
 
 interface EchoChatProps {
   /** content/echo.json: every question and answer. */
@@ -227,6 +214,12 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
     setChat((current) => ({ ...current, options: next }));
   };
 
+  // Echo acts out what's happening. In the corner he points up at "Want help?" or at the open chat,
+  // and otherwise waves; hover makes him jump for joy (CSS). In the chat he thinks while an answer
+  // is on its way.
+  const cornerPose: EchoPose = open || bubble === "shown" ? "point" : "wave";
+  const chatPose: EchoPose = thinking ? "think" : "wave";
+
   const featured = script.featured.flatMap((id) => questions.get(id) ?? []);
   const { options } = chat;
   const topic = options.kind === "topic" ? script.topics.find((t) => t.id === options.topicId) : undefined;
@@ -264,18 +257,8 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
           aria-controls={panelId}
           className="echo-launcher"
         >
-          {/* Echo stands on a round stage, his head breaking out over its rim. */}
-          <span className="echo-stage" aria-hidden="true">
-            <span className="echo-stage__echo">
-              <Image
-                src="/images/mascot/echo-3d-v2.png"
-                alt=""
-                width={614}
-                height={800}
-                sizes="64px"
-                priority={false}
-              />
-            </span>
+          <span className="echo-launcher__echo">
+            <EchoFigure pose={cornerPose} sizes="96px" />
           </span>
         </button>
       </div>
@@ -289,7 +272,9 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
         className="echo-panel rounded-card text-ink bg-white"
       >
         <header className="bg-ink flex items-center gap-3 px-5 py-4 text-white">
-          <EchoFace size={40} />
+          <span className="echo-header-echo">
+            <EchoFigure pose={chatPose} sizes="72px" />
+          </span>
           <div className="min-w-0 flex-1">
             <h2 id={titleId} className="font-serif text-xl leading-tight">
               Echo
