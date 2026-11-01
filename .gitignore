@@ -54,6 +54,9 @@ next-env.d.ts
 
 # Design references: animation templates and demos (third-party, unknown licence; not used by the site)
 /design-references/
+
+# Launch videos made with /brag-slim (rendered output and working files)
+/brag-output*/
 .DS_Store
 
 # Original photo uploads (copied into public/images with clean names)
