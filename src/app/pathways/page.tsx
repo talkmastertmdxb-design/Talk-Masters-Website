@@ -94,7 +94,7 @@ export default function PathwaysPage() {
               How it works
             </p>
             <h2 id="levels-title" data-reveal="lines" className="text-h2 mt-5 max-w-[14ch]">
-              Five levels. <em className="text-tm-blue">One step at a time.</em>
+              How does Pathways work? <em className="text-tm-blue">Five levels, one step at a time.</em>
             </h2>
             <p data-reveal="text" className="text-ink-muted mt-6 max-w-[36ch]">
               Every path follows the same five levels. Each project is a speech or a meeting role you deliver

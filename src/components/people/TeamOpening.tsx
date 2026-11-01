@@ -1,6 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { LastUpdated } from "@/components/ui/LastUpdated";
+import { content } from "@/lib/content";
 import type { Officer } from "@/lib/content/schemas";
 import { shortTerm } from "@/lib/content/people";
 
@@ -36,15 +38,20 @@ export function TeamOpening({ president, others, facts }: TeamOpeningProps) {
               Seven volunteers. One job: a better room every meeting.
             </h1>
             <p data-reveal="up" className="text-ink-muted mt-6 max-w-[44ch] text-lg leading-relaxed">
-              They plan every meeting, welcome every guest and look after every member&apos;s progress. Each
-              of them started where you might be now: in the audience, deciding whether to speak.
+              The Executive Committee is the team of volunteers who run {content.settings.clubName}
+              {term ? ` for ${term}` : ""}. They plan every
+              meeting, welcome every guest and look after every member&apos;s progress. Each of them started
+              where you might be now: in the audience, deciding whether to speak.
             </p>
           </div>
-          {facts.length > 0 && (
-            <p data-reveal="up" className="text-ink-muted text-sm">
-              {facts.join(" · ")}
-            </p>
-          )}
+          <div className="flex flex-col gap-1.5">
+            {facts.length > 0 && (
+              <p data-reveal="up" className="text-ink-muted text-sm">
+                {facts.join(" · ")}
+              </p>
+            )}
+            <LastUpdated date={content.updates.team} className="text-ink-muted" />
+          </div>
         </div>
 
         <ul

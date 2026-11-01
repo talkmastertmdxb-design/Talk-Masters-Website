@@ -79,8 +79,8 @@ export function Hero() {
               data-hero-item
               className="hero-lead text-lead mt-2 max-w-[44ch] text-white/80 max-sm:text-[0.9375rem] max-sm:leading-[1.5] sm:mt-4"
             >
-              Talk-Masters Club helps people of every age and background build the confidence to speak, lead
-              and be heard, one friendly meeting at a time.
+              Talk-Masters Club is a Toastmasters public speaking club in Dubai, helping people of every age
+              speak, lead and be heard.
             </p>
 
             <div

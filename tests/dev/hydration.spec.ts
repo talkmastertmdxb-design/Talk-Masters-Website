@@ -27,9 +27,9 @@ test("reveals still run after client-side navigation", async ({ page }) => {
   await page.goto("/", { waitUntil: "load" });
   await page.getByRole("link", { name: "Our Story" }).first().click();
   await expect(page).toHaveURL(/\/our-story$/);
-  const heading = page.getByRole("heading", { name: "Why Talk-Masters was created" });
+  const heading = page.getByRole("heading", { name: "Why was Talk-Masters created?" });
   await heading.scrollIntoViewIfNeeded();
-  await expect(heading).toHaveAttribute("aria-label", /Why Talk-Masters was created/, { timeout: 10_000 });
+  await expect(heading).toHaveAttribute("aria-label", /Why was Talk-Masters created\?/, { timeout: 10_000 });
   await expect(heading).toHaveCSS("opacity", "1");
   expect(errors).toEqual([]);
 });

@@ -535,6 +535,20 @@ export const pathwaysSchema = z
 
 export const ROLE_GROUPS = ["lead", "functionary", "officer", "support"] as const;
 
+/** A day that has already come: a page can't have been updated in the future. */
+const pastDay = z.iso.date().refine((day) => Date.parse(day) <= Date.now(), "Use a date that has passed");
+
+/**
+ * When the facts on a page last changed (content/updates.json): shown as "Last updated" and
+ * sent to search engines as the sitemap's lastmod. Bump a date whenever that page's content changes.
+ */
+export const updatesSchema = z.object({
+  /** /meetings: content/meeting-guide.json and the meeting rule in settings. */
+  meetings: pastDay,
+  /** /team: content/officers.json. */
+  team: pastDay,
+});
+
 /**
  * /meetings: a real meeting's running order, the roles in it, and the timing lights.
  * Every role an agenda item names must be described in `roles`.
@@ -663,6 +677,7 @@ export type EchoQuestion = EchoTopic["questions"][number];
 export type EchoToken = (typeof ECHO_TOKENS)[number];
 export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type MeetingGuide = z.infer<typeof meetingGuideSchema>;
+export type Updates = z.infer<typeof updatesSchema>;
 export type MeetingSession = MeetingGuide["sessions"][number];
 export type MeetingRole = MeetingGuide["roles"][number];
 export type SpeechTiming = MeetingGuide["timing"][number];

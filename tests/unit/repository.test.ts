@@ -17,6 +17,7 @@ const base: RawContent = {
   imageSlots: [],
   meetingGuide: content.meetingGuide,
   echo: content.echo,
+  updates: content.updates,
 };
 
 const event = (slug: string, startsAt: string, status: "draft" | "published" = "published") => ({

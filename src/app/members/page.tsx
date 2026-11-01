@@ -27,7 +27,7 @@ export default function MembersPage() {
       <PageBreadcrumb name="Members" path="/members" />
       <PageHeader
         title="Meet the people behind the voices"
-        lead="Engineers and teachers, parents and career changers. Different starting points, the same room, and stories worth hearing."
+        lead="Talk-Masters members are people of every age and background who meet twice a month in Dubai to practise speaking and leading: engineers and teachers, parents and career changers, each with a story worth hearing."
         imageSlot="members-hero"
       />
 

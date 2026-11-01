@@ -24,7 +24,7 @@ export default function OurStoryPage() {
       <PageBreadcrumb name="Our story" path="/our-story" />
       <PageHeader
         title="Every great speaker starts with a single conversation."
-        lead="Talk-Masters began the same way: a few people who wanted to speak with confidence, and a room where anyone could practise."
+        lead={`Talk-Masters began the same way, in ${history.foundedYear}: a few people who wanted to speak with confidence, and a room where anyone could practise.`}
         imageSlot="story-hero"
       />
 
@@ -45,7 +45,7 @@ export default function OurStoryPage() {
           </div>
           <div className="md:col-span-7 md:col-start-6">
             <h2 id="why-title" data-reveal="lines" className="text-h2 max-w-[18ch]">
-              Why Talk-Masters was created
+              Why was Talk-Masters created?
             </h2>
             <div className="mt-10 flex max-w-[62ch] flex-col gap-6 font-serif text-[1.3125rem] leading-[1.7]">
               {history.why.map((paragraph) => (

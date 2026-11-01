@@ -13,6 +13,7 @@ import pathwaysJson from "@content/pathways.json";
 import imagesJson from "@content/images.json";
 import meetingGuideJson from "@content/meeting-guide.json";
 import echoJson from "@content/echo.json";
+import updatesJson from "@content/updates.json";
 import { createRepository, type ContentRepository } from "./repository";
 import {
   awardSchema,
@@ -30,6 +31,7 @@ import {
   pathwaysSchema,
   settingsSchema,
   testimonialSchema,
+  updatesSchema,
 } from "./schemas";
 
 /** Validated once at build time. Invalid content fails the build with a readable message. */
@@ -48,6 +50,7 @@ export const content: ContentRepository = createRepository({
   imageSlots: parseContent(z.array(imageSlotSchema), imagesJson, "content/images.json"),
   meetingGuide: parseContent(meetingGuideSchema, meetingGuideJson, "content/meeting-guide.json"),
   echo: parseContent(echoSchema, echoJson, "content/echo.json"),
+  updates: parseContent(updatesSchema, updatesJson, "content/updates.json"),
 });
 
 export type { ContentRepository } from "./repository";

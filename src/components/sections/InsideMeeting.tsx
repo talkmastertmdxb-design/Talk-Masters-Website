@@ -21,7 +21,7 @@ export function InsideMeeting() {
               Inside a meeting
             </p>
             <h2 id="inside-title" data-reveal="lines" className="text-h2 mt-5 max-w-[18ch]">
-              What happens on a Sunday morning
+              What happens on a Sunday morning?
             </h2>
           </div>
           <p

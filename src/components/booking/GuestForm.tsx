@@ -163,8 +163,8 @@ export function GuestForm({ contacts, meeting, calendar, avatars, quote, serverN
           Join us <span data-invitation>{invitation}</span> as our guest
         </h1>
         <p className="mt-4 max-w-[42ch] text-white/80">
-          Tell us your name and pick a date. WhatsApp opens with your message ready, and we&apos;ll save you a
-          seat.
+          Visiting is free. Tell us your name and pick a date: WhatsApp opens with your message ready, and
+          we&apos;ll save you a seat.
         </p>
 
         <form noValidate onSubmit={onSubmit} className="mt-8 flex flex-col gap-7">

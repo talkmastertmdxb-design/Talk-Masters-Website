@@ -19,7 +19,7 @@ test.describe("signature moments", () => {
       "Talk-Masters is where nervous first words become confident speeches.",
       "What really changed?",
       "Nervous about speaking? So was everyone here.",
-      "What happens on a Sunday morning",
+      "What happens on a Sunday morning?",
       "Meet our members",
       "The people who run the room, 2026–27",
       "Ready to become a better speaker?",

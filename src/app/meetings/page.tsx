@@ -60,7 +60,7 @@ export default function MeetingsPage() {
               If you&apos;re a guest
             </p>
             <h2 id="guest-title" data-reveal="lines" className="text-h2 mt-5 max-w-[14ch]">
-              You&apos;re here to watch. <em className="text-tm-blue">Speaking is optional.</em>
+              Will I have to speak? <em className="text-tm-blue">Only if you want to.</em>
             </h2>
             <ol data-reveal="stagger" className="mt-10">
               {guestSteps.map((step, index) => (

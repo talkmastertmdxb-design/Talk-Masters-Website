@@ -13,6 +13,7 @@ import type {
   Pathways,
   Settings,
   Testimonial,
+  Updates,
 } from "./schemas";
 
 /**
@@ -42,6 +43,8 @@ export interface ContentRepository {
   readonly meetingGuide: MeetingGuide;
   /** Echo, the guest guide's questions and answers. */
   readonly echo: EchoScript;
+  /** When pages last changed, for "Last updated" and the sitemap. */
+  readonly updates: Updates;
 }
 
 export type RawContent = {
@@ -79,5 +82,6 @@ export function createRepository(raw: RawContent): ContentRepository {
     imageSlots: raw.imageSlots,
     meetingGuide: raw.meetingGuide,
     echo: raw.echo,
+    updates: raw.updates,
   });
 }

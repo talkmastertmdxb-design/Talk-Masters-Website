@@ -72,6 +72,37 @@ test.describe("search and sharing", () => {
     }
   });
 
+  test("pages that change say when they were last updated, and the sitemap agrees", async ({
+    page,
+    request,
+  }) => {
+    for (const path of ["/meetings", "/team"]) {
+      await page.goto(path);
+      const stamp = page.getByText(/^Last updated \d{1,2} [A-Z][a-z]+ \d{4}$/);
+      await expect(stamp, path).toBeVisible();
+      await expect(stamp.locator("time")).toHaveAttribute("datetime", /^\d{4}-\d{2}-\d{2}$/);
+    }
+    const sitemap = await (await request.get("/sitemap.xml")).text();
+    expect(sitemap).toMatch(/\/meetings<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}/);
+    expect(sitemap).toMatch(/\/team<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}/);
+  });
+
+  test("key pages open with a plain answer", async ({ page }) => {
+    await page.goto("/meetings");
+    await expect(page.getByText(/^Talk-Masters meets on the 2nd & 4th Sunday of every month/)).toBeVisible();
+    await page.goto("/join");
+    await expect(page.getByText(/^Visiting is free\./)).toBeVisible();
+    await page.goto("/");
+    await expect(page.getByText(/^Talk-Masters Club is a Toastmasters public speaking club in Dubai/)).toBeVisible();
+  });
+
+  test("serves the IndexNow key so search engines can confirm it", async ({ request }) => {
+    const key = "7f3c9a1e5b2d48c6a0e4f81d3b6c92a5";
+    const response = await request.get(`/${key}.txt`);
+    expect(response.status()).toBe(200);
+    expect(await response.text()).toBe(key);
+  });
+
   test("a missing page says so in its title and stays out of the index", async ({ page }) => {
     const response = await page.goto("/no-such-page");
     expect(response?.status()).toBe(404);

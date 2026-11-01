@@ -1,8 +1,9 @@
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { StageLight } from "@/components/motion/StageLight";
 import { ButtonLink } from "@/components/ui/Button";
+import { LastUpdated } from "@/components/ui/LastUpdated";
 import { content } from "@/lib/content";
-import { formatClock, meetingTimeRange } from "@/lib/content/meeting";
+import { formatClock, meetingSchedule, meetingTimeRange } from "@/lib/content/meeting";
 
 const LAMPS = [
   { signal: "green", time: "5:00", label: "Green", meaning: "You've made the minimum" },
@@ -32,9 +33,11 @@ export function MeetingsHero() {
           <h1 id="meetings-title" data-reveal="lines" className="text-display max-w-[11ch]">
             Every minute has a role.
           </h1>
+          {/* Opens with the plain answer, so search and AI answers can quote it as it stands. */}
           <p data-reveal="text" className="text-lead max-w-[44ch] text-white/75">
-            What actually happens on a Talk-Masters Sunday: the running order, who does what, the lights every
-            speaker watches, and where you fit in as a guest.
+            Talk-Masters meets on the {meetingSchedule(meeting)} for two structured hours: prepared speeches,
+            impromptu Table Topics and supportive evaluations. Here&apos;s the running order, who does what, and
+            where you fit in as a guest.
           </p>
           <div data-reveal="up" className="flex flex-wrap gap-3">
             <ButtonLink href="/join">Book a guest visit</ButtonLink>
@@ -65,6 +68,7 @@ export function MeetingsHero() {
               </dd>
             </div>
           </dl>
+          <LastUpdated date={content.updates.meetings} className="text-muted -mt-2" />
         </div>
 
         <figure

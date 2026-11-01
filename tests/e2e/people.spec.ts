@@ -14,7 +14,7 @@ test("Our Story follows Plan.md: why, the founders timeline, founders, legacy", 
   await expect(
     page.getByRole("heading", { level: 1, name: "Every great speaker starts with a single conversation." }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Why Talk-Masters was created" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Why was Talk-Masters created?" })).toBeVisible();
   const stages = page.getByRole("heading", { level: 3 }).filter({
     hasText: /^(Idea|Planning|Club Formation|Chartering|First Meeting|First Achievement|Today)$/,
   });
