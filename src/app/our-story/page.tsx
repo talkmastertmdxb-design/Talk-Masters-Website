@@ -5,12 +5,14 @@ import { ImageSlot } from "@/components/media/ImageSlot";
 import { StageLight } from "@/components/motion/StageLight";
 import { FoundersTimeline } from "@/components/sections/FoundersTimeline";
 import { ButtonLink } from "@/components/ui/Button";
+import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Our story",
   description:
     "Why Talk-Masters Club was created, the founders who started it, and the journey from an idea to a Toastmasters International club.",
+  alternates: { canonical: "/our-story" },
 };
 
 /** Plan.md: Founders Story Page. Turns the club from an organisation into a human story. */
@@ -19,6 +21,7 @@ export default function OurStoryPage() {
 
   return (
     <RevealScope as="main" id="main">
+      <PageBreadcrumb name="Our story" path="/our-story" />
       <PageHeader
         title="Every great speaker starts with a single conversation."
         lead="Talk-Masters began the same way: a few people who wanted to speak with confidence, and a room where anyone could practise."

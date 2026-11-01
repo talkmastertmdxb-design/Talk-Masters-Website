@@ -17,6 +17,7 @@
     "check:content": "node scripts/check-content.ts",
     "verify": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
     "images:unsplash": "node scripts/fetch-unsplash.ts",
+    "share:image": "node scripts/share-image.ts",
     "test:hydration": "playwright test -c playwright.dev.config.ts"
   },
   "dependencies": {

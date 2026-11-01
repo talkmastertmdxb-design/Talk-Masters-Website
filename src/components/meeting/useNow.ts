@@ -8,15 +8,17 @@ const subscribe = (onChange: () => void): (() => void) => {
 };
 
 /** Rounded to the minute, so the snapshot stays stable between renders. */
-const currentMinute = (): number => Math.floor(Date.now() / MINUTE_MS);
-const noTimeOnServer = (): null => null;
+const toMinute = (time: number): number => Math.floor(time / MINUTE_MS);
+const currentMinute = (): number => toMinute(Date.now());
 
 /**
- * The current time, to the minute, or null while prerendering and hydrating. Pages are
- * static, so anything date-based renders a timeless fallback first and the real value
- * right after hydration: no stale dates baked into the HTML, no hydration mismatch.
+ * The current time, to the minute. While prerendering and hydrating it is `serverNow` (an ISO
+ * time from renderedAt(), at most an hour old), or null without one: anything date-based then
+ * renders a timeless fallback first. Either way the server and the first client render agree,
+ * so there is no hydration mismatch, and the live clock takes over right after.
  */
-export function useNow(): Date | null {
-  const minute = useSyncExternalStore(subscribe, currentMinute, noTimeOnServer);
+export function useNow(serverNow?: string): Date | null {
+  const serverMinute = serverNow ? toMinute(Date.parse(serverNow)) : null;
+  const minute = useSyncExternalStore(subscribe, currentMinute, () => serverMinute);
   return minute === null ? null : new Date(minute * MINUTE_MS);
 }

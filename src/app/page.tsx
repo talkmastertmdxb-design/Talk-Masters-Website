@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { About } from "@/components/sections/About";
 import { ExecutiveCommittee } from "@/components/sections/ExecutiveCommittee";
@@ -10,6 +11,11 @@ import { MemberVoices } from "@/components/sections/MemberVoices";
 import { PathwaysTeaser } from "@/components/sections/PathwaysTeaser";
 import { WhoItsFor } from "@/components/sections/WhoItsFor";
 import { Workplaces } from "@/components/sections/Workplaces";
+
+/** The title and description come from the root layout; the home page only adds its canonical. */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
  * The home page is a speech (docs/IMPLEMENTATION_PLAN.md §1.1, SCROLL_ANIMATION_SYSTEM.md).

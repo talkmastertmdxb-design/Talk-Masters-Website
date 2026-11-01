@@ -5,9 +5,11 @@ import { Open_Sans, Source_Serif_4 } from "next/font/google";
 import { EchoChat } from "@/components/echo/EchoChat";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 import { introScript } from "@/lib/motion/intro";
 import { mainNav } from "@/lib/navigation";
+import { siteJsonLd } from "@/lib/seo/structured-data";
 import { siteUrl } from "@/lib/site";
 import "lenis/dist/lenis.css";
 import "./globals.css";
@@ -26,16 +28,19 @@ const sans = Open_Sans({
   display: "swap",
 });
 
-const { clubName, parentOrganisation, description } = content.settings;
+const { clubName, description, meeting } = content.settings;
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+  // The city in every title: guests search "public speaking club Dubai", "Toastmasters club Dubai".
   title: {
-    default: `${clubName} | Public Speaking & Leadership, ${parentOrganisation}`,
-    template: `%s | ${clubName}`,
+    default: `${clubName} ${meeting.city} | Toastmasters Public Speaking Club`,
+    template: `%s | ${clubName} ${meeting.city}`,
   },
   description,
   openGraph: { type: "website", siteName: clubName, locale: "en" },
+  // The share image itself is src/app/opengraph-image.jpg and twitter-image.jpg (npm run share:image).
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -60,6 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </MotionProvider>
         <EchoChat script={content.echo} meeting={content.settings.meeting} />
+        <JsonLd data={siteJsonLd(content.settings, siteUrl, content.history.foundedYear)} />
         {/* Cookieless visit counts and real-visitor Core Web Vitals; both report only on Vercel. */}
         <Analytics />
         <SpeedInsights />

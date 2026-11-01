@@ -2,7 +2,9 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { AskEchoButton } from "@/components/echo/AskEchoButton";
 import { Mascot } from "@/components/media/Mascot";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
+import { faqJsonLd } from "@/lib/seo/structured-data";
 
 interface FaqProps {
   /** Light on the home page, dark on /join. */
@@ -37,6 +39,8 @@ export function Faq({ tone = "light", showContactLink = true }: FaqProps) {
 
   return (
     <section id="faq" aria-labelledby="faq-title" className="py-section scroll-mt-24">
+      {/* The same questions as structured data, for search and AI answers. */}
+      <JsonLd data={faqJsonLd(faqs)} />
       <div className="container-site grid gap-12 lg:grid-cols-12">
         {/* Echo sits beside the heading on phones, so the page grows no taller, and below it on desktop. */}
         <div className="flex items-end justify-between gap-6 lg:col-span-4 lg:flex-col lg:items-start lg:justify-start">

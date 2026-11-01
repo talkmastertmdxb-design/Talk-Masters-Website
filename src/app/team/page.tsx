@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { OfficerCard } from "@/components/people/OfficerCard";
 import { TeamOpening } from "@/components/people/TeamOpening";
+import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 import { clubFacts, shortTerm, splitCommittee } from "@/lib/content/people";
 import { resolveImageSlot } from "@/lib/images/slots";
@@ -11,6 +12,7 @@ import { resolveImageSlot } from "@/lib/images/slots";
 export const metadata: Metadata = {
   title: "Executive Committee",
   description: "Meet the Talk-Masters Club Executive Committee, the members who lead the club this year.",
+  alternates: { canonical: "/team" },
 };
 
 const POSTER_SLOT = "excom-poster";
@@ -24,6 +26,7 @@ export default function TeamPage() {
 
   return (
     <RevealScope as="main" id="main">
+      <PageBreadcrumb name="Executive Committee" path="/team" />
       <TeamOpening president={president} others={others} facts={facts} />
 
       <section aria-label="Committee members" className="pb-section bg-white">

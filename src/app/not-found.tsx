@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { StageLight } from "@/components/motion/StageLight";
 import { ButtonLink } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+};
 
 export default function NotFound() {
   return (

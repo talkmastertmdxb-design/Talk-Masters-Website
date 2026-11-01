@@ -5,6 +5,7 @@ import { content } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Photo credits",
   description: "Credits for the photography used on the Talk-Masters Club website.",
+  alternates: { canonical: "/credits" },
 };
 
 /** Unsplash attribution (API guidelines) for the temporary scene photos. */

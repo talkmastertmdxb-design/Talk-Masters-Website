@@ -5,9 +5,11 @@ import { WalkIntoStrip } from "@/components/booking/WalkIntoStrip";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { AddToCalendar } from "@/components/meeting/AddToCalendar";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
+import { renderedAt } from "@/components/meeting/renderedAt";
 import { StageLight } from "@/components/motion/StageLight";
 import { UpcomingEvents } from "@/components/meeting/UpcomingEvents";
 import { Faq } from "@/components/sections/Faq";
+import { MeetingEvents, PageBreadcrumb } from "@/components/seo/JsonLd";
 import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
 import { content } from "@/lib/content";
 import { clubCalendar } from "@/lib/content/club-calendar";
@@ -18,15 +20,17 @@ const INFO_ICONS: Record<string, LucideIcon> = { parking: Car, food: Coffee, roo
 export const metadata: Metadata = {
   title: "Book a guest visit",
   description:
-    "Visit a Talk-Masters Club meeting as our guest. It's free, and we'll always ask for your consent before calling on you.",
+    "Visit a Talk-Masters Club meeting in Dubai as our guest. It's free, and we'll always ask for your consent before calling on you.",
+  alternates: { canonical: "/join" },
 };
 
 /**
  * Guests book on WhatsApp, the club's most active channel (decided 2026-10-22): the form
  * writes their message and opens WhatsApp with it ready to send to an officer.
  */
-export default function JoinPage() {
+export default async function JoinPage() {
   const { meeting, contacts, highlightVideo } = content.settings;
+  const serverNow = await renderedAt();
   const arriveTime = formatClock(meeting.arriveTime ?? meeting.startTime);
   // Officer photos render here (ImageSlot reads content on the server) and pass into the client form.
   const avatars = Object.fromEntries(
@@ -53,6 +57,8 @@ export default function JoinPage() {
 
   return (
     <main id="main" className="theme-dark bg-ink relative isolate min-h-dvh overflow-clip text-white">
+      <PageBreadcrumb name="Book a guest visit" path="/join" />
+      <MeetingEvents />
       <StageLight preset="join" />
       <div className="container-site pt-24 pb-8 md:pt-28">
         <GuestForm
@@ -61,6 +67,7 @@ export default function JoinPage() {
           calendar={{ ...clubCalendar(), tips: `Arrive from ${arriveTime}. ${parkingAndFood}` }}
           avatars={avatars}
           quote={highlightVideo?.quotes[0]}
+          serverNow={serverNow}
         />
 
         <WalkIntoStrip />

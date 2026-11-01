@@ -5,12 +5,14 @@ import { StageLight } from "@/components/motion/StageLight";
 import { Ladder } from "@/components/pathways/Ladder";
 import { PathQuiz } from "@/components/pathways/PathQuiz";
 import { ButtonLink } from "@/components/ui/Button";
+import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Pathways",
   description:
     "Toastmasters Pathways at Talk-Masters Club: six learning paths, five levels each, practised at friendly meetings in Dubai. Find the path that fits your goals.",
+  alternates: { canonical: "/pathways" },
 };
 
 const checkedOn = (iso: string): string =>
@@ -27,6 +29,7 @@ export default function PathwaysPage() {
 
   return (
     <RevealScope as="main" id="main">
+      <PageBreadcrumb name="Pathways" path="/pathways" />
       {/* Redesign opening: the words and three plain facts beside the ladder. Light, so the header goes light. */}
       <section
         data-header="light"

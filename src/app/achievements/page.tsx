@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { StageLight } from "@/components/motion/StageLight";
+import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 import { buildYear } from "@/lib/site";
 import {
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
   title: "Achievements",
   description:
     "Awards Talk-Masters Club has earned from Toastmasters International, and the contest achievements of its members.",
+  alternates: { canonical: "/achievements" },
 };
 
 /** Plan.md: Achievements Page. Builds credibility and shows the club's impact. */
@@ -35,6 +37,7 @@ export default function AchievementsPage() {
 
   return (
     <RevealScope as="main" id="main">
+      <PageBreadcrumb name="Achievements" path="/achievements" />
       <PageHeader
         title="Recognised for growth"
         lead="Awards from Toastmasters International, and the members who have represented the club on bigger stages."

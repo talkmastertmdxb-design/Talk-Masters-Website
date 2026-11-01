@@ -9,13 +9,15 @@ import { TimingLab } from "@/components/meetings/TimingLab";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { StageLight } from "@/components/motion/StageLight";
 import { ButtonLink } from "@/components/ui/Button";
+import { MeetingEvents, PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 import { formatClock, meetingSchedule, meetingTimeRange } from "@/lib/content/meeting";
 
 export const metadata: Metadata = {
   title: "Meetings",
   description:
-    "What happens at a Talk-Masters Club meeting in Dubai: the running order, every role from Toastmaster of the Day to Timer and Grammarian, the timing lights, and what to expect as a guest.",
+    "What happens at a Talk-Masters Club meeting in Dubai: the running order, every role from Toastmaster of the Day to Timer, and what to expect as a guest.",
+  alternates: { canonical: "/meetings" },
 };
 
 /** Plan.md Meetings page: what a meeting is, minute by minute, role by role, and how to visit. */
@@ -45,6 +47,8 @@ export default function MeetingsPage() {
 
   return (
     <RevealScope as="main" id="main">
+      <PageBreadcrumb name="Meetings" path="/meetings" />
+      <MeetingEvents />
       <MeetingsHero />
       <RunningOrder />
       <RoleCast />

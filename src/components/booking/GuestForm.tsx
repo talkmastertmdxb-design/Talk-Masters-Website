@@ -39,6 +39,8 @@ interface GuestFormProps {
   avatars: Readonly<Record<string, ReactNode>>;
   /** A member's words from the members' video, shown beside the button. */
   quote?: string;
+  /** When the page was rendered (renderedAt()), so the dates are in the HTML and nothing shifts. */
+  serverNow?: string;
 }
 
 type Field = "name" | "meeting" | "note";
@@ -53,11 +55,12 @@ const clockFormat = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: 
  * stage art lights up with the guest's name, and "Open in WhatsApp" hands the finished
  * message to the chosen officer. The guest presses send in WhatsApp; this site stores nothing.
  */
-export function GuestForm({ contacts, meeting, calendar, avatars, quote }: GuestFormProps) {
+export function GuestForm({ contacts, meeting, calendar, avatars, quote, serverNow }: GuestFormProps) {
   const id = useId();
   const nameRef = useRef<HTMLInputElement>(null);
   const noteRef = useRef<HTMLTextAreaElement>(null);
-  const now = useNow();
+  const now = useNow(serverNow);
+  const liveNow = useNow();
 
   const [name, setName] = useState("");
   const [meetingChoice, setMeetingChoice] = useState<string | null>(null);
@@ -114,7 +117,8 @@ export function GuestForm({ contacts, meeting, calendar, avatars, quote }: Guest
     setSentUrl(url);
   };
 
-  const time = now ? clockFormat.format(now) : null;
+  // The visitor's own clock, so only once the browser has it ("now" until then, the same width).
+  const time = liveNow ? clockFormat.format(liveNow) : null;
   const arriveTime = formatClock(meeting.arriveTime ?? meeting.startTime);
   const arriveNote = meeting.guestInfo
     .filter((info) => info.kind === "parking" || info.kind === "food")

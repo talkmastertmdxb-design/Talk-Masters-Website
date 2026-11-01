@@ -4,12 +4,14 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { ButtonLink } from "@/components/ui/Button";
 import { MemberDirectoryCard } from "@/components/people/MemberDirectoryCard";
+import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Members",
   description:
     "Meet the people behind the voices at Talk-Masters Club: members of every age and background, and how Toastmasters changed their lives.",
+  alternates: { canonical: "/members" },
 };
 
 /**
@@ -22,6 +24,7 @@ export default function MembersPage() {
 
   return (
     <RevealScope as="main" id="main">
+      <PageBreadcrumb name="Members" path="/members" />
       <PageHeader
         title="Meet the people behind the voices"
         lead="Engineers and teachers, parents and career changers. Different starting points, the same room, and stories worth hearing."
