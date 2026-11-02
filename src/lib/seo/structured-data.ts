@@ -104,12 +104,16 @@ export function meetingEventsJsonLd(club: ClubFacts, siteUrl: URL, now: Date): J
     location: venuePlace(club),
     image: [absolute(SHARE_IMAGE_PATH, siteUrl)],
     organizer: { "@type": "Organization", "@id": organizationId(siteUrl), name: club.clubName, url: absolute("/", siteUrl) },
+    // The members give the speeches, so they are the performers.
+    performer: { "@type": "PerformingGroup", name: `${club.clubName} members`, url: absolute("/members", siteUrl) },
     isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
       price: 0,
       priceCurrency: "AED",
       availability: `${SCHEMA}/InStock`,
+      // Guests can book any time, so a free seat is on offer from now (refreshed daily).
+      validFrom: zonedIsoString(now, meeting.timeZone),
       url: join,
     },
     url: join,

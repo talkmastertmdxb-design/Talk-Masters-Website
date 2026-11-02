@@ -91,6 +91,15 @@ describe("meetingEventsJsonLd", () => {
     expect(events[1]?.startDate).toBe("2026-11-22T10:30:00+04:00");
   });
 
+  it("fills Google's recommended fields: the members perform, and booking is open from now", () => {
+    expect(events[0]?.performer).toEqual({
+      "@type": "PerformingGroup",
+      name: "Talk-Masters Club members",
+      url: "https://www.talkmasters.ae/members",
+    });
+    expect(events[0]?.offers).toMatchObject({ validFrom: "2026-11-01T09:00:00+04:00" });
+  });
+
   it("leaves out cancelled meetings", () => {
     const cancelled = { ...club, meeting: { ...club.meeting, cancelled: ["2026-11-08"] } };
     expect(meetingEventsJsonLd(cancelled, site, now)[0]?.startDate).toBe("2026-11-22T10:30:00+04:00");
