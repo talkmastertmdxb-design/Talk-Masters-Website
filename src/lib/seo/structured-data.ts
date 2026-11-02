@@ -76,9 +76,12 @@ export function siteJsonLd(club: ClubFacts, siteUrl: URL, foundedYear: number): 
 
 /** "2026-11-08T10:30:00+04:00": the club's wall-clock time with its offset, as schema.org expects. */
 export function zonedIsoString(instant: Date, timeZone: string): string {
-  const wall = wallTime(instant, timeZone);
+  // To the minute first: wall time has no seconds, so comparing it with a mid-minute instant
+  // would skew the offset (+03:59 instead of +04:00).
+  const minute = Math.floor(instant.getTime() / 60_000) * 60_000;
+  const wall = wallTime(new Date(minute), timeZone);
   const asUtc = Date.UTC(wall.year, wall.month - 1, wall.day, wall.hour, wall.minute);
-  const offsetMinutes = Math.round((asUtc - instant.getTime()) / 60_000);
+  const offsetMinutes = Math.round((asUtc - minute) / 60_000);
   const sign = offsetMinutes < 0 ? "-" : "+";
   const abs = Math.abs(offsetMinutes);
   const pad = (n: number) => String(n).padStart(2, "0");

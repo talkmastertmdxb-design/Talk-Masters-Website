@@ -66,6 +66,11 @@ describe("zonedIsoString", () => {
     expect(zonedIsoString(new Date("2026-11-08T06:30:00Z"), "Asia/Dubai")).toBe("2026-11-08T10:30:00+04:00");
   });
 
+  it("keeps the offset exact when the time isn't on the minute", () => {
+    expect(zonedIsoString(new Date("2026-11-02T11:04:40.512Z"), "Asia/Dubai")).toBe("2026-11-02T15:04:00+04:00");
+    expect(zonedIsoString(new Date("2026-01-15T04:30:59.999Z"), "Asia/Kolkata")).toBe("2026-01-15T10:00:00+05:30");
+  });
+
   it("handles zones behind UTC and half-hour offsets", () => {
     expect(zonedIsoString(new Date("2026-01-15T17:00:00Z"), "America/New_York")).toBe("2026-01-15T12:00:00-05:00");
     expect(zonedIsoString(new Date("2026-01-15T04:30:00Z"), "Asia/Kolkata")).toBe("2026-01-15T10:00:00+05:30");
