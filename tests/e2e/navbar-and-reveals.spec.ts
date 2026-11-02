@@ -162,3 +162,49 @@ test.describe("hero numbers", () => {
     await expect.poll(() => first.innerText(), { timeout: 10_000 }).toBe(target);
   });
 });
+
+test.describe("scroll reveals", () => {
+  // Reveals wait for their block to cross a line 85-88% down the screen. A block that already
+  // starts on the first screen, below that line, used to sit blank until the visitor scrolled
+  // (the member grid under the /members hero on a tall phone).
+  const pages = ["/members", "/team", "/our-story", "/meetings", "/pathways", "/achievements"];
+  const screens = [
+    { width: 390, height: 664 },
+    { width: 430, height: 932 },
+  ];
+  for (const path of pages)
+    for (const screen of screens)
+      test(`${path} at ${screen.width}×${screen.height}: the first screen shows without scrolling`, async ({
+        page,
+      }, testInfo) => {
+        test.skip(testInfo.project.name === "reduced-motion", "Nothing animates in");
+        await page.setViewportSize(screen);
+        await page.goto(path);
+        await expect
+          .poll(
+            () =>
+              page.evaluate(() =>
+                [
+                  ...document.querySelectorAll(
+                    "main [data-reveal], main [data-reveal='stagger'] > *, main [data-reveal='rise'] > *",
+                  ),
+                ]
+                  .filter((el) => {
+                    const box = el.getBoundingClientRect();
+                    return box.width > 0 && box.top < window.innerHeight && box.bottom > 0;
+                  })
+                  .filter((el) => {
+                    for (let node: Element | null = el; node; node = node.parentElement) {
+                      const style = getComputedStyle(node);
+                      if (Number(style.opacity) < 0.05 || style.clipPath.startsWith("inset(100%"))
+                        return true;
+                    }
+                    return false;
+                  })
+                  .map((el) => el.textContent?.trim().slice(0, 30)),
+              ),
+            { timeout: 5_000 },
+          )
+          .toEqual([]);
+      });
+});

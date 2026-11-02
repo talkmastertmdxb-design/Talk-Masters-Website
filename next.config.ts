@@ -7,6 +7,7 @@ const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
   // A full Content-Security-Policy is added in Phase 10, once third-party scripts are known.
+  // It must allow frame-src https://www.google.com for the footer's venue map.
 ];
 
 const nextConfig: NextConfig = {

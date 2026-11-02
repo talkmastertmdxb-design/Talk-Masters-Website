@@ -115,6 +115,9 @@ export function workplaceName(place: Workplace): string {
   return typeof place === "string" ? place : place.name;
 }
 
+/** Only Google's embed endpoint may be framed (a share link refuses to load in an iframe). */
+const GOOGLE_MAPS_EMBED = "https://www.google.com/maps/embed?";
+
 export const settingsSchema = z.object({
   clubName: z.string().min(1),
   parentOrganisation: z.string().min(1),
@@ -150,6 +153,13 @@ export const settingsSchema = z.object({
       venue: z.string().min(1),
       city: z.string().min(1),
       mapUrl: z.url().optional(),
+      /** The map shown in the footer: Google Maps → Share → Embed a map, the iframe's src. */
+      mapEmbedUrl: z
+        .url()
+        .refine((url) => url.startsWith(GOOGLE_MAPS_EMBED), {
+          message: `Use a Google Maps embed link (Share → Embed a map), starting ${GOOGLE_MAPS_EMBED}`,
+        })
+        .optional(),
       placeholder,
     })
     .refine((meeting) => !meeting.arriveTime || meeting.arriveTime <= meeting.startTime, {

@@ -118,24 +118,42 @@ test("Echo says 'Want help?' once the page settles, and the bubble opens the cha
 });
 
 test("the bubble can be waved away, and steps aside on its own", async ({ page }) => {
+  // A paused clock moves only when the test steps it, so a slow page load can't use up Echo's
+  // timers on its own. Step in small increments: the timers start once the page has hydrated.
+  // Real time, so the stored "intro already seen" stamp from the test setup still counts.
   await page.clock.install();
+  await page.clock.pauseAt(Date.now() + 1_000);
+  const stepUntil = (condition: () => Promise<boolean>) =>
+    expect
+      .poll(
+        async () => {
+          await page.clock.runFor(250);
+          return condition();
+        },
+        { intervals: [50], timeout: 20_000 },
+      )
+      .toBe(true);
+  const bubble = page.getByRole("button", { name: "Want help?" });
+  const bubbleShown = async () => (await bubble.count()) === 1;
+  const bubbleGone = async () => (await bubble.count()) === 0;
+
   await page.goto("/");
   // Echo waves while the page settles, then points up at his bubble while it's there.
   const figure = page.locator(".echo-launcher .echo-figure");
   await expect(figure).toHaveAttribute("data-pose", "wave");
-  await page.clock.runFor(2_500);
-  await expect(page.getByRole("button", { name: "Want help?" })).toBeVisible();
+  await stepUntil(bubbleShown);
+  await expect(bubble).toBeVisible();
   await expect(figure).toHaveAttribute("data-pose", "point");
   await page.getByRole("button", { name: "Hide Echo's message" }).click();
-  await page.clock.runFor(500);
-  await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
+  await stepUntil(bubbleGone);
   await expect(page.getByRole("dialog", { name: "Echo" })).toHaveCount(0);
   await expect(figure).toHaveAttribute("data-pose", "wave");
 
   await page.evaluate(() => sessionStorage.clear());
   await page.reload();
-  await page.clock.runFor(2_500);
-  await expect(page.getByRole("button", { name: "Want help?" })).toBeVisible();
-  await page.clock.runFor(10_000);
-  await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
+  await stepUntil(bubbleShown);
+  // It stays a while, then steps aside without being touched.
+  await page.clock.runFor(5_000);
+  await expect(bubble).toBeVisible();
+  await stepUntil(bubbleGone);
 });

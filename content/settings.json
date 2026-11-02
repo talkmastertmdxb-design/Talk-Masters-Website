@@ -29,6 +29,7 @@
     "venue": "Hor Al Anz Public Library",
     "city": "Dubai",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Hor%20Al%20Anz%20Public%20Library%20Dubai",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4443.706231288254!2d55.348949076162896!3d25.28486297765459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c8e98526841%3A0x6e95ffd5dc006d16!2sHor%20Al%20Anz%2C%20Library!5e1!3m2!1sen!2sae!4v1793630493128!5m2!1sen!2sae",
     "placeholder": false
   },
   "heroSlides": ["hero-banner-speaker", "hero-stage", "hero-audience", "hero-microphone"],

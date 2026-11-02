@@ -115,6 +115,17 @@ describe("settingsSchema", () => {
     expect(withMeeting({ guestInfo: [{ kind: "wifi", text: "Free wifi" }] })).toBe(false);
   });
 
+  it("only embeds a Google Maps embed link as the venue map", () => {
+    const withMap = (mapEmbedUrl: string) =>
+      settingsSchema.safeParse({ ...validSettings, meeting: { ...validSettings.meeting, mapEmbedUrl } })
+        .success;
+    expect(withMap("https://www.google.com/maps/embed?pb=!1m18!1m12")).toBe(true);
+    // A share link (not an embed) refuses to load in a frame; anything else is not a map.
+    expect(withMap("https://maps.app.goo.gl/abc123")).toBe(false);
+    expect(withMap("https://example.com/maps/embed?pb=1")).toBe(false);
+    expect(withMap("http://www.google.com/maps/embed?pb=1")).toBe(false);
+  });
+
   it("rejects an invalid contact email", () => {
     expect(settingsSchema.safeParse({ ...validSettings, contactEmail: "nope" }).success).toBe(false);
   });

@@ -3,6 +3,7 @@ import { FooterBooking } from "@/components/booking/FooterBooking";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { ContactLinks } from "@/components/ui/ContactLinks";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { VenueMap } from "@/components/ui/VenueMap";
 import { content } from "@/lib/content";
 import { formatClock, meetingSchedule, meetingTimeRange } from "@/lib/content/meeting";
 import { clubFacts } from "@/lib/content/people";
@@ -21,7 +22,8 @@ const columnTitle = "text-eyebrow text-white/70";
  * invitation (book on WhatsApp in one step), then the club, its meetings and its links.
  */
 export function SiteFooter({ items }: SiteFooterProps) {
-  const { meeting, contacts, contactEmail, clubName, parentOrganisation, tagline, socials } = content.settings;
+  const { meeting, contacts, contactEmail, clubName, parentOrganisation, tagline, socials } =
+    content.settings;
   const facts = clubFacts(content.history);
 
   return (
@@ -113,6 +115,19 @@ export function SiteFooter({ items }: SiteFooterProps) {
             </div>
           </div>
         </div>
+
+        {meeting.mapEmbedUrl && (
+          <section aria-labelledby="footer-map" className="mt-14">
+            <h3 id="footer-map" className={columnTitle}>
+              Find us
+            </h3>
+            <VenueMap
+              src={meeting.mapEmbedUrl}
+              place={`${meeting.venue}, ${meeting.city}`}
+              className="mt-5"
+            />
+          </section>
+        )}
 
         <div className="mt-16 flex flex-col gap-3 text-sm text-white/70 md:flex-row md:justify-between">
           <p>

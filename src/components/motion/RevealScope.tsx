@@ -51,6 +51,12 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
       if (!scope) return;
       const all = <T extends Element = HTMLElement>(selector: string) =>
         gsap.utils.toArray<T>(selector, scope);
+      // Anything that starts on the page's first screen plays at once. Its usual trigger line
+      // (85-88% down the screen) can sit below the fold-in point on a tall phone, which left a
+      // visible block blank until the first scroll (the member grid under the /members hero).
+      const fold = window.innerHeight;
+      const startAt = (el: Element, line: string): string =>
+        el.getBoundingClientRect().top + window.scrollY < fold ? "top bottom" : line;
 
       const mm = gsap.matchMedia();
       mm.add(`not ${media.reducedMotion}`, () => {
@@ -66,7 +72,7 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
               duration: duration.base,
               ease: ease.deliver,
               clearProps: "opacity,transform",
-              scrollTrigger: { trigger: el, start: "top 88%", once: true },
+              scrollTrigger: { trigger: el, start: startAt(el, "top 88%"), once: true },
             },
           );
         });
@@ -82,7 +88,7 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
               ease: ease.deliver,
               stagger: stagger.item,
               clearProps: "opacity,transform",
-              scrollTrigger: { trigger: group, start: "top 85%", once: true },
+              scrollTrigger: { trigger: group, start: startAt(group, "top 85%"), once: true },
             },
           );
         });
@@ -99,7 +105,7 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
                 duration: textRise.duration,
                 ease: textRise.ease,
                 stagger: textRise.stagger,
-                scrollTrigger: { trigger: el, start: "top 88%", once: true },
+                scrollTrigger: { trigger: el, start: startAt(el, "top 88%"), once: true },
               }),
           });
         all("[data-reveal='lines']").forEach((el) => riseLines(el, "auto"));
@@ -141,7 +147,12 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
                 at + blockWipe.duration,
               );
           });
-          ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: () => tl.play() });
+          ScrollTrigger.create({
+            trigger: el,
+            start: startAt(el, "top 85%"),
+            once: true,
+            onEnter: () => tl.play(),
+          });
         });
 
         all("[data-reveal='image']").forEach((el) => {
@@ -150,7 +161,7 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
             scale: 1.04,
             duration: duration.slow,
             ease: ease.deliver,
-            scrollTrigger: { trigger: el, start: "top 85%", once: true },
+            scrollTrigger: { trigger: el, start: startAt(el, "top 85%"), once: true },
           });
         });
 
@@ -165,7 +176,7 @@ export function RevealScope({ children, as: Tag = "div", id, className }: Reveal
               ease: ease.deliver,
               stagger: stagger.item,
               clearProps: "clipPath",
-              scrollTrigger: { trigger: group, start: "top 80%", once: true },
+              scrollTrigger: { trigger: group, start: startAt(group, "top 80%"), once: true },
             },
           );
         });

@@ -25,3 +25,28 @@ test("the call to action stays readable over the gradient", async ({ page }) => 
     .analyze();
   expect(results.violations.filter((v) => v.impact === "serious" || v.impact === "critical")).toEqual([]);
 });
+
+test.describe("venue map", () => {
+  for (const screen of [
+    { width: 360, height: 640, minHeight: 240, maxHeight: 300 },
+    { width: 768, height: 1024, minHeight: 360, maxHeight: 420 },
+    { width: 1440, height: 900, minHeight: 310, maxHeight: 320 },
+  ]) {
+    test(`fits the footer at ${screen.width}px and loads only when reached`, async ({ page }, testInfo) => {
+      test.skip(testInfo.project.name !== "desktop", "Sets its own viewports");
+      await page.setViewportSize(screen);
+      await page.goto("/");
+      const map = page.locator("footer iframe[title^='Map:']");
+      await expect(map).toHaveAttribute("src", /^https:\/\/www\.google\.com\/maps\/embed\?/);
+      await expect(map).toHaveAttribute("loading", "lazy");
+      await expect(map).toHaveAttribute("title", "Map: Hor Al Anz Public Library, Dubai");
+      await map.scrollIntoViewIfNeeded();
+      const box = (await map.boundingBox())!;
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(screen.width);
+      expect(box.height).toBeGreaterThanOrEqual(screen.minHeight);
+      expect(box.height).toBeLessThanOrEqual(screen.maxHeight);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(screen.width);
+    });
+  }
+});
