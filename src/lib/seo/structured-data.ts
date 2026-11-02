@@ -15,6 +15,8 @@ const PARENT = { name: "Toastmasters International", url: "https://www.toastmast
 const LOGO_PATH = "/brand/talk-masters-badge.webp";
 /** The shared link-preview image (src/app/opengraph-image.jpg, drawn by `npm run share:image`). */
 const SHARE_IMAGE_PATH = "/opengraph-image.jpg";
+/** Other names people search the club by, for Google's site name. */
+const SITE_ALTERNATE_NAMES = ["Talk-Masters", "Talkmasters"];
 /** Enough meetings for search results to show what's next, all comfortably in the future. */
 export const LISTED_MEETINGS = 6;
 
@@ -66,7 +68,9 @@ export function siteJsonLd(club: ClubFacts, siteUrl: URL, foundedYear: number): 
         "@type": "WebSite",
         "@id": absolute("/#website", siteUrl),
         url: absolute("/", siteUrl),
+        // Google's site name in results: the full name first, then how people type it.
         name: club.clubName,
+        alternateName: SITE_ALTERNATE_NAMES,
         inLanguage: "en",
         publisher: { "@id": id },
       },

@@ -56,6 +56,8 @@ describe("siteJsonLd", () => {
     expect(website).toMatchObject({
       "@type": "WebSite",
       url: "https://www.talkmasters.ae/",
+      name: "Talk-Masters Club",
+      alternateName: ["Talk-Masters", "Talkmasters"],
       publisher: { "@id": "https://www.talkmasters.ae/#organization" },
     });
   });

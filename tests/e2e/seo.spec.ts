@@ -55,6 +55,14 @@ test.describe("search and sharing", () => {
     expect(response.headers()["content-type"]).toBe("image/jpeg");
   });
 
+  test("offers the club icon to search engines, including a classic favicon.ico", async ({ page, request }) => {
+    await page.goto("/");
+    await expect(page.locator('link[rel="icon"][href^="/favicon.ico"]')).toHaveCount(1);
+    const response = await request.get("/favicon.ico");
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toMatch(/icon/);
+  });
+
   test("titles name the city people search for", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle("Talk-Masters Club Dubai | Toastmasters Public Speaking Club");
