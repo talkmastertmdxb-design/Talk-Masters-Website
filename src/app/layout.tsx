@@ -61,7 +61,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <MotionProvider>
-          <SiteHeader items={mainNav} meeting={content.settings.meeting} socials={content.settings.socials} />
+          <SiteHeader
+            items={mainNav}
+            meeting={content.settings.meeting}
+            socials={content.settings.socials}
+            contact={content.settings.contacts[0]!}
+            email={content.settings.contactEmail}
+          />
           {children}
         </MotionProvider>
         <EchoChat script={content.echo} meeting={content.settings.meeting} />

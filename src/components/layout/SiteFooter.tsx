@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FooterBooking } from "@/components/booking/FooterBooking";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
+import { ContactLinks } from "@/components/ui/ContactLinks";
 import { SocialLinks } from "@/components/ui/SocialLinks";
-import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
 import { content } from "@/lib/content";
 import { formatClock, meetingSchedule, meetingTimeRange } from "@/lib/content/meeting";
 import { clubFacts } from "@/lib/content/people";
@@ -21,7 +21,7 @@ const columnTitle = "text-eyebrow text-white/70";
  * invitation (book on WhatsApp in one step), then the club, its meetings and its links.
  */
 export function SiteFooter({ items }: SiteFooterProps) {
-  const { meeting, contacts, clubName, parentOrganisation, tagline, socials } = content.settings;
+  const { meeting, contacts, contactEmail, clubName, parentOrganisation, tagline, socials } = content.settings;
   const facts = clubFacts(content.history);
 
   return (
@@ -106,9 +106,9 @@ export function SiteFooter({ items }: SiteFooterProps) {
             </nav>
 
             <div>
-              <h3 className={columnTitle}>WhatsApp us</h3>
+              <h3 className={columnTitle}>Contact us</h3>
               <div className="mt-4 font-medium">
-                <WhatsAppContacts contacts={contacts} />
+                <ContactLinks contacts={contacts} email={contactEmail} />
               </div>
             </div>
           </div>

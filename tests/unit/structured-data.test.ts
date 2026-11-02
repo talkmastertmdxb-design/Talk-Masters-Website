@@ -35,6 +35,15 @@ describe("siteJsonLd", () => {
     });
   });
 
+  it("gives the club inbox, and leaves it out when there is none", () => {
+    expect(organization?.email).toBe(club.contactEmail);
+    const withoutEmail = siteJsonLd({ ...club, contactEmail: undefined }, site, 2016)["@graph"] as Record<
+      string,
+      unknown
+    >[];
+    expect(withoutEmail[0]).not.toHaveProperty("email");
+  });
+
   it("links the club's own social profiles and logo", () => {
     expect(organization?.sameAs).toEqual(club.socials.map((social) => social.url));
     expect(organization?.logo).toEqual({

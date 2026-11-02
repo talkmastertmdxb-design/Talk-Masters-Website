@@ -18,7 +18,7 @@ const SHARE_IMAGE_PATH = "/opengraph-image.jpg";
 /** Enough meetings for search results to show what's next, all comfortably in the future. */
 export const LISTED_MEETINGS = 6;
 
-type ClubFacts = Pick<Settings, "clubName" | "description" | "tagline" | "socials" | "meeting">;
+type ClubFacts = Pick<Settings, "clubName" | "description" | "tagline" | "socials" | "meeting" | "contactEmail">;
 
 const absolute = (path: string, siteUrl: URL): string => new URL(path, siteUrl).toString();
 const organizationId = (siteUrl: URL): string => absolute("/#organization", siteUrl);
@@ -59,6 +59,7 @@ export function siteJsonLd(club: ClubFacts, siteUrl: URL, foundedYear: number): 
         location: venuePlace(club),
         areaServed: { "@type": "City", name: club.meeting.city },
         knowsAbout: ["Public speaking", "Leadership", "Communication skills", "Toastmasters Pathways"],
+        ...(club.contactEmail ? { email: club.contactEmail } : {}),
         sameAs: club.socials.map((social) => social.url),
       },
       {

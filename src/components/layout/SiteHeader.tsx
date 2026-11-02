@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Mail, Menu, MessageCircle, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +8,7 @@ import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { StageLight } from "@/components/motion/StageLight";
 import { ButtonLink } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { mailtoLink, QUESTION_MESSAGE, whatsappLink, type Contact } from "@/lib/content/contact";
 import { meetingTimeRange, type MeetingRule } from "@/lib/content/meeting";
 import type { ProfileLink } from "@/lib/content/schemas";
 import { Wordmark } from "./Wordmark";
@@ -23,6 +24,9 @@ interface SiteHeaderProps {
   meeting: MeetingRule & { venue: string };
   /** The club's own profiles, shown at the foot of the phone menu. */
   socials: readonly ProfileLink[];
+  /** "Talk to us" in the phone menu: the first officer on WhatsApp, and the club inbox. */
+  contact: Contact;
+  email?: string;
 }
 
 const FROST_AFTER_PX = 40;
@@ -32,6 +36,10 @@ const HIDE_AFTER_PX = 120;
 const SCROLL_TOLERANCE_PX = 6;
 
 const number = (index: number): string => String(index + 1).padStart(2, "0");
+
+/** "Talk to us" buttons in the phone menu: two equal pills sharing the row. */
+const menuContact =
+  "hover:border-gold inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full border border-white/20 px-3 text-[0.9375rem] font-semibold transition-colors duration-(--duration-quick)";
 
 /** "/members" is current on /members and its #profiles; "/" only on the home page itself. */
 const isCurrent = (pathname: string, href: string): boolean =>
@@ -43,7 +51,7 @@ const isCurrent = (pathname: string, href: string): boolean =>
  * away while you scroll down and returns the moment you scroll up (CSS limits the hiding to
  * those widths). Links are numbered like a meeting agenda; the current page is gold.
  */
-export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
+export function SiteHeader({ items, meeting, socials, contact, email }: SiteHeaderProps) {
   const [frosted, setFrosted] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [tone, setTone] = useState<"dark" | "light">("dark");
@@ -171,7 +179,13 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
               <X aria-hidden="true" className="size-5" />
             </button>
           </div>
-          <nav aria-label="Mobile" className="mt-12 flex-1">
+          {/* Short screens (most phones once the browser bar takes its share, under 50rem): tighter
+              rows and no socials row (the footer has them). If the links still don't fit they
+              scroll, so "Talk to us" and the booking button below always stay on screen. */}
+          <nav
+            aria-label="Mobile"
+            className="mt-12 min-h-0 flex-1 overflow-y-auto overscroll-contain [@media(max-height:50rem)]:mt-5"
+          >
             <ul className="flex flex-col">
               {items.map((item, index) => (
                 <li
@@ -183,12 +197,12 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
                     href={item.href}
                     onClick={closeMenu}
                     aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-                    className="menu-link flex min-h-16 items-baseline gap-4 py-3"
+                    className="menu-link flex min-h-16 items-baseline gap-4 py-3 [@media(max-height:50rem)]:min-h-12 [@media(max-height:50rem)]:py-2"
                   >
                     <span aria-hidden="true" className="text-gold text-xs font-semibold tabular-nums">
                       {number(index)}
                     </span>
-                    <span className="font-serif text-[2.5rem] leading-none tracking-[-0.02em]">
+                    <span className="font-serif text-[2.5rem] leading-none tracking-[-0.02em] [@media(max-height:50rem)]:text-[2rem]">
                       {item.label}
                     </span>
                   </Link>
@@ -198,11 +212,36 @@ export function SiteHeader({ items, meeting, socials }: SiteHeaderProps) {
           </nav>
           <div className="flex flex-col gap-3">
             {socials.length > 0 && (
-              <div className="mb-2 flex items-center justify-between gap-4">
+              <div className="mb-2 flex items-center justify-between gap-4 [@media(max-height:50rem)]:hidden">
                 <span className="text-sm text-white/70">Follow the club</span>
                 <SocialLinks links={socials} name="Talk-Masters Club" className="text-white/85" />
               </div>
             )}
+            {/* A person is one tap away from any page, without scrolling to the footer. */}
+            <div role="group" aria-labelledby="menu-talk" className="flex items-center gap-3">
+              <span id="menu-talk" className="shrink-0 text-sm text-white/70">
+                Talk to us
+              </span>
+              <a
+                href={whatsappLink(contact.whatsapp, QUESTION_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className={menuContact}
+              >
+                <MessageCircle aria-hidden="true" className="text-gold size-4.5" />
+                WhatsApp
+                {/* The name alone: "Vice President Membership" would also match a search for the Members link. */}
+                <span className="sr-only"> {contact.name} (opens WhatsApp in a new tab)</span>
+              </a>
+              {email && (
+                <a href={mailtoLink(email)} onClick={closeMenu} className={menuContact}>
+                  <Mail aria-hidden="true" className="text-gold size-4.5" />
+                  Email
+                  <span className="sr-only"> the club at {email}</span>
+                </a>
+              )}
+            </div>
             <Link
               href="/join"
               onClick={closeMenu}

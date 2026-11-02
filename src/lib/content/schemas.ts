@@ -156,7 +156,7 @@ export const settingsSchema = z.object({
       message: "Guests can't arrive after the meeting starts",
       path: ["arriveTime"],
     }),
-  /** Optional: the club has no shared inbox yet, so guests contact officers on WhatsApp. */
+  /** The club's shared inbox: the footer, /join, the phone menu and the club's structured data. */
   contactEmail: z.email().optional(),
   /** Who guests can message, in the order shown. */
   contacts: z

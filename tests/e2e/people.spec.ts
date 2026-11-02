@@ -286,7 +286,11 @@ test("guests book on WhatsApp with the VP Membership or VP Education", async ({ 
     "href",
     /^https:\/\/wa\.me\/971501600212\?text=/,
   );
-  await expect(page.locator("a[href^='mailto:']")).toHaveCount(0);
+  // Booking stays on WhatsApp; the club inbox is offered for questions (decided 2026-11-02).
+  await expect(main.getByRole("link", { name: /Email the club/ })).toHaveAttribute(
+    "href",
+    /^mailto:talkmastertmdxb@gmail\.com/,
+  );
   await expect(page.locator("footer").getByText("+971 50 283 7168", { exact: false })).toBeVisible();
   expect(await seriousViolations(page)).toEqual([]);
 });

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { content } from "@/lib/content";
-import { GUEST_MESSAGE, formatPhone, whatsappLink } from "@/lib/content/contact";
+import { GUEST_MESSAGE, QUESTION_MESSAGE, formatPhone, mailtoLink, whatsappLink } from "@/lib/content/contact";
 import { settingsSchema } from "@/lib/content/schemas";
 
 describe("whatsappLink", () => {
@@ -57,5 +57,28 @@ describe("club stats", () => {
     const stats = content.settings.stats;
     expect(stats.find((s) => s.label === "Active members")).toMatchObject({ value: 37, placeholder: false });
     expect(stats.some((s) => s.label === "Nationalities")).toBe(false);
+  });
+});
+
+describe("mailtoLink", () => {
+  it("opens the email app with the subject filled in", () => {
+    expect(mailtoLink("talkmastertmdxb@gmail.com")).toBe(
+      "mailto:talkmastertmdxb@gmail.com?subject=Question%20about%20Talk-Masters%20Club",
+    );
+    expect(mailtoLink("club@example.com", "Guest visit & parking")).toBe(
+      "mailto:club@example.com?subject=Guest%20visit%20%26%20parking",
+    );
+  });
+});
+
+describe("the club inbox", () => {
+  it("is set, so the footer, /join and the phone menu can offer email", () => {
+    expect(content.settings.contactEmail).toBe("talkmastertmdxb@gmail.com");
+  });
+
+  it("has a question message for WhatsApp, separate from the booking one", () => {
+    expect(whatsappLink("+971502837168", QUESTION_MESSAGE)).toBe(
+      `https://wa.me/971502837168?text=${encodeURIComponent(QUESTION_MESSAGE)}`,
+    );
   });
 });

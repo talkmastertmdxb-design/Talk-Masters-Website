@@ -10,7 +10,7 @@ import { StageLight } from "@/components/motion/StageLight";
 import { UpcomingEvents } from "@/components/meeting/UpcomingEvents";
 import { Faq } from "@/components/sections/Faq";
 import { MeetingEvents, PageBreadcrumb } from "@/components/seo/JsonLd";
-import { WhatsAppContacts } from "@/components/ui/WhatsAppContacts";
+import { ContactLinks } from "@/components/ui/ContactLinks";
 import { content } from "@/lib/content";
 import { clubCalendar } from "@/lib/content/club-calendar";
 import { formatClock, meetingSchedule, meetingTimeRange } from "@/lib/content/meeting";
@@ -148,7 +148,7 @@ export default async function JoinPage() {
 
         <h2 className="text-eyebrow mt-14 text-white/70">Rather just say hello?</h2>
         <div className="mt-5">
-          <WhatsAppContacts contacts={contacts} variant="buttons" />
+          <ContactLinks contacts={contacts} email={content.settings.contactEmail} variant="buttons" />
         </div>
         <UpcomingEvents events={content.events} timeZone={meeting.timeZone} />
       </div>
