@@ -410,17 +410,10 @@
     opacity: 0.2;
   }
   /* Mist: still haze on light sections. */
-  .stage-light--mission .stage-light__flow,
   .stage-light--impact .stage-light__flow,
   .stage-light--legacy .stage-light__flow {
     inset: -10%;
     will-change: auto;
-  }
-  .stage-light--mission .stage-light__flow {
-    background:
-      radial-gradient(40% 55% at 70% 40%, rgb(0 65 101 / 0.2) 0%, rgb(0 65 101 / 0) 70%),
-      radial-gradient(35% 45% at 88% 80%, rgb(214 176 106 / 0.42) 0%, rgb(214 176 106 / 0) 70%),
-      radial-gradient(30% 35% at 40% 15%, rgb(119 36 50 / 0.1) 0%, rgb(119 36 50 / 0) 70%);
   }
   .stage-light--impact .stage-light__flow {
     background:
@@ -439,19 +432,10 @@
       radial-gradient(45% 30% at 22% 95%, rgb(119 36 50 / 0.2) 0%, rgb(119 36 50 / 0) 70%),
       radial-gradient(45% 30% at 80% 92%, rgb(0 65 101 / 0.18) 0%, rgb(0 65 101 / 0) 70%);
   }
-  .stage-light--mission .stage-light__grain,
   .stage-light--impact .stage-light__grain,
   .stage-light--legacy .stage-light__grain {
     opacity: 0.08;
     mix-blend-mode: multiply;
-  }
-  /* Escapes its container to light the whole width (the section clips it). */
-  .stage-light--bleed {
-    inset: -4rem auto -6rem 50%;
-    width: 100vw;
-    translate: -50% 0;
-    /* Feather top and bottom so the haze never shows its box. */
-    mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
   }
   /* Achievements timeline: a still gold spotlight behind each year. */
   .year-glow {
@@ -582,15 +566,13 @@
   }
 
   /* Footer booking: a pill with the name field and the gold button inside (Bailey Hart's newsletter shape). */
+  /* An ink pill on the gold invitation; a navy ring outside it shows keyboard focus. */
   .footer-pill {
-    background: rgb(255 255 255 / 0.08);
-    border: 1px solid rgb(255 255 255 / 0.22);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    transition: border-color var(--duration-quick) var(--ease-deliver);
+    background: var(--color-ink);
+    transition: box-shadow var(--duration-quick) var(--ease-deliver);
   }
   .footer-pill:focus-within {
-    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px var(--color-tm-blue);
   }
 
   /* "Where our members work": names drift sideways; two identical halves loop seamlessly. */
@@ -649,6 +631,52 @@
   @keyframes marquee {
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  /* Members page advice band: one row of small advice cards sliding past, faded at both edges. */
+  .advice-band__row {
+    overflow: hidden;
+    padding-block: 0.5rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .advice-band__track {
+    display: flex;
+    width: max-content;
+  }
+  .advice-band__half {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-right: 1rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .advice-band__track {
+      animation: marquee var(--advice-duration, 60s) linear infinite;
+    }
+    .advice-band__row:hover .advice-band__track,
+    .advice-band__row:focus-within .advice-band__track {
+      animation-play-state: paused;
+    }
+  }
+  /* Still: the cards wrap into a grid, and the loop's copy goes. */
+  @media (prefers-reduced-motion: reduce) {
+    .advice-band__row {
+      -webkit-mask-image: none;
+      mask-image: none;
+      padding-inline: var(--site-gutter);
+    }
+    .advice-band__track {
+      width: auto;
+    }
+    .advice-band__half {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+      padding-right: 0;
+    }
+    .advice-band__half[aria-hidden="true"] {
+      display: none;
     }
   }
 
@@ -2066,6 +2094,15 @@
   }
   .member-profile::backdrop {
     background: transparent;
+  }
+  /* Phones and tablets scroll the profile by touch: no scrollbar down its side. */
+  @media (max-width: 63.99rem) {
+    .member-profile {
+      scrollbar-width: none;
+    }
+    .member-profile::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 

@@ -15,6 +15,7 @@ import {
   cardEyebrow,
   firstName,
   isMemberAchievement,
+  splitStory,
 } from "@/lib/content/people";
 
 const member = {
@@ -89,6 +90,22 @@ describe("memberSchema (Plan.md member directory + journey cards)", () => {
     expect(parsed.advice).toBeUndefined();
     expect(parsed.impact).toEqual({});
     expect(memberSchema.safeParse({ ...member, advice: "" }).success).toBe(false);
+  });
+
+  it("only takes a short advice line word for word from the member's own advice", () => {
+    const advice = "Don’t wait to become confident. Show up, speak, and become it.";
+    const withShort = (adviceShort: string, full: string | undefined = advice) =>
+      memberSchema.safeParse({ ...member, advice: full, adviceShort }).success;
+    expect(withShort("Show up, speak, and become it.")).toBe(true);
+    // Case, straight or curly apostrophes and a closing full stop don't count as changes.
+    expect(withShort("don't wait to become confident")).toBe(true);
+    expect(withShort("Show up, speak and become it.")).toBe(false);
+    expect(withShort("Just show up.")).toBe(false);
+    // No advice yet, so nothing to quote from.
+    expect(
+      memberSchema.safeParse({ ...member, advice: undefined, adviceShort: "Show up, speak." }).success,
+    ).toBe(false);
+    expect(withShort("x".repeat(91), "x".repeat(91))).toBe(false);
   });
 });
 
@@ -259,5 +276,32 @@ describe("cardEyebrow (member directory card)", () => {
   it("falls back to the join year, then to plain 'Member'", () => {
     expect(cardEyebrow({ memberSince: 2021 })).toEqual({ lead: "Member since 2021" });
     expect(cardEyebrow({})).toEqual({ lead: "Member" });
+  });
+});
+
+describe("splitStory (member profile pull quote)", () => {
+  it("lifts the member's own quoted sentence out of the story", () => {
+    expect(
+      splitStory(
+        "She came as a guest speaker on “Selling Yourself”. “There was something special about the room and the people.” Since then the club has become family.",
+      ),
+    ).toEqual({
+      lead: "She came as a guest speaker on “Selling Yourself”.",
+      quote: "There was something special about the room and the people.",
+      rest: "Since then the club has become family.",
+    });
+  });
+
+  it("leaves short quoted titles in the text, and a story without a quote whole", () => {
+    expect(splitStory("A masterclass on “Selling Yourself” at CareerNova.")).toEqual({
+      lead: "A masterclass on “Selling Yourself” at CareerNova.",
+    });
+  });
+
+  it("handles a quote that ends the story", () => {
+    expect(splitStory("He joined in 2018. “It was a journey of true human transformation.”")).toEqual({
+      lead: "He joined in 2018.",
+      quote: "It was a journey of true human transformation.",
+    });
   });
 });

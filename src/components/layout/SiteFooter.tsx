@@ -1,6 +1,8 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { FooterBooking } from "@/components/booking/FooterBooking";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
+import { ButtonLink } from "@/components/ui/Button";
 import { ContactLinks } from "@/components/ui/ContactLinks";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { VenueMap } from "@/components/ui/VenueMap";
@@ -18,13 +20,14 @@ interface SiteFooterProps {
 const columnTitle = "text-eyebrow text-white/70";
 
 /**
- * The Close, in Bailey Hart's footer shape: one continuous stage light behind a centred
- * invitation (book on WhatsApp in one step), then the club, its meetings and its links.
+ * The Close: a gold invitation (book on the guest page, or on WhatsApp in one step), then the
+ * club, its meetings and its links over a slow stage light.
  */
 export function SiteFooter({ items }: SiteFooterProps) {
   const { meeting, contacts, contactEmail, clubName, parentOrganisation, tagline, socials } =
     content.settings;
   const facts = clubFacts(content.history);
+  const breakfast = meeting.guestInfo.some((info) => info.kind === "food");
 
   return (
     <footer className="theme-dark cta-band bg-ink relative isolate overflow-hidden text-white">
@@ -32,24 +35,41 @@ export function SiteFooter({ items }: SiteFooterProps) {
       <div aria-hidden="true" className="cta-band__flow" />
       <div aria-hidden="true" className="cta-band__grain" />
 
-      <section
-        aria-labelledby="guest-band"
-        className="container-site relative pt-32 pb-24 text-center md:pt-40 md:pb-32"
-      >
-        <p className="text-eyebrow text-white/80">
-          Next meeting · <NextMeetingDate rule={meeting} /> · {formatClock(meeting.startTime)}
-        </p>
-        <h2 id="guest-band" className="text-h2 mx-auto mt-5 max-w-[16ch]">
-          Ready to become a better speaker?
-        </h2>
-        <p className="mx-auto mt-5 max-w-[46ch] text-white/75">
-          Come to your first meeting as our guest. It&apos;s free, and we&apos;ll always ask for your consent
-          before calling on you.
-        </p>
-        <FooterBooking contact={contacts[0]!} meeting={meeting} />
+      {/* The invitation, in gold: the guest's biggest worry answered, the next date, two ways to book. */}
+      <section aria-labelledby="guest-band" className="bg-gold text-ink relative">
+        <div className="container-site flex flex-col gap-10 py-20 md:flex-row md:items-end md:justify-between md:gap-12 md:py-26">
+          <div className="min-w-0">
+            <h2
+              id="guest-band"
+              className="max-w-[14ch] font-serif text-[clamp(2.5rem,1.6rem+3.4vw,5.25rem)] leading-[0.98] font-semibold tracking-[-0.035em]"
+            >
+              Come as a guest. Speak only if you want to.
+            </h2>
+            <p className="mt-6 max-w-[46ch] text-lg leading-relaxed">
+              Next meeting: <NextMeetingDate rule={meeting} />, {formatClock(meeting.startTime)} at{" "}
+              {meeting.venue}, {meeting.city}.{breakfast && " Breakfast is included."}
+            </p>
+            <p className="text-ink/80 mt-3 max-w-[46ch]">
+              Your first meeting is free, and we&apos;ll always ask for your consent before calling on you.
+            </p>
+          </div>
+          <div className="flex w-full shrink-0 flex-col gap-6 md:w-auto md:max-w-md md:items-end">
+            <ButtonLink href="/join" variant="dark" className="group min-h-15 px-8 text-base max-md:w-full">
+              Book a guest visit
+              <ArrowRight
+                aria-hidden="true"
+                className="size-4 transition-transform duration-(--duration-quick) group-hover:translate-x-0.5"
+              />
+            </ButtonLink>
+            <div className="w-full md:w-md">
+              <p className="text-ink/80 text-sm font-semibold">Or book straight on WhatsApp</p>
+              <FooterBooking contact={contacts[0]!} meeting={meeting} />
+            </div>
+          </div>
+        </div>
       </section>
 
-      <div className="container-site relative border-t border-white/14 pt-14 pb-12 md:pt-16">
+      <div className="container-site relative pt-16 pb-12 md:pt-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Wordmark size={56} />

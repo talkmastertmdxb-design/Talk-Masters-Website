@@ -43,6 +43,7 @@ describe("sitemap", () => {
       "/our-story",
       "/pathways",
       "/achievements",
+      "/events",
     ]);
   });
 });

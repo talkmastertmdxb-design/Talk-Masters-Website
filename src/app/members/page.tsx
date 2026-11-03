@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { ButtonLink } from "@/components/ui/Button";
+import { AdviceBand } from "@/components/people/AdviceBand";
 import { MemberDirectoryCard } from "@/components/people/MemberDirectoryCard";
 import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
@@ -31,12 +32,20 @@ export default function MembersPage() {
         imageSlot="members-hero"
       />
 
+      <AdviceBand />
+
       <section aria-label="Member directory" className="py-section bg-soft-gray">
         <div className="container-site">
           {members.length > 0 ? (
             <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:gap-8">
-              {members.map((member) => (
-                <MemberDirectoryCard key={member.slug} member={member} />
+              {members.map((member, index) => (
+                <MemberDirectoryCard
+                  key={member.slug}
+                  member={member}
+                  position={`${index + 1} of ${members.length}`}
+                  previous={members.at(index - 1)!}
+                  next={members[(index + 1) % members.length]!}
+                />
               ))}
               <NextStoryCard
                 columnsLeft={3 - (members.length % 3)}

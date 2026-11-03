@@ -111,6 +111,65 @@ test("a Spotlight 'Read more' link opens that member's profile, with its portrai
   );
 });
 
+test("a profile leads to the next and previous member without closing", async ({ page }) => {
+  await page.goto("/members#prathiba-leo");
+  const prathiba = page.getByRole("dialog", { name: "Prathiba Leo" });
+  await expect(prathiba).toBeVisible();
+  const more = prathiba.getByRole("navigation", { name: "More members" });
+  await expect(more).toContainText("3 of 11");
+
+  await more.getByRole("link", { name: /Next member/ }).click();
+  const tarannum = page.getByRole("dialog", { name: "Tarannum Sheikh" });
+  await expect(tarannum).toBeVisible();
+  await expect(prathiba).toBeHidden();
+  await expect(page).toHaveURL(/#tarannum-sheikh$/);
+  await expect(page.locator("dialog[open]")).toHaveCount(1);
+
+  await tarannum
+    .getByRole("navigation", { name: "More members" })
+    .getByRole("link", { name: /Previous member/ })
+    .click();
+  await expect(prathiba).toBeVisible();
+  await expect(tarannum).toBeHidden();
+
+  // Closing after switching still hands the page back.
+  await page.keyboard.press("Escape");
+  await expect(prathiba).toBeHidden();
+  await expect(page.locator("html")).not.toHaveClass(/profile-open/);
+});
+
+test("wide screens list the profile's chapters beside the portrait; phones get no side scrollbar", async ({
+  page,
+}) => {
+  await page.goto("/members#prathiba-leo");
+  const profile = page.getByRole("dialog", { name: "Prathiba Leo" });
+  await expect(profile).toBeVisible();
+  const chapters = profile.getByRole("navigation", { name: "In Prathiba Leo's profile" });
+  const wide = (page.viewportSize()?.width ?? 0) >= 1024;
+
+  if (wide) {
+    await expect(chapters.getByRole("button")).toHaveText([
+      "Story",
+      "Journey",
+      "What changed",
+      "Advice for guests",
+    ]);
+    await chapters.getByRole("button", { name: "Advice for guests" }).click();
+    await expect(profile.getByRole("heading", { name: "Prathiba's advice for new guests" })).toBeInViewport();
+  } else {
+    await expect(chapters).toBeHidden();
+    expect(await profile.evaluate((el) => getComputedStyle(el).scrollbarWidth)).toBe("none");
+  }
+});
+
+test("a member's own quoted words become the profile's pull quote", async ({ page }) => {
+  await page.goto("/members#prathiba-leo");
+  const profile = page.getByRole("dialog", { name: "Prathiba Leo" });
+  await expect(profile.locator("blockquote")).toHaveText(
+    "There was something almost enigmatic about the vibe of Talk-Masters: the energy, the warmth and, most importantly, the people.",
+  );
+});
+
 test("the members page downloads card photos only, not every profile portrait", async ({ page }) => {
   await page.goto("/members");
   await expect(page.locator("[data-profile-portrait] img")).toHaveCount(0);
@@ -180,23 +239,25 @@ test("Achievements celebrates the 2026-27 Triple Crowns and the club's 2025-26 D
   expect(await seriousViolations(page)).toEqual([]);
 });
 
-test("Jasim's profile shows his background and work, and leaves out what he hasn't shared yet", async ({
-  page,
-}) => {
+test("Jassim's profile tells the 100-day story, in Jassim's own words", async ({ page }) => {
   await page.goto("/members");
-  await page.getByRole("button", { name: "Open Jasim Eranhole's profile" }).click();
-  const profile = page.getByRole("dialog", { name: "Jasim Eranhole" });
+  await page.getByRole("button", { name: "Open Jassim Eranhole's profile" }).click();
+  const profile = page.getByRole("dialog", { name: "Jassim Eranhole" });
   await expect(profile).toBeVisible();
-  await expect(profile).toContainText("IKEA");
-  await expect(profile).toContainText("Member since 2024");
-  await expect(profile.getByRole("heading", { name: "Where it started" })).toBeVisible();
-  await expect(profile.getByRole("heading", { name: "Jasim's Toastmasters journey" })).toBeVisible();
-  // His advice for guests and "what changed" come from him; until then they're not shown.
-  await expect(profile.getByRole("heading", { name: /advice for new guests/ })).toHaveCount(0);
-  await expect(profile.getByRole("heading", { name: "What changed" })).toHaveCount(0);
+  await expect(profile).toContainText("Digital Content (UX/UI) Specialist at IKEA");
+  await expect(profile.getByRole("list", { name: "At Talk-Masters" })).toContainText(
+    "Toastmaster of the Day, Meeting #101",
+  );
+  await expect(profile.locator("blockquote")).toHaveText(
+    "Whenever I am in Dubai, I will be there at Toastmasters.",
+  );
+  await expect(profile.getByRole("heading", { name: "Jassim's Toastmasters journey" })).toBeVisible();
+  await expect(profile.getByRole("heading", { name: "What changed" })).toBeVisible();
+  await expect(profile.getByRole("heading", { name: "Jassim's advice for new guests" })).toBeVisible();
+  await expect(profile).toContainText("You do not need perfect English or confidence to begin.");
   await expect(profile.locator("[data-image-slot='member-jassim'] img")).toHaveAttribute(
     "alt",
-    "Jasim Eranhole, smiling, in a blue blazer",
+    "Jassim Eranhole, smiling, in a blue blazer",
   );
   expect(await seriousViolations(page)).toEqual([]);
 });
@@ -247,7 +308,7 @@ test("Members shows each member's LinkedIn on their card, with every other profi
     "Prathiba Leo": "https://www.linkedin.com/in/prathibaleo12/",
     "Tarannum Sheikh": "https://www.linkedin.com/in/tarannum-sheikh-381309171/",
     "Suhayb Muzammil Shaik": "https://www.linkedin.com/in/suhayb-shaik-13985231a",
-    "Jasim Eranhole": "https://www.linkedin.com/in/jassim-eranhole-90300b76/",
+    "Jassim Eranhole": "https://www.linkedin.com/in/jassim-eranhole-90300b76/",
     "Nabeel Bava": "https://www.linkedin.com/in/nabeel-kizhakkeveettil-001651334",
     "Noufal Aboobacker": "https://www.linkedin.com/in/noufal-aboobacker/",
   };

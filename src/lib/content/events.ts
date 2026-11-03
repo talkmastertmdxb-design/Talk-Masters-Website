@@ -14,6 +14,26 @@ export function upcomingEvents(events: readonly ClubEvent[], now: Date): ClubEve
     .toSorted((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt));
 }
 
+/** Events that have ended, most recent first. */
+export function pastEvents(events: readonly ClubEvent[], now: Date): ClubEvent[] {
+  return events
+    .filter((event) => endOf(event) <= now.getTime())
+    .toSorted((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt));
+}
+
+/** "Sunday 14 September 2025": the full date, year included, in the club's time zone. */
+export function eventDay(event: ClubEvent, timeZone: string): string {
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })
+    .format(new Date(event.startsAt))
+    .replace(",", "");
+}
+
 export interface EventWhen {
   /** "14" */
   day: string;

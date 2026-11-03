@@ -78,7 +78,10 @@ test.describe("light openings", () => {
       await expect(bar).toHaveAttribute("data-tone", "light");
       expect(await bar.evaluate((el) => getComputedStyle(el).color)).toBe("rgb(11, 18, 32)");
       await expect(page.locator("[data-header='light'] h1")).toBeVisible();
-      expect(await seriousViolations(page, "[data-header='light']")).toEqual([]);
+      // The opening fades its links in, so a mid-fade scan can read low; retry until it settles.
+      await expect
+        .poll(() => seriousViolations(page, "[data-header='light']"), { timeout: 10_000 })
+        .toEqual([]);
     });
   }
 

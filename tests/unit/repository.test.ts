@@ -29,6 +29,8 @@ const event = (slug: string, startsAt: string, status: "draft" | "published" = "
   summary: "x",
   status,
   placeholder: false,
+  lineup: [],
+  gallery: [],
 });
 
 describe("createRepository", () => {
@@ -42,6 +44,18 @@ describe("createRepository", () => {
       ],
     });
     expect(repo.events.map((e) => e.slug)).toEqual(["sooner", "later"]);
+  });
+
+  it("leaves out line-up entries without consent", () => {
+    const withLineup = {
+      ...event("panel", "2026-11-01T19:00:00+04:00"),
+      lineup: [
+        { name: "Agreed", role: "Emcee", poster: "a", consent: true, placeholder: false },
+        { name: "Not asked", role: "Speaker", poster: "b", consent: false, placeholder: false },
+      ],
+    };
+    const repo = createRepository({ ...base, events: [withLineup] });
+    expect(repo.events[0]!.lineup.map((person) => person.name)).toEqual(["Agreed"]);
   });
 
   it("keeps an officer's story link only when that member's profile is published", () => {
@@ -117,6 +131,8 @@ describe("content in /content", () => {
     expect(new Set(ids).size).toBe(ids.length);
     const referenced = [
       ...content.events,
+      ...content.events.flatMap((e) => e.lineup.map((person) => ({ imageSlot: person.poster }))),
+      ...content.events.flatMap((e) => e.gallery.map((id) => ({ imageSlot: id }))),
       ...content.members,
       ...content.founders,
       ...content.awards,

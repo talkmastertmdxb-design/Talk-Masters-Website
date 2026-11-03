@@ -118,21 +118,23 @@ test("Echo says 'Want help?' once the page settles, and the bubble opens the cha
 });
 
 test("the bubble can be waved away, and steps aside on its own", async ({ page }) => {
+  // Stepping page time in small increments is slow in real time, mostly on desktop (Lenis + GSAP).
+  test.setTimeout(60_000);
   // A paused clock moves only when the test steps it, so a slow page load can't use up Echo's
   // timers on its own. Step in small increments: the timers start once the page has hydrated.
   // Real time, so the stored "intro already seen" stamp from the test setup still counts.
   await page.clock.install();
   await page.clock.pauseAt(Date.now() + 1_000);
-  const stepUntil = (condition: () => Promise<boolean>) =>
-    expect
-      .poll(
-        async () => {
-          await page.clock.runFor(250);
-          return condition();
-        },
-        { intervals: [50], timeout: 20_000 },
-      )
-      .toBe(true);
+  // Check first, then step: the page redraws in real time, so stepping before it has caught up
+  // would run the clock past the moment we're waiting for (seen under heavy test load).
+  const stepUntil = async (condition: () => Promise<boolean>) => {
+    for (let step = 0; step < 300; step++) {
+      if (await condition()) return;
+      await page.clock.runFor(100);
+      await page.waitForTimeout(30);
+    }
+    expect(await condition(), "never happened within 30 s of page time").toBe(true);
+  };
   const bubble = page.getByRole("button", { name: "Want help?" });
   const bubbleShown = async () => (await bubble.count()) === 1;
   const bubbleGone = async () => (await bubble.count()) === 0;
@@ -152,8 +154,9 @@ test("the bubble can be waved away, and steps aside on its own", async ({ page }
   await page.evaluate(() => sessionStorage.clear());
   await page.reload();
   await stepUntil(bubbleShown);
-  // It stays a while, then steps aside without being touched.
-  await page.clock.runFor(5_000);
+  // It stays a while (9 s), then steps aside without being touched.
+  await page.clock.runFor(4_000);
   await expect(bubble).toBeVisible();
+  await page.clock.runFor(4_000);
   await stepUntil(bubbleGone);
 });

@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "slug": "she-leads",
+    "title": "She Leads",
+    "tagline": "Where every woman is a leader",
+    "type": "other",
+    "startsAt": "2025-09-14T09:00:00+04:00",
+    "endsAt": "2025-09-14T13:00:00+04:00",
+    "venue": "Glendale International School, Oud Metha, Dubai",
+    "summary": "A morning on mastering public speaking and leadership skills, learning from the experts, with a panel discussion and the Division C Director as chief guest.",
+    "status": "published",
+    "lineup": [
+      {
+        "name": "Deewee Alcasoas",
+        "role": "Chief Guest",
+        "note": "Director, Division C",
+        "poster": "she-leads-chief-guest",
+        "consent": true
+      },
+      {
+        "name": "Prathiba Leo",
+        "role": "Panel Moderator",
+        "note": "Business Communication Coach and TEDx speaker",
+        "poster": "she-leads-panel-moderator",
+        "consent": true
+      },
+      {
+        "name": "Remy George",
+        "role": "Emcee",
+        "note": "Marketing Expert",
+        "poster": "she-leads-emcee-remy-george",
+        "consent": true
+      },
+      {
+        "name": "Deepthi Rajeevan",
+        "role": "Emcee",
+        "poster": "she-leads-emcee-deepthi-rajeevan",
+        "consent": true
+      },
+      {
+        "name": "Aditi Gaikwad",
+        "role": "Sergeant at Arms",
+        "poster": "she-leads-sergeant-at-arms",
+        "consent": true
+      }
+    ],
+    "gallery": [],
+    "placeholder": false
+  }
+]

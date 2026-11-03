@@ -207,6 +207,19 @@ export const settingsSchema = z.object({
   placeholder,
 });
 
+/** One person on an event's programme, shown with the poster that announced them. */
+const lineupPersonSchema = z.object({
+  name: z.string().min(1),
+  /** Their part in the event: "Chief Guest", "Emcee", "Panel Moderator". */
+  role: z.string().min(1),
+  /** A short line from the poster, e.g. "Director, Division C". */
+  note: z.string().min(1).optional(),
+  poster: imageSlotId,
+  /** Permission to show their name and poster here (docs/CONTENT_REQUESTS.md). */
+  consent: z.boolean(),
+  placeholder,
+});
+
 export const eventSchema = z
   .object({
     slug,
@@ -216,8 +229,14 @@ export const eventSchema = z
     endsAt: z.iso.datetime({ offset: true }).optional(),
     venue: z.string().min(1),
     summary: z.string().min(1),
+    /** The event's own line, e.g. "Where every woman is a leader". */
+    tagline: z.string().min(1).optional(),
     status: publishStatus,
     imageSlot: imageSlotId.optional(),
+    /** Who took the stage, each with their announcement poster, in running order. */
+    lineup: z.array(lineupPersonSchema).default([]),
+    /** Photos from the day (image slot ids). The gallery appears once there is one. */
+    gallery: z.array(imageSlotId).default([]),
     placeholder,
   })
   .refine((event) => !event.endsAt || Date.parse(event.endsAt) > Date.parse(event.startsAt), {
@@ -248,59 +267,89 @@ export const JOURNEY_MILESTONES = [
  * A member directory card plus its expanded journey (Plan.md §Members Page).
  * Position, work, company and LinkedIn are all optional: members choose what to share.
  */
-export const memberSchema = z.object({
-  slug,
-  ...person,
-  /** Club position, if any (e.g. Vice President Education). */
-  position: z.string().min(1).optional(),
-  /** Degree or job role. */
-  occupation: z.string().min(1).optional(),
-  /** Company or organisation. */
-  organisation: z.string().min(1).optional(),
-  /**
-   * One line for the home page's "who it's for" faces: who they were and who they are now,
-   * e.g. "Mechanical engineer, now a public speaking trainer". Members without one aren't shown there.
-   */
-  headline: z.string().min(1).max(70).optional(),
-  /** One line on their directory card, over the photo (three lines at most). Falls back to `headline`. */
-  hook: z.string().min(1).max(80).optional(),
-  /** Public profiles the member chose to share, shown in this order. One per network. */
-  links: profileLinks,
-  /** For the future directory filter. */
-  segment: z.enum(["student", "professional", "executive", "alumni", "officer"]).optional(),
-  /** Before Toastmasters: the challenge they faced, in one sentence. */
-  challenge: z.string().min(1),
-  /** Today: their transformation, in one sentence. */
-  transformation: z.string().min(1),
-  journey: z
-    .array(z.object({ milestone: z.enum(JOURNEY_MILESTONES), text: z.string().min(1) }))
-    .min(1, "Add at least one journey milestone"),
-  impact: z
-    .object({
-      career: z.string().min(1).optional(),
-      leadership: z.string().min(1).optional(),
-      confidence: z.string().min(1).optional(),
-      networking: z.string().min(1).optional(),
-    })
-    /** In the member's own words; leave it out until they share it (the section is then hidden). */
-    .default({}),
-  /** One piece of advice for new guests, in their own words. Optional until they give it. */
-  advice: z.string().min(1).optional(),
-  /**
-   * The profile's lead paragraph: their personal story with the club, or what Toastmasters
-   * means to them. Not a repeat of their job title (that is `occupation`).
-   */
-  story: z.string().min(1),
-  /** What they bring to the club, for "What [name] brings to the club". */
-  contribution: z.string().min(1).optional(),
-  /** The year they joined Talk-Masters, for "Member since 2024". */
-  memberSince: z.number().int().min(1924).max(thisYear).optional(),
-  /** Short club facts shown under the name, e.g. "Featured speaker, 100th meeting". */
-  clubHighlights: z.array(z.string().min(1).max(48)).max(3, "Keep it to 3 highlights").default([]),
-  /** Shown in the home page Member Spotlight. */
-  spotlight: z.boolean().default(false),
-  status: publishStatus,
-});
+/** Compares the words only: case, straight or curly quotes, and a trailing full stop may differ. */
+const plainWords = (text: string): string =>
+  text
+    .toLowerCase()
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/[.]$/, "");
+
+/** True when `line` appears in `source`, so a shortened quote never puts new words in anyone's mouth. */
+export function isQuotedFrom(line: string, source: string): boolean {
+  return plainWords(source).includes(plainWords(line));
+}
+
+export const memberSchema = z
+  .object({
+    slug,
+    ...person,
+    /** Club position, if any (e.g. Vice President Education). */
+    position: z.string().min(1).optional(),
+    /** Degree or job role. */
+    occupation: z.string().min(1).optional(),
+    /** Company or organisation. */
+    organisation: z.string().min(1).optional(),
+    /**
+     * One line for the home page's "who it's for" faces: who they were and who they are now,
+     * e.g. "Mechanical engineer, now a public speaking trainer". Members without one aren't shown there.
+     */
+    headline: z.string().min(1).max(70).optional(),
+    /** One line on their directory card, over the photo (three lines at most). Falls back to `headline`. */
+    hook: z.string().min(1).max(80).optional(),
+    /** Public profiles the member chose to share, shown in this order. One per network. */
+    links: profileLinks,
+    /** For the future directory filter. */
+    segment: z.enum(["student", "professional", "executive", "alumni", "officer"]).optional(),
+    /** Before Toastmasters: the challenge they faced, in one sentence. */
+    challenge: z.string().min(1),
+    /** Today: their transformation, in one sentence. */
+    transformation: z.string().min(1),
+    journey: z
+      .array(z.object({ milestone: z.enum(JOURNEY_MILESTONES), text: z.string().min(1) }))
+      .min(1, "Add at least one journey milestone"),
+    impact: z
+      .object({
+        career: z.string().min(1).optional(),
+        leadership: z.string().min(1).optional(),
+        confidence: z.string().min(1).optional(),
+        networking: z.string().min(1).optional(),
+      })
+      /** In the member's own words; leave it out until they share it (the section is then hidden). */
+      .default({}),
+    /** One piece of advice for new guests, in their own words. Optional until they give it. */
+    advice: z.string().min(1).optional(),
+    /**
+     * A line from `advice`, word for word, short enough to read as it glides past in the Members
+     * page's advice band. Members without one aren't in the band.
+     */
+    adviceShort: z.string().min(1).max(90).optional(),
+    /**
+     * The profile's lead paragraph: their personal story with the club, or what Toastmasters
+     * means to them. Not a repeat of their job title (that is `occupation`).
+     */
+    story: z.string().min(1),
+    /** What they bring to the club, for "What [name] brings to the club". */
+    contribution: z.string().min(1).optional(),
+    /** The year they joined Talk-Masters, for "Member since 2024". */
+    memberSince: z.number().int().min(1924).max(thisYear).optional(),
+    /** Short club facts shown under the name, e.g. "Featured speaker, 100th meeting". */
+    clubHighlights: z.array(z.string().min(1).max(48)).max(3, "Keep it to 3 highlights").default([]),
+    /** Shown in the home page Member Spotlight. */
+    spotlight: z.boolean().default(false),
+    status: publishStatus,
+  })
+  .superRefine((member, ctx) => {
+    if (member.adviceShort && !isQuotedFrom(member.adviceShort, member.advice ?? "")) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["adviceShort"],
+        message: "adviceShort must be words taken from this member's advice, unchanged",
+      });
+    }
+  });
 
 export const founderSchema = z.object({
   slug,
@@ -670,6 +719,7 @@ export const imageSlotSchema = z.object({
 
 export type Settings = z.infer<typeof settingsSchema>;
 export type ClubEvent = z.infer<typeof eventSchema>;
+export type LineupPerson = ClubEvent["lineup"][number];
 export type Member = z.infer<typeof memberSchema>;
 export type ProfileLink = z.infer<typeof profileLinkSchema>;
 export type ProfileNetwork = ProfileLink["network"];

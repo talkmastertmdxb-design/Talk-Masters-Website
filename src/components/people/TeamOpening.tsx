@@ -39,9 +39,9 @@ export function TeamOpening({ president, others, facts }: TeamOpeningProps) {
             </h1>
             <p data-reveal="up" className="text-ink-muted mt-6 max-w-[44ch] text-lg leading-relaxed">
               The Executive Committee is the team of volunteers who run {content.settings.clubName}
-              {term ? ` for ${term}` : ""}. They plan every
-              meeting, welcome every guest and look after every member&apos;s progress. Each of them started
-              where you might be now: in the audience, deciding whether to speak.
+              {term ? ` for ${term}` : ""}. They plan every meeting, welcome every guest and look after every
+              member&apos;s progress. Each of them started where you might be now: in the audience, deciding
+              whether to speak.
             </p>
           </div>
           <div className="flex flex-col gap-1.5">

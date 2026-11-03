@@ -33,9 +33,9 @@ test.describe("home", () => {
 
   test("a big statement is wiped in by a block, then left as plain text", async ({ page }, testInfo) => {
     await page.goto("/");
-    const heading = page.locator("#about-title");
+    const heading = page.locator("#why-join-title");
     await heading.evaluate((el) => el.scrollIntoView({ block: "center" }));
-    await expect(heading).toContainText("nervous first words become confident speeches");
+    await expect(heading).toContainText("Nervous about speaking? So was everyone here.");
     // Once revealed (or straight away with reduced motion) the wipe's wrappers are gone.
     await expect(heading.locator(".reveal-block")).toHaveCount(0, { timeout: 5_000 });
     if (testInfo.project.name !== "reduced-motion") {
@@ -167,7 +167,7 @@ test.describe("scroll reveals", () => {
   // Reveals wait for their block to cross a line 85-88% down the screen. A block that already
   // starts on the first screen, below that line, used to sit blank until the visitor scrolled
   // (the member grid under the /members hero on a tall phone).
-  const pages = ["/members", "/team", "/our-story", "/meetings", "/pathways", "/achievements"];
+  const pages = ["/members", "/team", "/our-story", "/meetings", "/pathways", "/achievements", "/events"];
   const screens = [
     { width: 390, height: 664 },
     { width: 430, height: 932 },

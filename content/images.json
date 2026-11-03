@@ -393,7 +393,7 @@
   },
   {
     "id": "member-jassim",
-    "alt": "Jasim Eranhole, smiling, in a blue blazer",
+    "alt": "Jassim Eranhole, smiling, in a blue blazer",
     "aspectRatio": "4/5",
     "brief": "Member portrait, head and shoulders",
     "src": "/images/members/jassim.webp",
@@ -627,5 +627,40 @@
     "brief": "Members celebrating together at a meeting",
     "src": "/images/club/meeting-celebration.webp",
     "focalPoint": "50% 37%"
+  },
+  {
+    "id": "she-leads-chief-guest",
+    "alt": "She Leads poster: Chief Guest, TM Deewee Alcasoas, Director, Division C. Sunday 14 September 2025, 9 am to 1 pm, Glendale International School, Oud Metha, Dubai",
+    "aspectRatio": "3/4",
+    "brief": "She Leads (14 September 2025) announcement poster for the chief guest",
+    "src": "/images/events/she-leads-chief-guest.webp"
+  },
+  {
+    "id": "she-leads-panel-moderator",
+    "alt": "She Leads poster: Panel Moderator, TM Prathiba Leo, Business Communication Coach and TEDx speaker. Sunday 14 September 2025, 9 am to 1 pm, Glendale International School, Oud Metha, Dubai",
+    "aspectRatio": "3/4",
+    "brief": "She Leads (14 September 2025) announcement poster for the panel moderator",
+    "src": "/images/events/she-leads-panel-moderator.webp"
+  },
+  {
+    "id": "she-leads-emcee-remy-george",
+    "alt": "She Leads poster: Emcee, TM Remy George, Marketing Expert. Sunday 14 September 2025, 9 am to 1 pm, Glendale International School, Oud Metha, Dubai",
+    "aspectRatio": "3/4",
+    "brief": "She Leads (14 September 2025) announcement poster for the emcee",
+    "src": "/images/events/she-leads-emcee-remy-george.webp"
+  },
+  {
+    "id": "she-leads-emcee-deepthi-rajeevan",
+    "alt": "She Leads poster: Emcee, TM Deepthi Rajeevan. Sunday 14 September 2025, 9 am to 1 pm, Glendale International School, Oud Metha, Dubai",
+    "aspectRatio": "3/4",
+    "brief": "She Leads (14 September 2025) announcement poster for the emcee",
+    "src": "/images/events/she-leads-emcee-deepthi-rajeevan.webp"
+  },
+  {
+    "id": "she-leads-sergeant-at-arms",
+    "alt": "She Leads poster: Sergeant at Arms, TM Aditi Gaikwad. Sunday 14 September 2025, 9 am to 1 pm, Glendale International School, Oud Metha, Dubai",
+    "aspectRatio": "3/4",
+    "brief": "She Leads (14 September 2025) announcement poster for the sergeant at arms",
+    "src": "/images/events/she-leads-sergeant-at-arms.webp"
   }
 ]

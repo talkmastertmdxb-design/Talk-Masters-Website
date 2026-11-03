@@ -70,6 +70,7 @@ export function createRepository(raw: RawContent): ContentRepository {
     history: raw.history,
     events: raw.events
       .filter(isPublished)
+      .map((event) => ({ ...event, lineup: event.lineup.filter(hasConsent) }))
       .toSorted((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt)),
     members,
     founders: raw.founders.filter(hasConsent),

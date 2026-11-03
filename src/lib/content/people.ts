@@ -4,6 +4,22 @@ export function firstName(fullName: string): string {
   return fullName.trim().split(/\s+/)[0] ?? fullName;
 }
 
+/** A quoted sentence long enough to be the member's own words, not a quoted title. */
+const SPOKEN_QUOTE = /“([^”]{40,})”/;
+
+/**
+ * A member's story split around the first thing they said in it, for the profile's pull quote:
+ * the text before it, the quote itself (without its marks) and anything after. A story without
+ * such a quote comes back whole as `lead`.
+ */
+export function splitStory(story: string): { lead: string; quote?: string; rest?: string } {
+  const match = SPOKEN_QUOTE.exec(story);
+  if (!match) return { lead: story };
+  const lead = story.slice(0, match.index).trim();
+  const rest = story.slice(match.index + match[0].length).trim();
+  return { lead, quote: match[1]!.trim(), ...(rest ? { rest } : {}) };
+}
+
 /** "Civil engineer at Example" / "Civil engineer" / "Example" / undefined, as the member chose. */
 export function workLine(member: Pick<Member, "occupation" | "organisation">): string | undefined {
   const { occupation, organisation } = member;

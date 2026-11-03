@@ -155,6 +155,40 @@ describe("eventSchema", () => {
     const bad = { ...event, endsAt: "2026-11-10T18:00:00+04:00" };
     expect(eventSchema.safeParse(bad).success).toBe(false);
   });
+
+  it("starts with no line-up and no photos", () => {
+    const parsed = eventSchema.parse(event);
+    expect(parsed.lineup).toEqual([]);
+    expect(parsed.gallery).toEqual([]);
+  });
+
+  it("accepts a tagline, a line-up with posters, and photos from the day", () => {
+    const parsed = eventSchema.parse({
+      ...event,
+      tagline: "Where every woman is a leader",
+      lineup: [
+        {
+          name: "A Speaker",
+          role: "Chief Guest",
+          note: "Director, Division C",
+          poster: "she-leads-chief-guest",
+          consent: true,
+        },
+        { name: "An Emcee", role: "Emcee", poster: "she-leads-emcee", consent: true },
+      ],
+      gallery: ["she-leads-photo-1"],
+    });
+    expect(parsed.lineup).toHaveLength(2);
+    expect(parsed.gallery).toEqual(["she-leads-photo-1"]);
+  });
+
+  it("needs a name, a role and a poster for each person in the line-up", () => {
+    const withLineup = (person: Record<string, unknown>) =>
+      eventSchema.safeParse({ ...event, lineup: [person] }).success;
+    expect(withLineup({ name: "A Speaker", role: "Chief Guest", consent: true })).toBe(false);
+    expect(withLineup({ name: "", role: "Chief Guest", poster: "p", consent: true })).toBe(false);
+    expect(withLineup({ name: "A Speaker", poster: "p", consent: true })).toBe(false);
+  });
 });
 
 describe("imageSlotSchema", () => {

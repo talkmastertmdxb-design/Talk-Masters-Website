@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { content } from "@/lib/content";
 import {
   breadcrumbJsonLd,
+  clubEventJsonLd,
   faqJsonLd,
   LISTED_MEETINGS,
   meetingEventsJsonLd,
@@ -69,13 +70,21 @@ describe("zonedIsoString", () => {
   });
 
   it("keeps the offset exact when the time isn't on the minute", () => {
-    expect(zonedIsoString(new Date("2026-11-02T11:04:40.512Z"), "Asia/Dubai")).toBe("2026-11-02T15:04:00+04:00");
-    expect(zonedIsoString(new Date("2026-01-15T04:30:59.999Z"), "Asia/Kolkata")).toBe("2026-01-15T10:00:00+05:30");
+    expect(zonedIsoString(new Date("2026-11-02T11:04:40.512Z"), "Asia/Dubai")).toBe(
+      "2026-11-02T15:04:00+04:00",
+    );
+    expect(zonedIsoString(new Date("2026-01-15T04:30:59.999Z"), "Asia/Kolkata")).toBe(
+      "2026-01-15T10:00:00+05:30",
+    );
   });
 
   it("handles zones behind UTC and half-hour offsets", () => {
-    expect(zonedIsoString(new Date("2026-01-15T17:00:00Z"), "America/New_York")).toBe("2026-01-15T12:00:00-05:00");
-    expect(zonedIsoString(new Date("2026-01-15T04:30:00Z"), "Asia/Kolkata")).toBe("2026-01-15T10:00:00+05:30");
+    expect(zonedIsoString(new Date("2026-01-15T17:00:00Z"), "America/New_York")).toBe(
+      "2026-01-15T12:00:00-05:00",
+    );
+    expect(zonedIsoString(new Date("2026-01-15T04:30:00Z"), "Asia/Kolkata")).toBe(
+      "2026-01-15T10:00:00+05:30",
+    );
   });
 });
 
@@ -110,6 +119,30 @@ describe("meetingEventsJsonLd", () => {
   it("leaves out cancelled meetings", () => {
     const cancelled = { ...club, meeting: { ...club.meeting, cancelled: ["2026-11-08"] } };
     expect(meetingEventsJsonLd(cancelled, site, now)[0]?.startDate).toBe("2026-11-22T10:30:00+04:00");
+  });
+});
+
+describe("clubEventJsonLd", () => {
+  const sheLeads = content.events.find((event) => event.slug === "she-leads")!;
+  const data = clubEventJsonLd(sheLeads, club, site, content.imageSlots);
+
+  it("describes a special event at its own venue, linked to its section of /events", () => {
+    expect(data).toMatchObject({
+      "@type": "Event",
+      name: "She Leads",
+      startDate: "2025-09-14T09:00:00+04:00",
+      endDate: "2025-09-14T13:00:00+04:00",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: { "@type": "Place", name: "Glendale International School, Oud Metha, Dubai" },
+      organizer: { "@id": "https://www.talkmasters.ae/#organization" },
+      url: "https://www.talkmasters.ae/events#she-leads",
+    });
+  });
+
+  it("names the line-up as performers and uses their posters as images", () => {
+    expect(data.performer).toContainEqual({ "@type": "Person", name: "Deewee Alcasoas" });
+    expect(data.performer).toHaveLength(sheLeads.lineup.length);
+    expect(data.image).toContain("https://www.talkmasters.ae/images/events/she-leads-chief-guest.webp");
   });
 });
 

@@ -10,6 +10,7 @@ const PAGES = [
   { path: "/pathways", types: ["BreadcrumbList"] },
   { path: "/our-story", types: ["BreadcrumbList"] },
   { path: "/achievements", types: ["BreadcrumbList"] },
+  { path: "/events", types: ["BreadcrumbList", "Event"] },
 ] as const;
 
 /** Every JSON-LD block on the page, parsed (a block that isn't valid JSON fails the test). */

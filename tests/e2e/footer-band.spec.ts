@@ -1,12 +1,20 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-test("every page ends with the stage-light call to action", async ({ page }, testInfo) => {
+test("every page ends with the gold guest invitation, over the footer's stage light", async ({
+  page,
+}, testInfo) => {
   for (const path of ["/", "/pathways", "/team"]) {
     await page.goto(path);
     const band = page.locator("footer section[aria-labelledby='guest-band']");
-    await expect(band.getByRole("heading", { name: "Ready to become a better speaker?" })).toBeVisible();
-    // The stage light now runs behind the whole footer, not just the band (Bailey Hart layout).
+    await expect(
+      band.getByRole("heading", { name: "Come as a guest. Speak only if you want to." }),
+    ).toBeVisible();
+    await expect(band.getByRole("link", { name: "Book a guest visit" })).toHaveAttribute("href", "/join");
+    await expect(band.getByRole("button", { name: "Book on WhatsApp" })).toBeVisible();
+    await expect(band).toContainText("ask for your consent before calling on you");
+    await expect(band.locator("[data-next-meeting]")).toBeAttached();
+    // The stage light runs behind the rest of the footer.
     const flow = page.locator("footer > .cta-band__flow");
     await expect(flow).toBeAttached();
     const animation = await flow.evaluate((el) => getComputedStyle(el).animationName);
@@ -15,7 +23,7 @@ test("every page ends with the stage-light call to action", async ({ page }, tes
   }
 });
 
-test("the call to action stays readable over the gradient", async ({ page }) => {
+test("the gold invitation stays readable", async ({ page }) => {
   await page.goto("/");
   const band = page.locator("footer section[aria-labelledby='guest-band']");
   await band.scrollIntoViewIfNeeded();

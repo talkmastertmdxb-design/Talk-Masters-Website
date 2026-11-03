@@ -4,7 +4,6 @@ import { expect, test, type Page } from "@playwright/test";
 /** Each page and the stage light it carries; the animated moods name their keyframes. */
 const PLACEMENTS = [
   { path: "/", preset: "teaser", animation: "stage-rise" },
-  { path: "/", preset: "mission", animation: "none" },
   { path: "/join", preset: "join", animation: "stage-sway" },
   { path: "/pathways", preset: "quiz", animation: "stage-sway" },
   { path: "/achievements", preset: "impact", animation: "none" },
@@ -81,7 +80,7 @@ test("the phone menu opens onto an aurora", async ({ page, isMobile }) => {
 
 test("words stay readable over every light", async ({ page }) => {
   for (const [path, selector] of [
-    ["/", "#about figure"],
+    ["/", "#about"],
     ["/join", "main"],
     ["/achievements", "section[aria-label='Impact']"],
     ["/our-story", "section[aria-labelledby='legacy-title']"],

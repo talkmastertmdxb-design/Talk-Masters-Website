@@ -14,8 +14,8 @@ interface FooterBookingProps {
 }
 
 /**
- * The footer's quick booking (Bailey Hart's newsletter shape): a name, then WhatsApp opens with
- * the guest message ready for the next meeting. Same message and checks as the /join form;
+ * The footer's quick booking, an ink pill on the gold invitation: a name, then WhatsApp opens
+ * with the guest message ready for the next meeting. Same message and checks as the /join form;
  * nothing is stored or sent by the site.
  */
 export function FooterBooking({ contact, meeting }: FooterBookingProps) {
@@ -46,7 +46,7 @@ export function FooterBooking({ contact, meeting }: FooterBookingProps) {
   };
 
   return (
-    <form onSubmit={onSubmit} noValidate className="mx-auto mt-10 w-full max-w-md">
+    <form onSubmit={onSubmit} noValidate className="mt-3 w-full">
       <div className="footer-pill flex items-center gap-2 rounded-full p-1.5 pl-5">
         {/* Distinct from the /join form's "Your name": both can be on one page. */}
         <label htmlFor={`${id}-name`} className="sr-only">
@@ -71,11 +71,11 @@ export function FooterBooking({ contact, meeting }: FooterBookingProps) {
         </button>
       </div>
       {error ? (
-        <p id={`${id}-error`} role="alert" className="text-gold mt-3 text-sm">
+        <p id={`${id}-error`} role="alert" className="text-maroon mt-3 text-sm font-semibold">
           {error}
         </p>
       ) : (
-        <p id={`${id}-hint`} className="mt-3 text-sm text-white/70">
+        <p id={`${id}-hint`} className="text-ink/80 mt-3 text-sm">
           Opens WhatsApp with your message to {contact.name} ready to send.
         </p>
       )}

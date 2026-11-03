@@ -1,4 +1,4 @@
-import type { Faq, Settings } from "@/lib/content/schemas";
+import type { ClubEvent, Faq, ImageSlot, Settings } from "@/lib/content/schemas";
 import { upcomingMeetings, wallTime } from "@/lib/content/meeting";
 
 /**
@@ -20,7 +20,10 @@ const SITE_ALTERNATE_NAMES = ["Talk-Masters", "Talkmasters"];
 /** Enough meetings for search results to show what's next, all comfortably in the future. */
 export const LISTED_MEETINGS = 6;
 
-type ClubFacts = Pick<Settings, "clubName" | "description" | "tagline" | "socials" | "meeting" | "contactEmail">;
+type ClubFacts = Pick<
+  Settings,
+  "clubName" | "description" | "tagline" | "socials" | "meeting" | "contactEmail"
+>;
 
 const absolute = (path: string, siteUrl: URL): string => new URL(path, siteUrl).toString();
 const organizationId = (siteUrl: URL): string => absolute("/#organization", siteUrl);
@@ -110,9 +113,18 @@ export function meetingEventsJsonLd(club: ClubFacts, siteUrl: URL, now: Date): J
     eventAttendanceMode: `${SCHEMA}/OfflineEventAttendanceMode`,
     location: venuePlace(club),
     image: [absolute(SHARE_IMAGE_PATH, siteUrl)],
-    organizer: { "@type": "Organization", "@id": organizationId(siteUrl), name: club.clubName, url: absolute("/", siteUrl) },
+    organizer: {
+      "@type": "Organization",
+      "@id": organizationId(siteUrl),
+      name: club.clubName,
+      url: absolute("/", siteUrl),
+    },
     // The members give the speeches, so they are the performers.
-    performer: { "@type": "PerformingGroup", name: `${club.clubName} members`, url: absolute("/members", siteUrl) },
+    performer: {
+      "@type": "PerformingGroup",
+      name: `${club.clubName} members`,
+      url: absolute("/members", siteUrl),
+    },
     isAccessibleForFree: true,
     offers: {
       "@type": "Offer",
@@ -125,6 +137,48 @@ export function meetingEventsJsonLd(club: ClubFacts, siteUrl: URL, now: Date): J
     },
     url: join,
   }));
+}
+
+/** A special event (content/events.json) at its own venue, anchored to its section of /events. */
+export function clubEventJsonLd(
+  event: ClubEvent,
+  club: ClubFacts,
+  siteUrl: URL,
+  slots: readonly Pick<ImageSlot, "id" | "src">[],
+): JsonLdNode {
+  const posterUrl = (id: string) => {
+    const src = slots.find((slot) => slot.id === id)?.src;
+    return src ? absolute(src, siteUrl) : undefined;
+  };
+  const images = [...event.lineup.map((person) => person.poster), ...event.gallery]
+    .map(posterUrl)
+    .filter((url): url is string => Boolean(url));
+  return {
+    "@context": SCHEMA,
+    "@type": "Event",
+    name: event.title,
+    description: event.summary,
+    startDate: event.startsAt,
+    ...(event.endsAt ? { endDate: event.endsAt } : {}),
+    eventStatus: `${SCHEMA}/EventScheduled`,
+    eventAttendanceMode: `${SCHEMA}/OfflineEventAttendanceMode`,
+    location: {
+      "@type": "Place",
+      name: event.venue,
+      address: { "@type": "PostalAddress", addressLocality: club.meeting.city, addressCountry: "AE" },
+    },
+    image: images.length > 0 ? images : [absolute(SHARE_IMAGE_PATH, siteUrl)],
+    organizer: {
+      "@type": "Organization",
+      "@id": organizationId(siteUrl),
+      name: club.clubName,
+      url: absolute("/", siteUrl),
+    },
+    ...(event.lineup.length > 0
+      ? { performer: event.lineup.map((person) => ({ "@type": "Person", name: person.name })) }
+      : {}),
+    url: absolute(`/events#${event.slug}`, siteUrl),
+  };
 }
 
 export interface Crumb {

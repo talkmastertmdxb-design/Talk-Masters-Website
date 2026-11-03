@@ -20,6 +20,15 @@ interface MemberProfileProps {
   portrait: ReactNode;
   /** The profile's story. Mark the name [data-profile-name], animated rows [data-profile-item]. */
   children: ReactNode;
+  /** Sections of the story, listed under the portrait on wide screens. Ids must be in `children`. */
+  chapters?: readonly ProfileChapter[];
+  /** "3 of 11", shown with the chapters. */
+  position?: string;
+}
+
+export interface ProfileChapter {
+  id: string;
+  label: string;
 }
 
 const reduceMotion = (): boolean => window.matchMedia(media.reducedMotion).matches;
@@ -42,7 +51,15 @@ const isVisible = (rect: DOMRect): boolean =>
  * plays it back into the card. Reduced motion: a short fade. Native <dialog>: focus is
  * trapped, Escape closes, and focus returns to the card.
  */
-export function MemberProfile({ slug, name, card, portrait, children }: MemberProfileProps) {
+export function MemberProfile({
+  slug,
+  name,
+  card,
+  portrait,
+  children,
+  chapters = [],
+  position,
+}: MemberProfileProps) {
   const root = useRef<HTMLDivElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
@@ -73,10 +90,7 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
     closing.current = false;
     dialog.current?.close();
     // Faded out for the close; reset only now that the dialog is shut, so nothing flashes back.
-    const faded = within(
-      dialog,
-      "[data-profile-item], [data-profile-name], [data-profile-line], [data-profile-curtain]",
-    );
+    const faded = within(dialog, "[data-profile-item], [data-profile-name], [data-profile-curtain]");
     gsap.set([dialog.current, ...faded], { clearProps: "opacity" });
   }, [slug]);
 
@@ -95,6 +109,10 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
         flyerBox.style.backgroundPosition = cardImage.style.objectPosition || "50% 50%";
       }
       setPortraitMounted(true);
+      // "Next member" links: the profile being left closes as this one opens.
+      for (const other of document.querySelectorAll<HTMLDialogElement>("dialog.member-profile[open]")) {
+        if (other !== node) other.close();
+      }
       node.showModal();
       node.scrollTop = 0;
       document.documentElement.classList.add("profile-open");
@@ -103,7 +121,6 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
       const curtain = target("[data-profile-curtain]");
       const flyer = target("[data-profile-portrait]")[0];
       const items = target("[data-profile-item]");
-      const line = target("[data-profile-line]");
       const nameEl = target("[data-profile-name]")[0];
 
       timeline.current?.kill();
@@ -166,7 +183,6 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
         );
       }
       tl.from(items, { opacity: 0, y: 28, duration: 0.8, stagger: 0.07 }, 0.6);
-      tl.fromTo(line, { scaleY: 0 }, { scaleY: 1, duration: 1.4, ease: "power2.inOut" }, 0.9);
       timeline.current = tl;
     });
   };
@@ -187,7 +203,7 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
       const flyer = target("[data-profile-portrait]")[0];
       const to = photo?.getBoundingClientRect();
       const tl = gsap.timeline({ defaults: { ease: profileMotion.ease }, onComplete: finishClose });
-      tl.to(target("[data-profile-item], [data-profile-name], [data-profile-line]"), {
+      tl.to(target("[data-profile-item], [data-profile-name]"), {
         opacity: 0,
         duration: 0.25,
         ease: "power1.out",
@@ -225,6 +241,13 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
     actions.current = { open, close };
   });
 
+  /** Chapter buttons scroll the profile (an id link would change the hash, which names a member). */
+  const goTo = (id: string): void => {
+    dialog.current
+      ?.querySelector(`#${CSS.escape(id)}`)
+      ?.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+  };
+
   useEffect(() => {
     const node = dialog.current;
     if (!node) return;
@@ -235,9 +258,27 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
       event.preventDefault();
       actions.current?.close();
     };
+    // Closed by another profile opening: finish this one's animation and give the card its photo back.
+    const onClose = () => {
+      if (closing.current) return;
+      if (timeline.current && timeline.current.progress() < 1) timeline.current.progress(1);
+      timeline.current?.kill();
+      split.current?.revert();
+      split.current = null;
+      const photo = cardPhoto(root);
+      if (photo) gsap.set(photo, { clearProps: "opacity" });
+    };
+    // A "next member" link changes the hash to that member.
+    const onHashChange = () => {
+      if (window.location.hash === `#${slug}`) actions.current?.open();
+    };
     node.addEventListener("cancel", onCancel);
+    node.addEventListener("close", onClose);
+    window.addEventListener("hashchange", onHashChange);
     return () => {
       node.removeEventListener("cancel", onCancel);
+      node.removeEventListener("close", onClose);
+      window.removeEventListener("hashchange", onHashChange);
       document.documentElement.classList.remove("profile-open");
     };
   }, [slug]);
@@ -281,8 +322,35 @@ export function MemberProfile({ slug, name, card, portrait, children }: MemberPr
               {/* One grade for every portrait, so the collection reads as a set. */}
               <div aria-hidden="true" className="profile-portrait__grade absolute inset-0" />
             </div>
+            {chapters.length > 0 && (
+              <nav
+                aria-label={`In ${name}'s profile`}
+                className="bg-ink/75 absolute bottom-10 left-10 hidden w-72 rounded-2xl px-5 pt-4 pb-2 backdrop-blur-md lg:block xl:bottom-14 xl:left-14"
+              >
+                {position && <p className="text-sm text-white/70">{position}</p>}
+                <ul className="mt-1">
+                  {chapters.map((chapter) => (
+                    <li key={chapter.id} className="border-b border-white/12 last:border-b-0">
+                      <button
+                        type="button"
+                        onClick={() => goTo(chapter.id)}
+                        className="group hover:text-gold flex min-h-12 w-full cursor-pointer items-center gap-3 text-left font-serif text-xl text-white/85 transition-colors duration-(--duration-quick)"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="bg-gold/60 group-hover:bg-gold h-px w-4 transition-[width] duration-(--duration-quick) group-hover:w-8"
+                        />
+                        {chapter.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
           </div>
-          <div className="relative px-6 pt-10 pb-24 sm:px-10 lg:col-span-7 lg:pt-28 lg:pr-14 lg:pl-16 xl:pr-20 xl:pl-20">
+          <div className="relative isolate px-6 pt-10 pb-24 sm:px-10 lg:col-span-7 lg:pt-28 lg:pr-14 lg:pl-16 xl:pr-20 xl:pl-20">
+            {/* The story's own ground, fading with the curtain: the text stays on ink however far it scrolls. */}
+            <div data-profile-curtain aria-hidden="true" className="bg-ink absolute inset-0 -z-10" />
             <div className="max-w-[46rem]">{children}</div>
           </div>
         </div>

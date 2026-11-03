@@ -40,7 +40,9 @@ describe("indexNowSite", () => {
     expect(indexNowSite({ VERCEL_ENV: "preview", NEXT_PUBLIC_SITE_URL: site })).toBeNull();
     expect(indexNowSite({ NEXT_PUBLIC_SITE_URL: site })).toBeNull();
     expect(indexNowSite({ VERCEL_ENV: "production" })).toBeNull();
-    expect(indexNowSite({ VERCEL_ENV: "production", NEXT_PUBLIC_SITE_URL: "http://localhost:3000" })).toBeNull();
+    expect(
+      indexNowSite({ VERCEL_ENV: "production", NEXT_PUBLIC_SITE_URL: "http://localhost:3000" }),
+    ).toBeNull();
     expect(indexNowSite({ VERCEL_ENV: "production", NEXT_PUBLIC_SITE_URL: "not a url" })).toBeNull();
   });
 });

@@ -16,13 +16,13 @@ test.describe("signature moments", () => {
       h.replace(/\s+/g, " ").trim(),
     );
     const order = [
-      "Talk-Masters is where nervous first words become confident speeches.",
+      "A Club with a Difference.",
       "What really changed?",
       "Nervous about speaking? So was everyone here.",
       "What happens on a Sunday morning?",
       "Meet our members",
       "The people who run the room, 2026–27",
-      "Ready to become a better speaker?",
+      "Come as a guest. Speak only if you want to.",
     ];
     const positions = order.map((text) => headings.indexOf(text));
     expect(
@@ -250,7 +250,10 @@ test.describe("reduced motion", () => {
     await page.goto("/");
     await expect(page.locator("[data-pinned]")).toHaveCount(0);
     await page.locator("#about").scrollIntoViewIfNeeded();
-    await expect(page.getByText("Read how the club began")).toHaveCSS("opacity", "1");
+    await expect(page.locator("#about").getByRole("link", { name: "Read our story" })).toHaveCSS(
+      "opacity",
+      "1",
+    );
   });
 });
 

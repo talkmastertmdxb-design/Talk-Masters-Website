@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 /** Each preset is one placement's lighting, defined in globals.css (Stage light). */
 export type StageLightPreset =
-  "teaser" | "join" | "quiz" | "menu" | "not-found" | "mission" | "impact" | "legacy" | "meetings";
+  "teaser" | "join" | "quiz" | "menu" | "not-found" | "impact" | "legacy" | "meetings";
 
 interface StageLightProps {
   preset: StageLightPreset;

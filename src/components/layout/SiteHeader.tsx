@@ -180,8 +180,10 @@ export function SiteHeader({ items, meeting, socials, contact, email }: SiteHead
             </button>
           </div>
           {/* Short screens (most phones once the browser bar takes its share, under 50rem): tighter
-              rows and no socials row (the footer has them). If the links still don't fit they
-              scroll, so "Talk to us" and the booking button below always stay on screen. */}
+              rows and no socials row (the footer has them). The shortest (under 42rem, a 640px
+              phone) also drop the next-meeting card: the booking button below goes to the same
+              page. If the links still don't fit they scroll, so "Talk to us" and the booking
+              button always stay on screen. */}
           <nav
             aria-label="Mobile"
             className="mt-12 min-h-0 flex-1 overflow-y-auto overscroll-contain [@media(max-height:50rem)]:mt-5"
@@ -245,7 +247,7 @@ export function SiteHeader({ items, meeting, socials, contact, email }: SiteHead
             <Link
               href="/join"
               onClick={closeMenu}
-              className="flex min-h-16 flex-col justify-center gap-1 rounded-2xl border border-white/10 bg-white/5 px-5 py-3"
+              className="flex min-h-16 flex-col justify-center gap-1 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 [@media(max-height:42rem)]:hidden"
             >
               <span className="font-semibold">
                 Next meeting <span aria-hidden="true">·</span>{" "}

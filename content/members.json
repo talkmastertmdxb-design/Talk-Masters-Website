@@ -33,6 +33,7 @@
       "leadership": "I strongly believe in out-of-the-box thinking, strategic planning, and disciplined implementation. Serving as Sergeant at Arms and now as Club President has given me the opportunity to put these beliefs into practice. Contributing to the club’s Smedley Award wins and DCP success showed me what a committed team can achieve when ideas are backed by a clear plan and consistent action."
     },
     "advice": "You already have the knowledge. Toastmasters helps you find the confidence to share it.",
+    "adviceShort": "You already have the knowledge. Toastmasters helps you find the confidence to share it.",
     "story": "Anees joined Talk-Masters in 2024 to step out of his comfort zone. What began as a way to build confidence grew into a passion for leading others, and today, as Club President, he enjoys guiding and supporting fellow members on their own journeys.",
     "contribution": "Out-of-the-box thinking, strategic planning and disciplined follow-through: ideas backed by a clear plan and consistent action.",
     "clubHighlights": ["Sergeant at Arms 2025–26", "Two Smedley Awards", "6 DCP goals"],
@@ -93,7 +94,8 @@
       "confidence": "From hesitating to express my ideas, I have grown into someone who can address audiences, facilitate workshops, and share lessons through videos in English and Malayalam.",
       "leadership": "Taking on club responsibilities, supporting fellow members, and facilitating learning experiences have helped me develop the ability to guide, encourage, and bring out the best in others."
     },
-    "advice": "Don't wait to become confident before you start speaking. Start speaking, and confidence will follow. Just like a gym, every small practice makes you stronger.",
+    "advice": "Don’t wait to become confident before you start speaking. Start speaking, and confidence will follow. Just like a gym, every small practice makes you stronger.",
+    "adviceShort": "Start speaking, and confidence will follow.",
     "story": "“I joined Toastmasters to find my voice. Along the way, I discovered my purpose: helping others find theirs.” For Hadi, the club is still his practice ground: every speech he gives and every evaluation he receives is a reminder that there is always room to improve.",
     "contribution": "A trainer's eye for turning ideas into messages that connect: structuring a speech, strengthening an opening, using a purposeful pause, making a message memorable. And still a learner, taking something new from every meeting.",
     "clubHighlights": [
@@ -167,7 +169,8 @@
       "leadership": "Serving as Treasurer and taking up different club responsibilities has let me experience leadership beyond my professional role. It has taught me to contribute to a community, support other speakers, give constructive feedback, coordinate with people and, sometimes, simply step up when something needs to be done.",
       "networking": "I have found an incredible network of people from completely different professions, industries and walks of life. It keeps widening every time I attend a meeting, visit another club or take part in an event, and it has exposed me to perspectives and conversations I might otherwise never have encountered."
     },
-    "advice": "Just come in and immerse yourself in the experience. You don't need to know exactly what Toastmasters is, or wonder whether you are “good enough” to be there. Observe, participate, speak to people and experience the room. Sometimes, as it did for me, it might take just two minutes to realise you have found your people.",
+    "advice": "Just come in and immerse yourself in the experience. You don’t need to know exactly what Toastmasters is, or wonder whether you are “good enough” to be there. Observe, participate, speak to people and experience the room. Sometimes, as it did for me, it might take just two minutes to realise you have found your people.",
+    "adviceShort": "It might take just two minutes to realise you have found your people.",
     "story": "Prathiba first walked into Talk-Masters in 2025 as a guest speaker, delivering a masterclass on “Selling Yourself” at CareerNova. It took two minutes to decide to join. “There was something almost enigmatic about the vibe of Talk-Masters: the energy, the warmth and, most importantly, the people.” Since then, the club has become family, and a reminder that no matter how much you speak professionally, there is always something new to learn, practise and improve.",
     "contribution": "A TEDx speaker's craft and a professional moderator's gift for drawing people out, shared through masterclasses, panels and meeting roles.",
     "clubHighlights": [
@@ -225,6 +228,7 @@
       "confidence": "Shares her story on the TEDx stage and in her writing as an author."
     },
     "advice": "Start small: one minute on your feet is a beginning.",
+    "adviceShort": "Start small: one minute on your feet is a beginning.",
     "story": "After more than nine years in Toastmasters, Tarannum still treats every meeting as practice. She brings that habit to Talk-Masters, and the same message to the children she teaches: start small, and keep showing up.",
     "contribution": "Nearly a decade of Toastmasters experience and more than 100 speeches, shared generously with newer members.",
     "clubHighlights": ["9+ years in Toastmasters", "100+ speeches"],
@@ -274,6 +278,7 @@
       "career": "My bigger ambition is to become a tech founder. I am working on INTAKE, an AI-powered platform that makes university admissions easier for students. A strong idea only creates impact when you can pitch it clearly, inspire others, and lead with confidence."
     },
     "advice": "Don’t wait to become confident. Show up, speak, and become it.",
+    "adviceShort": "Don’t wait to become confident. Show up, speak, and become it.",
     "story": "His humorous speech “Recalculating” won first place at the club contest and took Suhayb to the Area-level contest. He didn’t win there, but it taught him something more valuable than a trophy: every stage is practice, and every setback is part of recalculating your path forward.",
     "contribution": "Posters, campaigns and creative ideas that put the club in front of new people, including leading the creation of this website so guests can find Talk-Masters more easily.",
     "clubHighlights": ["1st place, club Humorous Speech contest", "Area-level contestant"],
@@ -286,11 +291,12 @@
     "memberSince": 2024
   },
   {
-    "slug": "jasim-eranhole",
-    "name": "Jasim Eranhole",
-    "occupation": "Regional Digital Optimization Specialist, UI/UX Specialist and Graphic Leader",
-    "organisation": "IKEA",
-    "headline": "Regional digital optimisation specialist at IKEA",
+    "slug": "jassim-eranhole",
+    "name": "Jassim Eranhole",
+    "occupation": "Digital Content (UX/UI) Specialist",
+    "organisation": "IKEA (United Arab Emirates, Qatar, Egypt and Oman)",
+    "headline": "Digital content (UX/UI) specialist at IKEA",
+    "hook": "A 100-day video challenge, and a promise to the club",
     "links": [
       {
         "network": "linkedin",
@@ -298,8 +304,8 @@
       }
     ],
     "segment": "professional",
-    "challenge": "He started out as a freelance artist and art teacher in India, painting commissions in acrylic and oil, before moving to Kuwait as a graphic designer in 2008.",
-    "transformation": "Today he leads digital optimisation, UI/UX and graphics for IKEA across the region, from Dubai.",
+    "challenge": "Jassim had ideas and knowledge to share, but found it hard to put them into words with confidence at work.",
+    "transformation": "Today Jassim speaks up in meetings, shares ideas and presents with more confidence, and colleagues at work have noticed the change.",
     "journey": [
       {
         "milestone": "other",
@@ -308,9 +314,38 @@
       {
         "milestone": "first-meeting",
         "text": "Joined Talk-Masters in June 2024."
+      },
+      {
+        "milestone": "other",
+        "text": "Started WhatsApp groups so members could practise speaking between meetings and keep each other going."
+      },
+      {
+        "milestone": "other",
+        "text": "Completed a 100-day daily video challenge: a lesson in showing up, even when not fully happy with the performance."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Served as Toastmaster of the Day for Meeting #101."
+      },
+      {
+        "milestone": "other",
+        "text": "Colleagues began to notice the progress and encouraged more presentations at work."
       }
     ],
-    "story": "Jasim has spent his career making ideas clear to other people: first in paint, then in print, shop windows and websites for some of the region's best-known retailers. Since June 2024, he has been practising the spoken side of that craft at Talk-Masters.",
+    "impact": {
+      "career": "I can explain my design ideas more clearly, contribute to discussions, and share my knowledge with colleagues more confidently.",
+      "leadership": "Taking meeting roles and encouraging others through practice groups have helped me take responsibility and support other people’s growth.",
+      "confidence": "I have become more willing to speak, ask questions, and try. I am learning to share my thoughts without waiting for perfect English."
+    },
+    "advice": "Come as you are. You do not need perfect English or confidence to begin. Keep attending, ask for help, and practise between meetings. The club supports you, and your daily effort helps you grow.",
+    "adviceShort": "You do not need perfect English or confidence to begin.",
+    "story": "Jassim joined Toastmasters to communicate better and grow at work. At first, speaking was not easy: there were worries about English, about explaining thoughts clearly and about how people would respond. So Jassim asked for guidance, listened to feedback and learned from other speakers, and kept working between meetings with books, tongue twisters, voice exercises, daily videos and WhatsApp practice groups. Some days brought progress; on others, even a simple thought was hard to explain. The practice continued, along with one promise to the club: “Whenever I am in Dubai, I will be there at Toastmasters.”",
+    "contribution": "WhatsApp practice groups that keep members speaking between meetings, and the steady example of a 100-day daily video challenge.",
+    "clubHighlights": [
+      "Toastmaster of the Day, Meeting #101",
+      "100-day daily video challenge",
+      "Started WhatsApp speaking practice groups"
+    ],
     "memberSince": 2024,
     "imageSlot": "member-jassim",
     "consent": true,
@@ -362,6 +397,7 @@
       "leadership": "Serving as Club Treasurer and taking on meeting roles have helped me develop responsibility, coordination, and leadership skills while contributing to the club’s success."
     },
     "advice": "Don’t wait for confidence before you begin. Take the first step, keep showing up, and let confidence grow through experience.",
+    "adviceShort": "Take the first step, keep showing up, and let confidence grow through experience.",
     "story": "For Nabeel, Toastmasters is not just about delivering speeches. It is about building confidence, expressing his thoughts freely, and growing as a person and a professional. He first joined in 2021, came back in 2026, and now serves as the club's Treasurer.",
     "contribution": "A steady hand on the club's finances as Treasurer, and a member who says yes to meeting roles, from Timer and Grammarian to Toastmaster of the Day.",
     "clubHighlights": ["Executive Committee 2026–27", "Toastmaster of the Day, Meeting #105"],
@@ -415,7 +451,8 @@
       "confidence": "Today, I may still feel nervous, and I may still make mistakes, but I no longer see them as reasons to stop speaking.",
       "leadership": "By taking on roles such as Table Topics Master, Toastmaster of the Day, Zoom Master of the Day, and Sergeant at Arms, I am getting opportunities to take responsibility, coordinate with people, listen to different opinions, and help meetings run smoothly."
     },
-    "advice": "Please don't make the same mistake I made by waiting for years before joining Talk-Masters. Don't wait for the perfect moment. Take the first step today. Come, join us, participate in the activities, take up roles, and experience the energy, positivity, and encouragement this club offers.",
+    "advice": "Please don’t make the same mistake I made by waiting for years before joining Talk-Masters. Don’t wait for the perfect moment. Take the first step today. Come, join us, participate in the activities, take up roles, and experience the energy, positivity, and encouragement this club offers.",
+    "adviceShort": "Don’t wait for the perfect moment. Take the first step today.",
     "story": "Noufal first came to Talk-Masters as a guest in 2020, but only joined in 2025. \"Instead of focusing on the five years I missed, I am grateful that I finally took that first step.\" The energy, encouragement and support of fellow members are helping Noufal grow more confident at work and at home, and discover that the club is not just a place to improve speaking skills, but a place to find one's potential.",
     "contribution": "A steady presence who sets the room for every meeting as Sergeant at Arms, and says yes to roles, from Zoom Master to Toastmaster of the Day.",
     "clubHighlights": [
@@ -473,7 +510,8 @@
       "career": "The professional results were immediate. I began closing deals with confidence, leading internal management meetings and changing how people in the company saw me. Over 13 years at Samsotech, I earned a promotion every two years, rising from Sales Engineer to Senior Manager and, in the end, overtaking my own seniors.",
       "confidence": "Talk-Masters gave me a warm, empowering environment that taught me to think on my feet, organise my thoughts and speak with impact. For someone who grew up on the back bench, it was a true transformation."
     },
-    "advice": "Public speaking training is a powerful catalyst for professional growth, so visit our club at least once. You'll find an inclusive, high-energy room that welcomes everyone, whatever your current skill level. Join us, sharpen your speaking skills and test your mettle in front of a larger audience.",
+    "advice": "Public speaking training is a powerful catalyst for professional growth, so visit our club at least once. You’ll find an inclusive, high-energy room that welcomes everyone, whatever your current skill level. Join us, sharpen your speaking skills and test your mettle in front of a larger audience.",
+    "adviceShort": "Public speaking training is a powerful catalyst for professional growth.",
     "story": "Edwin landed in Dubai with great hopes and high ambitions, in a city of glittering skyscrapers. In 2018 a friend invited him to Talk-Masters. Inspired by Richard Branson's advice to say yes to great opportunities and work out the details later, he paid his membership fee that same day. “It was a journey of true human transformation.”",
     "contribution": "Eight years of club experience, from his first role as Vice President Membership to Immediate Past President, and living proof of what one “yes” can change.",
     "clubHighlights": ["First role: VP Membership"],
@@ -519,6 +557,7 @@
       "leadership": "Toastmasters is helping me take the initiative and communicate with greater confidence in my role as a co-founder."
     },
     "advice": "Don’t wait until you feel confident. Take the first step, keep practising and let your confidence grow with experience.",
+    "adviceShort": "Don’t wait until you feel confident.",
     "story": "Afnas’s Toastmasters journey began at CareerNova on 29 June 2025, where he found his way to Talk-Masters. He has made meaningful progress in a short time: the club has given him a supportive place to practise, learn from feedback and grow as a speaker.",
     "clubHighlights": ["Joined at CareerNova, June 2025"],
     "memberSince": 2025,
@@ -563,6 +602,7 @@
       "leadership": "Leadership grows through daily habits: listening before responding, preparing well and following through on commitments."
     },
     "advice": "Start small. Introduce yourself, volunteer for a short role or try a Table Topic. You don’t need confidence before you begin; you can build it through practice.",
+    "adviceShort": "You don’t need confidence before you begin; you can build it through practice.",
     "story": "Rilwan joined Toastmasters to strengthen his communication skills, and it gradually became a hobby. The theme “Atomic Habits” matches his approach to learning: every chance to speak is another chance to improve. As Toastmaster of the Day, he set out to help members recognise the small habits that shape their progress.",
     "contribution": "Careful listening and thoughtful feedback, from the evaluation panel to leading a meeting as Toastmaster of the Day.",
     "clubHighlights": ["Evaluation panel member", "Toastmaster of the Day, “Atomic Habits”"],

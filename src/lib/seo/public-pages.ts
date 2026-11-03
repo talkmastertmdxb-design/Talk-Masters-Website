@@ -12,4 +12,5 @@ export const PUBLIC_PAGES: ReadonlyArray<{ path: string; priority: number }> = [
   { path: "/our-story", priority: 0.7 },
   { path: "/pathways", priority: 0.7 },
   { path: "/achievements", priority: 0.6 },
+  { path: "/events", priority: 0.6 },
 ];

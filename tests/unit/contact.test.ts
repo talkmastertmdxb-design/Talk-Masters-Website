@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { content } from "@/lib/content";
-import { GUEST_MESSAGE, QUESTION_MESSAGE, formatPhone, mailtoLink, whatsappLink } from "@/lib/content/contact";
+import {
+  GUEST_MESSAGE,
+  QUESTION_MESSAGE,
+  formatPhone,
+  mailtoLink,
+  whatsappLink,
+} from "@/lib/content/contact";
 import { settingsSchema } from "@/lib/content/schemas";
 
 describe("whatsappLink", () => {
