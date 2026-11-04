@@ -14,6 +14,7 @@ import imagesJson from "@content/images.json";
 import meetingGuideJson from "@content/meeting-guide.json";
 import echoJson from "@content/echo.json";
 import updatesJson from "@content/updates.json";
+import galleryJson from "@content/gallery.json";
 import { createRepository, type ContentRepository } from "./repository";
 import {
   awardSchema,
@@ -21,6 +22,7 @@ import {
   echoSchema,
   eventSchema,
   faqSchema,
+  gallerySchema,
   founderSchema,
   historySchema,
   imageSlotSchema,
@@ -51,6 +53,7 @@ export const content: ContentRepository = createRepository({
   meetingGuide: parseContent(meetingGuideSchema, meetingGuideJson, "content/meeting-guide.json"),
   echo: parseContent(echoSchema, echoJson, "content/echo.json"),
   updates: parseContent(updatesSchema, updatesJson, "content/updates.json"),
+  gallery: parseContent(gallerySchema, galleryJson, "content/gallery.json"),
 });
 
 export type { ContentRepository } from "./repository";

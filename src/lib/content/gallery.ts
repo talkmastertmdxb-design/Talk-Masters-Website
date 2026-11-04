@@ -25,30 +25,36 @@ export interface GalleryFilter {
 const photosOf = (event: ClubEvent): readonly string[] =>
   event.album.length > 0 ? event.album : event.gallery;
 
+/** The Gallery's group for club photos that belong to no event. */
+export const MOMENTS = { id: "moments", label: "Club moments" } as const;
+
 /**
- * Every event's photos for /gallery, most recent event first, each photo once. Slots with no
- * photo yet are left out.
+ * Every photo for /gallery: each event's, most recent event first, then the club moments. Each
+ * photo appears once, even when two slots share a file; slots with no photo yet are left out.
  */
 export function galleryPhotos(
   events: readonly ClubEvent[],
+  moments: readonly string[],
   slots: readonly Pick<ImageSlot, "id" | "src" | "alt">[],
   timeZone: string,
 ): GalleryPhoto[] {
   const seen = new Set<string>();
-  return events
+  const photo = (id: string, event: string, caption: string): GalleryPhoto[] => {
+    const slot = slots.find((candidate) => candidate.id === id);
+    if (!slot?.src || seen.has(id) || seen.has(slot.src)) return [];
+    seen.add(id).add(slot.src);
+    return [{ id, src: slot.src, alt: slot.alt, event, caption }];
+  };
+  const fromEvents = events
     .toSorted((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt))
     .flatMap((event) => {
       const date = eventDay(event, timeZone).replace(/^\w+ /, "");
-      return photosOf(event).flatMap((id) => {
-        const slot = slots.find((candidate) => candidate.id === id);
-        if (!slot?.src || seen.has(id)) return [];
-        seen.add(id);
-        return [{ id, src: slot.src, alt: slot.alt, event: event.slug, caption: `${event.title}, ${date}` }];
-      });
+      return photosOf(event).flatMap((id) => photo(id, event.slug, `${event.title}, ${date}`));
     });
+  return [...fromEvents, ...moments.flatMap((id) => photo(id, MOMENTS.id, MOMENTS.label))];
 }
 
-/** All, then each special event, then the Sunday meetings together; only ones with photos. */
+/** All, each special event, the Sunday meetings together, then club moments; only ones with photos. */
 export function galleryFilters(
   photos: readonly GalleryPhoto[],
   events: readonly ClubEvent[],
@@ -63,6 +69,7 @@ export function galleryFilters(
     { id: "all", label: "All", count: photos.length },
     ...special,
     { id: "meetings", label: "Sunday meetings", count: count(meetings) },
+    { ...MOMENTS, count: count([MOMENTS.id]) },
   ].filter((filter) => filter.count > 0);
 }
 

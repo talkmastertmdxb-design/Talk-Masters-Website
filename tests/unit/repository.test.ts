@@ -18,6 +18,7 @@ const base: RawContent = {
   meetingGuide: content.meetingGuide,
   echo: content.echo,
   updates: content.updates,
+  gallery: content.gallery,
 };
 
 const event = (slug: string, startsAt: string, status: "draft" | "published" = "published") => ({

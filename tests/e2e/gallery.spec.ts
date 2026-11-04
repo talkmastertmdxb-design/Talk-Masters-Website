@@ -26,28 +26,49 @@ test.describe("gallery page", () => {
     expect(new Set(sources).size).toBe(18);
   });
 
-  test("filters the collage, and the counts match what it shows", async ({ page }) => {
+  test("shows 40 photos still, then 40 more at a time, with focus on the first new one", async ({ page }) => {
+    await page.goto("/gallery");
+    const tiles = page.locator(".collage .collage__tile");
+    await expect(tiles).toHaveCount(40);
+    await expect(page.getByText(/^Showing 40 of \d+$/)).toBeVisible();
+    // Still: nothing in the grid is animated.
+    expect(
+      await page
+        .locator(".collage__copy")
+        .first()
+        .evaluate((el) => getComputedStyle(el).animationName),
+    ).toBe("none");
+
+    await page.getByRole("button", { name: "Show 40 more" }).click();
+    await expect(tiles).toHaveCount(80);
+    await expect(page.locator(".collage__tile[data-index='40']")).toBeFocused();
+  });
+
+  test("filters the grid, the counts match, and a new filter starts again at 40", async ({ page }) => {
     await page.goto("/gallery");
     const filters = page.getByRole("group", { name: "Show photos from" });
-    const all = filters.getByRole("button", { name: /^All/ });
-    await expect(all).toHaveAttribute("aria-pressed", "true");
+    await expect(filters.getByRole("button", { name: /^All/ })).toHaveAttribute("aria-pressed", "true");
+    const tiles = page.locator(".collage .collage__tile");
 
-    const shown = page.locator(".collage__copy:not(.collage__copy--loop) > li:not([aria-hidden])");
+    const moments = filters.getByRole("button", { name: /^Club moments/ });
+    const count = Number((await moments.locator(".collage__count").textContent())?.trim());
+    await moments.click();
+    await expect(moments).toHaveAttribute("aria-pressed", "true");
+    await expect(tiles).toHaveCount(Math.min(40, count));
+    await expect(page.getByText(`Showing ${Math.min(40, count)} of ${count}`)).toBeVisible();
+
     const meetings = filters.getByRole("button", { name: /^Sunday meetings/ });
-    const count = Number((await meetings.locator(".collage__count").textContent())?.trim());
     await meetings.click();
-    await expect(meetings).toHaveAttribute("aria-pressed", "true");
-    await expect(shown).toHaveCount(count);
-    await expect(page.getByText(`${count} photos`, { exact: true })).toBeVisible();
+    await expect(tiles).toHaveCount(40);
+    await page.getByRole("button", { name: /^Show \d+ more$/ }).click();
+    await expect(tiles).toHaveCount(75);
+    await expect(page.getByRole("button", { name: /^Show \d+ more$/ })).toHaveCount(0);
   });
 
   test("opens any photo full screen, steps through and closes", async ({ page }) => {
     await page.goto("/gallery");
     await page.getByRole("button", { name: /^She Leads/ }).click();
-    const first = page
-      .locator(".collage__copy:not(.collage__copy--loop) > li:not([aria-hidden]) button")
-      .first();
-    await first.press("Enter");
+    await page.locator(".collage__tile[data-index='0']").press("Enter");
     const viewer = page.getByRole("dialog");
     await expect(viewer).toBeVisible();
     await expect(viewer).toContainText("She Leads, 14 September 2025");
@@ -58,23 +79,39 @@ test.describe("gallery page", () => {
     await expect(viewer).toBeHidden();
   });
 
-  test("drifts, holds still under the pointer, and stays still for reduced motion", async ({
-    page,
-    isMobile,
-  }, testInfo) => {
+  test("a swipe steps to the next photo", async ({ page }) => {
     await page.goto("/gallery");
-    const collage = page.locator(".collage");
-    const track = collage.locator(".collage__track").first();
-    const animation = () => track.evaluate((el) => getComputedStyle(el).animationName);
-    if (testInfo.project.name === "reduced-motion") {
-      expect(await animation()).toBe("none");
-      await expect(collage.locator(".collage__copy--loop").first()).toBeHidden();
-      return;
-    }
-    expect(await animation()).toBe("collage-drift");
-    test.skip(isMobile, "No pointer to hover with");
-    await collage.hover();
-    await expect.poll(() => track.evaluate((el) => getComputedStyle(el).animationPlayState)).toBe("paused");
+    await page.locator(".collage__tile[data-index='0']").press("Enter");
+    const viewer = page.getByRole("dialog");
+    const photo = viewer.locator(".lightbox__frame > div").first();
+    const box = (await photo.boundingBox())!;
+    const y = box.y + box.height / 2;
+    await photo.dispatchEvent("pointerdown", {
+      clientX: box.x + box.width * 0.7,
+      clientY: y,
+      pointerType: "touch",
+    });
+    await photo.dispatchEvent("pointerup", {
+      clientX: box.x + box.width * 0.3,
+      clientY: y,
+      pointerType: "touch",
+    });
+    await expect(viewer.getByText(/^2 of \d+$/)).toBeVisible();
+  });
+
+  test("a shared link opens that photo, and Share copies the link without a share sheet", async ({
+    page,
+    context,
+    browserName,
+  }) => {
+    await page.addInitScript(() => Object.defineProperty(navigator, "share", { value: undefined }));
+    if (browserName === "chromium") await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.goto("/gallery?photo=meeting-2025-07-13-j480");
+    const viewer = page.getByRole("dialog");
+    await expect(viewer).toBeVisible();
+    await expect(viewer).toHaveAccessibleName("Award winners holding their trophies and certificates");
+    await viewer.getByRole("button", { name: "Share this photo" }).click();
+    await expect(viewer.getByText(/Link copied|Couldn't share/)).toBeVisible();
   });
 
   test("an Events-page link opens the gallery on that meeting's photos", async ({ page }) => {

@@ -4,6 +4,7 @@ import type {
   CultureCard,
   EchoScript,
   Faq,
+  Gallery,
   Founder,
   History,
   ImageSlot,
@@ -45,6 +46,8 @@ export interface ContentRepository {
   readonly echo: EchoScript;
   /** When pages last changed, for "Last updated" and the sitemap. */
   readonly updates: Updates;
+  /** /gallery: club photos that belong to no event. */
+  readonly gallery: Gallery;
 }
 
 export type RawContent = {
@@ -84,5 +87,6 @@ export function createRepository(raw: RawContent): ContentRepository {
     meetingGuide: raw.meetingGuide,
     echo: raw.echo,
     updates: raw.updates,
+    gallery: raw.gallery,
   });
 }

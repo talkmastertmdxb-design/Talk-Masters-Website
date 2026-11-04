@@ -4,8 +4,6 @@ import type { GalleryPhoto } from "@/lib/content/gallery";
 
 interface GalleryHeroProps {
   photos: readonly GalleryPhoto[];
-  /** How many events the photos come from. */
-  eventCount: number;
 }
 
 /** One photo per card: 9 on each rail, none repeated (the cards are small, so are the files). */
@@ -22,7 +20,7 @@ function spread<T>(items: readonly T[], count: number): T[] {
  * /gallery's white opening: the headline over a corridor of club photos rushing toward the
  * viewer. The corridor is decorative; the photos themselves are in the collage below.
  */
-export function GalleryHero({ photos, eventCount }: GalleryHeroProps) {
+export function GalleryHero({ photos }: GalleryHeroProps) {
   const images = spread(photos, CORRIDOR_PHOTOS).map((photo) => ({
     src: getImageProps({ src: photo.src, alt: "", width: 640, height: 640, sizes: "640px" }).props.src,
   }));
@@ -48,7 +46,7 @@ export function GalleryHero({ photos, eventCount }: GalleryHeroProps) {
             data-reveal="up"
             className="text-ink-muted rounded-full bg-white/85 px-4 py-1.5 text-sm backdrop-blur-sm"
           >
-            {photos.length} photos from {eventCount} days, with more after every meeting
+            {photos.length} photos so far, with more after every meeting
           </p>
         </div>
       </ImageStreamHero>

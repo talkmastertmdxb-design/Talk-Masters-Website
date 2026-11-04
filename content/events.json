@@ -72,7 +72,11 @@
       "she-leads-feedback-award",
       "events-collage-panel",
       "events-collage-why",
-      "events-collage-smile"
+      "events-collage-smile",
+      "path-presentation-mastery",
+      "path-dynamic-leadership",
+      "path-persuasive-influence",
+      "path-motivational-strategies"
     ]
   },
   {
@@ -159,7 +163,9 @@
       "careernova-session-business",
       "careernova-session-ganesan",
       "events-collage-selling",
-      "events-collage-laughter"
+      "events-collage-laughter",
+      "path-visionary-communication",
+      "statement-fullbleed"
     ]
   },
   {
@@ -226,7 +232,7 @@
   },
   {
     "slug": "meeting-2025-07-13",
-    "title": "13 July meeting",
+    "title": "Sunday meeting",
     "type": "meeting",
     "startsAt": "2025-07-13T10:30:00+04:00",
     "endsAt": "2025-07-13T12:30:00+04:00",

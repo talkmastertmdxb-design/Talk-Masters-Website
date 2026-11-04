@@ -617,6 +617,12 @@ const pastDay = z.iso.date().refine((day) => Date.parse(day) <= Date.now(), "Use
  * When the facts on a page last changed (content/updates.json): shown as "Last updated" and
  * sent to search engines as the sitemap's lastmod. Bump a date whenever that page's content changes.
  */
+/** /gallery: club photos that belong to no event (content/gallery.json), best first. */
+export const gallerySchema = z.object({
+  /** Image slot ids. Portraits and posters stay out: this is the club's album of moments. */
+  moments: z.array(imageSlotId).default([]),
+});
+
 export const updatesSchema = z.object({
   /** /meetings: content/meeting-guide.json and the meeting rule in settings. */
   meetings: pastDay,
@@ -755,6 +761,7 @@ export type EchoToken = (typeof ECHO_TOKENS)[number];
 export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type MeetingGuide = z.infer<typeof meetingGuideSchema>;
 export type Updates = z.infer<typeof updatesSchema>;
+export type Gallery = z.infer<typeof gallerySchema>;
 export type MeetingSession = MeetingGuide["sessions"][number];
 export type MeetingRole = MeetingGuide["roles"][number];
 export type SpeechTiming = MeetingGuide["timing"][number];

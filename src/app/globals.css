@@ -2589,7 +2589,7 @@ html[data-nav="history"]::view-transition-new(.page-in) {
     margin: 0;
     padding: clamp(0.75rem, 3vw, 2.5rem);
     border: 0;
-    background: rgb(11 18 32 / 0.96);
+    background: var(--color-ink);
     color: var(--color-white);
   }
   .lightbox::backdrop {
@@ -2634,8 +2634,7 @@ html[data-nav="history"]::view-transition-new(.page-in) {
   }
 }
 
-/* /gallery: the moving collage. Columns drift in opposite directions; pointing at the collage or
-   tabbing into it holds it still. Reduced motion: a still grid with every photo once. */
+/* /gallery: the photo grid, a still masonry of columns. */
 @layer components {
   .collage__chip {
     display: inline-flex;
@@ -2672,17 +2671,12 @@ html[data-nav="history"]::view-transition-new(.page-in) {
 
   .collage {
     display: flex;
+    align-items: flex-start;
     gap: clamp(0.5rem, 1vw, 0.875rem);
-    height: clamp(36rem, 120svh, 76rem);
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 7%, #000 93%, transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 7%, #000 93%, transparent);
-  }
-  .collage__col {
-    flex: 1 1 0;
-    min-width: 0;
   }
   .collage__copy {
+    flex: 1 1 0;
+    min-width: 0;
     display: grid;
     gap: clamp(0.5rem, 1vw, 0.875rem);
     margin: 0;
@@ -2727,31 +2721,23 @@ html[data-nav="history"]::view-transition-new(.page-in) {
     translate: 0 0;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .collage__track {
-      animation: collage-drift var(--collage-duration, 60s) linear infinite;
-      animation-direction: var(--collage-direction, normal);
-    }
-    .collage:hover .collage__track,
-    .collage:focus-within .collage__track {
-      animation-play-state: paused;
-    }
+  .collage__more {
+    min-height: 3rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-ink);
+    padding-inline: 1.75rem;
+    font-weight: 600;
+    transition:
+      background-color var(--duration-quick) var(--ease-deliver),
+      color var(--duration-quick) var(--ease-deliver);
   }
-  @keyframes collage-drift {
-    to {
-      transform: translateY(-50%);
-    }
+  .collage__more:hover {
+    background: var(--color-ink);
+    color: var(--color-white);
   }
-  @media (prefers-reduced-motion: reduce) {
-    .collage {
-      height: auto;
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-    .collage__copy--loop,
-    .collage__copy > li[aria-hidden="true"] {
-      display: none;
-    }
+  .collage__more:focus-visible {
+    outline: 2px solid var(--color-tm-blue);
+    outline-offset: 3px;
   }
 }
 
