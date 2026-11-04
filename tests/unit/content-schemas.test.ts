@@ -156,10 +156,31 @@ describe("eventSchema", () => {
     expect(eventSchema.safeParse(bad).success).toBe(false);
   });
 
-  it("starts with no line-up and no photos", () => {
+  it("starts with no line-up, no sessions and no photos", () => {
     const parsed = eventSchema.parse(event);
     expect(parsed.lineup).toEqual([]);
+    expect(parsed.sessions).toEqual([]);
     expect(parsed.gallery).toEqual([]);
+  });
+
+  it("takes sessions whose title is optional, as long as each has a speaker and a photo", () => {
+    const sessions = [
+      { speaker: "Jouhar Ali", title: "Strategic CV Writing", photo: "careernova-session-cv" },
+      { speaker: "Ganesan", photo: "careernova-session-ganesan" },
+    ];
+    expect(eventSchema.safeParse({ ...event, sessions }).success).toBe(true);
+    expect(eventSchema.safeParse({ ...event, sessions: [{ speaker: "Ganesan" }] }).success).toBe(false);
+  });
+
+  it("keeps a session title short enough for its card", () => {
+    const title = "A talk title that runs on far too long to fit on one card at all";
+    const sessions = [{ speaker: "Jouhar Ali", title, photo: "careernova-session-cv" }];
+    expect(eventSchema.safeParse({ ...event, sessions }).success).toBe(false);
+  });
+
+  it("accepts the day told in paragraphs, but not an empty story", () => {
+    expect(eventSchema.safeParse({ ...event, story: ["A full hall."] }).success).toBe(true);
+    expect(eventSchema.safeParse({ ...event, story: [] }).success).toBe(false);
   });
 
   it("accepts a tagline, a line-up with posters, and photos from the day", () => {

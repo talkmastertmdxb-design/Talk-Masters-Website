@@ -613,6 +613,14 @@
     "focalPoint": "50% 25%"
   },
   {
+    "id": "member-lulu",
+    "alt": "Lulu Baseerath, smiling, at a desk in front of the Talk-Masters sign",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/members/lulu.webp",
+    "focalPoint": "42% 25%"
+  },
+  {
     "id": "why-speaking",
     "alt": "A member speaking to the room during a meeting, smiling, with the meeting slides behind him",
     "aspectRatio": "4/5",
@@ -662,5 +670,221 @@
     "aspectRatio": "3/4",
     "brief": "She Leads (14 September 2025) announcement poster for the sergeant at arms",
     "src": "/images/events/she-leads-sergeant-at-arms.webp"
+  },
+  {
+    "id": "she-leads-panel",
+    "alt": "The She Leads panel on stage, under the screen naming the moderator and the three panellists",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_1793",
+    "src": "/images/events/she-leads-panel.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "she-leads-stage",
+    "alt": "The two She Leads emcees on stage, either side of the event's banner on the big screen",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_1670",
+    "src": "/images/events/she-leads-stage.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "she-leads-charge-up",
+    "alt": "A speaker beaming with the microphone in hand during She Leads",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_2009",
+    "src": "/images/events/she-leads-charge-up.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "she-leads-audience",
+    "alt": "The She Leads audience laughing together in their seats",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_1846",
+    "src": "/images/events/she-leads-audience.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "she-leads-standing-together",
+    "alt": "Guests standing side by side at the front of the hall during an activity",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_2017",
+    "src": "/images/events/she-leads-standing-together.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "she-leads-token",
+    "alt": "A guest smiling with a potted plant, the She Leads thank-you gift",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_1766",
+    "src": "/images/events/she-leads-token.webp",
+    "focalPoint": "65% 40%"
+  },
+  {
+    "id": "she-leads-feedback-award",
+    "alt": "A guest receiving a thank-you plant on stage during audience feedback",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_2151",
+    "src": "/images/events/she-leads-feedback-award.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "she-leads-question",
+    "alt": "An audience member speaking into the microphone",
+    "aspectRatio": "3/2",
+    "brief": "She Leads (14 September 2025) gallery, IMG_2099",
+    "src": "/images/events/she-leads-question.webp",
+    "focalPoint": "60% 40%"
+  },
+  {
+    "id": "careernova-group",
+    "alt": "The CareerNova audience, speakers and hosts together in one group photo",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC02010",
+    "src": "/images/events/careernova-group.webp",
+    "focalPoint": "50% 60%"
+  },
+  {
+    "id": "careernova-emcees",
+    "alt": "Emcees Geeta and Hadi on stage under the CareerNova emcees slide",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC01730",
+    "src": "/images/events/careernova-emcees.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "careernova-opening",
+    "alt": "Edwin giving the opening address as Vice President Membership",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC01675",
+    "src": "/images/events/careernova-opening.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "careernova-applause",
+    "alt": "Two guests applauding from the audience",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC01982",
+    "src": "/images/events/careernova-applause.webp",
+    "focalPoint": "55% 40%"
+  },
+  {
+    "id": "careernova-networking",
+    "alt": "Guests talking to each other after the sessions",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC02324",
+    "src": "/images/events/careernova-networking.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "careernova-thanks",
+    "alt": "Speakers and hosts on stage, handing out thank-you plants",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC02354",
+    "src": "/images/events/careernova-thanks.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "careernova-room",
+    "alt": "The full CareerNova hall, seen from the back during a session",
+    "aspectRatio": "3/2",
+    "brief": "CareerNova (29 June 2025) gallery, DSC01967",
+    "src": "/images/events/careernova-room.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "careernova-session-money",
+    "alt": "Deepak Bhadra speaking at CareerNova",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC01773",
+    "src": "/images/events/careernova-session-money.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "careernova-session-selling",
+    "alt": "Prathiba Leo presenting “Selling Yourself” at CareerNova",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC01847",
+    "src": "/images/events/careernova-session-selling.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "careernova-session-dream",
+    "alt": "Sona Nambiar speaking at CareerNova",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC02025",
+    "src": "/images/events/careernova-session-dream.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "careernova-session-ganesan",
+    "alt": "Ganesan speaking at CareerNova",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC02154",
+    "src": "/images/events/careernova-session-ganesan.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "careernova-session-ats",
+    "alt": "Ragid Kader on stage beside his introduction slide",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC02177",
+    "src": "/images/events/careernova-session-ats.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "careernova-session-cv",
+    "alt": "Jouhar Ali presenting Strategic CV Writing",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC02244",
+    "src": "/images/events/careernova-session-cv.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "careernova-session-business",
+    "alt": "A business coach speaking under the “Uncover the Business Owner in You” poster",
+    "aspectRatio": "4/5",
+    "brief": "CareerNova (29 June 2025) session photo, DSC02306",
+    "src": "/images/events/careernova-session-business.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
+    "id": "events-collage-panel",
+    "alt": "The She Leads panel and moderator raising their hands on stage",
+    "aspectRatio": "3/2",
+    "brief": "Events page collage, She Leads (14 September 2025), IMG_1885",
+    "src": "/images/events/events-collage-panel.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "events-collage-laughter",
+    "alt": "CareerNova guests laughing in the front row",
+    "aspectRatio": "3/2",
+    "brief": "Events page collage, CareerNova (29 June 2025), DSC02075",
+    "src": "/images/events/events-collage-laughter.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "events-collage-smile",
+    "alt": "A She Leads speaker smiling between sessions",
+    "aspectRatio": "3/2",
+    "brief": "Events page collage, She Leads (14 September 2025), IMG_1722",
+    "src": "/images/events/events-collage-smile.webp",
+    "focalPoint": "62% 35%"
+  },
+  {
+    "id": "events-collage-why",
+    "alt": "The Division C Director presenting “Why Toastmasters?” at She Leads",
+    "aspectRatio": "3/2",
+    "brief": "Events page collage, She Leads (14 September 2025), IMG_1681",
+    "src": "/images/events/events-collage-why.webp",
+    "focalPoint": "50% 40%"
+  },
+  {
+    "id": "events-collage-selling",
+    "alt": "Prathiba Leo speaking at CareerNova, her profile on the screen behind",
+    "aspectRatio": "3/2",
+    "brief": "Events page collage, CareerNova (29 June 2025), DSC01906",
+    "src": "/images/events/events-collage-selling.webp",
+    "focalPoint": "42% 35%"
   }
 ]

@@ -144,6 +144,14 @@ describe("clubEventJsonLd", () => {
     expect(data.performer).toHaveLength(sheLeads.lineup.length);
     expect(data.image).toContain("https://www.talkmasters.ae/images/events/she-leads-chief-guest.webp");
   });
+
+  it("names every session speaker of an event without a poster line-up, once each", () => {
+    const careerNova = content.events.find((event) => event.slug === "careernova")!;
+    const workshop = clubEventJsonLd(careerNova, club, site, content.imageSlots);
+    const names = careerNova.sessions.map((session) => session.speaker);
+    expect(workshop.performer).toEqual([...new Set(names)].map((name) => ({ "@type": "Person", name })));
+    expect(workshop.image).toContain("https://www.talkmasters.ae/images/events/careernova-group.webp");
+  });
 });
 
 describe("breadcrumbJsonLd", () => {

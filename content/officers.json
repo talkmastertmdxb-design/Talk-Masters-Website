@@ -28,7 +28,8 @@
     "statement": "Making sure every guest who walks in feels welcome, and every member feels at home.",
     "imageSlot": "officer-vp-membership",
     "consent": true,
-    "placeholder": true
+    "placeholder": true,
+    "memberSlug": "lulu-baseerath"
   },
   {
     "slug": "vp-public-relations",

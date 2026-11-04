@@ -30,6 +30,7 @@ const event = (slug: string, startsAt: string, status: "draft" | "published" = "
   status,
   placeholder: false,
   lineup: [],
+  sessions: [],
   gallery: [],
 });
 

@@ -153,6 +153,10 @@ export function clubEventJsonLd(
   const images = [...event.lineup.map((person) => person.poster), ...event.gallery]
     .map(posterUrl)
     .filter((url): url is string => Boolean(url));
+  // Everyone who took the stage, once each: the line-up first, then the session speakers.
+  const performers = [
+    ...new Set([...event.lineup.map((person) => person.name), ...event.sessions.map((s) => s.speaker)]),
+  ];
   return {
     "@context": SCHEMA,
     "@type": "Event",
@@ -174,9 +178,7 @@ export function clubEventJsonLd(
       name: club.clubName,
       url: absolute("/", siteUrl),
     },
-    ...(event.lineup.length > 0
-      ? { performer: event.lineup.map((person) => ({ "@type": "Person", name: person.name })) }
-      : {}),
+    ...(performers.length > 0 ? { performer: performers.map((name) => ({ "@type": "Person", name })) } : {}),
     url: absolute(`/events#${event.slug}`, siteUrl),
   };
 }

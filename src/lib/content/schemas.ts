@@ -220,6 +220,16 @@ const lineupPersonSchema = z.object({
   placeholder,
 });
 
+/** One talk from an event's programme, told with a photo of the speaker on stage. */
+const eventSessionSchema = z.object({
+  speaker: z.string().min(1),
+  /** The talk's title, from its slide or poster. Leave it out when it isn't known. */
+  title: z.string().min(1).max(60).optional(),
+  /** One short line on what the talk covered. */
+  note: z.string().min(1).max(90).optional(),
+  photo: imageSlotId,
+});
+
 export const eventSchema = z
   .object({
     slug,
@@ -229,13 +239,17 @@ export const eventSchema = z
     endsAt: z.iso.datetime({ offset: true }).optional(),
     venue: z.string().min(1),
     summary: z.string().min(1),
+    /** The day, told in a few short paragraphs, under the summary. */
+    story: paragraphs.optional(),
     /** The event's own line, e.g. "Where every woman is a leader". */
     tagline: z.string().min(1).optional(),
     status: publishStatus,
     imageSlot: imageSlotId.optional(),
     /** Who took the stage, each with their announcement poster, in running order. */
     lineup: z.array(lineupPersonSchema).default([]),
-    /** Photos from the day (image slot ids). The gallery appears once there is one. */
+    /** The talks, in running order, each with a photo of the speaker on stage. */
+    sessions: z.array(eventSessionSchema).max(9, "Keep it to 9 sessions").default([]),
+    /** Photos from the day (image slot ids), best first: the first one leads the gallery. */
     gallery: z.array(imageSlotId).default([]),
     placeholder,
   })
@@ -720,6 +734,7 @@ export const imageSlotSchema = z.object({
 export type Settings = z.infer<typeof settingsSchema>;
 export type ClubEvent = z.infer<typeof eventSchema>;
 export type LineupPerson = ClubEvent["lineup"][number];
+export type EventSession = ClubEvent["sessions"][number];
 export type Member = z.infer<typeof memberSchema>;
 export type ProfileLink = z.infer<typeof profileLinkSchema>;
 export type ProfileNetwork = ProfileLink["network"];

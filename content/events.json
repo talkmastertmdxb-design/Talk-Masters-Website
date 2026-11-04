@@ -44,7 +44,91 @@
         "consent": true
       }
     ],
-    "gallery": [],
+    "gallery": [
+      "she-leads-panel",
+      "she-leads-charge-up",
+      "she-leads-audience",
+      "she-leads-stage",
+      "she-leads-token",
+      "she-leads-standing-together",
+      "she-leads-question",
+      "she-leads-feedback-award"
+    ],
+    "placeholder": false,
+    "imageSlot": "she-leads-panel",
+    "story": [
+      "On a Sunday morning in September 2025, Talk-Masters filled a hall at Glendale International School for She Leads, a morning built on one idea: every woman is a leader. Members, guests and their families came from all walks of life.",
+      "The Division C Director, DTM Deewee Alcasoas, opened with “Why Toastmasters?”. TM Shavonda followed with “Time to Charge Up”, and “The Career Pivot Playbook” turned to reinvention with purpose and power.",
+      "At the heart of the morning, Prathiba Leo moderated a panel with Tarannum Sheikh, Vibha Talati and Sangita Mishra: a conversation people still talk about. The audience took the microphone too, and the morning closed with TM Edwin's address and a plant for everyone who took the stage."
+    ]
+  },
+  {
+    "slug": "careernova",
+    "title": "CareerNova",
+    "tagline": "A career workshop for professionals who've been stuck too long",
+    "type": "workshop",
+    "startsAt": "2025-06-29T09:00:00+04:00",
+    "endsAt": "2025-06-29T13:00:00+04:00",
+    "venue": "Glendale International School, Oud Metha, Dubai",
+    "summary": "A morning of seven talks on the next step in a career: CVs that get read, selling yourself, building a business of your own and the money habits behind it.",
+    "story": [
+      "CareerNova brought a full hall together on a Sunday morning in June 2025, for professionals ready for their next move. Emcees Hadi and Geeta kept the programme moving from nine until one.",
+      "Edwin, then Vice President Membership, opened the day. Seven speakers followed, each with one practical idea: how HR reads a CV, how AI can tailor one for screening software, how to sell yourself, and how to start thinking like a business owner.",
+      "For some, the morning was a beginning. Afnas Pareed found his way to Talk-Masters that day, and Prathiba Leo, who gave the masterclass on selling yourself, decided to join within two minutes."
+    ],
+    "status": "published",
+    "imageSlot": "careernova-group",
+    "lineup": [],
+    "sessions": [
+      {
+        "speaker": "Deepak Bhadra",
+        "title": "Pay yourself first",
+        "note": "Money is a habit, and financial freedom needs discipline.",
+        "photo": "careernova-session-money"
+      },
+      {
+        "speaker": "Prathiba Leo",
+        "title": "Selling Yourself",
+        "note": "A masterclass from a business communication coach.",
+        "photo": "careernova-session-selling"
+      },
+      {
+        "speaker": "Sona Nambiar",
+        "title": "Dream of your own, or work for others?",
+        "photo": "careernova-session-dream"
+      },
+      {
+        "speaker": "Ganesan",
+        "photo": "careernova-session-ganesan"
+      },
+      {
+        "speaker": "Ragid Kader",
+        "title": "A modern CV, with AI",
+        "note": "Prompts that tailor a CV to the job and get it past ATS screening.",
+        "photo": "careernova-session-ats"
+      },
+      {
+        "speaker": "Jouhar Ali",
+        "title": "Strategic CV Writing",
+        "note": "How HR looks at your CV.",
+        "photo": "careernova-session-cv"
+      },
+      {
+        "speaker": "The Profit Generator",
+        "title": "Uncover the Business Owner in You",
+        "note": "A business coach's case, in twenty minutes.",
+        "photo": "careernova-session-business"
+      }
+    ],
+    "gallery": [
+      "careernova-group",
+      "careernova-emcees",
+      "careernova-applause",
+      "careernova-opening",
+      "careernova-room",
+      "careernova-networking",
+      "careernova-thanks"
+    ],
     "placeholder": false
   }
 ]

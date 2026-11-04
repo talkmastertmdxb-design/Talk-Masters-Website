@@ -65,3 +65,7 @@ next-env.d.ts
 # Raw, uncompressed video. Compressed cuts live in public/videos (see docs/IMAGES.md).
 /assets/source/video/
 
+
+# raw event photo dumps: originals stay off git, the chosen ones live in public/images/events
+/she LEADS/
+/Career Nova 2025-29-Jun-25/

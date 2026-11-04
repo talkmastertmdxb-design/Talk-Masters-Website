@@ -116,7 +116,7 @@ test("a profile leads to the next and previous member without closing", async ({
   const prathiba = page.getByRole("dialog", { name: "Prathiba Leo" });
   await expect(prathiba).toBeVisible();
   const more = prathiba.getByRole("navigation", { name: "More members" });
-  await expect(more).toContainText("3 of 11");
+  await expect(more).toContainText("3 of 12");
 
   await more.getByRole("link", { name: /Next member/ }).click();
   const tarannum = page.getByRole("dialog", { name: "Tarannum Sheikh" });

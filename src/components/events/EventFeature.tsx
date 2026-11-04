@@ -2,47 +2,57 @@ import { ImageSlot } from "@/components/media/ImageSlot";
 import { content } from "@/lib/content";
 import { eventDay, eventWhen } from "@/lib/content/events";
 import type { ClubEvent } from "@/lib/content/schemas";
+import { BentoGallery } from "./BentoGallery";
+import { CardFan } from "./CardFan";
+import { PerspectiveCarousel } from "./PerspectiveCarousel";
 
 interface EventFeatureProps {
   event: ClubEvent;
   timeZone: string;
   /** Whether it is still to come; past events say when they were held. */
   upcoming: boolean;
+  /** The event's own heading level: 2 when it has a band of its own, 3 inside "Coming up". */
+  level?: 2 | 3;
 }
 
-const slotSrc = (id: string): string | undefined => content.imageSlots.find((slot) => slot.id === id)?.src ?? undefined;
+const slotOf = (id: string) => content.imageSlots.find((slot) => slot.id === id);
 
 /**
- * One special event, told in full: what it was, when and where, who took the stage (with the
- * posters that announced them) and, once added, photos from the day. Linkable at /events#slug.
+ * One special event, told as a chapter: what it was, when and where, the day in a few
+ * paragraphs, who took the stage (a fan of the posters that announced them, or the talks in a
+ * perspective carousel) and photos from the day in a bento grid. Linkable at /events#slug.
  */
-export function EventFeature({ event, timeZone, upcoming }: EventFeatureProps) {
+export function EventFeature({ event, timeZone, upcoming, level = 2 }: EventFeatureProps) {
   const when = eventWhen(event, timeZone);
   const titleId = `${event.slug}-title`;
+  const Title = level === 2 ? "h2" : "h3";
+  const Sub = level === 2 ? "h3" : "h4";
+  const [lead, ...story] = event.story ?? [];
+  const gallery = event.gallery.flatMap((id) => {
+    const slot = slotOf(id);
+    return slot?.src ? [{ id, src: slot.src, alt: slot.alt }] : [];
+  });
 
   return (
     <article id={event.slug} aria-labelledby={titleId} className="min-w-0 scroll-mt-28">
-      <div className="grid gap-10 md:grid-cols-12 md:gap-12">
+      <header className="grid gap-10 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-7">
           <p data-reveal="up">
             <span className="border-hairline text-ink-muted inline-flex rounded-full border px-3 py-1 text-sm font-medium">
               {upcoming ? "Coming up" : "Past event"}
             </span>
           </p>
-          <h3 id={titleId} data-reveal="lines" className="text-h1 mt-6">
+          <Title id={titleId} data-reveal="lines" className="text-display mt-4">
             {event.title}
-          </h3>
+          </Title>
           {event.tagline && (
-            <p data-reveal="up" className="text-maroon mt-4 text-xl font-semibold md:text-2xl">
+            <p data-reveal="up" className="text-maroon mt-5 max-w-[30ch] text-xl font-semibold md:text-2xl">
               {event.tagline}
             </p>
           )}
-          <p data-reveal="up" className="text-ink-muted mt-6 max-w-[52ch] text-lg leading-relaxed">
-            {event.summary}
-          </p>
         </div>
 
-        <dl data-reveal="stagger" className="grid content-start gap-6 md:col-span-5 md:pt-14">
+        <dl data-reveal="stagger" className="grid content-end gap-6 md:col-span-5">
           <div className="border-hairline border-t pt-4">
             <dt className="text-ink-muted text-sm">When</dt>
             <dd className="mt-1 font-semibold">
@@ -58,69 +68,105 @@ export function EventFeature({ event, timeZone, upcoming }: EventFeatureProps) {
             <dd className="mt-1 font-semibold">{event.venue}</dd>
           </div>
         </dl>
+      </header>
+
+      <div className="mt-14 grid gap-8 md:mt-20 md:grid-cols-12">
+        <p data-reveal="text" className="event-lead md:col-span-7">
+          {lead ?? event.summary}
+        </p>
+        {story.length > 0 && (
+          <div className="text-ink-muted grid content-start gap-5 text-lg leading-relaxed md:col-span-5 md:pt-2">
+            {story.map((paragraph) => (
+              <p key={paragraph} data-reveal="up">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
 
       {event.lineup.length > 0 && (
-        <section aria-labelledby={`${event.slug}-lineup`} className="mt-16 md:mt-20">
-          <h4 id={`${event.slug}-lineup`} data-reveal="up" className="text-h3">
+        <section aria-labelledby={`${event.slug}-lineup`} className="mt-24 md:mt-32">
+          <Sub id={`${event.slug}-lineup`} data-reveal="up" className="text-h3">
             The line-up
-          </h4>
-          {/* Phones and tablets swipe through the posters; desktops see them all in a row. */}
-          <ul
-            data-reveal="stagger"
-            className="slider-track relative -mx-(--site-gutter) mt-8 flex snap-x snap-mandatory scroll-px-(--site-gutter) gap-5 overflow-x-auto px-(--site-gutter) pb-4 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
-          >
-            {event.lineup.map((person) => {
-              const full = slotSrc(person.poster);
-              const poster = (
-                <ImageSlot
-                  id={person.poster}
-                  sizes="(min-width: 1024px) 18vw, (min-width: 640px) 40vw, 72vw"
-                  className="rounded-card overflow-hidden shadow-[0_18px_40px_-24px_rgb(11_18_32/0.45)]"
-                />
-              );
-              return (
-                <li
-                  key={person.poster}
-                  className="w-[72vw] max-w-80 shrink-0 snap-start sm:w-[40vw] lg:w-auto"
-                >
-                  {full ? (
-                    <a
-                      href={full}
-                      target="_blank"
-                      rel="noopener"
-                      className="rounded-card block transition-transform duration-300 hover:-translate-y-1"
-                    >
-                      {poster}
-                      <span className="sr-only">
-                        Open {person.name}&apos;s poster full size (opens in a new tab)
-                      </span>
-                    </a>
-                  ) : (
-                    poster
-                  )}
-                  <p className="text-maroon mt-4 text-sm font-semibold">{person.role}</p>
-                  <p className="mt-0.5 text-lg font-semibold">{person.name}</p>
-                  {person.note && <p className="text-ink-muted mt-0.5 text-sm">{person.note}</p>}
-                </li>
-              );
-            })}
-          </ul>
+          </Sub>
+          <div className="mt-10">
+            <CardFan
+              label={`${event.title} line-up posters`}
+              cards={event.lineup.map((person) => ({
+                name: person.name,
+                role: person.role,
+                note: person.note,
+                href: slotOf(person.poster)?.src ?? undefined,
+                poster: (
+                  <ImageSlot
+                    id={person.poster}
+                    sizes="(min-width: 56.25rem) 20rem, 60vw"
+                    className="shadow-[0_24px_50px_-28px_rgb(11_18_32/0.6)]"
+                  />
+                ),
+              }))}
+            />
+          </div>
         </section>
       )}
 
-      {event.gallery.length > 0 && (
-        <section aria-labelledby={`${event.slug}-photos`} className="mt-16 md:mt-20">
-          <h4 id={`${event.slug}-photos`} data-reveal="up" className="text-h3">
+      {event.sessions.length > 0 && (
+        <section aria-labelledby={`${event.slug}-sessions`} className="mt-24 md:mt-32">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <Sub id={`${event.slug}-sessions`} data-reveal="up" className="text-h3">
+              On stage
+            </Sub>
+            <p data-reveal="up" className="text-ink-muted">
+              {event.sessions.length} talks, in running order
+            </p>
+          </div>
+          <div className="-mx-(--site-gutter) mt-10">
+            <PerspectiveCarousel
+              label={`${event.title} talks`}
+              cards={event.sessions.map((session) => ({
+                key: session.photo,
+                photo: <ImageSlot id={session.photo} sizes="(min-width: 56.25rem) 22rem, 72vw" />,
+                caption: (
+                  <>
+                    <span className="block font-serif text-2xl leading-tight">
+                      {session.title ?? session.speaker}
+                    </span>
+                    {session.title && (
+                      <span className="text-maroon mt-1 block text-sm font-semibold">{session.speaker}</span>
+                    )}
+                    {session.note && (
+                      <span className="text-ink-muted mt-2 block text-sm">{session.note}</span>
+                    )}
+                  </>
+                ),
+              }))}
+            />
+          </div>
+        </section>
+      )}
+
+      {gallery.length > 0 && (
+        <section aria-labelledby={`${event.slug}-photos`} className="mt-24 md:mt-32">
+          <Sub id={`${event.slug}-photos`} data-reveal="up" className="text-h3">
             Photos from the day
-          </h4>
-          <ul data-reveal="stagger" className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {event.gallery.map((id) => (
-              <li key={id} className="rounded-card overflow-hidden">
-                <ImageSlot id={id} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" />
-              </li>
-            ))}
-          </ul>
+          </Sub>
+          <div className="mt-10">
+            <BentoGallery
+              label={`Photos from ${event.title}`}
+              photos={gallery.map((photo, index) => ({
+                ...photo,
+                tile: (
+                  <ImageSlot
+                    id={photo.id}
+                    sizes={
+                      index === 0 ? "(min-width: 56.25rem) 60vw, 100vw" : "(min-width: 56.25rem) 30vw, 50vw"
+                    }
+                  />
+                ),
+              }))}
+            />
+          </div>
         </section>
       )}
     </article>

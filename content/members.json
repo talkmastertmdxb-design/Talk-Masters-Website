@@ -612,5 +612,54 @@
     "spotlight": false,
     "status": "published",
     "placeholder": false
+  },
+  {
+    "slug": "lulu-baseerath",
+    "name": "Lulu Baseerath",
+    "position": "Vice President Membership",
+    "occupation": "Manager – Business Development, logistics and supply chain",
+    "hook": "One year, one decision, countless possibilities",
+    "segment": "officer",
+    "challenge": "Lulu was always confident, persuasive and quick to take the initiative, but the bigger dream was to become a professional trainer, and that called for the public speaking skills to engage an audience, handle questions with confidence and learn from experienced speakers and leaders.",
+    "transformation": "Within a single year, Lulu has become Vice President Membership and Assistant Area Program Quality Director, and is growing as a corporate trainer, content creator and leader.",
+    "journey": [
+      {
+        "milestone": "other",
+        "text": "Started teaching tuition at 12; by 15, while in 10th grade, had around 20 students and was earning AED 4,500 a month."
+      },
+      {
+        "milestone": "other",
+        "text": "Entered the corporate world at 17, explored entrepreneurship, and began investing in real estate plots and buildings at 22."
+      },
+      {
+        "milestone": "first-meeting",
+        "text": "Joined Talk-Masters in September 2025, with the dream of becoming a professional trainer."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Became Vice President Membership for 2026–27, and Assistant Area Program Quality Director at the Area level."
+      },
+      {
+        "milestone": "other",
+        "text": "Began creating social media videos, and took business development to international markets, travelling across the GCC, Europe, Turkey and China."
+      }
+    ],
+    "impact": {
+      "career": "Talk-Masters has broadened my perspective on business development. It is not just about selling services; it is about building global connections, developing meaningful customer relationships and creating long-term opportunities. It has encouraged me to think beyond geographical boundaries and connect with customers and business leaders across cultures. Today, I see business not just as transactions, but as relationships, connections and opportunities without borders.",
+      "confidence": "Talk-Masters has transformed my confidence into action and my ambition into reality. It has strengthened my communication skills, given me the confidence to pursue my dream of becoming a corporate trainer, and encouraged me to create social media videos. I joined with a dream to become a trainer; today, I am growing as a speaker, content creator and leader.",
+      "leadership": "Talk-Masters has taught me that leadership is not about holding a position; it is about taking responsibility, supporting others, creating opportunities and helping people grow. It has strengthened my ability to lead with empathy, encourage participation, build connections and bring people together towards a common goal.",
+      "networking": "Talk-Masters has broadened my vision beyond geographical boundaries. Today, I see the world not just as a place to travel, but as a world of connections, partnerships and business opportunities."
+    },
+    "advice": "Whatever your dream, ambition or goal may be, Talk-Masters can be the place where it begins. Here, you meet people from different backgrounds, with diverse ideas, perspectives, experiences and leadership styles, and every interaction is a chance to learn something new. Whatever brought you here, you can find the inspiration, guidance and right environment to plant the seeds of your dream and take your first steps towards it. Don’t just come with a dream. Come ready to give your dream a beginning!",
+    "adviceShort": "Don’t just come with a dream. Come ready to give your dream a beginning!",
+    "story": "Lulu’s story has always been about dreaming big and taking the wheel: “No excuses. No waiting. No blaming.” Teaching tuition at 12, entering the corporate world at 17 and investing in property at 22 built an entrepreneur’s mindset and the courage to take calculated risks. Talk-Masters came next, not just to find a voice, but to inspire others, transform lives and grow through that transformation. “One year, one decision, countless possibilities. The right platform can transform not just who you are, but who you can become.”",
+    "contribution": "A family-like welcome for every guest and member, in the spirit Lulu sums up as “We don’t grow alone; we grow together”: every member’s success becomes everyone’s happiness, and every challenge becomes a chance to support one another.",
+    "clubHighlights": ["Assistant Area Program Quality Director", "Executive Committee within a year"],
+    "memberSince": 2025,
+    "imageSlot": "member-lulu",
+    "consent": true,
+    "spotlight": true,
+    "status": "published",
+    "placeholder": false
   }
 ]

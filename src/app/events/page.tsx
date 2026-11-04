@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { EventFeature } from "@/components/events/EventFeature";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { EventsHero } from "@/components/events/EventsHero";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { renderedAt } from "@/components/meeting/renderedAt";
 import { RevealScope } from "@/components/motion/RevealScope";
@@ -15,7 +15,7 @@ import { clubEventJsonLd } from "@/lib/seo/structured-data";
 export const metadata: Metadata = {
   title: "Events",
   description:
-    "Special events hosted by Talk-Masters Club in Dubai, beyond its regular Sunday meetings, such as She Leads: a morning on public speaking and leadership.",
+    "Special events hosted by Talk-Masters Club in Dubai, beyond its regular Sunday meetings: She Leads, a morning on public speaking and leadership, and CareerNova, a career workshop.",
   alternates: { canonical: "/events" },
 };
 
@@ -35,41 +35,31 @@ export default async function EventsPage() {
       {events.length > 0 && (
         <JsonLd data={events.map((event) => clubEventJsonLd(event, settings, siteUrl, imageSlots))} />
       )}
-      <PageHeader
-        title="Beyond the Sunday meeting"
-        lead="Besides our meetings on the 2nd and 4th Sunday, Talk-Masters hosts special events, open to members and guests alike. Here is what's coming up, and what we've hosted so far."
-        imageSlot="event-featured"
-      />
+      <EventsHero events={[...upcoming, ...past]} timeZone={meeting.timeZone} />
 
       {upcoming.length > 0 && (
-        <section aria-labelledby="upcoming-title" className="py-section bg-white">
+        <section aria-labelledby="upcoming-title" className="py-section overflow-x-clip bg-white">
           <div className="container-site">
             <h2 id="upcoming-title" data-reveal="lines" className="text-h2">
               Coming up
             </h2>
             <div className="mt-14 grid gap-24">
               {upcoming.map((event) => (
-                <EventFeature key={event.slug} event={event} timeZone={meeting.timeZone} upcoming />
+                <EventFeature key={event.slug} event={event} timeZone={meeting.timeZone} upcoming level={3} />
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {past.length > 0 && (
-        <section aria-labelledby="past-title" className="py-section bg-soft-gray">
+      {/* Each past event is a chapter of its own, on alternating bands. */}
+      {past.map((event, index) => (
+        <div key={event.slug} className={`py-section overflow-x-clip ${index % 2 === 0 ? "bg-white" : "bg-soft-gray"}`}>
           <div className="container-site">
-            <h2 id="past-title" data-reveal="lines" className="text-h2">
-              Events we&apos;ve hosted
-            </h2>
-            <div className="mt-14 grid gap-24 md:mt-20">
-              {past.map((event) => (
-                <EventFeature key={event.slug} event={event} timeZone={meeting.timeZone} upcoming={false} />
-              ))}
-            </div>
+            <EventFeature event={event} timeZone={meeting.timeZone} upcoming={false} />
           </div>
-        </section>
-      )}
+        </div>
+      ))}
 
       {upcoming.length === 0 && (
         <section aria-labelledby="next-title" className="py-section bg-white">

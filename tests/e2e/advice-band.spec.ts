@@ -14,7 +14,7 @@ test("the advice band sits above the directory: one card per member who agreed t
     .evaluate((el) => el.getBoundingClientRect().top);
   expect(bandTop).toBeLessThan(directoryTop);
   // Screen readers and keyboards get each card once: the loop's copy is hidden and unfocusable.
-  await expect(section.getByRole("link")).toHaveCount(11);
+  await expect(section.getByRole("link")).toHaveCount(12);
   await expect(section.locator("ul[aria-hidden='true'] a:not([tabindex='-1'])")).toHaveCount(0);
   const card = section.getByRole("link", { name: /Start small: one minute on your feet/ });
   await expect(card).toHaveAttribute("href", "#tarannum-sheikh");

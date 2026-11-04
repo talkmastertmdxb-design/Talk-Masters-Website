@@ -13,6 +13,7 @@ const event = (slug: string, startsAt: string, endsAt?: string): ClubEvent => ({
   status: "published",
   placeholder: false,
   lineup: [],
+  sessions: [],
   gallery: [],
 });
 
