@@ -4,41 +4,47 @@
     "name": "Edwin Sunny",
     "role": "Immediate Past President",
     "consent": true,
-    "placeholder": false
+    "placeholder": false,
+    "imageSlot": "member-edwin"
   },
   {
     "quote": "Today, I may still feel nervous, and I may still make mistakes, but I no longer see them as reasons to stop speaking.",
     "name": "Noufal Aboobacker",
     "role": "Sergeant at Arms",
     "consent": true,
-    "placeholder": false
+    "placeholder": false,
+    "imageSlot": "officer-sergeant-at-arms"
   },
   {
     "quote": "There was something almost enigmatic about the vibe of Talk-Masters: the energy, the warmth and, most importantly, the people.",
     "name": "Prathiba Leo",
     "role": "TEDx speaker and communication coach",
     "consent": true,
-    "placeholder": false
+    "placeholder": false,
+    "imageSlot": "member-prathiba"
   },
   {
     "quote": "I have moved from feeling intimidated when speaking to senior people to expressing my thoughts more confidently in front of groups, colleagues, and audiences.",
     "name": "Nabeel Bava",
     "role": "Treasurer",
     "consent": true,
-    "placeholder": false
+    "placeholder": false,
+    "imageSlot": "officer-treasurer"
   },
   {
     "quote": "I joined Toastmasters to find my voice. Along the way, I discovered my purpose: helping others find theirs.",
     "name": "Hadi Abdulkader",
     "role": "Public speaking trainer",
     "consent": true,
-    "placeholder": false
+    "placeholder": false,
+    "imageSlot": "member-hadi"
   },
   {
     "quote": "You already have the knowledge. Toastmasters helps you find the confidence to share it.",
     "name": "Muhamed Anees K Mousafi",
     "role": "Club President",
     "consent": true,
-    "placeholder": false
+    "placeholder": false,
+    "imageSlot": "officer-president"
   }
 ]

@@ -251,6 +251,8 @@ export const eventSchema = z
     sessions: z.array(eventSessionSchema).max(9, "Keep it to 9 sessions").default([]),
     /** Photos from the day (image slot ids), best first: the first one leads the gallery. */
     gallery: z.array(imageSlotId).default([]),
+    /** Every photo from the day for /gallery, best first. Falls back to `gallery`. */
+    album: z.array(imageSlotId).default([]),
     placeholder,
   })
   .refine((event) => !event.endsAt || Date.parse(event.endsAt) > Date.parse(event.startsAt), {

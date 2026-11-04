@@ -14,6 +14,7 @@ const event = (slug: string, startsAt: string, endsAt?: string): ClubEvent => ({
   placeholder: false,
   lineup: [],
   sessions: [],
+  album: [],
   gallery: [],
 });
 

@@ -17,7 +17,11 @@ export interface IndexNowSubmission {
 }
 
 /** The request body announcing `paths` on the site at `siteUrl`. */
-export function indexNowSubmission(siteUrl: URL, paths: readonly string[], key = INDEXNOW_KEY): IndexNowSubmission {
+export function indexNowSubmission(
+  siteUrl: URL,
+  paths: readonly string[],
+  key = INDEXNOW_KEY,
+): IndexNowSubmission {
   return {
     host: siteUrl.host,
     key,

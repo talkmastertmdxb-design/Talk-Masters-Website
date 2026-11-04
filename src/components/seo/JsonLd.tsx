@@ -1,7 +1,12 @@
 import { cacheLife } from "next/cache";
 import { content } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
-import { breadcrumbJsonLd, meetingEventsJsonLd, serializeJsonLd, type Crumb } from "@/lib/seo/structured-data";
+import {
+  breadcrumbJsonLd,
+  meetingEventsJsonLd,
+  serializeJsonLd,
+  type Crumb,
+} from "@/lib/seo/structured-data";
 
 type JsonLdData = Parameters<typeof serializeJsonLd>[0];
 

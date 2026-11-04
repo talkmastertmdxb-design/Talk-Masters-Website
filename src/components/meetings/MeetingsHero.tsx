@@ -36,8 +36,8 @@ export function MeetingsHero() {
           {/* Opens with the plain answer, so search and AI answers can quote it as it stands. */}
           <p data-reveal="text" className="text-lead max-w-[44ch] text-white/75">
             Talk-Masters meets on the {meetingSchedule(meeting)} for two structured hours: prepared speeches,
-            impromptu Table Topics and supportive evaluations. Here&apos;s the running order, who does what, and
-            where you fit in as a guest.
+            impromptu Table Topics and supportive evaluations. Here&apos;s the running order, who does what,
+            and where you fit in as a guest.
           </p>
           <div data-reveal="up" className="flex flex-wrap gap-3">
             <ButtonLink href="/join">Book a guest visit</ButtonLink>

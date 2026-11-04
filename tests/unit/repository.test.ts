@@ -31,6 +31,7 @@ const event = (slug: string, startsAt: string, status: "draft" | "published" = "
   placeholder: false,
   lineup: [],
   sessions: [],
+  album: [],
   gallery: [],
 });
 

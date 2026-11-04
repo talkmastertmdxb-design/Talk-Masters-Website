@@ -114,7 +114,7 @@ export function SiteHeader({ items, meeting, socials, contact, email }: SiteHead
           />
 
           <nav aria-label="Main" className="site-nav hidden md:block">
-            <ul className="flex items-center gap-4 text-[0.875rem] lg:gap-6 lg:text-[0.9375rem] xl:gap-7">
+            <ul className="flex items-center gap-3 text-[0.875rem] lg:gap-4 lg:text-[0.9375rem] xl:gap-6">
               {items.map((item, index) => (
                 <li key={item.href}>
                   <Link

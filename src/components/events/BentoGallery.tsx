@@ -1,14 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { useState, type CSSProperties, type ReactNode } from "react";
+import { Lightbox, type LightboxPhoto } from "@/components/media/Lightbox";
 import { bentoSpan } from "@/lib/bento";
-import { useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 
-export interface BentoPhoto {
-  id: string;
-  src: string;
-  alt: string;
+export interface BentoPhoto extends LightboxPhoto {
   /** The tile, rendered on the server (an ImageSlot). */
   tile: ReactNode;
 }
@@ -20,23 +16,10 @@ interface BentoGalleryProps {
 
 /**
  * Bento gallery: photos from the day on an asymmetric grid, the best one first and largest.
- * Each tile opens the photo full screen in a native <dialog> (Esc closes, ←/→ step through).
+ * Each tile opens the photo full screen (Lightbox).
  */
 export function BentoGallery({ label, photos }: BentoGalleryProps) {
-  const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState<number | null>(null);
-
-  const show = (index: number) => {
-    setOpen(index);
-    if (!dialog.current?.open) dialog.current?.showModal();
-  };
-  const step = (by: number) =>
-    setOpen((index) => (index === null ? null : (index + by + photos.length) % photos.length));
-  const onKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "ArrowLeft") step(-1);
-    else if (event.key === "ArrowRight") step(1);
-  };
-  const photo = open === null ? undefined : photos[open];
 
   return (
     <>
@@ -55,7 +38,7 @@ export function BentoGallery({ label, photos }: BentoGalleryProps) {
                 } as CSSProperties
               }
             >
-              <button type="button" onClick={() => show(index)} className="bento__button group">
+              <button type="button" onClick={() => setOpen(index)} className="bento__button group">
                 <span className="media-zoom block h-full">{item.tile}</span>
                 <span className="sr-only">Open full screen: {item.alt}</span>
               </button>
@@ -63,63 +46,7 @@ export function BentoGallery({ label, photos }: BentoGalleryProps) {
           );
         })}
       </ul>
-
-      <dialog
-        ref={dialog}
-        aria-label={photo ? photo.alt : label}
-        className="lightbox"
-        onKeyDown={onKeyDown}
-        onClose={() => setOpen(null)}
-        onClick={(event) => event.target === event.currentTarget && dialog.current?.close()}
-      >
-        {photo && (
-          <div className="lightbox__frame">
-            <div className="relative min-h-0 flex-1">
-              <Image
-                key={photo.id}
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                sizes="100vw"
-                className="object-contain"
-              />
-            </div>
-            <div className="lightbox__bar">
-              <p className="text-muted max-w-[60ch] text-sm">{photo.alt}</p>
-              <div className="flex shrink-0 items-center gap-3">
-                <span className="text-muted text-sm tabular-nums">
-                  {(open ?? 0) + 1} of {photos.length}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => step(-1)}
-                  aria-label="Previous photo"
-                  className="lightbox__btn"
-                >
-                  <ArrowLeft aria-hidden="true" className="size-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => step(1)}
-                  aria-label="Next photo"
-                  className="lightbox__btn"
-                >
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => dialog.current?.close()}
-                  aria-label="Close"
-                  className="lightbox__btn"
-                  autoFocus
-                >
-                  <X aria-hidden="true" className="size-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </dialog>
+      <Lightbox label={label} photos={photos} index={open} onChange={setOpen} />
     </>
   );
 }

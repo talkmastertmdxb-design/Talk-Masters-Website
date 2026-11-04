@@ -44,6 +44,7 @@ describe("sitemap", () => {
       "/pathways",
       "/achievements",
       "/events",
+      "/gallery",
     ]);
   });
 });

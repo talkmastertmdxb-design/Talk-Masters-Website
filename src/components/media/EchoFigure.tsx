@@ -31,13 +31,7 @@ export function EchoFigure({ pose, sizes, label }: EchoFigureProps) {
     >
       {ECHO_POSES.map((name) => (
         <span key={name} className="echo-figure__pose" data-pose={name}>
-          <Image
-            src={`/images/mascot/toon/${name}.png`}
-            alt=""
-            {...CANVAS}
-            sizes={sizes}
-            draggable={false}
-          />
+          <Image src={`/images/mascot/toon/${name}.png`} alt="" {...CANVAS} sizes={sizes} draggable={false} />
           {name === "wave" && (
             <Image
               src="/images/mascot/toon/wave-arm.png"

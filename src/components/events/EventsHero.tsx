@@ -6,6 +6,8 @@ import type { ClubEvent } from "@/lib/content/schemas";
 interface EventsHeroProps {
   /** Events listed under the headline, each linking to its section. */
   events: readonly ClubEvent[];
+  /** Sunday meetings with photos: one index entry for all of them, linking to #meetings. */
+  meetings: readonly ClubEvent[];
   timeZone: string;
 }
 
@@ -21,11 +23,17 @@ const PRINTS = [
     drift: 4,
     caption: "She Leads",
   },
-  { id: "events-collage-selling", place: "right-0 top-0 w-[46%]", tilt: "rotate-[4deg]", drift: 7 },
-  { id: "events-collage-why", place: "left-[40%] top-[40%] w-[34%]", tilt: "-rotate-[5deg]", drift: 10 },
-  { id: "events-collage-smile", place: "right-[2%] top-[52%] w-[38%]", tilt: "rotate-2", drift: 6 },
   {
-    id: "events-collage-laughter",
+    id: "meeting-2025-08-10-a413",
+    place: "right-0 top-0 w-[46%]",
+    tilt: "rotate-[4deg]",
+    drift: 7,
+    caption: "Session 80",
+  },
+  { id: "meeting-2025-07-13-j365", place: "left-[40%] top-[40%] w-[34%]", tilt: "-rotate-[5deg]", drift: 10 },
+  { id: "she-leads-charge-up", place: "right-[2%] top-[52%] w-[38%]", tilt: "rotate-2", drift: 6 },
+  {
+    id: "careernova-group",
     place: "left-[4%] bottom-0 w-[50%]",
     tilt: "rotate-[1.5deg]",
     drift: 3,
@@ -38,7 +46,24 @@ const PRINTS = [
  * on the left, photos from those days laid over one another on the right. The prints settle in
  * one after another on load (the page's one orchestrated moment), then drift apart on scroll.
  */
-export function EventsHero({ events, timeZone }: EventsHeroProps) {
+export function EventsHero({ events, meetings, timeZone }: EventsHeroProps) {
+  const index = [
+    ...events.map((event) => ({
+      href: `#${event.slug}`,
+      title: event.title,
+      when: eventDay(event, timeZone),
+    })),
+    ...(meetings.length > 0
+      ? [
+          {
+            href: "#meetings",
+            title: "From our Sunday meetings",
+            when: meetings.map((meeting) => eventDay(meeting, timeZone).replace(/^\w+ /, "")).join(" and "),
+          },
+        ]
+      : []),
+  ];
+
   return (
     <section aria-labelledby="events-title" className="events-hero bg-ink overflow-hidden text-white">
       <div className="container-site grid gap-14 pt-32 pb-20 md:pt-40 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-28">
@@ -47,23 +72,23 @@ export function EventsHero({ events, timeZone }: EventsHeroProps) {
             Beyond the Sunday meeting
           </h1>
           <p data-reveal="up" className="text-muted mt-8 max-w-[44ch] text-lg leading-relaxed">
-            Besides our meetings on the 2nd and 4th Sunday, Talk-Masters hosts special events, open to members
-            and guests alike. Each one is here: who spoke, what was said, and how the day looked.
+            Special events open to members and guests, and the Sunday meetings in between. Who spoke, what was
+            said, and how each day looked.
           </p>
-          {events.length > 0 && (
+          {index.length > 0 && (
             <nav aria-label="Events on this page" className="mt-12">
               <ul data-reveal="stagger" className="border-hairline-dark border-t">
-                {events.map((event) => (
-                  <li key={event.slug} className="border-hairline-dark border-b">
+                {index.map((event) => (
+                  <li key={event.href} className="border-hairline-dark border-b">
                     <a
-                      href={`#${event.slug}`}
+                      href={event.href}
                       className="group flex items-center justify-between gap-6 py-5 focus-visible:outline-offset-4"
                     >
                       <span>
                         <span className="block font-serif text-2xl leading-tight md:text-3xl">
                           {event.title}
                         </span>
-                        <span className="text-gold mt-1 block text-sm">{eventDay(event, timeZone)}</span>
+                        <span className="text-gold mt-1 block text-sm">{event.when}</span>
                       </span>
                       <ArrowDown
                         aria-hidden="true"

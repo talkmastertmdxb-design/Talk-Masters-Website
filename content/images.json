@@ -185,15 +185,15 @@
   },
   {
     "id": "agenda-prepared-speeches",
-    "alt": "A member delivering a prepared speech",
+    "alt": "Jouhar Ali mid-speech, both arms wide",
     "aspectRatio": "3/4",
     "brief": "Prepared speech in progress, gesture mid-sentence",
-    "src": "/images/club/member-prepared-speech.webp",
+    "src": "/images/meetings/2025-07-13-j213.webp",
     "unsplash": {
       "query": "speaker presenting to audience",
       "orientation": "portrait"
     },
-    "focalPoint": "50% 25%"
+    "focalPoint": "50% 30%"
   },
   {
     "id": "agenda-table-topics",
@@ -209,15 +209,15 @@
   },
   {
     "id": "agenda-evaluations",
-    "alt": "Members giving feedback as an evaluation panel",
+    "alt": "An evaluator speaking under the Evaluator 1 slide",
     "aspectRatio": "3/4",
     "brief": "Evaluator giving feedback, speaker listening",
-    "src": "/images/club/panel-evaluation.webp",
+    "src": "/images/meetings/2025-07-13-j323.webp",
     "unsplash": {
       "query": "people discussion feedback meeting",
       "orientation": "portrait"
     },
-    "focalPoint": "58% 62%"
+    "focalPoint": "45% 40%"
   },
   {
     "id": "agenda-timer",
@@ -864,5 +864,605 @@
     "brief": "Events page collage, CareerNova (29 June 2025), DSC01906",
     "src": "/images/events/events-collage-selling.webp",
     "focalPoint": "42% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j8",
+    "alt": "A speaker in a dark blazer raising his hand mid-speech",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02399.JPG",
+    "src": "/images/meetings/2025-07-13-j8.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j33",
+    "alt": "A full room of members listening at their tables",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02431.JPG",
+    "src": "/images/meetings/2025-07-13-j33.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j56",
+    "alt": "Members lined up at the front of the room, beside the club banner",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02454.JPG",
+    "src": "/images/meetings/2025-07-13-j56.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j64",
+    "alt": "Tarannum Sheikh speaking to the room",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02462.JPG",
+    "src": "/images/meetings/2025-07-13-j64.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j68",
+    "alt": "Tarannum Sheikh smiling mid-speech",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02466.JPG",
+    "src": "/images/meetings/2025-07-13-j68.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j94",
+    "alt": "Two members laughing at their table",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02495.JPG",
+    "src": "/images/meetings/2025-07-13-j94.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j101",
+    "alt": "Members sharing a laugh during the meeting",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02502.JPG",
+    "src": "/images/meetings/2025-07-13-j101.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j102",
+    "alt": "Two members laughing together",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02504.JPG",
+    "src": "/images/meetings/2025-07-13-j102.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j108",
+    "alt": "Members smiling at their table",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02510.JPG",
+    "src": "/images/meetings/2025-07-13-j108.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j151",
+    "alt": "Jasim Eranhole speaking with open hands",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02554.JPG",
+    "src": "/images/meetings/2025-07-13-j151.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j165",
+    "alt": "Jasim Eranhole speaking, his name on the screen behind him",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02568.JPG",
+    "src": "/images/meetings/2025-07-13-j165.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j175",
+    "alt": "A member smiling as she listens",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02579.JPG",
+    "src": "/images/meetings/2025-07-13-j175.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j189",
+    "alt": "A member grinning at his table",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02596.JPG",
+    "src": "/images/meetings/2025-07-13-j189.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j192",
+    "alt": "Two members laughing as one films the speaker",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02599.JPG",
+    "src": "/images/meetings/2025-07-13-j192.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j212",
+    "alt": "Jouhar Ali opening his arms to the room",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02620.JPG",
+    "src": "/images/meetings/2025-07-13-j212.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j213",
+    "alt": "Jouhar Ali mid-speech, both arms wide",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02621.JPG",
+    "src": "/images/meetings/2025-07-13-j213.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j229",
+    "alt": "The 13 July group photo",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02637.JPG",
+    "src": "/images/meetings/2025-07-13-j229.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j236",
+    "alt": "The room from the front, a speaker walking between the tables",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02642.JPG",
+    "src": "/images/meetings/2025-07-13-j236.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j290",
+    "alt": "A speaker in a patterned shirt gesturing as he speaks",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02703.JPG",
+    "src": "/images/meetings/2025-07-13-j290.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j296",
+    "alt": "A member smiling as she speaks",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02709.JPG",
+    "src": "/images/meetings/2025-07-13-j296.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j323",
+    "alt": "An evaluator speaking under the Evaluator 1 slide",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02742.JPG",
+    "src": "/images/meetings/2025-07-13-j323.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j359",
+    "alt": "A speaker raising her hand high",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02781.JPG",
+    "src": "/images/meetings/2025-07-13-j359.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j365",
+    "alt": "The Trivia Master throwing his arms wide",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02787.JPG",
+    "src": "/images/meetings/2025-07-13-j365.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j371",
+    "alt": "A member reading his notes with a grin",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02793.JPG",
+    "src": "/images/meetings/2025-07-13-j371.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j395",
+    "alt": "A member smiling as he walks to the front",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02817.JPG",
+    "src": "/images/meetings/2025-07-13-j395.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j405",
+    "alt": "A speaker explaining with both hands",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02827.JPG",
+    "src": "/images/meetings/2025-07-13-j405.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j409",
+    "alt": "The General Evaluator giving his report",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02831.JPG",
+    "src": "/images/meetings/2025-07-13-j409.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j438",
+    "alt": "A speaker in a dark blazer mid-sentence",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02864.JPG",
+    "src": "/images/meetings/2025-07-13-j438.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j442",
+    "alt": "A speaker in a grey blazer gesturing with both hands",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02869.JPG",
+    "src": "/images/meetings/2025-07-13-j442.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j460",
+    "alt": "A speaker with her hands raised as she explains",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02892.JPG",
+    "src": "/images/meetings/2025-07-13-j460.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j480",
+    "alt": "Award winners holding their trophies and certificates",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02918.JPG",
+    "src": "/images/meetings/2025-07-13-j480.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j484",
+    "alt": "A member receiving a certificate",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02922.JPG",
+    "src": "/images/meetings/2025-07-13-j484.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j491",
+    "alt": "The gavel raised to close the meeting",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02930.JPG",
+    "src": "/images/meetings/2025-07-13-j491.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j496",
+    "alt": "A best-speaker trophy",
+    "aspectRatio": "2/3",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02935.JPG",
+    "src": "/images/meetings/2025-07-13-j496.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j504",
+    "alt": "Members posing together for a group photo",
+    "aspectRatio": "3/2",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02942.JPG",
+    "src": "/images/meetings/2025-07-13-j504.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-07-13-j537",
+    "alt": "A member smiling in his seat",
+    "aspectRatio": "2/3",
+    "brief": "Sunday meeting, 13 July 2025 gallery, DSC02974.JPG",
+    "src": "/images/meetings/2025-07-13-j537.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a4",
+    "alt": "The Toastmaster of the evening raising his hand to open the meeting",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03099.JPG",
+    "src": "/images/meetings/2025-08-10-a4.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a9",
+    "alt": "A speaker in a maroon blazer opening his arms",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03105.JPG",
+    "src": "/images/meetings/2025-08-10-a9.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a26",
+    "alt": "A speaker raising his hand mid-speech",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03124.JPG",
+    "src": "/images/meetings/2025-08-10-a26.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a35",
+    "alt": "Members listening closely at their tables",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03135.JPG",
+    "src": "/images/meetings/2025-08-10-a35.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a37",
+    "alt": "Two members taking notes",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03137.JPG",
+    "src": "/images/meetings/2025-08-10-a37.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a41",
+    "alt": "Members laughing at their table",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03142.JPG",
+    "src": "/images/meetings/2025-08-10-a41.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a50",
+    "alt": "A speaker in a lilac suit explaining a point",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03154.JPG",
+    "src": "/images/meetings/2025-08-10-a50.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a68",
+    "alt": "A speaker in a blue blazer raising both hands",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03176.JPG",
+    "src": "/images/meetings/2025-08-10-a68.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a76",
+    "alt": "A speaker smiling at the room",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03185.JPG",
+    "src": "/images/meetings/2025-08-10-a76.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a87",
+    "alt": "Members listening at the side of the room",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03196.JPG",
+    "src": "/images/meetings/2025-08-10-a87.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a102",
+    "alt": "A member listening intently",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03211.JPG",
+    "src": "/images/meetings/2025-08-10-a102.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a110",
+    "alt": "Two members acting out an answer together",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03219.JPG",
+    "src": "/images/meetings/2025-08-10-a110.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a128",
+    "alt": "A member smiling at his table",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03237.JPG",
+    "src": "/images/meetings/2025-08-10-a128.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a158",
+    "alt": "A speaker in a purple shirt mid-speech",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03267.JPG",
+    "src": "/images/meetings/2025-08-10-a158.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a164",
+    "alt": "A speaker beside the club banner",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03273.JPG",
+    "src": "/images/meetings/2025-08-10-a164.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a187",
+    "alt": "Two members laughing at the front of the room",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03302.JPG",
+    "src": "/images/meetings/2025-08-10-a187.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a213",
+    "alt": "A member smiling in his seat",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03329.JPG",
+    "src": "/images/meetings/2025-08-10-a213.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a216",
+    "alt": "A speaker beside the club banner, hands open",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03332.JPG",
+    "src": "/images/meetings/2025-08-10-a216.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a230",
+    "alt": "Session 80's group photo",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03349.JPG",
+    "src": "/images/meetings/2025-08-10-a230.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a234",
+    "alt": "The room from the back during the meeting",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03353.JPG",
+    "src": "/images/meetings/2025-08-10-a234.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a244",
+    "alt": "A speaker in a navy suit mid-sentence",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03363.JPG",
+    "src": "/images/meetings/2025-08-10-a244.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a257",
+    "alt": "A speaker in a maroon blazer leaning towards the audience",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03376.JPG",
+    "src": "/images/meetings/2025-08-10-a257.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a270",
+    "alt": "A speaker in a navy blazer with his hand raised",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03391.JPG",
+    "src": "/images/meetings/2025-08-10-a270.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a277",
+    "alt": "A speaker in a white shirt explaining with both hands",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03398.JPG",
+    "src": "/images/meetings/2025-08-10-a277.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a301",
+    "alt": "A speaker smiling with her book",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03422.JPG",
+    "src": "/images/meetings/2025-08-10-a301.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a309",
+    "alt": "A panel member laughing during the discussion",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03430.JPG",
+    "src": "/images/meetings/2025-08-10-a309.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a314",
+    "alt": "A panel member answering a question",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03435.JPG",
+    "src": "/images/meetings/2025-08-10-a314.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a317",
+    "alt": "The panel seated at the front of the room",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03438.JPG",
+    "src": "/images/meetings/2025-08-10-a317.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a354",
+    "alt": "The panel discussing a question",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03479.JPG",
+    "src": "/images/meetings/2025-08-10-a354.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a373",
+    "alt": "A panel member making a point, one finger raised",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03498.JPG",
+    "src": "/images/meetings/2025-08-10-a373.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a380",
+    "alt": "A member smiling as she speaks",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03505.JPG",
+    "src": "/images/meetings/2025-08-10-a380.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a394",
+    "alt": "A speaker reading from his notes, one arm raised",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03519.JPG",
+    "src": "/images/meetings/2025-08-10-a394.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a403",
+    "alt": "A speaker reading from his notes, hand raised",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03528.JPG",
+    "src": "/images/meetings/2025-08-10-a403.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a412",
+    "alt": "The club's trophies on display",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03537.JPG",
+    "src": "/images/meetings/2025-08-10-a412.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a413",
+    "alt": "The Toastmaster of the evening opening his arms to the room",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03538.JPG",
+    "src": "/images/meetings/2025-08-10-a413.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a416",
+    "alt": "Award winners lined up with their certificates",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03541.JPG",
+    "src": "/images/meetings/2025-08-10-a416.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a425",
+    "alt": "Members holding their certificates",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03550-1.JPG",
+    "src": "/images/meetings/2025-08-10-a425.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a429",
+    "alt": "A member receiving his certificate",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03553-1.JPG",
+    "src": "/images/meetings/2025-08-10-a429.webp",
+    "focalPoint": "50% 35%"
+  },
+  {
+    "id": "meeting-2025-08-10-a435",
+    "alt": "Members giving a thumbs up beside the club banner",
+    "aspectRatio": "3/2",
+    "brief": "Session 80, 10 August 2025 gallery, DSC03558.JPG",
+    "src": "/images/meetings/2025-08-10-a435.webp",
+    "focalPoint": "50% 35%"
   }
 ]

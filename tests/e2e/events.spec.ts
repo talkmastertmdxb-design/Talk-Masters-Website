@@ -28,7 +28,9 @@ test.describe("events page", () => {
     await expect(page.locator(".events-collage [data-image-slot] img")).toHaveCount(5);
 
     const index = page.getByRole("navigation", { name: "Events on this page" }).getByRole("link");
-    await expect(index).toHaveCount(2);
+    await expect(index).toHaveCount(3);
+    await expect(index.nth(2)).toHaveAttribute("href", "#meetings");
+    await expect(index.nth(2)).toContainText("13 July 2025 and 10 August 2025");
     await expect(index.nth(0)).toHaveAttribute("href", "#she-leads");
     await expect(index.nth(0)).toContainText("Sunday 14 September 2025");
     await expect(index.nth(1)).toHaveAttribute("href", "#careernova");

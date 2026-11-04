@@ -1,13 +1,14 @@
 import { ArrowRight } from "lucide-react";
 import { HighlightVideo } from "@/components/media/HighlightVideo";
-import { QuoteDrift } from "@/components/people/QuoteDrift";
+import { ImageSlot } from "@/components/media/ImageSlot";
+import { TestimonialStack } from "@/components/people/TestimonialStack";
 import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 
 /**
  * Opening, proof: members on camera, in their own words, straight after the manifesto.
- * The video previews silently with burned-in captions; beside it, members' own words drift past
- * (content/testimonials.json).
+ * The video previews silently with burned-in captions; beside it, members' own words, one at a
+ * time with their portrait (content/testimonials.json).
  */
 export function MemberVoices() {
   const video = content.settings.highlightVideo;
@@ -44,7 +45,14 @@ export function MemberVoices() {
 
         <div className="md:col-start-1 md:self-start">
           <div data-reveal="up" className="max-w-[32rem] md:mt-10">
-            <QuoteDrift />
+            <TestimonialStack
+              quotes={content.testimonials.map((t) => ({
+                quote: t.quote,
+                name: t.name,
+                role: t.role,
+                portrait: t.imageSlot ? <ImageSlot id={t.imageSlot} sizes="8rem" /> : undefined,
+              }))}
+            />
           </div>
 
           <div data-reveal="up" className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">

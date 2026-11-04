@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { EventFeature } from "@/components/events/EventFeature";
 import { EventsHero } from "@/components/events/EventsHero";
+import { GalleryTeaser } from "@/components/events/GalleryTeaser";
+import { MeetingsBand } from "@/components/events/MeetingsBand";
 import { NextMeetingDate } from "@/components/meeting/NextMeetingDate";
 import { renderedAt } from "@/components/meeting/renderedAt";
 import { RevealScope } from "@/components/motion/RevealScope";
@@ -8,6 +10,7 @@ import { JsonLd, PageBreadcrumb } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { content } from "@/lib/content";
 import { pastEvents, upcomingEvents } from "@/lib/content/events";
+import { isMeeting } from "@/lib/content/gallery";
 import { formatClock } from "@/lib/content/meeting";
 import { siteUrl } from "@/lib/site";
 import { clubEventJsonLd } from "@/lib/seo/structured-data";
@@ -26,8 +29,19 @@ export default async function EventsPage() {
   // Split on the server, from a time refreshed hourly: the page is right in its HTML, with no
   // shift when the browser takes over, and an event moves to "past" on its own once it ends.
   const now = new Date(await renderedAt());
-  const upcoming = upcomingEvents(events, now);
-  const past = pastEvents(events, now);
+  const special = events.filter((event) => !isMeeting(event));
+  const upcoming = upcomingEvents(special, now);
+  const past = pastEvents(special, now);
+  // Sunday meetings with photos get a band of their own, after the special events.
+  const meetings = pastEvents(events.filter(isMeeting), now).filter((event) => event.gallery.length > 0);
+  const teaser = [
+    "she-leads-audience",
+    "meeting-2025-07-13-j365",
+    "careernova-group",
+    "meeting-2025-08-10-a309",
+    "she-leads-token",
+    "meeting-2025-07-13-j480",
+  ];
 
   return (
     <RevealScope as="main" id="main">
@@ -35,7 +49,11 @@ export default async function EventsPage() {
       {events.length > 0 && (
         <JsonLd data={events.map((event) => clubEventJsonLd(event, settings, siteUrl, imageSlots))} />
       )}
-      <EventsHero events={[...upcoming, ...past]} timeZone={meeting.timeZone} />
+      <EventsHero
+        events={[...upcoming, ...past]}
+        meetings={meetings.toReversed()}
+        timeZone={meeting.timeZone}
+      />
 
       {upcoming.length > 0 && (
         <section aria-labelledby="upcoming-title" className="py-section overflow-x-clip bg-white">
@@ -54,12 +72,17 @@ export default async function EventsPage() {
 
       {/* Each past event is a chapter of its own, on alternating bands. */}
       {past.map((event, index) => (
-        <div key={event.slug} className={`py-section overflow-x-clip ${index % 2 === 0 ? "bg-white" : "bg-soft-gray"}`}>
+        <div
+          key={event.slug}
+          className={`py-section overflow-x-clip ${index % 2 === 0 ? "bg-white" : "bg-soft-gray"}`}
+        >
           <div className="container-site">
             <EventFeature event={event} timeZone={meeting.timeZone} upcoming={false} />
           </div>
         </div>
       ))}
+
+      <MeetingsBand meetings={meetings} timeZone={meeting.timeZone} />
 
       {upcoming.length === 0 && (
         <section aria-labelledby="next-title" className="py-section bg-white">
@@ -82,6 +105,8 @@ export default async function EventsPage() {
           </div>
         </section>
       )}
+
+      <GalleryTeaser photos={teaser} />
     </RevealScope>
   );
 }
