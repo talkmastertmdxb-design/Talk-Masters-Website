@@ -1,9 +1,12 @@
 "use client";
 
 import { ArrowLeft, ArrowUp, RotateCcw, X } from "lucide-react";
-import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type FormEvent } from "react";
 import type { EchoQuestion, EchoScript, Settings } from "@/lib/content/schemas";
 import { echoFacts } from "@/lib/echo/answers";
+import { loadBubbleMemory, rememberNudge, saveBubbleMemory, shouldNudge } from "@/lib/echo/bubble";
+import { nowOnLine, pageKey, pageScript } from "@/lib/echo/pages";
 import {
   allQuestions,
   answerQuestion,
@@ -24,13 +27,16 @@ import { EchoReply } from "./EchoReply";
 
 /** How long Echo's three lights show before an answer: long enough to feel like a reply. */
 const THINKING_MS = 650;
-/** Echo says "Want help?" once the page has settled, and only until the guest opens or dismisses it. */
-const BUBBLE_DELAY_MS = 2200;
+/**
+ * Echo speaks up once the guest has taken in a page: after they've scrolled this far through it,
+ * or after this long, whichever comes first. Never on load.
+ */
+const BUBBLE_SCROLL_SHARE = 0.3;
+const BUBBLE_DELAY_MS = 6000;
 /** It then steps aside on its own, so it never sits over the page for long. */
 const BUBBLE_SHOWN_MS = 9000;
 /** Matches the bubble's exit in globals.css. */
 const BUBBLE_EXIT_MS = 300;
-const BUBBLE_SEEN_KEY = "tm-echo-bubble-seen";
 
 type BubbleState = "hidden" | "shown" | "leaving";
 
@@ -43,24 +49,34 @@ const sessionStore = (): Storage | undefined => {
 };
 
 interface EchoChatProps {
-  /** content/echo.json: every question and answer. */
+  /** content/echo.json: every question and answer, and what Echo says on each page. */
   script: EchoScript;
   /** The meeting rule, for live facts such as the next meeting date. */
   meeting: Settings["meeting"];
+  /** The club's WhatsApp number, offered when Echo has no answer. */
+  whatsapp?: string;
 }
 
 /**
  * Echo, the guest guide: a launcher in the corner of every page and a chat panel that grows out of
  * it. Answers are the club's own, from content/echo.json: guests tap a topic and a question, or
  * type one and Echo finds the closest. No AI, no network. Opens from anywhere with `openEcho()`.
+ *
+ * Echo knows which page the guest is on: its bubble, greeting and first questions are that page's,
+ * and a guest who moves on mid-conversation gets that page's questions too.
  */
-export function EchoChat({ script, meeting }: EchoChatProps) {
+export function EchoChat({ script, meeting, whatsapp }: EchoChatProps) {
+  const pathname = usePathname();
+  const page = useMemo(() => pageScript(script, pathname), [script, pathname]);
+  const pageId = pageKey(pathname);
   const [open, setOpen] = useState(false);
   const [chat, setChat] = useState<ChatState>(INITIAL_CHAT);
   const [draft, setDraft] = useState("");
   const [thinking, setThinking] = useState(false);
   const [bubble, setBubble] = useState<BubbleState>("hidden");
   const loaded = useRef(false);
+  /** Read by the bubble's timers and scroll listener, which outlive a render. */
+  const isOpen = useRef(false);
   const timer = useRef<number | undefined>(undefined);
   const launcher = useRef<HTMLButtonElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
@@ -94,14 +110,20 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
     reply(question.question, () => answerQuestion(question, echoFacts(meeting, new Date())));
   };
 
-  /** The bubble has done its job once the guest opens Echo or waves it away: not again this visit. */
-  const retireBubble = useCallback(() => {
+  /** The page the bubble is showing on, so retiring it is remembered against that page. */
+  const bubblePage = useRef<string | null>(null);
+
+  /**
+   * The bubble has had its moment on this page once the guest opens Echo, waves it away (`dismissed`)
+   * or lets it step aside: it won't come back on this kind of page this visit.
+   */
+  const retireBubble = useCallback((dismissed = false) => {
     setBubble((current) => (current === "shown" ? "leaving" : current));
-    try {
-      sessionStore()?.setItem(BUBBLE_SEEN_KEY, "1");
-    } catch {
-      // Storage blocked: the bubble may simply come back on the next page.
-    }
+    const shownOn = bubblePage.current;
+    if (!shownOn) return;
+    bubblePage.current = null;
+    const store = sessionStore();
+    saveBubbleMemory(store, rememberNudge(loadBubbleMemory(store), shownOn, dismissed));
   }, []);
 
   const show = useCallback(() => {
@@ -118,21 +140,58 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
     launcher.current?.focus({ preventScroll: true });
   }, []);
 
+  // Each new page: the old page's bubble steps aside, and this page's may speak up once the guest
+  // has scrolled into it or spent a moment on it, if it hasn't already this visit.
   useEffect(() => {
-    let seen = false;
-    try {
-      seen = sessionStore()?.getItem(BUBBLE_SEEN_KEY) === "1";
-    } catch {
-      seen = false;
+    if (bubblePage.current && bubblePage.current !== pageId) retireBubble();
+    if (!shouldNudge(loadBubbleMemory(sessionStore()), pageId)) return;
+
+    let leave: number | undefined;
+    const appear = () => {
+      cleanup();
+      if (isOpen.current) return;
+      bubblePage.current = pageId;
+      setBubble("shown");
+      leave = window.setTimeout(() => retireBubble(), BUBBLE_SHOWN_MS);
+    };
+    const onScroll = () => {
+      const room = document.documentElement.scrollHeight - window.innerHeight;
+      if (room > 0 && window.scrollY / room >= BUBBLE_SCROLL_SHARE) appear();
+    };
+    const waited = window.setTimeout(appear, BUBBLE_DELAY_MS);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // A guest can already be well into the page: back from another page, or scrolled before it hydrated.
+    onScroll();
+    function cleanup() {
+      window.clearTimeout(waited);
+      window.removeEventListener("scroll", onScroll);
     }
-    if (seen) return;
-    const appear = window.setTimeout(() => setBubble("shown"), BUBBLE_DELAY_MS);
-    const leave = window.setTimeout(retireBubble, BUBBLE_DELAY_MS + BUBBLE_SHOWN_MS);
     return () => {
-      window.clearTimeout(appear);
+      cleanup();
       window.clearTimeout(leave);
     };
-  }, [retireBubble]);
+  }, [pageId, retireBubble]);
+
+  useEffect(() => {
+    isOpen.current = open;
+  }, [open]);
+
+  // A guest who already has a conversation and moves to another page gets that page's questions,
+  // once, the next time Echo is open there. A fresh chat just follows the page it starts on.
+  useEffect(() => {
+    if (!open || !loaded.current || chat.page === pageId) return;
+    setChat((current) =>
+      current.lines.length === 0
+        ? { ...current, page: pageId }
+        : {
+            ...withEchoLine(current, {
+              text: nowOnLine(page),
+              options: { kind: "questions", ids: page.questions },
+            }),
+            page: pageId,
+          },
+    );
+  }, [open, pageId, page, chat.page]);
 
   useEffect(() => {
     if (bubble !== "leaving") return;
@@ -199,13 +258,13 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
     const typed = draft.trim().slice(0, QUESTION_MAX_CHARS);
     if (!typed || thinking) return;
     setDraft("");
-    reply(typed, () => answerTyped(script, typed, echoFacts(meeting, new Date())));
+    reply(typed, () => answerTyped(script, typed, echoFacts(meeting, new Date()), whatsapp));
   };
 
   const startOver = () => {
     window.clearTimeout(timer.current);
     setThinking(false);
-    setChat(INITIAL_CHAT);
+    setChat({ ...INITIAL_CHAT, page: pageId });
     input.current?.focus();
   };
 
@@ -220,7 +279,10 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
   const cornerPose: EchoPose = open || bubble === "shown" ? "point" : "wave";
   const chatPose: EchoPose = thinking ? "think" : "wave";
 
-  const featured = script.featured.flatMap((id) => questions.get(id) ?? []);
+  const featured = page.questions.flatMap((id) => questions.get(id) ?? []);
+  // A fresh chat greets the guest for this page; a conversation keeps the greeting it began with.
+  const greeting =
+    chat.lines.length > 0 && chat.page ? pageScript(script, chat.page).greeting : page.greeting;
   const { options } = chat;
   const topic = options.kind === "topic" ? script.topics.find((t) => t.id === options.topicId) : undefined;
   const offered: EchoQuestion[] =
@@ -236,11 +298,11 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
         {bubble !== "hidden" && (
           <div className="echo-bubble" data-leaving={bubble === "leaving" || undefined}>
             <button type="button" onClick={show} className="echo-bubble__say">
-              Want help?
+              {page.nudge}
             </button>
             <button
               type="button"
-              onClick={retireBubble}
+              onClick={() => retireBubble(true)}
               className="echo-bubble__close"
               aria-label="Hide Echo's message"
             >
@@ -294,7 +356,7 @@ export function EchoChat({ script, meeting }: EchoChatProps) {
         <div ref={log} data-lenis-prevent className="echo-log">
           <div role="log" aria-live="polite" className="flex flex-col gap-2.5">
             <div className="echo-line echo-line--echo">
-              <EchoReply text={script.greeting} />
+              <EchoReply text={greeting} />
             </div>
             {chat.lines.map((line) => (
               <div key={line.id} className={`echo-line echo-line--${line.role}`}>

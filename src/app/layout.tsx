@@ -70,7 +70,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           />
           {children}
         </MotionProvider>
-        <EchoChat script={content.echo} meeting={content.settings.meeting} />
+        <EchoChat
+          script={content.echo}
+          meeting={content.settings.meeting}
+          whatsapp={content.settings.contacts[0]?.whatsapp}
+        />
         <JsonLd data={siteJsonLd(content.settings, siteUrl, content.history.foundedYear)} />
         {/* Cookieless visit counts and real-visitor Core Web Vitals; both report only on Vercel. */}
         <Analytics />

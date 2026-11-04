@@ -9,7 +9,7 @@ const openEcho = async (page: Page) => {
 };
 
 test("Echo answers from the club's own question bank: topic, question, answer", async ({ page }) => {
-  await page.goto("/pathways");
+  await page.goto("/");
   const launcher = page.getByRole("button", { name: "Ask Echo", exact: true });
   await expect(launcher).toHaveAttribute("aria-expanded", "false");
   const panel = await openEcho(page);
@@ -64,7 +64,13 @@ test("typed questions get the closest answer, a choice, or an honest 'ask us on 
   await box.fill("what's the weather in Paris");
   await box.press("Enter");
   await expect(log.getByText(/I don't have an answer for that one yet/)).toBeVisible();
-  await expect(log.getByRole("link", { name: "the guest page" }).last()).toHaveAttribute("href", "/join");
+  // A member answers instead: WhatsApp opens with the guest's question already written.
+  const ask = log.getByRole("link", { name: "Ask the club on WhatsApp" }).last();
+  const href = (await ask.getAttribute("href")) ?? "";
+  expect(href.startsWith("https://wa.me/971502837168?text=")).toBe(true);
+  expect(new URL(href).searchParams.get("text")).toBe(
+    "Hi! I have a question about Talk-Masters: what's the weather in Paris",
+  );
 });
 
 test("the chat is remembered while the guest moves between pages", async ({ page }) => {
@@ -77,6 +83,16 @@ test("the chat is remembered while the guest moves between pages", async ({ page
   await page.goto("/meetings");
   panel = await openEcho(page);
   await expect(panel.getByRole("log").getByText(/Only if you want to/)).toBeVisible();
+  // On a new page, Echo offers that page's questions, once.
+  await expect(
+    panel.getByRole("log").getByText("Now you're on the meetings page. Here's what people often ask here."),
+  ).toHaveCount(1);
+  await expect(
+    panel.getByRole("button", { name: "What do the green, amber and red lights mean?" }),
+  ).toBeVisible();
+  await page.reload();
+  panel = await openEcho(page);
+  await expect(panel.getByRole("log").getByText(/Now you're on the meetings page/)).toHaveCount(1);
 
   await panel.getByRole("button", { name: "Start over" }).click();
   await expect(panel.getByRole("log").getByText(/Only if you want to/)).toHaveCount(0);
@@ -102,19 +118,55 @@ test("the shut panel is hidden from screen readers, and the open one passes an a
   expect(serious.map((v) => v.id)).toEqual([]);
 });
 
-test("Echo says 'Want help?' once the page settles, and the bubble opens the chat", async ({ page }) => {
-  await page.goto("/pathways");
-  const bubble = page.getByRole("button", { name: "Want help?" });
-  await expect(bubble).toBeVisible({ timeout: 6_000 });
-  await bubble.click();
-  await expect(page.getByRole("dialog", { name: "Echo" })).toBeVisible();
-  await expect(bubble).toHaveCount(0);
+/** Scrolls far enough through the page that Echo speaks up (30 %). */
+const scrollInto = (page: Page) =>
+  page.evaluate(() => window.scrollTo(0, (document.documentElement.scrollHeight - window.innerHeight) * 0.5));
 
-  // Once Echo has been opened, the bubble doesn't come back this visit.
+test("on each page Echo speaks to that page once the guest scrolls in, and opens on its questions", async ({
+  page,
+}) => {
+  await page.goto("/gallery");
+  const gallery = page.getByRole("button", { name: "Looking for a photo of yourself?" });
+  await expect(gallery).toHaveCount(0);
+  await scrollInto(page);
+  await expect(gallery).toBeVisible();
+  await gallery.click();
+  const panel = page.getByRole("dialog", { name: "Echo" });
+  await expect(panel).toBeVisible();
+  await expect(gallery).toHaveCount(0);
+  await expect(panel.getByText(/Every photo from our events and meetings is here/)).toBeVisible();
+  await expect(panel.getByRole("list", { name: "Popular questions" }).getByRole("button")).toHaveText([
+    "Where can I find photos from a meeting?",
+    "How do I share a photo?",
+    "Can I get a photo of me removed?",
+  ]);
+  await page.keyboard.press("Escape");
+
+  // Not again on the Gallery this visit, but each other page has its own moment.
   await page.reload();
-  await expect(page.getByRole("button", { name: "Ask Echo", exact: true })).toBeVisible();
-  await page.waitForTimeout(3_500);
-  await expect(page.getByRole("button", { name: "Want help?" })).toHaveCount(0);
+  await scrollInto(page);
+  await page.waitForTimeout(1_500);
+  await expect(gallery).toHaveCount(0);
+  await page.goto("/events");
+  await scrollInto(page);
+  await expect(page.getByRole("button", { name: "Curious what our special events are like?" })).toBeVisible();
+});
+
+test("waved away twice, Echo stays quiet for the rest of the visit", async ({ page }) => {
+  const dismiss = async (path: string, nudge: string) => {
+    await page.goto(path);
+    await scrollInto(page);
+    await expect(page.getByRole("button", { name: nudge })).toBeVisible();
+    await page.getByRole("button", { name: "Hide Echo's message" }).click();
+    await expect(page.getByRole("button", { name: nudge })).toHaveCount(0);
+  };
+  await dismiss("/events", "Curious what our special events are like?");
+  await dismiss("/gallery", "Looking for a photo of yourself?");
+
+  await page.goto("/pathways");
+  await scrollInto(page);
+  await page.waitForTimeout(1_500);
+  await expect(page.locator(".echo-bubble")).toHaveCount(0);
 });
 
 test("the bubble can be waved away, and steps aside on its own", async ({ page }) => {
@@ -135,7 +187,7 @@ test("the bubble can be waved away, and steps aside on its own", async ({ page }
     }
     expect(await condition(), "never happened within 30 s of page time").toBe(true);
   };
-  const bubble = page.getByRole("button", { name: "Want help?" });
+  const bubble = page.getByRole("button", { name: "Thinking of visiting? Ask me." });
   const bubbleShown = async () => (await bubble.count()) === 1;
   const bubbleGone = async () => (await bubble.count()) === 0;
 

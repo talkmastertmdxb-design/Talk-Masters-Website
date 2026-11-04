@@ -9,6 +9,7 @@ import {
   allQuestions,
   answerQuestion,
   answerTyped,
+  askClubMessage,
   loadChat,
   openEcho,
   saveChat,
@@ -150,10 +151,22 @@ describe("the conversation", () => {
     const suggest = answerTyped(script, "how long", facts);
     expect(suggest.text).toBe(script.suggest);
     expect(suggest.options.kind).toBe("questions");
-    expect(answerTyped(script, "tell me a joke about cats", facts)).toEqual({
-      text: script.fallback,
-      options: { kind: "topics" },
-    });
+    // With no club number, Echo points to the guest page.
+    const withoutNumber = answerTyped(script, "tell me a joke about cats", facts);
+    expect(withoutNumber.options).toEqual({ kind: "topics" });
+    expect(withoutNumber.text.startsWith(script.fallback)).toBe(true);
+    expect(withoutNumber.text).toContain("[the guest page](/join)");
+  });
+
+  it("offers WhatsApp with the guest's own question when there's no answer", () => {
+    const typed = "Tell me a joke about cats (and dogs), it's fine!";
+    const { text } = answerTyped(script, typed, facts, "+971502837168");
+    const [link] = parseReply(text).filter((segment) => segment.type === "link");
+    expect(link).toMatchObject({ type: "link", text: "Ask the club on WhatsApp" });
+    // The whole question survives the trip, apostrophe and brackets included.
+    const href = link?.type === "link" ? link.href : "";
+    expect(href.startsWith("https://wa.me/971502837168?text=")).toBe(true);
+    expect(decodeURIComponent(new URL(href).searchParams.get("text") ?? "")).toBe(askClubMessage(typed));
   });
 
   it("remembers the chat for the tab, and survives blocked or corrupted storage", () => {

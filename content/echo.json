@@ -1,7 +1,7 @@
 {
   "greeting": "Hi, I'm Echo! Pick a topic, or type a question, and I'll help you get ready for your first visit.",
   "suggest": "I'm not completely sure what you mean. Is it one of these?",
-  "fallback": "I don't have an answer for that one yet. Try a topic below, or message the club on WhatsApp from [the guest page](/join): a member will be happy to help.",
+  "fallback": "I don't have an answer for that one yet, but a member will be happy to help.",
   "featured": ["what-talkmasters", "what-happens", "book"],
   "topics": [
     {
@@ -152,6 +152,13 @@
           ],
           "related": ["who-can-join", "bring-friend"],
           "placeholder": false
+        },
+        {
+          "id": "register",
+          "question": "Do I need to register before coming?",
+          "answer": "Just let us know you're coming: one WhatsApp message from [the guest page](/join) is enough, so we can save you a seat. There's no form and no fee.",
+          "keywords": ["register", "registration", "sign up", "rsvp", "form", "reserve"],
+          "related": ["book", "cost-visit"]
         }
       ]
     },
@@ -417,6 +424,13 @@
             "leadership"
           ],
           "related": ["what-pathways", "mentor", "fees"]
+        },
+        {
+          "id": "story-on-site",
+          "question": "Can my story be on the website?",
+          "answer": "If you're a member, yes. We share members' stories only with their permission and in their own words. Message the club on WhatsApp from [the guest page](/join) and we'll talk you through it.",
+          "keywords": ["my story", "featured", "profile", "on the website", "members page"],
+          "related": ["become-member", "benefits"]
         }
       ]
     },
@@ -488,6 +502,54 @@
             "win"
           ],
           "related": ["awards", "what-pathways"]
+        }
+      ]
+    },
+    {
+      "id": "events-photos",
+      "label": "Events & photos",
+      "questions": [
+        {
+          "id": "events-open",
+          "question": "Are your events open to guests?",
+          "answer": "Yes. Our special events, like She Leads and CareerNova, are open to members and guests alike. See them all on [the events page](/events).",
+          "keywords": ["event guest", "open to guests", "attend event", "non member", "can anyone come"],
+          "related": ["events-next", "events-cost"]
+        },
+        {
+          "id": "events-cost",
+          "question": "Do events cost anything?",
+          "answer": "It depends on the event, and we always say so when we announce it. Ask us on WhatsApp from [the guest page](/join) about the next one.",
+          "keywords": ["event cost", "event ticket", "event price", "event fee", "pay for event"],
+          "related": ["events-open", "events-next"]
+        },
+        {
+          "id": "events-next",
+          "question": "When is the next special event?",
+          "answer": "New events appear on [the events page](/events) as soon as they're announced. Our regular meetings never stop: the next one is {nextMeeting}.",
+          "keywords": ["next event", "upcoming event", "coming up", "special event", "future event"],
+          "related": ["events-open", "book"]
+        },
+        {
+          "id": "gallery-find",
+          "question": "Where can I find photos from a meeting?",
+          "answer": "In [the Gallery](/gallery). The buttons above the photos show one event, the Sunday meetings or club moments, and any photo opens full screen.",
+          "keywords": ["photo", "photos", "pictures", "gallery", "find my photo", "meeting photos"],
+          "related": ["gallery-share", "gallery-remove"]
+        },
+        {
+          "id": "gallery-share",
+          "question": "How do I share a photo?",
+          "answer": "Open the photo in [the Gallery](/gallery) and tap the share button. On a phone it opens your share sheet; on a computer it copies a link that opens that exact photo.",
+          "keywords": ["share photo", "send photo", "photo link", "download photo", "share picture"],
+          "related": ["gallery-find", "gallery-remove"]
+        },
+        {
+          "id": "gallery-remove",
+          "question": "Can I get a photo of me removed?",
+          "answer": "Of course. Send the club the photo's link on WhatsApp from [the guest page](/join) (the share button in the Gallery copies it) and we'll take it down.",
+          "keywords": ["remove photo", "delete photo", "take down", "photo of me", "privacy"],
+          "related": ["gallery-share", "contact"]
         }
       ]
     },
@@ -613,8 +675,94 @@
           ],
           "related": ["contests", "contact"],
           "placeholder": false
+        },
+        {
+          "id": "smedley",
+          "question": "What is the Smedley Award?",
+          "answer": "A Toastmasters club-growth award for welcoming new members in August and September. Talk-Masters earned Bronze in District 127's Club Growth Awards for 2026-27. See [our achievements](/achievements).",
+          "keywords": ["smedley", "club growth award", "bronze award"],
+          "related": ["triple-crown", "awards"]
+        },
+        {
+          "id": "triple-crown",
+          "question": "What is a Triple Crown?",
+          "answer": "A District 127 recognition for completing three Pathways levels in a single Toastmasters year. Two of our members earned it in 2026-27. See [our achievements](/achievements).",
+          "keywords": ["triple crown", "three levels", "pathways levels award"],
+          "related": ["smedley", "what-pathways"]
         }
       ]
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "name": "the home page",
+      "nudge": "Thinking of visiting? Ask me.",
+      "greeting": "Hi, I'm Echo! Pick a topic, or type a question, and I'll help you get ready for your first visit.",
+      "questions": ["what-talkmasters", "what-happens", "book"]
+    },
+    {
+      "path": "/join",
+      "name": "the guest page",
+      "nudge": "Questions before you book?",
+      "greeting": "Booking takes one WhatsApp message. Ask me anything first: what it costs, what to bring, or whether you'll have to speak.",
+      "questions": ["cost-visit", "will-speak", "prepare", "register"]
+    },
+    {
+      "path": "/meetings",
+      "name": "the meetings page",
+      "nudge": "Want to know what happens at a meeting?",
+      "greeting": "This page walks through a real meeting. Ask me about the roles, the timing lights or the evaluations.",
+      "questions": ["what-happens", "lights", "roles", "evaluations"]
+    },
+    {
+      "path": "/events",
+      "name": "the events page",
+      "nudge": "Curious what our special events are like?",
+      "greeting": "You're on our events page. Ask me about our special events, whether guests can come, or what's next.",
+      "questions": ["events-next", "events-open", "events-cost"]
+    },
+    {
+      "path": "/gallery",
+      "name": "the Gallery",
+      "nudge": "Looking for a photo of yourself?",
+      "greeting": "Every photo from our events and meetings is here. Ask me how to find, share or remove one.",
+      "questions": ["gallery-find", "gallery-share", "gallery-remove"]
+    },
+    {
+      "path": "/members",
+      "name": "the members page",
+      "nudge": "Want to know how our members started?",
+      "greeting": "These are our members, in their own words. Ask me what it's like to start as a beginner, or how to share your own story.",
+      "questions": ["beginner", "story-on-site", "become-member"]
+    },
+    {
+      "path": "/team",
+      "name": "the team page",
+      "nudge": "Not sure who to ask? I'll point you.",
+      "greeting": "This is the committee that runs the club this year. Ask me who to contact, or how the club is run.",
+      "questions": ["contact", "who-runs", "become-member"]
+    },
+    {
+      "path": "/pathways",
+      "name": "the Pathways page",
+      "nudge": "Not sure which path fits you?",
+      "greeting": "Pathways is how members learn at Toastmasters. Ask me which path fits, how long one takes, or about mentors.",
+      "questions": ["what-pathways", "paths", "path-length", "mentor"]
+    },
+    {
+      "path": "/our-story",
+      "name": "our story",
+      "nudge": "Want to know how the club began?",
+      "greeting": "This is how Talk-Masters began. Ask me about the club's history, or about Toastmasters International.",
+      "questions": ["history", "what-toastmasters", "who-runs"]
+    },
+    {
+      "path": "/achievements",
+      "name": "the achievements page",
+      "nudge": "Wondering what these awards mean?",
+      "greeting": "These are the club's awards and our members' achievements. Ask me what a Smedley Award or a Triple Crown is.",
+      "questions": ["smedley", "triple-crown", "contests"]
     }
   ]
 }

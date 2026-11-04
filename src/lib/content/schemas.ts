@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PUBLIC_PAGES } from "../seo/public-pages";
 
 /**
  * One schema per content type. Types, validation and the future Google Drive
@@ -516,6 +517,24 @@ export const echoSchema = z
     fallback: z.string().min(1),
     /** Ids of the questions shown first, above the topics. */
     featured: z.array(z.string()).max(4).default([]),
+    /** What Echo says on each page: its bubble, its greeting and the questions it offers first. */
+    pages: z
+      .array(
+        z.object({
+          /** A public page, e.g. "/gallery". */
+          path: z.string().refine((path) => PUBLIC_PAGES.some((page) => page.path === path), {
+            message: "Use a public page's path (src/lib/seo/public-pages.ts)",
+          }),
+          /** How Echo names the page: "Now you're on the Gallery." */
+          name: z.string().min(1).max(32),
+          /** The speech bubble: short enough for two lines beside Echo. */
+          nudge: z.string().min(1).max(48),
+          /** The chat's first line on this page. */
+          greeting: z.string().min(1).max(200),
+          questions: z.array(z.string()).min(2).max(4),
+        }),
+      )
+      .default([]),
     topics: z
       .array(
         z.object({
@@ -539,6 +558,15 @@ export const echoSchema = z
     for (const id of echo.featured) {
       if (!known.has(id))
         ctx.addIssue({ code: "custom", message: `Featured question "${id}" doesn't exist` });
+    }
+    const paths = echo.pages.map((page) => page.path);
+    if (new Set(paths).size !== paths.length)
+      ctx.addIssue({ code: "custom", message: "Each page appears once in Echo's pages" });
+    for (const page of echo.pages) {
+      for (const id of page.questions) {
+        if (!known.has(id))
+          ctx.addIssue({ code: "custom", message: `Page "${page.path}" offers unknown "${id}"` });
+      }
     }
   });
 
@@ -757,6 +785,7 @@ export type Faq = z.infer<typeof faqSchema>;
 export type EchoScript = z.infer<typeof echoSchema>;
 export type EchoTopic = EchoScript["topics"][number];
 export type EchoQuestion = EchoTopic["questions"][number];
+export type EchoPage = EchoScript["pages"][number];
 export type EchoToken = (typeof ECHO_TOKENS)[number];
 export type CultureCard = z.infer<typeof cultureSchema>[number];
 export type MeetingGuide = z.infer<typeof meetingGuideSchema>;

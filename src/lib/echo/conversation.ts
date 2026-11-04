@@ -1,5 +1,6 @@
 import type { EchoQuestion, EchoScript } from "@/lib/content/schemas";
 import { fillAnswer, type EchoFacts } from "./answers";
+import { whatsappLink } from "@/lib/content/contact";
 import { matchQuestion } from "./match";
 
 /** A line in the chat window. */
@@ -16,6 +17,8 @@ export type ChatOptions =
 export interface ChatState {
   lines: ChatLine[];
   options: ChatOptions;
+  /** The page (see pageKey) the conversation last spoke about, so moving on is noticed once. */
+  page?: string;
 }
 
 /** What Echo says next, and the chips that follow it. */
@@ -46,7 +49,11 @@ export function withUserLine(chat: ChatState, text: string): ChatState {
 }
 
 export function withEchoLine(chat: ChatState, reply: EchoReply): ChatState {
-  return { lines: [...chat.lines, { id: lineId(), role: "echo", text: reply.text }], options: reply.options };
+  return {
+    ...chat,
+    lines: [...chat.lines, { id: lineId(), role: "echo", text: reply.text }],
+    options: reply.options,
+  };
 }
 
 /** A chosen question's answer, followed by its related questions. */
@@ -58,14 +65,36 @@ export function answerQuestion(question: EchoQuestion, facts: EchoFacts): EchoRe
   };
 }
 
-/** A typed question: answered when it's clear, a few suggestions when close, otherwise WhatsApp. */
-export function answerTyped(script: EchoScript, typed: string, facts: EchoFacts): EchoReply {
+/** What a guest sends the club when Echo can't answer: their own question, already typed. */
+export const askClubMessage = (typed: string): string => `Hi! I have a question about Talk-Masters: ${typed}`;
+
+/**
+ * A typed question: answered when it's clear, a few suggestions when close. Otherwise Echo says
+ * so and offers WhatsApp to the club's contact, with the question already written.
+ */
+export function answerTyped(
+  script: EchoScript,
+  typed: string,
+  facts: EchoFacts,
+  whatsapp?: string,
+): EchoReply {
   const match = matchQuestion(typed, allQuestions(script));
   if (match.kind === "answer") return answerQuestion(match.question, facts);
   if (match.kind === "suggest") {
     return { text: script.suggest, options: { kind: "questions", ids: match.questions.map((q) => q.id) } };
   }
-  return { text: script.fallback, options: { kind: "topics" } };
+  // Echo's replies carry links as [label](url): the five characters encodeURIComponent leaves
+  // alone (! ' ( ) *) would end the link early or fail its safety check, so they are encoded too.
+  const href = whatsapp
+    ? whatsappLink(whatsapp, askClubMessage(typed)).replace(
+        /[!'()*]/g,
+        (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`,
+      )
+    : undefined;
+  const ask = href
+    ? ` [Ask the club on WhatsApp](${href})`
+    : " Message the club on WhatsApp from [the guest page](/join).";
+  return { text: `${script.fallback}${ask}`, options: { kind: "topics" } };
 }
 
 const isLine = (value: unknown): value is ChatLine => {
@@ -95,10 +124,9 @@ export function loadChat(storage: Pick<Storage, "getItem"> | undefined): ChatSta
   try {
     const parsed: unknown = JSON.parse(storage?.getItem(ECHO_STORAGE_KEY) ?? "null");
     if (typeof parsed !== "object" || parsed === null) return INITIAL_CHAT;
-    const { lines, options } = parsed as Record<string, unknown>;
-    return Array.isArray(lines) && lines.every(isLine) && isOptions(options)
-      ? { lines, options }
-      : INITIAL_CHAT;
+    const { lines, options, page } = parsed as Record<string, unknown>;
+    if (!(Array.isArray(lines) && lines.every(isLine) && isOptions(options))) return INITIAL_CHAT;
+    return typeof page === "string" ? { lines, options, page } : { lines, options };
   } catch {
     return INITIAL_CHAT;
   }

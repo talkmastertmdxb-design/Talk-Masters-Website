@@ -1153,7 +1153,11 @@
     font-weight: 600;
     line-height: 1.2;
     color: var(--color-ink);
-    white-space: nowrap;
+    /* Page nudges run to two lines: kept narrow beside Echo, balanced so neither line is lonely. */
+    width: max-content;
+    max-width: min(15rem, calc(100vw - var(--echo-size) - 2.5rem));
+    text-align: left;
+    text-wrap: balance;
   }
   /* The tail: a white square turned on its corner, outlined on its two outer sides. */
   .echo-bubble__say::after {
