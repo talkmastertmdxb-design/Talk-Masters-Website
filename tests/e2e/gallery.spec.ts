@@ -5,7 +5,9 @@ test.describe("gallery page", () => {
     await page.goto("/");
     if (isMobile) await page.getByRole("button", { name: "Open menu" }).click();
     const nav = isMobile ? page.getByRole("dialog") : page.getByRole("navigation", { name: "Main" });
-    const labels = (await nav.locator("a").allTextContents()).map((text) => text.replace(/^\d+\s*/, "").trim());
+    const labels = (await nav.locator("a").allTextContents()).map((text) =>
+      text.replace(/^\d+\s*/, "").trim(),
+    );
     expect(labels[labels.findIndex((label) => label.startsWith("Events")) + 1]).toMatch(/^Gallery/);
   });
 
@@ -17,6 +19,11 @@ test.describe("gallery page", () => {
     await expect(hero).toHaveCSS("background-color", "rgb(255, 255, 255)");
     const corridor = hero.locator("[aria-hidden='true']").first();
     await expect(corridor.locator("img")).toHaveCount(18);
+    // The two rails carry different photos: none is shown twice.
+    const sources = await corridor
+      .locator("img")
+      .evaluateAll((imgs) => imgs.map((img) => img.getAttribute("src")));
+    expect(new Set(sources).size).toBe(18);
   });
 
   test("filters the collage, and the counts match what it shows", async ({ page }) => {

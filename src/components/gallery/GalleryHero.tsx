@@ -8,8 +8,8 @@ interface GalleryHeroProps {
   eventCount: number;
 }
 
-/** Photos on the corridor's rails: enough for variety, each one small (the cards are). */
-const CORRIDOR_PHOTOS = 14;
+/** One photo per card: 9 on each rail, none repeated (the cards are small, so are the files). */
+const CORRIDOR_PHOTOS = 18;
 
 /** Every nth photo, so the corridor mixes all the events instead of showing the newest one. */
 function spread<T>(items: readonly T[], count: number): T[] {
@@ -32,6 +32,7 @@ export function GalleryHero({ photos, eventCount }: GalleryHeroProps) {
       <ImageStreamHero
         images={images}
         axis={72}
+        speed={32}
         className="h-[34rem] [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)] md:h-[clamp(36rem,92svh,52rem)]"
       >
         <div className="relative z-10 flex h-full flex-col items-center justify-between px-(--site-gutter) pt-32 pb-10 text-center md:pt-36">

@@ -79,7 +79,10 @@ export interface StreamImage {
 }
 
 interface ImageStreamHeroProps extends ComponentProps<"div"> {
-  /** Cycled onto both rails, so the corridor reads as one mirrored stream. */
+  /**
+   * Dealt onto the rails: the right rail takes the first `cards`, the left the next `cards`, so
+   * with 2 × `cards` images no photo shows twice. Fewer simply repeat.
+   */
   images: readonly StreamImage[];
   /** Cards on each rail at once: denser, not faster. Far below 9 tears the ribbon. */
   cards?: number;
@@ -130,9 +133,9 @@ export function ImageStreamHero({
         style={{ perspective: `${p.perspective}cqw`, perspectiveOrigin: `50% ${axis}%` }}
       >
         <div className="absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
-          {[right, left].map((name) =>
+          {[right, left].map((name, rail) =>
             Array.from({ length: cards }, (_, i) => {
-              const img = images[i % Math.max(images.length, 1)];
+              const img = images[(rail * cards + i) % Math.max(images.length, 1)];
               return (
                 <div
                   key={`${name}-${i}`}
