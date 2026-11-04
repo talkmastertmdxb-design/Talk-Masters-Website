@@ -75,99 +75,81 @@
   },
   {
     "id": "path-presentation-mastery",
-    "alt": "A speaker presenting confidently to an audience from a stage",
+    "alt": "A speaker mid-speech on the She Leads stage, hand on heart",
     "aspectRatio": "3/2",
     "brief": "Presentation Mastery: a confident speaker presenting on stage",
-    "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8c3BlYWtlciUyMHByZXNlbnRpbmclMjBvbiUyMHN0YWdlJTIwY29uZmVyZW5jZXxlbnwxfDB8fHwxNzkyOTQ4OTgzfDA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "speaker presenting on stage conference",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/path-presentation-mastery.webp",
     "credit": {
       "name": "Headway",
       "profileUrl": "https://unsplash.com/@headwayio?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/crowd-of-people-sitting-on-chairs-inside-room-F2KRf_QfCqw?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "50% 30%"
   },
   {
     "id": "path-dynamic-leadership",
-    "alt": "A team leader guiding a discussion around a table",
+    "alt": "Prathiba Leo moderating the She Leads panel discussion",
     "aspectRatio": "3/2",
     "brief": "Dynamic Leadership: a leader guiding a team discussion",
-    "src": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bGVhZGVyJTIwbGVhZGluZyUyMHRlYW0lMjBtZWV0aW5nJTIwZGlzY3Vzc2lvbnxlbnwxfDB8fHwxNzkyOTQ4OTg0fDA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "leader leading team meeting discussion",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/path-dynamic-leadership.webp",
     "credit": {
       "name": "Dylan Gillis",
       "profileUrl": "https://unsplash.com/@mainermedia?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/people-sitting-on-chair-in-front-of-table-while-holding-pens-during-daytime-KdeqA3aTnBY?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "50% 45%"
   },
   {
     "id": "path-persuasive-influence",
-    "alt": "Two professionals shaking hands after a negotiation",
+    "alt": "Two members in conversation, one making his point with open hands",
     "aspectRatio": "3/2",
     "brief": "Persuasive Influence: a negotiation that ends in agreement",
-    "src": "https://images.unsplash.com/photo-1672380135241-c024f7fbfa13?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YnVzaW5lc3MlMjBuZWdvdGlhdGlvbiUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5Mjk0ODk4NXww&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "business negotiation handshake meeting",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/path-persuasive-influence.webp",
     "credit": {
       "name": "Radission US",
       "profileUrl": "https://unsplash.com/@radission?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/two-people-shaking-hands-in-front-of-a-laptop-_XeQ8XEWb4Q?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "50% 35%"
   },
   {
     "id": "path-motivational-strategies",
-    "alt": "A mentor encouraging a colleague in a one-to-one conversation",
+    "alt": "Guests on their feet during a group activity, encouraging each other",
     "aspectRatio": "3/2",
     "brief": "Motivational Strategies: coaching and encouraging people",
-    "src": "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8bWVudG9yJTIwY29hY2hpbmclMjBjb2xsZWFndWUlMjBjb252ZXJzYXRpb258ZW58MXwwfHx8MTc5Mjk0ODk4Nnww&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "mentor coaching colleague conversation",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/path-motivational-strategies.webp",
     "credit": {
       "name": "Christina @ wocintechchat.com M",
       "profileUrl": "https://unsplash.com/@wocintechchat?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/two-women-sitting-on-chair-eF7HN40WbAQ?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "55% 40%"
   },
   {
     "id": "path-visionary-communication",
-    "alt": "A team planning a strategy together on a whiteboard",
+    "alt": "Deepak Bhadra presenting “The 3 Secrets” at CareerNova",
     "aspectRatio": "3/2",
     "brief": "Visionary Communication: planning a long-term vision",
-    "src": "https://images.unsplash.com/photo-1529119368496-2dfda6ec2804?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8dGVhbSUyMHN0cmF0ZWd5JTIwcGxhbm5pbmclMjB3aGl0ZWJvYXJkfGVufDF8MHx8fDE3OTI5NDg5ODd8MA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "team strategy planning whiteboard",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/path-visionary-communication.webp",
     "credit": {
       "name": "Startaê Team",
       "profileUrl": "https://unsplash.com/@startaeteam?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/person-pointing-white-paper-on-wall-7tXA8xwe4W4?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "45% 40%"
   },
   {
     "id": "path-engaging-humor",
-    "alt": "An audience laughing during a talk",
+    "alt": "The She Leads audience laughing together in their seats",
     "aspectRatio": "3/2",
     "brief": "Engaging Humor: an audience laughing with the speaker",
-    "src": "https://images.unsplash.com/photo-1544531585-9847b68c8c86?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8YXVkaWVuY2UlMjBsYXVnaGluZyUyMHByZXNlbnRhdGlvbnxlbnwxfDB8fHwxNzkyOTQ4OTg4fDA&ixlib=rb-4.1.0&w=2400&q=80",
-    "unsplash": {
-      "query": "audience laughing presentation",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/path-engaging-humor.webp",
     "credit": {
       "name": "Miguel Henriques",
       "profileUrl": "https://unsplash.com/@miguel_photo?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/man-sitting-on-stage-E0bIdzi8zoQ?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "50% 40%"
   },
   {
     "id": "manifesto-bento",
@@ -267,20 +249,16 @@
   },
   {
     "id": "statement-fullbleed",
-    "alt": "An audience of all ages listening intently",
+    "alt": "A full hall at CareerNova: guests of all ages listening to a talk",
     "aspectRatio": "16/9",
     "brief": "Wide audience shot showing a range of ages and backgrounds",
-    "src": "https://images.unsplash.com/photo-1770844102881-f8823e9f3c83?ixid=M3wxMTA1MDM1fDB8MXxhbGx8fHx8fHx8fHwxNzkyMjI2OTg5fA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "photoId": "-w_UfjjPe8o",
-      "query": "empty theater seats darkness",
-      "orientation": "landscape"
-    },
+    "src": "/images/club/statement-audience-wide.webp",
     "credit": {
       "name": "Ian Edokov",
       "profileUrl": "https://unsplash.com/@edokov95?utm_source=talk_masters_club&utm_medium=referral",
       "photoUrl": "https://unsplash.com/photos/rows-of-empty-theater-seats-receding-into-darkness--w_UfjjPe8o?utm_source=talk_masters_club&utm_medium=referral"
-    }
+    },
+    "focalPoint": "50% 45%"
   },
   {
     "id": "journey-feature",
