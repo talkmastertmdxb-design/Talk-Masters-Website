@@ -368,26 +368,28 @@ export const memberSchema = z
     }
   });
 
+/** One chapter of a founder's story: a short label (often a date), a title and their words. */
+export const founderChapterSchema = z.object({
+  label: z.string().min(1),
+  title: z.string().min(1),
+  paragraphs,
+  /** A line from the chapter, set large after it. */
+  pullQuote: z.string().min(1).optional(),
+});
+
 export const founderSchema = z.object({
   slug,
   ...consentedPerson,
   /** Degree or profession. */
   profession: z.string().min(1).optional(),
   quote: z.string().min(1),
-  /** Their personal story. */
+  /** Their story in brief. */
   story: paragraphs,
+  /** Their story in full, in their own words, chapter by chapter (Our Story). */
+  chapters: z.array(founderChapterSchema).default([]),
+  /** Who tells the story, e.g. "As remembered and shared by its founder, …". */
+  byline: z.string().min(1).optional(),
 });
-
-/** The founders timeline, exactly as in Plan.md. Order matters. */
-export const FOUNDING_STAGES = [
-  "idea",
-  "planning",
-  "club-formation",
-  "chartering",
-  "first-meeting",
-  "first-achievement",
-  "today",
-] as const;
 
 /** The club's founding story for /our-story (content/history.json). */
 export const historySchema = z.object({
@@ -399,23 +401,23 @@ export const historySchema = z.object({
   district: z.string().min(1).optional(),
   division: z.string().min(1).optional(),
   area: z.string().min(1).optional(),
-  /** Why Talk-Masters was created. */
-  why: paragraphs,
-  timeline: z
+  /** The club's story in numbers, e.g. { value: "150", label: "independent sessions" }. */
+  numbers: z
+    .array(z.object({ value: z.string().min(1), label: z.string().min(1) }))
+    .max(5, "Show at most 5 numbers")
+    .default([]),
+  /** The club's milestones, oldest first. */
+  milestones: z
     .array(
       z.object({
-        stage: z.enum(FOUNDING_STAGES),
-        /** Free text, e.g. "March 2019". */
-        date: z.string().min(1).optional(),
+        /** Free text, e.g. "5 Sep 2014" or "Today". */
+        date: z.string().min(1),
+        title: z.string().min(1),
         text: z.string().min(1),
+        placeholder,
       }),
     )
-    .refine(
-      (items) =>
-        items.length === FOUNDING_STAGES.length &&
-        items.every((item, i) => item.stage === FOUNDING_STAGES[i]),
-      { message: `The timeline must list every stage in order: ${FOUNDING_STAGES.join(" → ")}` },
-    ),
+    .min(1, "Add at least one milestone"),
   legacy: z.string().min(1),
   placeholder,
 });
@@ -776,8 +778,8 @@ export type ProfileLink = z.infer<typeof profileLinkSchema>;
 export type ProfileNetwork = ProfileLink["network"];
 export type JourneyMilestone = (typeof JOURNEY_MILESTONES)[number];
 export type Founder = z.infer<typeof founderSchema>;
+export type FounderChapter = z.infer<typeof founderChapterSchema>;
 export type History = z.infer<typeof historySchema>;
-export type FoundingStage = (typeof FOUNDING_STAGES)[number];
 export type Award = z.infer<typeof awardSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type Officer = z.infer<typeof officerSchema>;

@@ -1,41 +1,49 @@
 {
-  "foundedYear": 2016,
-  "origin": "Talk-Masters began in 2016 as an independent speaking club, and later joined Toastmasters International.",
+  "foundedYear": 2014,
+  "origin": "Talk-Masters began in 2014 as an independent speaking club, and joined Toastmasters International after 150 sessions.",
   "clubNumber": "07956953",
   "district": "127",
   "division": "C",
   "area": "11",
-  "why": [
-    "Placeholder: why the founders started the club. What did they wish had existed when they first tried to speak up?",
-    "Placeholder: the challenges people faced: fear of speaking, nowhere safe to practise, no one to give honest, kind feedback.",
-    "Placeholder: the vision. A community open to everyone, of every age and background, where anyone can find their voice.",
-    "Placeholder: the gap the club filled in the community."
+  "numbers": [
+    { "value": "83", "label": "friends called on the drive home" },
+    { "value": "12", "label": "came to the first gathering" },
+    { "value": "150", "label": "independent sessions, exactly" },
+    { "value": "100+", "label": "early meetings with guest speakers" },
+    { "value": "7", "label": "years before joining Toastmasters" }
   ],
-  "timeline": [
-    { "stage": "idea", "date": "Date", "text": "Placeholder: the conversation where the idea began." },
+  "milestones": [
     {
-      "stage": "planning",
-      "date": "Date",
-      "text": "Placeholder: finding founding members, a venue and a meeting night."
+      "date": "15 Aug 2014",
+      "title": "The minute that started it",
+      "text": "A short Independence Day speech in Deira, and a decision on the drive home to Sharjah."
     },
     {
-      "stage": "club-formation",
-      "date": "2016",
-      "text": "Talk-Masters begins as an independent speaking club, before it is part of Toastmasters."
+      "date": "5 Sep 2014",
+      "title": "The first gathering",
+      "text": "Twelve people at a hotel in Sharjah, opened by Adv. KSA Basheer. Everyone came forward and spoke."
     },
     {
-      "stage": "chartering",
-      "date": "Date",
-      "text": "The club joins Toastmasters International and is chartered as club 07956953. (Placeholder: confirm the year.)"
+      "date": "The first 7 years",
+      "title": "150 independent sessions",
+      "text": "Structured agendas, guest speakers and mentors, rooms of six and rooms of more than 100."
     },
-    { "stage": "first-meeting", "date": "Date", "text": "Placeholder: who came, and what it felt like." },
-    { "stage": "first-achievement", "date": "Date", "text": "Placeholder: the first award or recognition." },
     {
-      "stage": "today",
+      "date": "After 7 years",
+      "title": "Joining Toastmasters International",
+      "text": "Chartered as club 07956953 in District 127, Division C, Area 11, bringing seven years of community into a wider international family."
+    },
+    {
+      "date": "2026",
+      "title": "Recognised",
+      "text": "The Smedley Award (Bronze) for the club, and Triple Crown Awards for Ganesan Venkatachalam, DTM, and Mohammed Jabir."
+    },
+    {
       "date": "Today",
-      "text": "Placeholder: members of every age and background, meeting every month."
+      "title": "Every 2nd and 4th Sunday",
+      "text": "Members of every age and background, meeting at Hor Al Anz Public Library, Dubai. Guests are always welcome."
     }
   ],
-  "legacy": "Today the club continues the mission started by its founders, helping people of every age and background become confident communicators and leaders.",
-  "placeholder": true
+  "legacy": "Every long journey begins with a single step. Ours began on 5 September 2014, and the journey continues.",
+  "placeholder": false
 }

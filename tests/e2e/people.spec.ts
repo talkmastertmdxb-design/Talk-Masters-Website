@@ -9,25 +9,47 @@ const seriousViolations = async (page: Page) => {
   return results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
 };
 
-test("Our Story follows Plan.md: why, the founders timeline, founders, legacy", async ({ page }) => {
+test("Our Story tells the founder's story first, then the club's, all on the page", async ({ page }) => {
   await page.goto("/our-story");
+  // The hero stays as it was.
   await expect(
     page.getByRole("heading", { level: 1, name: "Every great speaker starts with a single conversation." }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Why was Talk-Masters created?" })).toBeVisible();
-  const stages = page.getByRole("heading", { level: 3 }).filter({
-    hasText: /^(Idea|Planning|Club Formation|Chartering|First Meeting|First Achievement|Today)$/,
-  });
-  await expect(stages).toHaveText([
-    "Idea",
-    "Planning",
-    "Club Formation",
-    "Chartering",
-    "First Meeting",
-    "First Achievement",
-    "Today",
+  await expect(page.getByText(/Talk-Masters began the same way, in 2014/)).toBeVisible();
+
+  const founder = page.locator("section[aria-labelledby='founder-title']");
+  await expect(founder.getByRole("heading", { level: 2 })).toHaveText(
+    "From one minute of fear to a movement",
+  );
+  await expect(founder.getByText("As remembered and shared by its founder, Faizal Rahman")).toBeVisible();
+  await expect(founder.locator('[data-image-slot="founder-one"] img')).toHaveAttribute(
+    "alt",
+    "Faizal Rahman, founder of Talk-Masters",
+  );
+  await expect(founder.getByRole("heading", { level: 3 })).toHaveText([
+    "One minute in Deira",
+    "83 phone calls, 12 people",
+    "The first step",
+    "A name with a simple purpose",
+    "Exactly 150 sessions, and one important decision",
+    "More than a club",
   ]);
-  await expect(page.getByRole("heading", { name: "Meet the founders" })).toBeVisible();
+  await expect(founder.getByText("Come here. Talk. Practise. Become a master at talking.")).toBeVisible();
+  // Only one founder now.
+  await expect(page.getByRole("heading", { name: "Meet the founders" })).toHaveCount(0);
+
+  // The club's story comes after the founder's, and every word is already on the page.
+  const club = page.locator("section[aria-labelledby='club-story-title']");
+  await expect(club.getByRole("heading", { level: 3 }).first()).toHaveText("The minute that started it");
+  await expect(club.getByText("Joining Toastmasters International")).toBeVisible();
+  const order = await page.evaluate(() => {
+    const founderTop = document.querySelector("#founder-title")!.getBoundingClientRect().top;
+    const clubTop = document.querySelector("#club-story-title")!.getBoundingClientRect().top;
+    return clubTop > founderTop;
+  });
+  expect(order).toBe(true);
+  await expect(page.locator("main [aria-expanded], main details")).toHaveCount(0);
+
   await expect(page.getByRole("heading", { name: "Legacy" })).toBeVisible();
   expect(await seriousViolations(page)).toEqual([]);
 });

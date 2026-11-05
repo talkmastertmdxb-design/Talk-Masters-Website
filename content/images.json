@@ -323,27 +323,11 @@
   },
   {
     "id": "founder-one",
-    "alt": "Portrait of a Talk-Masters founder",
+    "alt": "Faizal Rahman, founder of Talk-Masters",
     "aspectRatio": "4/5",
-    "brief": "Founder portrait, natural light, plain background",
+    "brief": "Our Story: portrait of the founder, Faizal Rahman",
     "src": "/images/team/founder-one-portrait.webp",
     "focalPoint": "50% 28%"
-  },
-  {
-    "id": "founder-two",
-    "alt": "Portrait of a club founder",
-    "aspectRatio": "4/5",
-    "brief": "Founder portrait, natural light, plain background",
-    "src": "https://images.unsplash.com/photo-1728932976150-7e81ef17e734?ixid=M3wxMTA1MDM1fDB8MXxzZWFyY2h8MXx8c2VuaW9yJTIwbWFuJTIwcG9ydHJhaXQlMjBzbWlsaW5nfGVufDF8MXx8fDE3OTIyMjY5OTR8MA&ixlib=rb-4.1.0&w=2400&q=80&fm=jpg",
-    "unsplash": {
-      "query": "senior man portrait smiling",
-      "orientation": "portrait"
-    },
-    "credit": {
-      "name": "Mehdi Raad",
-      "profileUrl": "https://unsplash.com/@mehdihraad?utm_source=talk_masters_club&utm_medium=referral",
-      "photoUrl": "https://unsplash.com/photos/a-black-and-white-photo-of-an-old-man-bhRKz7e2A_E?utm_source=talk_masters_club&utm_medium=referral"
-    }
   },
   {
     "id": "member-hadi",
@@ -1312,6 +1296,14 @@
     "brief": "Session 80, 10 August 2025 gallery, DSC03349.JPG",
     "src": "/images/meetings/2025-08-10-a230.webp",
     "focalPoint": "50% 35%"
+  },
+  {
+    "id": "story-club-group",
+    "alt": "Talk-Masters members together for a group photo at Session 80",
+    "aspectRatio": "3/2",
+    "brief": "Our Story, end of the club story: Session 80 group photo, 10 August 2025 (DSC03349.JPG, exported at 2400px)",
+    "src": "/images/club/session-80-group.webp",
+    "focalPoint": "50% 40%"
   },
   {
     "id": "meeting-2025-08-10-a234",

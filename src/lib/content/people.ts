@@ -1,4 +1,4 @@
-import type { Award, FoundingStage, History, JourneyMilestone, Member, Officer } from "./schemas";
+import type { Award, History, JourneyMilestone, Member, Officer } from "./schemas";
 
 export function firstName(fullName: string): string {
   return fullName.trim().split(/\s+/)[0] ?? fullName;
@@ -143,16 +143,6 @@ const levelLabels: Record<Award["level"], string> = {
 
 export const programmeLabel = (award: Award): string => programmeLabels[award.programme];
 export const levelLabel = (award: Award): string => levelLabels[award.level];
-
-export const foundingStageLabels: Record<FoundingStage, string> = {
-  idea: "Idea",
-  planning: "Planning",
-  "club-formation": "Club Formation",
-  chartering: "Chartering",
-  "first-meeting": "First Meeting",
-  "first-achievement": "First Achievement",
-  today: "Today",
-};
 
 export const milestoneLabels: Record<JourneyMilestone, string> = {
   "first-meeting": "First meeting",

@@ -113,8 +113,15 @@ describe("content in /content", () => {
     ]);
   });
 
-  it("dates the club from 2016, when it began as an independent club", () => {
-    expect(content.history.foundedYear).toBe(2016);
+  it("links Anees, the club President, to his LinkedIn", () => {
+    const anees = content.members.find((member) => member.slug === "anees-mousafi");
+    expect(anees?.links).toEqual([
+      { network: "linkedin", url: "https://www.linkedin.com/in/muhamed-anees-k-mousafi-a9974489/" },
+    ]);
+  });
+
+  it("dates the club from 2014, when it began as an independent club", () => {
+    expect(content.history.foundedYear).toBe(2014);
     expect(content.history.origin).toMatch(/independent/);
     expect(content.history.origin).toMatch(/Toastmasters International/);
   });

@@ -5,6 +5,12 @@
     "position": "President",
     "occupation": "Sales Manager – Middle East",
     "organisation": "Energy Recovery Inc.",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/muhamed-anees-k-mousafi-a9974489/"
+      }
+    ],
     "hook": "From technical talks to leading the whole club",
     "segment": "officer",
     "challenge": "He was comfortable in technical and business discussions, yet not always sure his words were landing the way he intended.",

@@ -7,7 +7,6 @@ import {
   historySchema,
   memberSchema,
   officerSchema,
-  FOUNDING_STAGES,
 } from "@/lib/content/schemas";
 import {
   achievementYear,
@@ -49,8 +48,6 @@ const award = {
   year: "2024-2025",
   description: "Our highest recognition for meeting club goals.",
 };
-
-const timeline = FOUNDING_STAGES.map((stage) => ({ stage, text: `${stage} happened.` }));
 
 describe("memberSchema (Plan.md member directory + journey cards)", () => {
   it("accepts a complete member journey", () => {
@@ -124,31 +121,58 @@ describe("founderSchema", () => {
   });
 });
 
-describe("historySchema (Our Story)", () => {
-  const history = {
-    foundedYear: 2019,
-    why: ["Why the club was created."],
-    timeline,
-    legacy: "Today the club continues the mission.",
+describe("founderSchema chapters (the founder's story on Our Story)", () => {
+  const founder = {
+    slug: "faizal-rahman",
+    name: "Faizal Rahman",
+    role: "Founder",
+    quote: "I decided this would be the last time.",
+    story: ["In brief."],
+    consent: true,
   };
 
-  it("keeps the founders timeline exactly: Idea → Planning → … → Today", () => {
-    expect(FOUNDING_STAGES).toEqual([
-      "idea",
-      "planning",
-      "club-formation",
-      "chartering",
-      "first-meeting",
-      "first-achievement",
-      "today",
-    ]);
-    expect(historySchema.safeParse(history).success).toBe(true);
+  it("tells the story chapter by chapter, each with a label, title, words and an optional pull quote", () => {
+    const parsed = founderSchema.parse({
+      ...founder,
+      byline: "As remembered and shared by its founder, Faizal Rahman",
+      chapters: [
+        {
+          label: "15 August 2014",
+          title: "One minute in Deira",
+          paragraphs: ["It began."],
+          pullQuote: "Never again.",
+        },
+        { label: "The name", title: "A simple purpose", paragraphs: ["Talk-Masters."] },
+      ],
+    });
+    expect(parsed.chapters.map((chapter) => chapter.pullQuote)).toEqual(["Never again.", undefined]);
   });
 
-  it("rejects a timeline that skips or reorders a stage", () => {
-    expect(historySchema.safeParse({ ...history, timeline: timeline.slice(1) }).success).toBe(false);
-    const swapped = [timeline[1], timeline[0], ...timeline.slice(2)];
-    expect(historySchema.safeParse({ ...history, timeline: swapped }).success).toBe(false);
+  it("defaults to no chapters, and rejects a chapter without words", () => {
+    expect(founderSchema.parse(founder).chapters).toEqual([]);
+    expect(
+      founderSchema.safeParse({ ...founder, chapters: [{ label: "L", title: "T", paragraphs: [] }] }).success,
+    ).toBe(false);
+  });
+});
+
+describe("historySchema (Our Story)", () => {
+  const history = {
+    foundedYear: 2014,
+    milestones: [{ date: "5 Sep 2014", title: "The first gathering", text: "Twelve people." }],
+    legacy: "The journey continues.",
+  };
+
+  it("accepts the club's milestones and its story in numbers", () => {
+    const parsed = historySchema.parse({ ...history, numbers: [{ value: "150", label: "sessions" }] });
+    expect(parsed.milestones[0]?.placeholder).toBe(false);
+    expect(historySchema.parse(history).numbers).toEqual([]);
+  });
+
+  it("needs at least one milestone, and at most five numbers", () => {
+    expect(historySchema.safeParse({ ...history, milestones: [] }).success).toBe(false);
+    const numbers = Array.from({ length: 6 }, (_, i) => ({ value: String(i), label: "n" }));
+    expect(historySchema.safeParse({ ...history, numbers }).success).toBe(false);
   });
 });
 

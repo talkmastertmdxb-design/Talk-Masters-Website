@@ -1,9 +1,9 @@
 import { RevealScope } from "@/components/motion/RevealScope";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { ImageSlot } from "@/components/media/ImageSlot";
 import { StageLight } from "@/components/motion/StageLight";
-import { FoundersTimeline } from "@/components/sections/FoundersTimeline";
+import { ClubStory } from "@/components/sections/ClubStory";
+import { FounderStory } from "@/components/sections/FounderStory";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageBreadcrumb } from "@/components/seo/JsonLd";
 import { content } from "@/lib/content";
@@ -11,13 +11,14 @@ import { content } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Our story",
   description:
-    "Why Talk-Masters Club was created, the founders who started it, and the journey from an idea to a Toastmasters International club.",
+    "How Talk-Masters began in 2014 with one nervous minute and twelve friends, told by its founder, Faizal Rahman, and how it grew into a Toastmasters International club.",
   alternates: { canonical: "/our-story" },
 };
 
-/** Plan.md: Founders Story Page. Turns the club from an organisation into a human story. */
+/** The founder's story first, then the club's: everything on the page, nothing behind a click. */
 export default function OurStoryPage() {
   const { history, founders } = content;
+  const founder = founders[0];
 
   return (
     <RevealScope as="main" id="main">
@@ -28,77 +29,21 @@ export default function OurStoryPage() {
         imageSlot="story-hero"
       />
 
-      <section aria-labelledby="why-title" className="py-section bg-soft-gray">
-        <div className="container-site grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <div className="md:sticky md:top-32">
-              <p className="text-eyebrow text-ink-muted">Founded</p>
-              <p data-reveal="up" className="text-display mt-4">
-                {history.foundedYear}
-              </p>
-              {history.origin && (
-                <p data-reveal="up" className="text-ink-muted mt-6 max-w-[30ch] text-lg">
-                  {history.origin}
-                </p>
-              )}
-            </div>
-          </div>
-          <div className="md:col-span-7 md:col-start-6">
-            <h2 id="why-title" data-reveal="lines" className="text-h2 max-w-[18ch]">
-              Why was Talk-Masters created?
-            </h2>
-            <div className="mt-10 flex max-w-[62ch] flex-col gap-6 font-serif text-[1.3125rem] leading-[1.7]">
-              {history.why.map((paragraph) => (
-                <p key={paragraph} data-reveal="up">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div data-reveal="image" className="rounded-card mt-14 overflow-hidden">
-              <ImageSlot id="club-history" sizes="(min-width: 900px) 55vw, 100vw" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <FoundersTimeline timeline={history.timeline} />
-
-      {founders.length > 0 && (
-        <section aria-labelledby="founders-title" className="py-section bg-white">
-          <div className="container-site">
-            <h2 id="founders-title" data-reveal="lines" className="text-h2 max-w-[16ch]">
-              Meet the founders
-            </h2>
-            <div className="mt-16 grid gap-x-6 gap-y-20 md:grid-cols-2">
-              {founders.map((founder) => (
-                <article key={founder.slug} aria-labelledby={`founder-${founder.slug}`}>
-                  {founder.imageSlot && (
-                    // Capped so a portrait never outgrows its photo on wide or high-density screens.
-                    <div data-reveal="image" className="rounded-card max-w-md overflow-hidden">
-                      <ImageSlot id={founder.imageSlot} sizes="(min-width: 640px) 28rem, 100vw" />
-                    </div>
-                  )}
-                  <div data-reveal="up">
-                    <h3 id={`founder-${founder.slug}`} className="text-h3 mt-8">
-                      {founder.name}
-                    </h3>
-                    <p className="text-maroon mt-1 text-sm font-semibold">{founder.role}</p>
-                    {founder.profession && <p className="text-ink-muted mt-1">{founder.profession}</p>}
-                    <div className="text-ink-muted mt-6 flex max-w-[58ch] flex-col gap-4">
-                      {founder.story.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                    <blockquote className="border-gold mt-8 max-w-[40ch] border-l-2 pl-5 font-serif text-2xl leading-snug italic">
-                      “{founder.quote}”
-                    </blockquote>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+      {founder && (
+        <FounderStory
+          founder={founder}
+          interlude={{
+            afterChapter: 2,
+            imageSlot: "statement-fullbleed",
+            caption: "From twelve to a full hall: guests of all ages at CareerNova, 29 June 2025.",
+          }}
+        />
       )}
+
+      <ClubStory
+        history={history}
+        photo={{ imageSlot: "story-club-group", caption: "Session 80, 10 August 2025." }}
+      />
 
       <section
         aria-labelledby="legacy-title"
@@ -112,9 +57,13 @@ export default function OurStoryPage() {
           <p data-reveal="up" className="text-h2 mx-auto mt-6 max-w-[24ch]">
             {history.legacy}
           </p>
+          <p data-reveal="up" className="text-ink-muted mx-auto mt-6 max-w-[52ch] text-lg">
+            Afraid of speaking in front of others, or not sure you&rsquo;re confident enough to begin? This is
+            the room for that first step.
+          </p>
           <div data-reveal="up" className="mt-10 flex justify-center">
-            <ButtonLink href="/members" variant="dark">
-              Meet the members carrying it on
+            <ButtonLink href="/join" variant="dark">
+              Book a guest visit
             </ButtonLink>
           </div>
         </div>

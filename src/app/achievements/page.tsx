@@ -33,7 +33,8 @@ export default function AchievementsPage() {
   const memberPosters = memberAchievements.filter((award) => award.imageSlot);
   const memberList = memberAchievements.filter((award) => !award.imageSlot);
   // The build year keeps this year's undated awards out of a calendar year that hasn't started.
-  const timeline = achievementsByYear(awards, buildYear);
+  // Only the newest year: earlier years are kept off the timeline.
+  const timeline = achievementsByYear(awards, buildYear).slice(0, 1);
 
   return (
     <RevealScope as="main" id="main">

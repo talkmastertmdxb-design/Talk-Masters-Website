@@ -1,24 +1,71 @@
 [
   {
-    "slug": "founder-one",
-    "name": "Founder name",
-    "role": "Founding President",
-    "profession": "Degree / profession",
-    "quote": "I joined Toastmasters because I feared public speaking. Creating Talk-Masters became my way of helping others overcome that same fear.",
-    "story": ["Placeholder: this founder's personal story, in their own words."],
+    "slug": "faizal-rahman",
+    "name": "Faizal Rahman",
+    "role": "Founder",
+    "quote": "I decided this would be the last time I allowed my fear of public speaking to defeat me.",
+    "story": [
+      "On 15 August 2014, Faizal could not finish a one-minute speech in front of 30 familiar faces. Three weeks later, he and twelve friends held the first Talk-Masters gathering."
+    ],
+    "chapters": [
+      {
+        "label": "15 August 2014",
+        "title": "One minute in Deira",
+        "paragraphs": [
+          "It all began in a small hotel restaurant in Deira, Dubai. It was India's Independence Day, and I was invited to speak for a few minutes about it to a gathering of around 30 people.",
+          "I was 33 years old. I knew the history, the stories and the significance of the day. I had more than enough to say for five minutes. But when I stood up, I couldn't speak. I struggled to complete even one minute.",
+          "It wasn't a big stage. Just around 30 familiar faces, people who probably considered me confident and capable. That made it even more painful. And it wasn't the first time: through school, college and my corporate career, I had missed opportunities because I couldn't confidently stand up and speak."
+        ],
+        "pullQuote": "I decided this would be the last time I allowed my fear of public speaking to defeat me."
+      },
+      {
+        "label": "The drive home",
+        "title": "83 phone calls, 12 people",
+        "paragraphs": [
+          "Driving back from Deira to Sharjah that evening, I knew I had to do something. I wasn't thinking about a club or an organisation. I just needed a few friends with the same challenge, who could meet regularly, practise, make mistakes and improve.",
+          "Somewhere along the way I stopped my car and started calling friends. Over that period, I reached out to around 83 people. Almost everyone agreed that public speaking mattered. Some were hesitant, some were afraid of being judged. I understood them, because I was exactly like them.",
+          "When the first meeting finally happened, 12 people showed up. Twelve ordinary people who trusted the idea and were ready to act. Even today, I deeply respect them for that courage."
+        ]
+      },
+      {
+        "label": "5 September 2014",
+        "title": "The first step",
+        "paragraphs": [
+          "Exactly three weeks after that Independence Day, we gathered at a hotel in Sharjah. It was a Friday, and Teachers' Day in India: there couldn't have been a more meaningful day to begin a journey of learning.",
+          "Adv. KSA Basheer inaugurated our first gathering. Point by point, with humour and warmth, he explained what it takes to become a good speaker. I still consider it one of the most valuable lessons in public speaking I have ever received. Sadly, he is no longer with us, but his part in our beginning will always remain in our history.",
+          "That day, everyone came forward and spoke. I remember holding a paper, taking notes and trying to learn everything I could. We weren't there for another social gathering. We were serious about improving ourselves."
+        ]
+      },
+      {
+        "label": "The name",
+        "title": "A name with a simple purpose",
+        "paragraphs": [
+          "We needed a name. My close friend Sabik always had a gift for simple, meaningful names, and he suggested Talk-Masters. We loved it. We didn't want anything complicated. Our purpose was straightforward."
+        ],
+        "pullQuote": "Come here. Talk. Practise. Become a master at talking."
+      },
+      {
+        "label": "Seven years",
+        "title": "Exactly 150 sessions, and one important decision",
+        "paragraphs": [
+          "Some meetings had six people, some had nine, and some drew more than 100. Keeping everyone motivated was never easy, but stopping Talk-Masters never crossed my mind. The only question was how to make the next meeting better.",
+          "I wasn't alone. Founding members, leadership teams, and more than 100 meetings' worth of guest speakers and mentors shaped what Talk-Masters became. Gradually, it became much more than a place to practise speaking. It became a family.",
+          "By our seventh year we had held exactly 150 sessions. We had proved the idea worked, but we needed a stronger system to sustain it. Joining Toastmasters International wasn't an easy decision: we worried about losing our family atmosphere. With encouragement from members and experienced Toastmasters, we took the step, and brought seven years of friendship and community spirit into a wider international family."
+        ]
+      },
+      {
+        "label": "Looking back",
+        "title": "More than a club",
+        "paragraphs": [
+          "The person who couldn't complete a one-minute speech in 2014 went on to speak, train, lead and guide others professionally. But my own transformation is a small part of what Talk-Masters achieved.",
+          "Over the years, members found confidence and courage. Some became authors and business owners, some built businesses together, others were promoted or recognised in their fields. Above all, we built friendships that still create value in our lives. Talk-Masters wasn't just teaching people how to speak. It was helping ordinary people discover their extraordinary potential.",
+          "I remain deeply grateful to those first 12 members, to Sabik for our name, to the late Adv. KSA Basheer, and to every member, leader, mentor and guest who contributed along the way. This legacy belongs to all of us."
+        ]
+      }
+    ],
+    "byline": "As remembered and shared by its founder, Faizal Rahman",
     "imageSlot": "founder-one",
     "consent": true,
-    "placeholder": true
-  },
-  {
-    "slug": "founder-two",
-    "name": "Founder name",
-    "role": "Founding member",
-    "profession": "Degree / profession",
-    "quote": "Placeholder quote: what the first meetings were like.",
-    "story": ["Placeholder: this founder's personal story, in their own words."],
-    "imageSlot": "founder-two",
-    "consent": true,
-    "placeholder": true
+    "placeholder": false
   }
 ]

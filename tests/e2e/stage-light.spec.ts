@@ -48,10 +48,10 @@ test("the quiz light warms to gold once a path is suggested", async ({ page }) =
   expect(await seriousViolations(page, "#find-your-path")).toEqual([]);
 });
 
-test("each year on the achievements timeline sits in a gold glow", async ({ page }) => {
+test("the achievements timeline shows only this year, in a gold glow", async ({ page }) => {
   await page.goto("/achievements");
   const years = page.locator("section[aria-labelledby='timeline-title'] h3.year-glow");
-  expect(await years.count()).toBeGreaterThan(0);
+  await expect(years).toHaveText(["2026"]);
   await expect(page.locator("section[aria-label='Impact'] svg.lucide-trophy")).toBeAttached();
 });
 

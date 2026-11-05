@@ -29,8 +29,10 @@ test("the phone menu offers the club's socials too", async ({ page, isMobile }) 
   await expect(menu.getByRole("link", { name: /on LinkedIn/ })).toHaveAttribute("href", LINKEDIN);
 });
 
-test("Our Story dates the club from 2016 and tells how it joined Toastmasters", async ({ page }) => {
+test("the club dates from 2014, when it began as an independent club", async ({ page }) => {
   await page.goto("/our-story");
-  await expect(page.locator("section[aria-labelledby='why-title'] .text-display")).toHaveText("2016");
-  await expect(page.getByText(/began in 2016 as an independent speaking club/)).toBeVisible();
+  const club = page.locator("section[aria-labelledby='club-story-title']");
+  await expect(club.getByText("5 Sep 2014")).toBeVisible();
+  await expect(club.getByText("independent sessions, exactly")).toBeVisible();
+  await expect(page.locator("footer").getByText(/Speaking together since 2014/)).toBeVisible();
 });
