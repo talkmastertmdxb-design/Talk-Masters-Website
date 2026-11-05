@@ -204,11 +204,13 @@ test.describe("members' video", () => {
     await expect(video).toHaveAttribute("controls", "");
   });
 
-  test("the published video is the compressed cut, not the raw footage", async ({ page }) => {
-    const response = await page.request.get("/videos/member-voices.mp4");
+  test("the published video is the full web copy, not the raw footage", async ({ page }) => {
+    const response = await page.request.head("/videos/member-voices-full.mp4");
     expect(response.status()).toBe(200);
-    expect(Number(response.headers()["content-length"])).toBeLessThan(8_000_000);
-    expect((await page.request.get("/Video/Toastmasters%20Video.mp4")).status()).toBe(404);
+    // GitHub rejects files over 100 MB, so the web copy must stay below it.
+    expect(Number(response.headers()["content-length"])).toBeLessThan(95_000_000);
+    expect((await page.request.head("/videos/member-voices.mp4")).status()).toBe(404);
+    expect((await page.request.head("/Toastmasters%20Video%20(1).mp4")).status()).toBe(404);
   });
 });
 

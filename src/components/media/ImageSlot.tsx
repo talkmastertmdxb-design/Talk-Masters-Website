@@ -17,6 +17,8 @@ interface ImageSlotProps {
   variant?: ImageVariant;
   /** Backdrops only: "dim" (default) sits behind text; "full" shows the photo at full strength. */
   tone?: "dim" | "full";
+  /** Compression quality: 75 (default) or 90 (next.config `images.qualities`), for the hero only. */
+  quality?: 75 | 90;
   className?: string;
 }
 
@@ -32,6 +34,7 @@ export function ImageSlot({
   eager = false,
   variant = "frame",
   tone = "dim",
+  quality = 75,
   className = "",
 }: ImageSlotProps) {
   const slot = resolveImageSlot(content.imageSlots, id);
@@ -66,6 +69,7 @@ export function ImageSlot({
         alt={slot.alt}
         fill
         sizes={sizes}
+        quality={quality}
         loading={priority || eager ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
         className="object-cover"

@@ -12,13 +12,15 @@ import { HeroIntro } from "./HeroIntro";
 import { HeroSlideshow } from "./HeroSlideshow";
 
 const PHOTO_SIZES = "(min-width: 900px) 58vw, 100vw";
+/** Group photos show compression in every small face, so the hero is served sharper. */
+const HERO_QUALITY = 90;
 
 /** The intro's copy of the first hero photo. The grade fades in as the iris opens, so it starts vivid. */
 function IntroPhoto({ id }: { id: string }) {
   return (
     <>
       {/* Same URL as the first slide, and it is the LCP image while the intro plays. */}
-      <ImageSlot id={id} variant="backdrop" tone="full" sizes={PHOTO_SIZES} priority />
+      <ImageSlot id={id} variant="backdrop" tone="full" sizes={PHOTO_SIZES} quality={HERO_QUALITY} priority />
       <div aria-hidden="true" data-intro-grade className="hero-panel-fade absolute inset-0" />
     </>
   );
@@ -36,6 +38,7 @@ export function Hero() {
       variant="backdrop"
       tone="full"
       sizes={PHOTO_SIZES}
+      quality={HERO_QUALITY}
       priority={index === 0}
       eager={index > 0}
     />

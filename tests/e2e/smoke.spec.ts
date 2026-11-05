@@ -20,12 +20,12 @@ test.describe("home", () => {
 
   test("shows hero photography without placeholder labels in production", async ({ page }) => {
     await page.goto("/");
-    const slot = page.locator('[data-hero-backdrop] [data-image-slot="hero-banner-speaker"]');
+    const slot = page.locator('[data-hero-backdrop] [data-image-slot="hero-club-group"]');
     await expect(slot).toBeVisible();
     await expect(slot.getByText("Photo needed")).toHaveCount(0);
   });
 
-  test("rotates the hero photos in order: the banner speaker first, the microphone last", async ({
+  test("rotates the hero photos in order: the club group photo first, the microphone last", async ({
     page,
   }) => {
     await page.goto("/");
@@ -33,7 +33,7 @@ test.describe("home", () => {
     const ids = await slides.evaluateAll((nodes) =>
       nodes.map((node) => node.getAttribute("data-image-slot")),
     );
-    expect(ids).toEqual(["hero-banner-speaker", "hero-stage", "hero-audience", "hero-microphone"]);
+    expect(ids).toEqual(["hero-club-group", "hero-stage", "hero-audience", "hero-microphone"]);
   });
 
   test("has no serious accessibility violations", async ({ page }) => {
@@ -76,6 +76,6 @@ test("serves a sitemap, and robots.txt keeps non-production builds out of search
 });
 
 test("caches the video and photos in the browser", async ({ request }) => {
-  const video = await request.head("/videos/member-voices.mp4");
+  const video = await request.head("/videos/member-voices-full.mp4");
   expect(video.headers()["cache-control"]).toContain("max-age=2592000");
 });

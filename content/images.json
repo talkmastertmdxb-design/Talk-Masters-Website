@@ -42,6 +42,14 @@
     "focalPoint": "45% 60%"
   },
   {
+    "id": "hero-club-group",
+    "alt": "Talk-Masters members together for a group photo beside the club banner",
+    "aspectRatio": "3/2",
+    "brief": "Hero opening photo: the whole club together, Sunday meeting, 13 July 2025 (DSC02637.JPG, exported at 2400px for the hero)",
+    "src": "/images/club/hero-club-group.webp",
+    "focalPoint": "72% 55%"
+  },
+  {
     "id": "hero-banner-speaker",
     "alt": "A Talk-Masters member in a navy suit speaking beside the club banner, members listening in the foreground",
     "aspectRatio": "4/5",

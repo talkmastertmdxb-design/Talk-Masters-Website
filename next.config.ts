@@ -18,8 +18,11 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // No remotePatterns on purpose: Unsplash photos use their own CDN via
     // src/lib/images/unsplash-loader.ts, so the optimizer only serves /public/images.
-    // Club photos are at most ~1300px wide, so larger variants would only resize up.
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    // Most club photos are 1600px wide; the hero's opening photo is 2400px for sharp
+    // retina screens (Next never resizes a photo up past its own width).
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2400],
+    // 75 everywhere; 90 only for the hero photos, where small faces show compression.
+    qualities: [75, 90],
     // Keep optimised images for 31 days: fewer re-transformations on Vercel's free plan.
     // Replacing a photo? Give the file a new name (docs/IMAGES.md), or visitors keep the old one.
     minimumCacheTTL: 2_678_400,
