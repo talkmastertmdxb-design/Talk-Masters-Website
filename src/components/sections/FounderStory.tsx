@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { ImageSlot } from "@/components/media/ImageSlot";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import type { Founder } from "@/lib/content/schemas";
 
 interface FounderStoryProps {
@@ -26,6 +27,7 @@ export function FounderStory({ founder, interlude }: FounderStoryProps) {
             )}
             <p className="text-h3 mt-6">{founder.name}</p>
             <p className="text-maroon mt-1 text-sm font-semibold">{founder.role}, Talk-Masters</p>
+            <SocialLinks links={founder.links} name={founder.name} className="text-ink/70 mt-4" />
           </div>
         </div>
 

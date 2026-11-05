@@ -64,6 +64,7 @@
       }
     ],
     "byline": "As remembered and shared by its founder, Faizal Rahman",
+    "links": [{ "network": "linkedin", "url": "https://www.linkedin.com/in/coachfaizalrahman/" }],
     "imageSlot": "founder-one",
     "consent": true,
     "placeholder": false

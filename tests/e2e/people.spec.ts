@@ -26,6 +26,9 @@ test("Our Story tells the founder's story first, then the club's, all on the pag
     "alt",
     "Faizal Rahman, founder of Talk-Masters",
   );
+  await expect(
+    founder.getByRole("link", { name: "Faizal Rahman on LinkedIn (opens in a new tab)" }),
+  ).toHaveAttribute("href", "https://www.linkedin.com/in/coachfaizalrahman/");
   await expect(founder.getByRole("heading", { level: 3 })).toHaveText([
     "One minute in Deira",
     "83 phone calls, 12 people",

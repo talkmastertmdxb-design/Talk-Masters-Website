@@ -389,6 +389,8 @@ export const founderSchema = z.object({
   chapters: z.array(founderChapterSchema).default([]),
   /** Who tells the story, e.g. "As remembered and shared by its founder, …". */
   byline: z.string().min(1).optional(),
+  /** Public profiles the founder chose to share, checked like members' links. */
+  links: profileLinks,
 });
 
 /** The club's founding story for /our-story (content/history.json). */
