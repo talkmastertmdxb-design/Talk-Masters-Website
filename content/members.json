@@ -667,5 +667,60 @@
     "spotlight": true,
     "status": "published",
     "placeholder": false
+  },
+  {
+    "slug": "mansoor-ammad",
+    "name": "Mansoor Ammad",
+    "position": "Vice President Education",
+    "occupation": "Sales & Operations Manager",
+    "organisation": "Al Omran Building Materials Group of Companies",
+    "hook": "Joined to find a voice, stayed to build connections",
+    "links": [
+      {
+        "network": "linkedin",
+        "url": "https://www.linkedin.com/in/ammad-manzur-955b4384/"
+      }
+    ],
+    "segment": "officer",
+    "challenge": "Mansoor joined Toastmasters in 2024 out of a passion for public speaking, without yet knowing the strengths as a leader and communicator that the journey would bring out.",
+    "transformation": "Today Mansoor is Vice President Education for 2026–27: more grounded, open-minded and confident, after helping the club more than double, from 20 to over 40 members, in a single year.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Joined Talk-Masters in August 2024, driven by a passion for public speaking."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "As Vice President Membership, played a key role in revitalising the club, which grew from 20 to over 40 members within a year."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Led the team that organised the club's contests and two major events, CareerNova and She Leads."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Became Vice President Education for 2026–27."
+      }
+    ],
+    "impact": {
+      "confidence": "Toastmasters has made me more grounded, open-minded, and confident. It helped me discover hidden strengths I never knew I possessed, especially as a leader and communicator. Above all, it taught me that true growth happens when we help others grow.",
+      "leadership": "I had the privilege of leading an incredible team in organising our club contests and two major events, CareerNova and She Leads. These initiatives went beyond the club, inspiring, empowering, and making a meaningful difference in many lives.",
+      "networking": "What started as a platform to improve my speaking skills soon became a space for meaningful connections, beautiful friendships, shared experiences, and countless moments of happiness."
+    },
+    "advice": "Be a Toastmaster, wherever life takes you. It’s not just about becoming a better speaker; it’s about discovering a better version of yourself. Trust me, it can be a game changer!",
+    "adviceShort": "Be a Toastmaster, wherever life takes you.",
+    "story": "Mansoor joined Toastmasters in 2024 out of a passion for public speaking, with little idea how many doors it would open beyond the stage. The most rewarding part has not been how much Mansoor has grown, but how much the club grows together: learning from one another, celebrating each other’s achievements and helping others discover their potential. “Today, Toastmasters is more than just a club to me. It has become an integral part of my life, a place where I continue to learn, unlearn, inspire, and be inspired. I joined to find my voice, stayed to build connections, and grew by helping others find theirs.”",
+    "contribution": "A leader who grows the club by growing its people: as Vice President Membership, Mansoor helped build a vibrant, connected and supportive community, and now, as Vice President Education, makes every meeting a practical learning experience.",
+    "clubHighlights": [
+      "Grew the club from 20 to 40+ members",
+      "Led CareerNova and She Leads",
+      "Executive Committee 2026–27"
+    ],
+    "memberSince": 2024,
+    "imageSlot": "officer-vp-education",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
   }
 ]

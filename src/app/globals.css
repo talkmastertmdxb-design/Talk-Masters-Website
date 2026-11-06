@@ -634,6 +634,50 @@
     }
   }
 
+  /* Home page committee reel: portraits drifting slowly past, faded at both edges. */
+  .committee-reel {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .committee-reel__track {
+    display: flex;
+    width: max-content;
+  }
+  .committee-reel__half {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding-right: clamp(1rem, 2vw, 1.5rem);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .committee-reel__track {
+      animation: marquee var(--reel-duration, 63s) linear infinite;
+    }
+    .committee-reel:hover .committee-reel__track {
+      animation-play-state: paused;
+    }
+  }
+  /* Still: the portraits wrap into a grid, and the loop's copy goes. */
+  @media (prefers-reduced-motion: reduce) {
+    .committee-reel {
+      -webkit-mask-image: none;
+      mask-image: none;
+      padding-inline: var(--site-gutter);
+    }
+    .committee-reel__track {
+      width: auto;
+    }
+    .committee-reel__half {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+      padding-right: 0;
+    }
+    .committee-reel__half[aria-hidden="true"] {
+      display: none;
+    }
+  }
+
   /* Members page advice band: one row of small advice cards sliding past, faded at both edges. */
   .advice-band__row {
     overflow: hidden;

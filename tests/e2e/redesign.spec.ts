@@ -57,10 +57,16 @@ test.describe("home", () => {
     expect(await seriousViolations(page, "#pathways")).toEqual([]);
   });
 
-  test("the committee sits in one row of faces, with their stories", async ({ page }) => {
+  test("the committee's portraits drift past in one reel", async ({ page }, testInfo) => {
     await page.goto("/");
     const committee = page.locator("section[aria-labelledby='committee-title']");
+    // The loop's copy is hidden from assistive tech, so each officer is listed once.
     await expect(committee.getByRole("listitem")).toHaveCount(7);
+    await expect(committee.locator("ul:not([aria-hidden]) [data-image-slot] img")).toHaveCount(7);
+    await expect(committee.locator(".committee-reel__track")).toHaveCSS(
+      "animation-name",
+      testInfo.project.name === "reduced-motion" ? "none" : "marquee",
+    );
     await expect(committee.getByRole("link", { name: "Meet the Executive Committee" })).toHaveAttribute(
       "href",
       "/team",
