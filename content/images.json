@@ -599,6 +599,14 @@
     "focalPoint": "50% 35%"
   },
   {
+    "id": "member-ganesan",
+    "alt": "Ganesan Venkatachalam, smiling, in a dark blazer and white shirt",
+    "aspectRatio": "4/5",
+    "brief": "Member portrait, head and shoulders",
+    "src": "/images/members/ganesan.webp",
+    "focalPoint": "50% 30%"
+  },
+  {
     "id": "why-speaking",
     "alt": "A member speaking to the room during a meeting, smiling, with the meeting slides behind him",
     "aspectRatio": "4/5",

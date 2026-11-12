@@ -51,6 +51,59 @@
     "placeholder": false
   },
   {
+    "slug": "ganesan-venkatachalam",
+    "name": "Ganesan Venkatachalam",
+    "occupation": "Chartered Accountant and Financial Controller",
+    "organisation": "International School of Choueifat",
+    "hook": "Once nervous to speak in public, now a two-time Distinguished Toastmaster",
+    "links": [],
+    "segment": "professional",
+    "challenge": "Ganesan joined Toastmasters in December 2021 hesitant and nervous about speaking in front of an audience.",
+    "transformation": "Today Ganesan is a mentor and coach, and has twice earned Toastmasters’ highest award, Distinguished Toastmaster.",
+    "journey": [
+      {
+        "milestone": "first-meeting",
+        "text": "Started the Toastmasters journey in December 2021."
+      },
+      {
+        "milestone": "other",
+        "text": "Completed 7 Pathways and received 7 Triple Crown awards."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Held all seven Executive Committee roles, then served as Area Director and District Finance Manager."
+      },
+      {
+        "milestone": "leadership-role",
+        "text": "Now serves as Division F Director."
+      },
+      {
+        "milestone": "other",
+        "text": "Became a Distinguished Toastmaster (DTM) twice, the milestone Ganesan remembers most."
+      }
+    ],
+    "impact": {
+      "career": "I became an expert in presenting budget reports in PowerPoint presentations.",
+      "confidence": "I am so confident now that I can face any number of audiences and speak boldly.",
+      "leadership": "I became a great leader, both in Toastmasters and in my career."
+    },
+    "advice": "Attend as a guest two or three times, learn how a Toastmasters meeting is conducted, and join immediately as a member without wasting much time.",
+    "adviceShort": "Attend as a guest two or three times, learn how a Toastmasters meeting is conducted",
+    "story": "Ganesan started the Toastmasters journey in December 2021 and has not slowed down since: 7 Pathways completed, 7 Triple Crown awards, and the Distinguished Toastmaster award earned twice. Along the way Ganesan has held all seven Executive Committee roles, served as Area Director and District Finance Manager, and now leads as Division F Director. “My passion for learning in Toastmasters has taken me to this level of competence, as I was and am still visiting most of the other club meetings.”",
+    "contribution": "A mentor and coach with experience in every Executive Committee role and at Area, Division and District level, who still visits other clubs’ meetings to keep learning.",
+    "clubHighlights": [
+      "Distinguished Toastmaster, twice",
+      "7 Pathways, 7 Triple Crowns",
+      "Division F Director"
+    ],
+    "memberSince": 2021,
+    "imageSlot": "member-ganesan",
+    "consent": true,
+    "spotlight": false,
+    "status": "published",
+    "placeholder": false
+  },
+  {
     "slug": "hadi-abdulkader",
     "name": "Hadi Abdulkader",
     "occupation": "Director – Trainings",
