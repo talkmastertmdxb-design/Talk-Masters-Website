@@ -102,11 +102,11 @@ export function singleMeetingGoogleUrl(details: CalendarDetails, visit: MeetingO
 }
 
 /** RFC 5545 §3.3.11 text escaping. */
-const escapeText = (text: string): string =>
+export const escapeText = (text: string): string =>
   text.replace(/[\\;,]/g, (char) => `\\${char}`).replace(/\r?\n/g, "\\n");
 
 /** RFC 5545 §3.1: lines longer than 75 octets continue on the next line after a space. */
-function fold(line: string): string[] {
+export function fold(line: string): string[] {
   const chunks = [line.slice(0, MAX_LINE_OCTETS)];
   for (let index = MAX_LINE_OCTETS; index < line.length; index += MAX_LINE_OCTETS - 1) {
     chunks.push(` ${line.slice(index, index + MAX_LINE_OCTETS - 1)}`);

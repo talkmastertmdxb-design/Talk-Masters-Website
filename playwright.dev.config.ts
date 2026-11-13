@@ -13,6 +13,8 @@ export default defineConfig({
   webServer: {
     command: "npx next dev -p 3000",
     url: "http://localhost:3000",
+    // The site is under test: launch countdown off (a reused dev server must be started the same way).
+    env: { LAUNCH_AT: "off" },
     reuseExistingServer: true,
     timeout: 240_000,
   },

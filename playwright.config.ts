@@ -35,6 +35,8 @@ export default defineConfig({
   webServer: {
     command: `npm run build && npx next start -p ${port}`,
     url: `http://localhost:${port}`,
+    // The site itself is under test, so the launch countdown is switched off (tests/launch covers it).
+    env: { LAUNCH_AT: "off" },
     reuseExistingServer: !isCI,
     timeout: 240_000,
   },

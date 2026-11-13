@@ -19,7 +19,8 @@
     "verify": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
     "images:unsplash": "node scripts/fetch-unsplash.ts",
     "share:image": "node scripts/share-image.ts",
-    "test:hydration": "playwright test -c playwright.dev.config.ts"
+    "test:hydration": "playwright test -c playwright.dev.config.ts",
+    "test:launch": "playwright test -c playwright.launch.config.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

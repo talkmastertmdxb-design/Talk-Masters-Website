@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { LAUNCH_CONCEPTS } from "../launch/launch";
 import { PUBLIC_PAGES } from "../seo/public-pages";
 
 /**
@@ -205,6 +206,16 @@ export const settingsSchema = z.object({
     .max(5, "Keep the hero to 5 photos or fewer"),
   /** The members' video on the home page. Leave it out to hide the section. */
   highlightVideo: videoSchema.optional(),
+  /**
+   * The website launch countdown (src/proxy.ts). Until `at`, every page shows the countdown.
+   * Leave it out (and LAUNCH_AT unset) for no countdown. LAUNCH_AT / LAUNCH_CONCEPT override it.
+   */
+  launch: z
+    .object({
+      at: z.iso.datetime({ offset: true }).optional(),
+      concept: z.enum(LAUNCH_CONCEPTS).optional(),
+    })
+    .optional(),
   placeholder,
 });
 
