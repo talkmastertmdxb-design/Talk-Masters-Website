@@ -2,7 +2,7 @@
   {
     "question": "Will I be called on to speak?",
     "answer": "Only with your consent: we always ask before calling on a guest. Speakers here don't shy away from an opportunity, and a short impromptu topic is a great first one to take.",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "question": "When should I arrive, and where do I go?",
@@ -17,21 +17,21 @@
   {
     "question": "Who can join?",
     "answer": "Everyone. Our members come from every age group, gender and background: students, professionals, parents, career changers and retirees.",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "question": "Does it cost anything to visit?",
     "answer": "Visiting as a guest is free. Membership dues are confirmed by the club; ask us at any meeting.",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "question": "What happens at a meeting?",
     "answer": "Two structured hours on a Sunday morning: prepared speeches, impromptu Table Topics and supportive evaluations, all kept on time by a timer with green, amber and red lights.",
-    "placeholder": true
+    "placeholder": false
   },
   {
     "question": "I'm a complete beginner. Is that okay?",
     "answer": "That's exactly who Toastmasters is for. Everyone starts somewhere, and you'll progress at your own pace with a mentor.",
-    "placeholder": true
+    "placeholder": false
   }
 ]

@@ -8,7 +8,7 @@
     "imageSlot": "officer-president",
     "memberSlug": "anees-mousafi",
     "consent": true,
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "vp-education",
@@ -18,7 +18,7 @@
     "statement": "Creating an environment where every meeting becomes a practical learning experience.",
     "imageSlot": "officer-vp-education",
     "consent": true,
-    "placeholder": true,
+    "placeholder": false,
     "memberSlug": "mansoor-ammad"
   },
   {
@@ -29,7 +29,7 @@
     "statement": "Making sure every guest who walks in feels welcome, and every member feels at home.",
     "imageSlot": "officer-vp-membership",
     "consent": true,
-    "placeholder": true,
+    "placeholder": false,
     "memberSlug": "lulu-baseerath"
   },
   {
@@ -41,7 +41,7 @@
     "imageSlot": "officer-vp-public-relations",
     "memberSlug": "suhayb-shaik",
     "consent": true,
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "treasurer",
@@ -52,7 +52,7 @@
     "imageSlot": "officer-treasurer",
     "memberSlug": "nabeel-bava",
     "consent": true,
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "secretary",
@@ -62,7 +62,7 @@
     "statement": "Building a club culture where every member feels supported and valued.",
     "imageSlot": "officer-secretary",
     "consent": true,
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "sergeant-at-arms",
@@ -73,6 +73,6 @@
     "imageSlot": "officer-sergeant-at-arms",
     "memberSlug": "noufal-aboobacker",
     "consent": true,
-    "placeholder": true
+    "placeholder": false
   }
 ]

@@ -228,7 +228,7 @@
       "meeting-2025-08-10-a429",
       "meeting-2025-08-10-a435"
     ],
-    "placeholder": true
+    "placeholder": false
   },
   {
     "slug": "meeting-2025-07-13",
@@ -286,6 +286,6 @@
       "meeting-2025-07-13-j504",
       "meeting-2025-07-13-j537"
     ],
-    "placeholder": true
+    "placeholder": false
   }
 ]

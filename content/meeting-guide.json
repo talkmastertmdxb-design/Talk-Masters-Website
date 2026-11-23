@@ -131,7 +131,8 @@
       "name": "General Evaluator",
       "group": "lead",
       "text": "Evaluates the meeting itself: the evaluators, the roles, the timing and the energy in the room. Leads the evaluation team.",
-      "onStage": "7 minutes"
+      "onStage": "7 minutes",
+      "imageSlot": "agenda-general-evaluator"
     },
     {
       "slug": "timer",

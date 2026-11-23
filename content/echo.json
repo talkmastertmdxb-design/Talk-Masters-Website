@@ -88,7 +88,7 @@
           "answer": "Come as you are. Smart casual is common, but there's no dress code.",
           "keywords": ["wear", "dress", "dress code", "clothes", "outfit", "formal", "casual"],
           "related": ["prepare", "arrive"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "prepare",
@@ -96,7 +96,7 @@
           "answer": "Nothing at all. Just bring yourself, and a notebook if you like jotting down ideas.",
           "keywords": ["prepare", "preparation", "bring", "need to bring", "ready", "laptop", "notebook"],
           "related": ["will-speak", "wear"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "bring-friend",
@@ -113,7 +113,7 @@
             "together"
           ],
           "related": ["book", "children"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "online",
@@ -129,7 +129,7 @@
           "answer": "English.",
           "keywords": ["language", "english", "arabic", "hindi", "malayalam", "urdu"],
           "related": ["english-level"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "children",
@@ -181,7 +181,7 @@
             "stage"
           ],
           "related": ["nervous", "table-topics"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "nervous",
@@ -350,7 +350,7 @@
             "apply"
           ],
           "related": ["fees", "benefits", "visits-before"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "fees",
@@ -372,7 +372,7 @@
             "dirham"
           ],
           "related": ["benefits", "become-member"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "visits-before",
@@ -388,7 +388,7 @@
             "more than once"
           ],
           "related": ["become-member", "book"],
-          "placeholder": true
+          "placeholder": false
         },
         {
           "id": "who-can-join",
