@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { LaunchPhase, Remaining } from "@/lib/launch/launch";
 
 export interface LaunchCalendar {
@@ -14,6 +15,8 @@ export interface SceneProps {
   calendar: LaunchCalendar;
   /** Preview links only: says this is a rehearsal. */
   previewSeconds: number | null;
+  /** The stage photo, an <ImageSlot> rendered on the server (it reads content/images.json). */
+  photo: ReactNode;
   /** True from zero: play the finale, then call onFinaleDone. */
   finale: boolean;
   onFinaleDone: () => void;

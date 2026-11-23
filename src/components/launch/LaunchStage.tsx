@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { INTRO_CLASS, INTRO_STORAGE_KEY, PHONE_INTRO_CLASS } from "@/lib/motion/intro";
 import type { LaunchCalendar } from "./scenes";
 import { SpeechScene } from "./SpeechScene";
@@ -15,6 +15,7 @@ interface LaunchStageProps {
   dateLine: string;
   calendar: LaunchCalendar;
   previewSeconds: number | null;
+  photo: ReactNode;
 }
 
 export function LaunchStage({ launchAt, serverNow, ...copy }: LaunchStageProps) {

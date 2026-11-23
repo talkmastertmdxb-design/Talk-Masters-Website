@@ -30,6 +30,12 @@
   --color-hairline: rgb(0 65 101 / 0.12);
   --color-hairline-dark: rgb(255 255 255 / 0.08);
 
+  /* Launch countdown: warm house-lights paper, and the navy of the lit stage */
+  --color-paper: #f7f3ee;
+  --color-paper-deep: #eee5da;
+  --color-stage: #0f1d33;
+  --color-stage-deep: #070f1c;
+
   /* Type */
   --font-serif: var(--font-source-serif), Cambria, Georgia, serif;
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;

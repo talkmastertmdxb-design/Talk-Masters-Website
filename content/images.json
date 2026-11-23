@@ -228,6 +228,24 @@
     "focalPoint": "45% 40%"
   },
   {
+    "id": "launch-stage",
+    "alt": "A speaker seen from behind, one hand raised, lit by a single stage light in front of his audience",
+    "aspectRatio": "2/3",
+    "brief": "Launch countdown: a speaker under a single stage light, seen from behind, facing the audience",
+    "src": "https://images.unsplash.com/photo-1546872006-42c78c0ccb29?ixlib=rb-4.1.0&w=2400&q=80",
+    "unsplash": {
+      "photoId": "kvinEq5Utfw",
+      "query": "speaker on stage from behind spotlight",
+      "orientation": "portrait"
+    },
+    "focalPoint": "50% 42%",
+    "credit": {
+      "name": "Alberto Bigoni",
+      "profileUrl": "https://unsplash.com/@albertobigoni?utm_source=talk_masters_club&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/grayscale-of-man-in-dress-shirt-kvinEq5Utfw?utm_source=talk_masters_club&utm_medium=referral"
+    }
+  },
+  {
     "id": "agenda-general-evaluator",
     "alt": "The General Evaluator giving his report",
     "aspectRatio": "3/4",

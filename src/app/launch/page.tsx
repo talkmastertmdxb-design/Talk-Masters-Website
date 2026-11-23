@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { LaunchStage } from "@/components/launch/LaunchStage";
+import { ImageSlot } from "@/components/media/ImageSlot";
 import { content } from "@/lib/content";
 import { launchConfig, previewAllowed, serverTime } from "@/lib/launch/config";
 import { launchDateLine, launchGoogleUrl } from "@/lib/launch/calendar";
@@ -51,6 +52,15 @@ async function LaunchContent({ searchParams }: Pick<PageProps<"/launch">, "searc
         ics: `/launch.ics?${new URLSearchParams({ at: at.toISOString() })}`,
       }}
       previewSeconds={rehearsal}
+      photo={
+        <ImageSlot
+          id="launch-stage"
+          variant="backdrop"
+          tone="full"
+          sizes="(min-width: 56.25rem) 45vw, 100vw"
+          priority
+        />
+      }
     />
   );
 }

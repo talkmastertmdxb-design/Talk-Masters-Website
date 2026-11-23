@@ -9,7 +9,16 @@ const unit = (value: number, word: string): string => (value === 1 ? word : `${w
 export function LaunchBrand() {
   return (
     <p className="launch-brand">
-      <Image src={badge} alt="" width={44} height={44} sizes="44px" priority />
+      <Image
+        src={badge}
+        alt="Talk-Masters Club badge, a club of Toastmasters International"
+        width={84}
+        height={84}
+        sizes="84px"
+        priority
+        className="launch-brand__badge"
+      />
+      <span aria-hidden="true" className="launch-brand__rule" />
       <span>
         <span className="launch-brand__name">Talk-Masters</span>
         <span className="launch-brand__club">A Toastmasters International club</span>

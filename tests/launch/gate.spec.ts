@@ -7,12 +7,12 @@ const PAGES = ["/", "/members", "/join", "/meetings", "/our-story", "/no-such-pa
 for (const path of PAGES) {
   test(`${path} shows the countdown, never the site`, async ({ page, request }) => {
     const html = await (await request.get(path)).text();
-    expect(html).toContain("Talk-Masters Club is preparing a brand new website");
+    expect(html).toContain("Talk-Masters is getting ready for its next chapter");
     expect(html).not.toContain("Meet the people behind the voices");
 
     await page.goto(path);
     await expect(
-      page.getByRole("heading", { level: 1, name: "Something big is about to take the stage." }),
+      page.getByRole("heading", { level: 1, name: "A new stage. A louder voice." }),
     ).toBeVisible();
     await expect(page.locator(".site-header")).toBeHidden();
     await expect(page.locator("#contact")).toBeHidden();
@@ -38,7 +38,7 @@ test("rehearsal links are ignored while the gate is closed", async ({ page }) =>
   await page.goto("/launch?in=5");
   await page.waitForTimeout(7_000);
   await expect(
-    page.getByRole("heading", { level: 1, name: "Something big is about to take the stage." }),
+    page.getByRole("heading", { level: 1, name: "A new stage. A louder voice." }),
   ).toBeVisible();
 });
 

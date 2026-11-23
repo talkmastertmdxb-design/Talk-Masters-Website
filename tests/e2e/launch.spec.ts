@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 
 /** The main suite runs with no launch scheduled: the site is open and /launch only rehearses. */
 
-const HEADLINE = "Something big is about to take the stage.";
+const HEADLINE = "A new stage. A louder voice.";
 
 test("with no launch scheduled, /launch sends visitors home", async ({ page }) => {
   await page.goto("/launch");
@@ -17,7 +17,7 @@ test("a rehearsal counts down, hides the site's chrome, then opens the site", as
   await expect(page.getByRole("timer")).toBeAttached();
   await expect(page.locator(".site-header")).toBeHidden();
   await expect(page.locator(".echo")).toBeHidden();
-  await expect(page.getByRole("link", { name: /Google Calendar/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /^Google Calendar/ })).toHaveAttribute(
     "href",
     /calendar\.google\.com/,
   );
@@ -34,7 +34,7 @@ test("a rehearsal counts down, hides the site's chrome, then opens the site", as
 test("a short countdown shows only the units that are left", async ({ page }) => {
   await page.goto("/launch?in=300");
   const words = await page.locator(".launch-count__word").allInnerTexts();
-  expect(words).toEqual(["minutes", "seconds"]);
+  expect(words.map((word) => word.toLowerCase())).toEqual(["minutes", "seconds"]);
 });
 
 test("the countdown fits phones without scrolling sideways", async ({ page }) => {
