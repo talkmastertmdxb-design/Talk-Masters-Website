@@ -17,6 +17,8 @@ export interface SceneProps {
   previewSeconds: number | null;
   /** The stage photo, an <ImageSlot> rendered on the server (it reads content/images.json). */
   photo: ReactNode;
+  /** Where the club meets, from content/settings.json: "Hor Al Anz Public Library, Dubai". */
+  venueLine: string;
   /** True from zero: play the finale, then call onFinaleDone. */
   finale: boolean;
   onFinaleDone: () => void;

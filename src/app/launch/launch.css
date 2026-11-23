@@ -128,6 +128,10 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "words stage"
+    "more stage";
   min-height: 100dvh;
   overflow: hidden;
   background:
@@ -137,15 +141,33 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
   font-family: var(--font-sans);
 }
 
-.sp__words {
+.sp__words,
+.sp__more {
   position: relative;
   z-index: 2;
+  padding-left: clamp(1rem, 5.5vw, 6rem);
+  padding-right: clamp(1rem, 3vw, 3rem);
+}
+.sp__words {
+  grid-area: words;
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 2.3vh + 0.6vw, 2.25rem);
-  padding-block: clamp(1.25rem, 2.5vw, 2.25rem) clamp(2rem, 3vw, 3rem);
-  padding-left: clamp(1rem, 5.5vw, 6rem);
-  padding-right: clamp(1rem, 3vw, 3rem);
+  padding-top: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+.sp__more {
+  grid-area: more;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding-block: 1rem clamp(2rem, 3vw, 3rem);
+}
+/* Phone-only parts of the first screen and the save-the-date section. */
+.sp__when,
+.sp__more-link,
+.sp__note,
+.sp__chevron {
+  display: none;
 }
 
 .sp__title {
@@ -291,6 +313,14 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
   font-size: 0.9375rem;
   color: var(--color-ink-muted);
 }
+.sp__save-title {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+.sp__save-title::after {
+  content: ":";
+}
 .sp__save ul {
   display: flex;
   flex-wrap: wrap;
@@ -327,11 +357,7 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
   height: 1.15rem;
   flex: none;
 }
-.sp__app-icon--apple {
-  color: var(--color-ink);
-  margin-top: -0.1rem;
-}
-:is(.sp__cta, .sp__save a):focus-visible {
+:is(.sp__cta, .sp__save a, .sp__more-link):focus-visible {
   outline: 3px solid var(--color-gold);
   outline-offset: 3px;
 }
@@ -344,6 +370,7 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
 /* ---------- The stage: one photograph ---------- */
 
 .sp__stage {
+  grid-area: stage;
   position: relative;
   z-index: 1;
   min-height: 36rem;
@@ -456,7 +483,7 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
 /* ---------- The finale ---------- */
 
 .sp__curtain {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 5;
   display: grid;
@@ -525,71 +552,281 @@ html:has([data-launch]) :is(.site-header, .echo, #contact, .skip-link) {
   }
 }
 
-/* ---------- Phones and narrow tablets: the photo opens the page ---------- */
+/*
+ * ---------- Phones and narrow tablets ----------
+ * The first screen is the stage: the photo fills it, the countdown stands centre stage, and the
+ * one action sits in thumb reach. Every way to save the date follows on paper below.
+ */
 
 @media (max-width: 56.24rem) {
   .sp {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .sp__stage {
-    order: -1;
+    display: block;
     min-height: 0;
-    height: clamp(22rem, 92vw, 32rem);
+    background: var(--color-paper);
+  }
+
+  .sp__stage {
+    position: absolute;
+    inset: 0 0 auto;
+    height: max(100svh, 34rem);
+    min-height: 0;
+  }
+  .sp__echo,
+  .sp__date,
+  .sp__photo figcaption {
+    display: none;
   }
   .sp__photo {
     inset: 0;
-    border-radius: 0 0 50% 50% / 0 0 12% 12%;
+    border-radius: 0 0 2rem 2rem;
+    box-shadow: none;
   }
   .sp__photo img {
-    object-position: 50% 38% !important;
+    object-position: 52% 30% !important;
   }
-  .sp__echo {
-    display: none;
+  .sp__photo::after {
+    background:
+      radial-gradient(90% 40% at 50% 58%, color-mix(in srgb, var(--color-stage-deep) 55%, transparent), transparent 75%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-stage-deep) 82%, transparent) 0%,
+        color-mix(in srgb, var(--color-stage-deep) 35%, transparent) 34%,
+        color-mix(in srgb, var(--color-stage-deep) 35%, transparent) 52%,
+        color-mix(in srgb, var(--color-stage-deep) 90%, transparent) 100%
+      );
   }
-  .sp__photo figcaption {
-    bottom: 2.25rem;
-  }
-  .sp__date {
-    left: 1.25rem;
-    right: auto;
-    justify-items: start;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-  }
+
   .sp__words {
-    padding: 1.5rem 1.25rem 3rem;
+    min-height: max(100svh, 34rem);
+    gap: 1rem;
+    padding: max(1rem, env(safe-area-inset-top, 0px)) max(1.25rem, env(safe-area-inset-right, 0px)) 1.5rem
+      max(1.25rem, env(safe-area-inset-left, 0px));
+    color: var(--color-white);
   }
+
   .launch-brand {
-    position: relative;
-    margin-top: -3.75rem;
+    gap: 0.7rem;
   }
   .launch-brand__badge {
-    width: 5rem;
-    height: 5rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    filter: drop-shadow(0 4px 10px rgb(0 0 0 / 0.45));
   }
   .launch-brand__rule {
     display: none;
   }
-  .launch-brand > span:last-child {
-    padding-top: 2.5rem;
+  .launch-brand__name {
+    font-size: 1.125rem;
   }
-  .sp__title {
+  .launch-brand__club {
     margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.68);
+  }
+
+  .sp__title {
+    margin-top: clamp(0.75rem, 4vh, 2rem);
+    font-size: clamp(2.35rem, 10.5vw, 3.25rem);
+    line-height: 1;
+    text-shadow: 0 2px 24px rgb(0 0 0 / 0.35);
+  }
+  .sp__title em {
+    color: var(--color-gold-hover);
   }
   .sp__swoosh {
-    margin-left: 8%;
+    width: 62%;
+    height: 1rem;
+    margin: 0.35rem 0 0 18%;
   }
-}
-@media (max-width: 26.25rem) {
+  .sp__swoosh path {
+    stroke: var(--color-gold);
+    opacity: 0.8;
+  }
+  .sp__lead {
+    margin: 0;
+    max-width: 32ch;
+    font-size: 0.9375rem;
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  /* Centre stage: the countdown. */
+  .sp__count {
+    margin-block: auto;
+    gap: 0.9rem;
+    max-width: none;
+  }
+  .sp__eyebrow {
+    justify-content: center;
+    font-size: 0.6875rem;
+    color: var(--color-gold-hover);
+  }
+  .sp__eyebrow::before,
+  .sp__eyebrow::after {
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-gold) 55%, transparent), transparent);
+  }
+  .launch-count__cards {
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .launch-count__card,
+  .launch-count__final {
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.05));
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.16),
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      0 18px 40px -18px rgb(0 0 0 / 0.7);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
+  }
   .launch-count__card {
-    border-radius: 0.9rem;
+    padding: 0.95rem 0.15rem 0.8rem;
+    border-radius: 1.1rem;
+  }
+  .launch-count__final {
+    display: flex;
+    justify-content: center;
+  }
+  .launch-count__num {
+    font-size: clamp(2.25rem, 11vw, 3rem);
+    color: var(--color-white);
+  }
+  .launch-count__final .launch-count__num {
+    font-size: clamp(3.5rem, 18vw, 5rem);
   }
   .launch-count__word {
     font-size: 0.625rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
+    color: color-mix(in srgb, var(--color-gold-hover) 85%, transparent);
   }
-  .sp__photo figcaption {
-    font-size: 0.6875rem;
+  .sp[data-phase="green"] .launch-count__final {
+    box-shadow: inset 0 0 0 2px var(--color-signal-green), 0 18px 40px -18px rgb(0 0 0 / 0.7);
+  }
+  .sp[data-phase="amber"] .launch-count__final {
+    box-shadow: inset 0 0 0 2px var(--color-gold), 0 18px 40px -18px rgb(0 0 0 / 0.7);
+  }
+  .sp:is([data-phase="red"], [data-phase="live"]) .launch-count__final {
+    box-shadow: inset 0 0 0 2px var(--color-signal-red), 0 18px 40px -18px rgb(0 0 0 / 0.7);
+  }
+  .sp__when {
+    display: block;
+    margin: -0.2rem 0 0;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
     letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .sp__signal {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: rgb(255 255 255 / 0.72);
+  }
+  .sp__lamps {
+    background: rgb(0 0 0 / 0.4);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  }
+
+  /* Thumb reach: the one action. */
+  .sp__actions {
+    justify-items: stretch;
+    gap: 0.5rem;
+  }
+  .sp__cta {
+    justify-content: center;
+    padding: 1.05rem 1.5rem;
+    background: var(--color-gold);
+    color: var(--color-ink);
+    box-shadow: 0 16px 32px -14px color-mix(in srgb, var(--color-gold) 55%, transparent);
+  }
+  .sp__cta:hover {
+    background: var(--color-gold-hover);
+  }
+  .sp__more-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.8);
+    text-decoration: none;
+  }
+
+  /* Below the fold, on paper: every way to save the date. */
+  .sp__more {
+    gap: 0;
+    padding: 2.25rem max(1.25rem, env(safe-area-inset-right, 0px)) calc(2.5rem + env(safe-area-inset-bottom, 0px))
+      max(1.25rem, env(safe-area-inset-left, 0px));
+    scroll-margin-top: 1rem;
+  }
+  .sp__save {
+    display: grid;
+    gap: 0.85rem;
+  }
+  .sp__save-title {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .sp__save-title::after {
+    content: none;
+  }
+  .sp__save ul {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .sp__save a {
+    width: 100%;
+    gap: 0.85rem;
+    padding: 0.95rem 1rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+  }
+  .sp__app-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .sp__chevron {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sp__chevron--right {
+    margin-left: auto;
+    color: var(--color-ink-muted);
+  }
+  .sp__note {
+    display: block;
+    margin: 1.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+  }
+  .sp__preview {
+    margin-top: 1rem;
+  }
+}
+
+/* Short phones: the countdown and the action still fit on the first screen. */
+@media (max-width: 56.24rem) and (max-height: 45rem) {
+  .sp__lead {
+    display: none;
+  }
+  .sp__title {
+    margin-top: 0.5rem;
+    font-size: clamp(2.1rem, 9.5vw, 2.75rem);
+  }
+  .launch-count__card {
+    padding-block: 0.75rem 0.65rem;
   }
 }

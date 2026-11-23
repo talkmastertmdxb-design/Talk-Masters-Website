@@ -24,7 +24,7 @@ const SIGNALS: Record<LaunchPhase, string> = {
 const openTheStage: FinaleBuilder = (q) =>
   gsap
     .timeline()
-    .to(q(".sp__words"), { opacity: 0, y: 14, duration: 0.45, ease: "power2.in" }, 0.2)
+    .to(q(".sp__words, .sp__more"), { opacity: 0, y: 14, duration: 0.45, ease: "power2.in" }, 0.2)
     .fromTo(
       q(".sp__curtain"),
       { clipPath: "circle(0% at 72% 45%)" },
@@ -56,6 +56,14 @@ function BellIcon() {
   );
 }
 
+function Chevron({ direction }: { direction: "down" | "right" }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className={`sp__chevron sp__chevron--${direction}`}>
+      <path d={direction === "down" ? "m6 9 6 6 6-6" : "m9 6 6 6-6 6"} />
+    </svg>
+  );
+}
+
 function CalendarGlyph() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="sp__date-icon">
@@ -72,6 +80,7 @@ export function SpeechScene({
   calendar,
   previewSeconds,
   photo,
+  venueLine,
   finale,
   onFinaleDone,
 }: SceneProps) {
@@ -95,6 +104,7 @@ export function SpeechScene({
         <div className="sp__count">
           <p className="sp__eyebrow">The big reveal begins in</p>
           <Countdown remaining={remaining} phase={phase} />
+          <p className="sp__when">{dateLine}, Dubai</p>
           <p className="sp__signal">
             <span aria-hidden="true" className="sp__lamps">
               <span className="sp__lamp sp__lamp--green" />
@@ -111,34 +121,47 @@ export function SpeechScene({
             <BellIcon />
             <span className="sr-only"> (adds the launch to Google Calendar, opens in a new tab)</span>
           </a>
-          <div className="sp__save">
-            <span>Save the date:</span>
-            <ul>
-              <li>
-                <a href={calendar.google} target="_blank" rel="noopener noreferrer">
-                  <GoogleCalendarIcon className="sp__app-icon" />
-                  Google Calendar<span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              </li>
-              <li>
-                <a href={calendar.ics} download="talk-masters-launch.ics">
-                  <AppleIcon className="sp__app-icon sp__app-icon--apple" />
-                  Apple Calendar
-                </a>
-              </li>
-              <li>
-                <a href={calendar.ics} download="talk-masters-launch.ics">
-                  <OutlookIcon className="sp__app-icon" />
-                  Outlook
-                </a>
-              </li>
-            </ul>
-          </div>
-          {previewSeconds !== null && (
-            <p className="sp__preview">Preview rehearsal. The live site is not affected.</p>
-          )}
+          <a className="sp__more-link" href="#save-the-date">
+            More ways to save the date
+            <Chevron direction="down" />
+          </a>
         </div>
       </div>
+
+      <section id="save-the-date" className="sp__more" aria-labelledby="save-the-date-title">
+        <div className="sp__save">
+          <h2 id="save-the-date-title" className="sp__save-title">
+            Save the date
+          </h2>
+          <ul>
+            <li>
+              <a href={calendar.google} target="_blank" rel="noopener noreferrer">
+                <GoogleCalendarIcon className="sp__app-icon" />
+                Google Calendar<span className="sr-only"> (opens in a new tab)</span>
+                <Chevron direction="right" />
+              </a>
+            </li>
+            <li>
+              <a href={calendar.ics} download="talk-masters-launch.ics">
+                <AppleIcon className="sp__app-icon" />
+                Apple Calendar
+                <Chevron direction="right" />
+              </a>
+            </li>
+            <li>
+              <a href={calendar.ics} download="talk-masters-launch.ics">
+                <OutlookIcon className="sp__app-icon" />
+                Outlook
+                <Chevron direction="right" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <p className="sp__note">Talk-Masters Club · Sunday meetings at {venueLine}</p>
+        {previewSeconds !== null && (
+          <p className="sp__preview">Preview rehearsal. The live site is not affected.</p>
+        )}
+      </section>
 
       <div className="sp__stage">
         <span aria-hidden="true" className="sp__echo" />

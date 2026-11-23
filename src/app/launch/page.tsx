@@ -52,6 +52,7 @@ async function LaunchContent({ searchParams }: Pick<PageProps<"/launch">, "searc
         ics: `/launch.ics?${new URLSearchParams({ at: at.toISOString() })}`,
       }}
       previewSeconds={rehearsal}
+      venueLine={`${meeting.venue}, ${meeting.city}`}
       photo={
         <ImageSlot
           id="launch-stage"

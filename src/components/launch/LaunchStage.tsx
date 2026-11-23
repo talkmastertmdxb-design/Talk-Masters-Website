@@ -16,6 +16,7 @@ interface LaunchStageProps {
   calendar: LaunchCalendar;
   previewSeconds: number | null;
   photo: ReactNode;
+  venueLine: string;
 }
 
 export function LaunchStage({ launchAt, serverNow, ...copy }: LaunchStageProps) {
